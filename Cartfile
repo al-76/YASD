@@ -1,0 +1,7 @@
+github "Swinject/Swinject"
+github "Swinject/SwinjectStoryboard"
+github "ReactiveX/RxSwift"
+github "donileo/RMessage"
+github "scinfu/SwiftSoup"
+github "Brightify/Cuckoo"
+github "ivanbruel/MarkdownKit"
