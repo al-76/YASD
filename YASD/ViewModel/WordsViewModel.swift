@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-class WordsTableViewModel: ViewModel {
+class WordsViewModel: ViewModel {
     private let lexin: LexinService
     
     struct Input {
@@ -29,9 +29,9 @@ class WordsTableViewModel: ViewModel {
             .flatMapLatest { [weak self] word in
                 (self?.lexin.search(word: word).asDriver { error in return Driver.just(.failure(error)) }) ?? Driver.just(.success([]))
         }
-        let formated = searched.flatMap { [weak self] in
+        let formatted = searched.flatMap { [weak self] in
             Driver.just(self?.lexin.formatter.format(result: $0) ?? .success([]))
         }
-        return Output(foundWords: formated)
+        return Output(foundWords: formatted)
     }
 }

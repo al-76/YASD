@@ -12,7 +12,7 @@ import RxSwift
 import RxTest
 import Cuckoo
 
-class WordsTableViewModelTests: XCTestCase {
+class WordsViewModelTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
@@ -31,8 +31,8 @@ class WordsTableViewModelTests: XCTestCase {
             .completed(400)
             ])
         let foundWords = scheduler.createObserver(LexinServiceResultFormatted.self)
-        let viewModel = WordsTableViewModel(lexin: createMockLexinService(errorWord: errorWord))
-        viewModel.transform(input: WordsTableViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
+        let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: errorWord))
+        viewModel.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -56,8 +56,8 @@ class WordsTableViewModelTests: XCTestCase {
             .completed(400)
             ])
         let foundWords = scheduler.createObserver(LexinServiceResultFormatted.self)
-        var viewModel: WordsTableViewModel?  = WordsTableViewModel(lexin: createMockLexinService(errorWord: ""))
-        viewModel?.transform(input: WordsTableViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
+        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(errorWord: ""))
+        viewModel?.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -75,7 +75,7 @@ class WordsTableViewModelTests: XCTestCase {
     func createMockLexinService(errorWord: String) -> MockLexinService {
         let mock = MockLexinService(network: MockNetwork(),
                                                 htmlParser: MockHtmlParser(),
-                                                parameters: MockLexinServiceParameters(from: "ru", to: "sv"),
+                                                parameters: LexinServiceParameters(language: MockLexinServiceParameters.Language(name: "test", code: "test")),
                                                 formatter: createMockLexinServiceFormatter())
         stub(mock) { mock in
             when(mock.search(word: anyString())).then { word in
