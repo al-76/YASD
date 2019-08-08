@@ -17,22 +17,12 @@ class LexinServiceTests: XCTestCase {
         case someError
     }
 
-    func testSearch() {
-        // Arrange
-        let testData = "test"
-        let scheduler = TestScheduler(initialClock: 0)
-        let service = createLexinService(mockNetwork: createMockNetwork(data: testData),
-                                         mockHtmlParser: createMockHtmlParser())
-
-         // Act
-        let found = service.search(word: "test")
-        let res = scheduler.start { found }
-
-        // Assert
-        XCTAssertEqual(res.events, [
-            .next(200, LexinServiceResult.success([LexinServiceResultItem(word: testData)])),
-            .completed(200)
-        ])
+    func testSearchWord() {
+        testSearch(htmlParser: createMockHtmlParserWord())
+    }
+    
+    func testSearchLemma() {
+        testSearch(htmlParser: createMockHtmlParserLemma())
     }
     
     func testSearchNilService() {
@@ -40,7 +30,7 @@ class LexinServiceTests: XCTestCase {
         let testData = "test"
         let scheduler = TestScheduler(initialClock: 0)
         var service : LexinService? = createLexinService(mockNetwork: createMockNetwork(data: testData),
-                                         mockHtmlParser: createMockHtmlParser())
+                                         mockHtmlParser: createMockHtmlParserWord())
         
         // Act
         let found = service!.search(word: "test")
@@ -71,15 +61,33 @@ class LexinServiceTests: XCTestCase {
             ])
 
     }
+    
+    fileprivate func testSearch(htmlParser: MockHtmlParser) {
+        // Arrange
+        let testData = "test"
+        let scheduler = TestScheduler(initialClock: 0)
+        let service = createLexinService(mockNetwork: createMockNetwork(data: testData),
+                                         mockHtmlParser: htmlParser)
+        
+        // Act
+        let found = service.search(word: "test")
+        let res = scheduler.start { found }
+        
+        // Assert
+        XCTAssertEqual(res.events, [
+            .next(200, LexinServiceResult.success([LexinServiceResultItem(word: testData), LexinServiceResultItem(word: testData)])),
+            .completed(200)
+            ])
+    }
 
-    func createLexinService(mockNetwork: MockNetwork, mockHtmlParser: MockHtmlParser) -> LexinService {
+    fileprivate func createLexinService(mockNetwork: MockNetwork, mockHtmlParser: MockHtmlParser) -> LexinService {
         return LexinService(network: mockNetwork,
                             htmlParser: mockHtmlParser,
-                            parameters: LexinServiceParameters(from: "test1", to: "test2"),
+                            parameters: LexinServiceParameters(language: MockLexinServiceParameters.Language(name: "test", code: "test")),
                             formatter: MockLexinServiceFormatter(markdown: MockMarkdown()))
     }
     
-    func createMockNetwork(data: String) -> MockNetwork {
+    fileprivate func createMockNetwork(data: String) -> MockNetwork {
         let mock = MockNetwork()
         stub(mock) { mock in
             when(mock.postRequest(url: anyString(), parameters: any())).then { url, parameters in
@@ -89,7 +97,7 @@ class LexinServiceTests: XCTestCase {
         return mock
     }
     
-    class MockHtmlParserElement : HtmlParserElement {
+    class MockHtmlParserElement1 : HtmlParserElement {
         let data: String
         
         init(data: String) {
@@ -113,21 +121,35 @@ class LexinServiceTests: XCTestCase {
         }
         
         func selectElements(_ query: String) throws -> [HtmlParserElement] {
-            return [ MockHtmlParserElement(data: query) ]
+            return [ MockHtmlParserElement1(data: query) ]
         }
     }
     
-    func createMockHtmlParser() -> MockHtmlParser {
+    class MockHtmlParserElement2 : MockHtmlParserElement1 {
+        override func selectElements(_ query: String) throws -> [HtmlParserElement] {
+            return []
+        }
+    }
+    
+    fileprivate func createMockHtmlParserWord() -> MockHtmlParser {
+        return createMockHtmlParser(parserQuery: "Word")
+    }
+    
+    fileprivate func createMockHtmlParserLemma() -> MockHtmlParser {
+        return createMockHtmlParser(parserQuery: "Lemma")
+    }
+    
+    fileprivate func createMockHtmlParser(parserQuery: String) -> MockHtmlParser {
         let mock = MockHtmlParser()
         stub(mock) { mock in
             when(mock.parse(html: any(), query: any())).then { html, query in
-                return [ MockHtmlParserElement(data: html) ]
+                return (parserQuery == query) ? [ MockHtmlParserElement1(data: html), MockHtmlParserElement2(data: html) ] : []
             }
         }
         return mock
     }
     
-    func createMockHtmlParserError(error: Error) -> MockHtmlParser {
+    fileprivate func createMockHtmlParserError(error: Error) -> MockHtmlParser {
         let mock = MockHtmlParser()
         stub (mock) { mock in
             when(mock.parse(html: any(), query: any())).thenThrow(error)

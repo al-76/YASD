@@ -26,31 +26,54 @@ class LexinServiceFormatter {
         }
     }
     
-    private func format(item: LexinServiceResultItem) -> NSAttributedString {
-        let phonetic = "[" + (item.baseLang.phonetic ?? "") + "]"
-        let word = "# " + item.word + " " + phonetic + " " + textType(text: item.type ?? "") + "\n"
-        let inflection = "### (" + item.word + textInflection(lang: item.baseLang) + ")\n"
-        let meaning = textOrEmpty(text: item.baseLang.meaning ?? "")
-        let translation = textOrEmpty(text: item.targetLang?.translation ?? "")
-        let example = textTranslatedItems(items1opt: item.baseLang.example, items2opt: item.targetLang?.example)
-        let idiom = textTranslatedItems(items1opt: item.baseLang.idiom, items2opt: item.targetLang?.idiom)
-        let compound = textTranslatedItems(items1opt: item.baseLang.compound, items2opt: item.targetLang?.compound)
-        return self.markdown.parse(data: word +
-            inflection +
-            meaning +
-            translation +
+    fileprivate func format(item: LexinServiceResultItem) -> NSAttributedString {
+        if let baseLang = item.baseLang {
+            return markdown.parse(data: formatWordDefinition(lang: baseLang, item: item) + formatWordExample(lang: baseLang, targetLang: item.targetLang))
+        } else if let lexemes = item.lexemes {
+            var formatLexemes = ""
+            for (i, lexeme) in lexemes.enumerated() {
+                formatLexemes += formatWordExample(lang: lexeme, targetLang: nil)
+                if lexemes.count - 1 != i {
+                    formatLexemes += "\n"
+                }
+            }
+            return markdown.parse(data: formatWordDefinition(lang: lexemes.first, item: item) + formatLexemes)
+        }
+        return markdown.parse(data: formatWordDefinition(lang: nil, item: item))
+    }
+    
+    fileprivate func formatWordDefinition(lang: LexinServiceResultItem.Lang?, item: LexinServiceResultItem) -> String {
+        let phonetic = "[" + (lang?.phonetic ?? "") + "]"
+        var langReference = ""
+        if let reference = lang?.reference { langReference = " " + reference }
+        let word = "# " + item.word + " " + phonetic + " " + (textType(text: (item.type ?? "") + langReference)) + "\n"
+        let inflection = "### (" + item.word + textInflection(lang: lang) + ")\n"
+        var langSynonym = ""
+        if let synonym = item.targetLang?.synonym {
+            langSynonym = (synonym == "") ? "" : " (" + synonym + ")"
+        }
+        let translation = textOrEmpty(text: (item.targetLang?.translation ?? "") + langSynonym)
+        return (word + inflection + translation)
+    }
+    
+    fileprivate func formatWordExample(lang: LexinServiceResultItem.Lang, targetLang: LexinServiceResultItem.Lang?) -> String {
+        let meaning = textItalicOrEmpty(text: lang.meaning ?? "")
+        let example = textTranslatedItems(items1opt: lang.example, items2opt: targetLang?.example)
+        let idiom = textTranslatedItems(items1opt: lang.idiom, items2opt: targetLang?.idiom)
+        let compound = textTranslatedItems(items1opt: lang.compound, items2opt: targetLang?.compound)
+        return (meaning +
             addLabel(to: idiom, label: "Uttryck") +
             addLabel(to: example, label: "Exempel") +
             addLabel(to: compound, label: "Sammansättningar"))
     }
     
-    private func textInflection(lang: LexinServiceResultItem.Lang) -> String {
-        return lang.inflection?
+    fileprivate func textInflection(lang: LexinServiceResultItem.Lang?) -> String {
+        return lang?.inflection?
             .compactMap { $0 }
             .reduce("") { $0 + ", " + $1 } ?? ""
     }
     
-    private func textTranslatedItems(items1opt: [LexinServiceResultItem.Item]?, items2opt: [LexinServiceResultItem.Item]?) -> String {
+    fileprivate func textTranslatedItems(items1opt: [LexinServiceResultItem.Item]?, items2opt: [LexinServiceResultItem.Item]?) -> String {
         let separator = "\n* "
         var res = ""
         if let items1 = items1opt,
@@ -64,7 +87,7 @@ class LexinServiceFormatter {
         return res
     }
     
-    private func textMatchedItems(items1: [LexinServiceResultItem.Item], items2: [LexinServiceResultItem.Item], separator: String) -> String {
+    fileprivate func textMatchedItems(items1: [LexinServiceResultItem.Item], items2: [LexinServiceResultItem.Item], separator: String) -> String {
         let matchedItems = items1.compactMap { first in
             ( first, items2.first { $0.id == first.id } ) }
             .compactMap { $0 }
@@ -77,15 +100,19 @@ class LexinServiceFormatter {
             .reduce("") { $0 + separator + $1 }
     }
     
-    private func addLabel(to: String, label: String) -> String {
+    fileprivate func addLabel(to: String, label: String) -> String {
         return (to == "" ? "" : "\n## " + label + ":" + to + "\n")
     }
     
-    private func textOrEmpty(text: String) -> String {
+    fileprivate func textOrEmpty(text: String) -> String {
         return (text == "" ? "" : text + "\n");
     }
     
-    private func textType(text: String) -> String {
+    fileprivate func textItalicOrEmpty(text: String) -> String {
+        return (text == "" ? "" : "*" + text + "*\n");
+    }
+    
+    fileprivate func textType(text: String) -> String {
         return (text == "" ? "" : "(" + text + ")")
     }
 }

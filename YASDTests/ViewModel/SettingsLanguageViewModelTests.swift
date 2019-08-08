@@ -6,28 +6,42 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
+@testable import YASD
+
 import XCTest
+import RxSwift
+import RxTest
+import Cuckoo
 
 class SettingsLanguageViewModelTests: XCTestCase {
-
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    let disposeBag = DisposeBag()
+    
+    func testSettingsLanguage() {
+        // Arrange
+        let testLanguages = [
+            LexinServiceParameters.defaultLanguage,
+            LexinServiceParameters.supportedLanguages[0]
+            ]
+        let scheduler = TestScheduler(initialClock: 0)
+        let inputLanguages = scheduler.createHotObservable([
+            .next(150, testLanguages[1].name)
+            ])
+        let outputLanguages = scheduler.createObserver([SettingsLanguageViewModel.SettingsItem].self)
+        let parameters = MockLexinServiceParameters(language: testLanguages[0])
+        let viewModel = SettingsLanguageViewModel(lexinParameters: parameters)
+        let output = viewModel.transform(input: SettingsLanguageViewModel.Input(selectedLanguage: inputLanguages.asDriver(onErrorJustReturn: "")))
+        output.languages.drive(outputLanguages).disposed(by: disposeBag)
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        for (index, event) in outputLanguages.events.enumerated() {
+            XCTAssertEqual(getSelectedItem(items: event.value.element!)!.language.name, testLanguages[index].name)
         }
     }
-
+    
+    fileprivate func getSelectedItem(items: [SettingsLanguageViewModel.SettingsItem]) -> SettingsLanguageViewModel.SettingsItem? {
+        return items.first(where: { $0.selected })
+    }
 }

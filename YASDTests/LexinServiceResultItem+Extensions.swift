@@ -10,11 +10,11 @@
 
 extension LexinServiceResultItem {
     public init(word: String) {
-        self.init(word: word, type: "test", baseLang: Lang(), targetLang: Lang())
+        self.init(word: word, type: "test", baseLang: Lang(), targetLang: Lang(), lexemes: nil)
     }
     
     public init(word: String, type: String?) {
-        self.init(word: word, type: type, baseLang: Lang(), targetLang: Lang())
+        self.init(word: word, type: type, baseLang: Lang(), targetLang: Lang(), lexemes: nil)
     }
 }
 

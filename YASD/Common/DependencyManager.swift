@@ -10,7 +10,8 @@ import UIKit
 import Swinject
 import SwinjectStoryboard
 
-func configure(container: Container) {
+func createContainer() -> Container {
+    let container = Container()
     // Platform
     container.register(Network.self) { _ in Network() }
         .inObjectScope(.container)
@@ -24,7 +25,7 @@ func configure(container: Container) {
         LexinServiceFormatter(markdown: container.resolve(Markdown.self)!) }
         .inObjectScope(.container)
     container.register(LexinServiceParameters.self) { _ in
-        LexinServiceParameters(from:"swe", to:"rus") }
+        LexinServiceParameters(language: LexinServiceParameters.defaultLanguage) }
         .inObjectScope(.container)
     container.register(LexinService.self) { _ in
         LexinService(network: container.resolve(Network.self)!,
@@ -34,12 +35,25 @@ func configure(container: Container) {
         .inObjectScope(.container)
     
     // Models
-    container.register(WordsTableViewModel.self) { container in
-        WordsTableViewModel(lexin: container.resolve(LexinService.self)!) }
+    container.register(WordsViewModel.self) { container in
+        WordsViewModel(lexin: container.resolve(LexinService.self)!) }
+        .inObjectScope(.container)
+    container.register(SettingsViewModel.self) { container in
+        SettingsViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!) }
+        .inObjectScope(.container)
+    container.register(SettingsLanguageViewModel.self) { container in
+        SettingsLanguageViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!) }
         .inObjectScope(.container)
     
     // View
     container.storyboardInitCompleted(WordsTableViewController.self) { container, view in
-        view.model = container.resolve(WordsTableViewModel.self)
+        view.model = container.resolve(WordsViewModel.self)
     }
+    container.storyboardInitCompleted(SettingsTableViewController.self) { container, view in
+        view.model = container.resolve(SettingsViewModel.self)
+    }
+    container.storyboardInitCompleted(SettingsLanguageTableViewController.self) { container, view in
+        view.model = container.resolve(SettingsLanguageViewModel.self)
+    }
+    return container
 }

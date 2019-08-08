@@ -6,8 +6,25 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import UIKit
+import RxSwift
+import RxCocoa
 
 class SettingsViewModel: ViewModel {
+    private let lexinParameters: LexinServiceParameters
+    
+    struct Input {
+    }
+    
+    struct Output {
+        let selectedLanguage: Driver<String>
+    }
 
+    init(lexinParameters: LexinServiceParameters) {
+        self.lexinParameters = lexinParameters
+    }
+    
+    func transform(input: Input) -> Output {
+        let languageUpdate = lexinParameters.language.map { $0.name }
+        return Output(selectedLanguage: languageUpdate.asDriver(onErrorJustReturn: ""))
+    }
 }

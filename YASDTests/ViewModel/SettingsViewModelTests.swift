@@ -13,38 +13,33 @@ import RxSwift
 import RxTest
 import Cuckoo
 
-class SettingsViewModel: XCTestCase {
-    enum TestError: Error {
-        case someError
-    }
-    
+class SettingsViewModelTests: XCTestCase {
     let disposeBag = DisposeBag()
     
     func testSelectLanguage() {
         // Arrange
-        let errorWord = "error_word"
+        let testValues = [
+            LexinServiceParameters.Language(name: "initTestLanguage", code: "initTestCode"),
+            LexinServiceParameters.Language(name: "testLanguage", code: "testCode"),
+        ]
         let scheduler = TestScheduler(initialClock: 0)
-        let inputWords = scheduler.createHotObservable([
-            .next(150, ""), // will be ignored
-            .next(200, "test2"),
-            .next(250, "test3"),
-            .next(350, errorWord),
-            .completed(400)
+        let inputLanguages = scheduler.createHotObservable([
+            .next(150, testValues[1])
             ])
-        let selectedLanguages = scheduler.createObserver(String.self)
-        let viewModel = SettingsViewModel(lexinParameters: MockLexinServiceParameters(language: LexinServiceParameters.Language(name: "test", code: "test")))
-//        viewModel.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
-//            .foundWords.drive(foundWords).disposed(by: disposeBag)
+        let outputSelectedLanguages = scheduler.createObserver(String.self)
+        let parameters = MockLexinServiceParameters(language: testValues[0])
+        inputLanguages.bind(to: parameters.language).disposed(by: disposeBag)
+        let viewModel = SettingsViewModel(lexinParameters: parameters)
+        let output = viewModel.transform(input: SettingsViewModel.Input())
+        output.selectedLanguage.drive(outputSelectedLanguages).disposed(by: disposeBag)
         
         // Act
         scheduler.start()
         
         // Assert
-//        XCTAssertEqual(selectedLanguages.events, [
-//            .next(200, "test2"),
-//            .next(250, "test3"),
-//            .next(350, TestError.someError),
-//            .completed(400)
-//            ])
+        XCTAssertEqual(outputSelectedLanguages.events, [
+            .next(0, testValues[0].name),
+            .next(150, testValues[1].name)
+            ])
     }
 }

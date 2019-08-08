@@ -13,7 +13,9 @@ import SwinjectStoryboard
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    private let container = Container() { c in configure(container: c)}
+    private let container = { () -> Container in
+        return createContainer()
+    }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = createMainWindow(container: container)

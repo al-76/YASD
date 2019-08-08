@@ -19,7 +19,6 @@ class LexinServiceFormatterTests: XCTestCase {
     
     func testFormat() {
         // Arrange
-        let testId = "test"
         let testLang = LexinServiceResultItem.Lang(meaning: "meaning",
                                                    phonetic: nil,
                                                    inflection: [ "1", "2" ],
@@ -27,17 +26,33 @@ class LexinServiceFormatterTests: XCTestCase {
                                                    example: [ LexinServiceResultItem.Item(id: "1", value: "example") ],
                                                    idiom: nil,
                                                    compound: nil,
-                                                   translation: nil)
-        let formatter = LexinServiceFormatter(markdown: createMockMarkdown(id: testId))
+                                                   translation: nil,
+                                                   reference: "reference",
+                                                   synonym: "synonym")
+        let formatter = LexinServiceFormatter(markdown: createMockMarkdown())
         let result = LexinServiceResult.success([
             LexinServiceResultItem(word: "word"),
             LexinServiceResultItem(word: "word", type: nil),
             LexinServiceResultItem(word: "word", type: "type",
                                    baseLang: testLang,
-                                   targetLang: testLang),
+                                   targetLang: testLang,
+                                   lexemes: nil),
             LexinServiceResultItem(word: "word", type: "type",
                                    baseLang: testLang,
-                                   targetLang: nil)
+                                   targetLang: nil,
+                                   lexemes: nil),
+            LexinServiceResultItem(word: "word", type: "type",
+                                   baseLang: nil,
+                                   targetLang: nil,
+                                   lexemes: [testLang, testLang]),
+            LexinServiceResultItem(word: "word", type: "type",
+                                   baseLang: testLang,
+                                   targetLang: nil,
+                                   lexemes: [testLang, testLang]),
+            LexinServiceResultItem(word: "word", type: "type",
+                                   baseLang: nil,
+                                   targetLang: nil,
+                                   lexemes: nil)
             ])
         
         // Act
@@ -45,16 +60,19 @@ class LexinServiceFormatterTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(strings, LexinServiceResultFormatted.success([
-            NSAttributedString(string: testId),
-            NSAttributedString(string: testId),
-            NSAttributedString(string: testId),
-            NSAttributedString(string: testId) ]))
+            NSAttributedString(string: "# word [] (test)\n### (word)\n"),
+            NSAttributedString(string: "# word [] \n### (word)\n"),
+            NSAttributedString(string: "# word [] (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example - example\n"),
+            NSAttributedString(string: "# word [] (type reference)\n### (word, 1, 2)\n*meaning*\n\n## Exempel:\n* example\n"),
+            NSAttributedString(string: "# word [] (type reference)\n### (word, 1, 2)\n*meaning*\n\n## Exempel:\n* example\n\n*meaning*\n\n## Exempel:\n* example\n"),
+            NSAttributedString(string: "# word [] (type reference)\n### (word, 1, 2)\n*meaning*\n\n## Exempel:\n* example\n"),
+            NSAttributedString(string: "# word [] (type)\n### (word)\n")
+            ]))
     }
     
     func testFormatError() {
         // Arrange
-        let testId = "test"
-        let formatter = LexinServiceFormatter(markdown: createMockMarkdown(id: testId))
+        let formatter = LexinServiceFormatter(markdown: createMockMarkdown())
         let error = LexinServiceResult.failure(TestError.someError)
         
         // Act
@@ -64,11 +82,13 @@ class LexinServiceFormatterTests: XCTestCase {
         XCTAssertEqual(strings, LexinServiceResultFormatted.failure(TestError.someError))
     }
     
-    func createMockMarkdown(id: String) -> MockMarkdown {
+    func createMockMarkdown() -> MockMarkdown {
         let mock = MockMarkdown()
         stub (mock) { mock in
             when(mock.parse(data: any())).then { data in
-                return NSAttributedString(string: id)
+                print("line")
+                print(data)
+                return NSAttributedString(string: data)
             }
         }
         return mock

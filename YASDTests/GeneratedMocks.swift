@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-06-21 11:44:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-08-08 13:18:02 +0000
 
 
 //
@@ -317,7 +317,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-06-21 11:44:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-08-08 13:18:02 +0000
 
 //
 //  MarkdownParser.swift
@@ -424,7 +424,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-06-21 11:44:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-08-08 13:18:02 +0000
 
 //
 //  Network.swift
@@ -531,7 +531,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-06-21 11:44:14 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-08-08 13:18:02 +0000
 
 //
 //  LexinService.swift
@@ -544,6 +544,7 @@ import RxSwift
 import Cuckoo
 @testable import YASD
 
+import RxCocoa
 import RxSwift
 import UIKit
 
@@ -586,6 +587,21 @@ import UIKit
         
     }
     
+    
+    
+     override func getLanguageCode() -> String {
+        
+    return cuckoo_manager.call("getLanguageCode() -> String",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                super.getLanguageCode()
+                ,
+            defaultCall: __defaultImplStub!.getLanguageCode())
+        
+    }
+    
 
 	 struct __StubbingProxy_LexinServiceParameters: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -598,6 +614,11 @@ import UIKit
 	    func get() -> Cuckoo.ClassStubFunction<(), String> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinServiceParameters.self, method: "get() -> String", parameterMatchers: matchers))
+	    }
+	    
+	    func getLanguageCode() -> Cuckoo.ClassStubFunction<(), String> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinServiceParameters.self, method: "getLanguageCode() -> String", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -622,6 +643,12 @@ import UIKit
 	        return cuckoo_manager.verify("get() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func getLanguageCode() -> Cuckoo.__DoNotUse<(), String> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("getLanguageCode() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -632,6 +659,10 @@ import UIKit
 
     
      override func get() -> String  {
+        return DefaultValueRegistry.defaultValue(for: (String).self)
+    }
+    
+     override func getLanguageCode() -> String  {
         return DefaultValueRegistry.defaultValue(for: (String).self)
     }
     
@@ -729,7 +760,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-06-21 11:44:14 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-08-08 13:18:02 +0000
 
 //
 //  LexinService+Format.swift
@@ -830,113 +861,6 @@ import Foundation
     
      override func format(result: LexinServiceResult) -> LexinServiceResultFormatted  {
         return DefaultValueRegistry.defaultValue(for: (LexinServiceResultFormatted).self)
-    }
-    
-}
-
-
-// MARK: - Mocks generated from file: YASD/ViewModel/WordsTableViewModel.swift at 2019-06-21 11:44:14 +0000
-
-//
-//  WordsTableViewModel.swift
-//  YASD
-//
-//  Created by Vyacheslav Konopkin on 14/05/2019.
-//  Copyright © 2019 yac. All rights reserved.
-//
-
-import Cuckoo
-@testable import YASD
-
-import RxCocoa
-import RxSwift
-
-
- class MockWordsTableViewModel: WordsTableViewModel, Cuckoo.ClassMock {
-    
-     typealias MocksType = WordsTableViewModel
-    
-     typealias Stubbing = __StubbingProxy_WordsTableViewModel
-     typealias Verification = __VerificationProxy_WordsTableViewModel
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
-
-    
-    private var __defaultImplStub: WordsTableViewModel?
-
-     func enableDefaultImplementation(_ stub: WordsTableViewModel) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-     override func transform(input: Input) -> Output {
-        
-    return cuckoo_manager.call("transform(input: Input) -> Output",
-            parameters: (input),
-            escapingParameters: (input),
-            superclassCall:
-                
-                super.transform(input: input)
-                ,
-            defaultCall: __defaultImplStub!.transform(input: input))
-        
-    }
-    
-
-	 struct __StubbingProxy_WordsTableViewModel: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func transform<M1: Cuckoo.Matchable>(input: M1) -> Cuckoo.ClassStubFunction<(Input), Output> where M1.MatchedType == Input {
-	        let matchers: [Cuckoo.ParameterMatcher<(Input)>] = [wrap(matchable: input) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockWordsTableViewModel.self, method: "transform(input: Input) -> Output", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_WordsTableViewModel: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func transform<M1: Cuckoo.Matchable>(input: M1) -> Cuckoo.__DoNotUse<(Input), Output> where M1.MatchedType == Input {
-	        let matchers: [Cuckoo.ParameterMatcher<(Input)>] = [wrap(matchable: input) { $0 }]
-	        return cuckoo_manager.verify("transform(input: Input) -> Output", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class WordsTableViewModelStub: WordsTableViewModel {
-    
-
-    
-
-    
-     override func transform(input: Input) -> Output  {
-        return DefaultValueRegistry.defaultValue(for: (Output).self)
     }
     
 }

@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class WordsTableViewController: UITableViewController {
-    var model: WordsTableViewModel!
+    var model: WordsViewModel!
     let searchController = UISearchController(searchResultsController: nil)
     let disposeBag = DisposeBag()
     
@@ -32,7 +32,7 @@ class WordsTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        let input = WordsTableViewModel.Input(searchBar: createTextDriver())
+        let input = WordsViewModel.Input(searchBar: createTextDriver())
         model.transform(input: input)
             .foundWords.map { [weak self] result -> [NSAttributedString] in
                 switch result {
@@ -42,7 +42,7 @@ class WordsTableViewController: UITableViewController {
                     self?.handleError(error: error)
                     return []
                 }
-            }.drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { (index, result, cell) in
+            }.drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { (_, result, cell) in
                 if let wordsCell = cell as? WordsTableViewCell {
                     wordsCell.textView.attributedText = result
                 }
