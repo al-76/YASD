@@ -22,6 +22,14 @@ class WordsTableViewController: UITableViewController {
         bindToModel()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        searchController.searchBar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        searchController.searchBar.isHidden = false
+    }
+    
     private func customizeView() {
         searchController.dimsBackgroundDuringPresentation = false
         
