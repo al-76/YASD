@@ -40,10 +40,10 @@ class WordsViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(foundWords.events, [
+            .next(0, LexinServiceResultFormatted.success([])), // first search on init
             .next(200, LexinServiceResultFormatted.success([NSAttributedString(string: "test2")])),
             .next(250, LexinServiceResultFormatted.success([NSAttributedString(string: "test3")])),
-            .next(350, LexinServiceResultFormatted.failure(TestError.someError)),
-            .completed(400)
+            .next(350, LexinServiceResultFormatted.failure(TestError.someError))
             ])
     }
     
@@ -56,7 +56,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
             ])
         let foundWords = scheduler.createObserver(LexinServiceResultFormatted.self)
-        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(errorWord: ""))
+        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(errorWord: "error"))
         viewModel?.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
@@ -66,10 +66,14 @@ class WordsViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(foundWords.events, [
+            .next(0, LexinServiceResultFormatted.success([])), // first search on init
             .next(200, LexinServiceResultFormatted.success([])),
-            .next(250, LexinServiceResultFormatted.success([])),
-            .completed(400)
+            .next(250, LexinServiceResultFormatted.success([]))
             ])
+    }
+    
+    func testSearchUpdateOnSwitchParameters() {
+        // TODO
     }
     
     func createMockLexinService(errorWord: String) -> MockLexinService {

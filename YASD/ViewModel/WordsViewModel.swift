@@ -23,6 +23,11 @@ class WordsViewModel: ViewModel {
     
     init(lexin: LexinService) {
         self.lexin = lexin
+        print("Init")
+    }
+    
+    deinit {
+        print("Deinit")
     }
     
     func transform(input: Input) -> Output {
@@ -33,7 +38,8 @@ class WordsViewModel: ViewModel {
         }
         let updateSearch = lexin.parameters.language.asDriver()
             .flatMapLatest { [weak self] _ -> Driver<LexinServiceResult> in
-            if let model = self, let word = self?.lastWord {
+            if let model = self,
+                let word = self?.lastWord, word != "" {
                 return model.searchWord(word: word)
             }
             return Driver.just(.success([]))
