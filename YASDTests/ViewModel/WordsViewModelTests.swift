@@ -40,7 +40,6 @@ class WordsViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(0, LexinServiceResultFormatted.success([])), // first search on init
             .next(200, LexinServiceResultFormatted.success([NSAttributedString(string: "test2")])),
             .next(250, LexinServiceResultFormatted.success([NSAttributedString(string: "test3")])),
             .next(350, LexinServiceResultFormatted.failure(TestError.someError))
@@ -66,7 +65,6 @@ class WordsViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(0, LexinServiceResultFormatted.success([])), // first search on init
             .next(200, LexinServiceResultFormatted.success([])),
             .next(250, LexinServiceResultFormatted.success([]))
             ])
