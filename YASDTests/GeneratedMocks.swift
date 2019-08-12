@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-08-09 15:29:06 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-08-12 09:08:38 +0000
 
 
 //
@@ -317,7 +317,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-08-09 15:29:06 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-08-12 09:08:38 +0000
 
 //
 //  MarkdownParser.swift
@@ -424,7 +424,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-08-09 15:29:06 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-08-12 09:08:38 +0000
 
 //
 //  Network.swift
@@ -531,7 +531,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-08-09 15:29:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-08-12 09:08:38 +0000
 
 //
 //  LexinService.swift
@@ -760,7 +760,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-08-09 15:29:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-08-12 09:08:38 +0000
 
 //
 //  LexinService+Format.swift
