@@ -43,17 +43,35 @@ class LexinServiceFormatter {
     }
     
     fileprivate func formatWordDefinition(lang: LexinServiceResultItem.Lang?, item: LexinServiceResultItem) -> String {
-        let phonetic = "[" + (lang?.phonetic ?? "") + "]"
+        var phonetic = ""
+        if let langPhonetic = lang?.phonetic {
+            phonetic = "[" + langPhonetic + "] "
+        }
         var langReference = ""
         if let reference = lang?.reference { langReference = " " + reference }
-        let word = "# " + item.word + " " + phonetic + " " + (textType(text: (item.type ?? "") + langReference)) + "\n"
-        let inflection = "### (" + item.word + textInflection(lang: lang) + ")\n"
-        var langSynonym = ""
-        if let synonym = item.targetLang?.synonym {
-            langSynonym = (synonym == "") ? "" : " (" + synonym + ")"
+        let word = "# " + item.word + " " + phonetic + (textType(text: (item.type ?? "") + langReference)) + "\n"
+        var inflection = ""
+        if let langInflection = lang?.inflection,
+            langInflection.count > 0 {
+            inflection = "### (" + item.word + ", " + textStrings(strings: langInflection) + ")\n"
         }
-        let translation = textOrEmpty(text: (item.targetLang?.translation ?? "") + langSynonym)
-        return (word + inflection + translation)
+        return (word + inflection + formatTranslation(lang: lang, item: item))
+    }
+    
+    fileprivate func formatTranslation(lang: LexinServiceResultItem.Lang?, item: LexinServiceResultItem) -> String {
+        var translation = textOrEmpty(text: (item.targetLang?.translation ?? "") + formatSynonym(lang: item.targetLang))
+        if translation == "" {
+            translation = textOrEmpty(text: (lang?.translation ?? "") + formatSynonym(lang: lang))
+        }
+        return translation
+    }
+    
+    fileprivate func formatSynonym(lang: LexinServiceResultItem.Lang?) -> String {
+        var res = ""
+        if let synonym = lang?.synonym, synonym.count > 0 {
+            res = " (" + textStrings(strings: synonym) + ")"
+        }
+        return res
     }
     
     fileprivate func formatWordExample(lang: LexinServiceResultItem.Lang, targetLang: LexinServiceResultItem.Lang?) -> String {
@@ -67,10 +85,10 @@ class LexinServiceFormatter {
             addLabel(to: compound, label: "Sammansättningar"))
     }
     
-    fileprivate func textInflection(lang: LexinServiceResultItem.Lang?) -> String {
-        return lang?.inflection?
+    fileprivate func textStrings(strings: [String?]) -> String {
+        return strings
             .compactMap { $0 }
-            .reduce("") { $0 + ", " + $1 } ?? ""
+            .joined(separator: ", ")
     }
     
     fileprivate func textTranslatedItems(items1opt: [LexinServiceResultItem.Item]?, items2opt: [LexinServiceResultItem.Item]?) -> String {

@@ -34,10 +34,10 @@ class WordsViewModelTests: XCTestCase {
         let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: errorWord))
         viewModel.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(foundWords.events, [
             .next(200, LexinServiceResultFormatted.success([NSAttributedString(string: "test2")])),
@@ -45,7 +45,7 @@ class WordsViewModelTests: XCTestCase {
             .next(350, LexinServiceResultFormatted.failure(TestError.someError))
             ])
     }
-    
+
     func testSearchErrorNilViewModel() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
@@ -58,18 +58,18 @@ class WordsViewModelTests: XCTestCase {
         var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(errorWord: "error_word"))
         viewModel?.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
-        
+
         // Act
         viewModel = nil
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(foundWords.events, [
             .next(200, LexinServiceResultFormatted.success([])),
             .next(250, LexinServiceResultFormatted.success([]))
             ])
     }
-    
+
     func testSearchUpdateOnSwitchParameters() {
         // Arrange
         let errorWord = "error_word"
@@ -83,12 +83,12 @@ class WordsViewModelTests: XCTestCase {
         let viewModel = WordsViewModel(lexin: lexin)
         viewModel.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
-        
+
         // Act
         scheduler.start()
         lexin.parameters.language
             .accept(LexinServiceParameters.Language(name: "test2", code: "test2_code"))
-        
+
         // Assert
         XCTAssertEqual(foundWords.events, [
             .next(200, LexinServiceResultFormatted.success([NSAttributedString(string: "test2")])),
@@ -98,10 +98,11 @@ class WordsViewModelTests: XCTestCase {
     }
     
     func createMockLexinService(errorWord: String) -> MockLexinService {
+        let mockParser = MockLexinServiceParser()
         let mock = MockLexinService(network: MockNetwork(),
-                                                htmlParser: MockHtmlParser(),
-                                                parameters: LexinServiceParameters(language: MockLexinServiceParameters.Language(name: "test", code: "test")),
-                                                formatter: createMockLexinServiceFormatter())
+                                    parameters: LexinServiceParameters(language: MockLexinServiceParameters.Language(name: "test", code: "test")),
+                                    formatter: createMockLexinServiceFormatter(),
+                                    provider: MockLexinServiceProvider(defaultParser: mockParser, folketsParser: mockParser, swedishParser: mockParser))
         stub(mock) { mock in
             when(mock.search(word: anyString())).then { word in
                 return Observable<LexinServiceResult>.create { observable in
@@ -110,7 +111,7 @@ class WordsViewModelTests: XCTestCase {
                     } else if word.isEmpty {
                         observable.on(.completed)
                     } else {
-                      observable.on(.next(.success([LexinServiceResultItem(word: word)])))
+                        observable.on(.next(.success([LexinServiceResultItem(word: word)])))
                     }
                     return Disposables.create {}
                 }

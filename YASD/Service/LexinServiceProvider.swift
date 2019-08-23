@@ -73,7 +73,7 @@ class LexinServiceParserDefault : LexinServiceParser {
     
     fileprivate static func parseLang(root: String, element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
         return LexinServiceResultItem.Lang(meaning: try parseMeaning(root: root, element: element),
-                    phonetic: try? element.selectText(root + "Phonetic"),
+                                           phonetic: parsePhonetic(phonetic: (try? element.selectText(root + "Phonetic")) ?? ""),
                     inflection: try? element.selectTexts(root + "Inflection"),
                     grammar: try? element.selectText(root + "Graminfo"),
                     example: try? element.selectLexinServiceResultItems(root + "Example"),
@@ -86,6 +86,10 @@ class LexinServiceParserDefault : LexinServiceParser {
     
     fileprivate static func parseReference(root: String, element: HtmlParserElement) throws -> String? {
         let reference = try? element.selectElements(root + "Reference").first
+        if let type = try reference?.attribute("Type"),
+            (!type.isEmpty && type.removeQuotes() != "see") {
+            return ""
+        }
         return try? reference?.attribute("Value").removeQuotes()
     }
     
@@ -97,27 +101,29 @@ class LexinServiceParserDefault : LexinServiceParser {
     }
 }
 
-class LexinServiceSwedish : LexinServiceParserDefault {
+class LexinServiceParserSwedish : LexinServiceParserDefault {
     override func parseHtml(text: String) throws -> [LexinServiceResultItem] {
         return try htmlParser.parse(html: text.replacingOccurrences(of: "\\n", with: ""), query: "Lemma")
             .map { word ->LexinServiceResultItem in
             let value = (try word.attribute("Value")).removeQuotes()
             let type = (try word.attribute("Type")).removeQuotes()
-            let lexems = try LexinServiceSwedish.parseLexems(id: "Lexeme", element: word)
+            let lexems = try LexinServiceParserSwedish.parseLexems(id: "Lexeme", element: word)
             return LexinServiceResultItem(word: value, type: type, baseLang: nil, targetLang: nil, lexemes: lexems)
         }
     }
     
     fileprivate static func parseLexems(id: String, element: HtmlParserElement) throws -> [LexinServiceResultItem.Lang] {
-        let phonetic = try element.selectText("Phonetic")
+        let phonetic = parsePhonetic(phonetic: try element.selectText("Phonetic"))
+        let inflection = try element.selectTexts("Inflection")
         var langs: [LexinServiceResultItem.Lang] = try element.selectElements(id).map {
             var lang = try parseLang(root: "", element: $0)
             lang.phonetic = phonetic
+            lang.inflection = inflection
             return lang
         }
         if langs.isEmpty {
             let reference = try? parseReference(root: "", element: element)
-            langs.append(LexinServiceResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: nil, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil))
+            langs.append(LexinServiceResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: inflection, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil))
         }
         return langs
     }
@@ -199,7 +205,7 @@ class LexinServiceParserFolkets : LexinServiceParser {
     
     fileprivate static func parseLang(element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
         let lang = LexinServiceResultItem.Lang(meaning: try? element.selectValue("definition"),
-                                           phonetic: try? element.selectValue("phonetic"),
+                                               phonetic: parsePhonetic(phonetic: (try? element.selectValue("phonetic")) ?? ""),
                                            inflection: try? element.selectValues( "inflection"),
                                            grammar: try? element.selectValue("graminfo"),
                                            example: try? element.selectLexinServiceResultItems("example"),
@@ -218,3 +224,43 @@ class LexinServiceParserFolkets : LexinServiceParser {
         return lang
     }
 }
+
+fileprivate func parsePhonetic(phonetic: String) -> String {
+    if phonetic.isEmpty {
+        return ""
+    }
+    
+    let symbols = [ ("+", "‿"),
+                    ("@", "ng"),
+                    ("$", "sj"),
+                    ("2", "²") ]
+    var res = phonetic
+    
+    if let regex = try? NSRegularExpression(pattern: "\\\\u([0-9a-fA-F]{1,4})", options: []) {
+        for match in regex.matches(in: res, options: [], range:NSMakeRange(0, res.count)) {
+            let a = res.substring(with: match.range(at: 0))
+            if let b = Int(res.substring(with: match.range(at: 1)), radix: 16),
+                let uc = UnicodeScalar(b) {
+                res = res.replacingOccurrences(of: a, with: String(Character(uc)))
+            }
+        }
+    }
+    
+    for symbol in symbols {
+        res = res.replacingOccurrences(of: symbol.0, with: symbol.1)
+    }
+    
+    for symbol in res.filter({ $0.isUppercase }) {
+        res = res.replacingOccurrences(of: String(symbol), with: "'" + symbol.lowercased())
+    }
+    
+    return res
+}
+
+private extension String {
+    func substring(with nsrange: NSRange) -> Substring {
+        guard let range = Range(nsrange, in: self) else { return "" }
+        return self[range]
+    }
+}
+

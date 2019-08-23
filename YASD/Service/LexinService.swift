@@ -79,7 +79,7 @@ struct LexinServiceResultItem {
         var compound: [Item]?
         var translation: String?
         var reference: String?
-        var synonym: String?
+        var synonym: [String?]?
     }
     
     var word: String
@@ -90,120 +90,31 @@ struct LexinServiceResultItem {
 }
 
 class LexinService {
-    public static let URL: String = "https://lexin.nada.kth.se/lexin/lexin/"
-
     public let formatter: LexinServiceFormatter
     public let parameters: LexinServiceParameters
     
     private let network: Network
-    private let htmlParser: HtmlParser
+    private let provider: LexinServiceProvider
     
-    init(network: Network, htmlParser: HtmlParser, parameters: LexinServiceParameters, formatter: LexinServiceFormatter) {
+    init(network: Network, parameters: LexinServiceParameters, formatter: LexinServiceFormatter, provider: LexinServiceProvider) {
         self.network = network
-        self.htmlParser = htmlParser
         self.parameters = parameters
         self.formatter = formatter
+        self.provider = provider
     }
     
     func search(word: String) -> Observable<LexinServiceResult> {
         if word.isEmpty {
             return Observable<LexinServiceResult>.just(.success([]))
         }
-        return network.postRequest(url: LexinService.URL + "lookupword",
-                                   parameters: createRequestParameters(word: word))
-            .map { [weak self] data in
-                do {
-                    return .success(try self?.parseHtml(text: data) ?? [])
+        let parser = provider.getParser(language: parameters.language.value)
+        return network.postRequest(url: parser.getUrl(),
+                                   parameters: parser.getRequestParameters(word: word, parameters: parameters.get()))
+            .map { do {
+                    return try .success(parser.parseHtml(text: $0))
                 } catch let error {
                     return .failure(error)
                 }
             }
-    }
-    
-    fileprivate func createRequestParameters(word: String) -> (String?, [String: String]?) {
-        let body = "7|0|7|" + LexinService.URL + "|FCDCCA88916BAACF8B03FB48D294BA89|se.jojoman.lexin.lexingwt.client.LookUpService|lookUpWord|se.jojoman.lexin.lexingwt.client.LookUpRequest/682723451|" +
-            parameters.get() + "|" +
-            word + "|1|2|3|4|1|5|5|1|6|0|7|"
-        let headers = [ "Content-Type": "text/x-gwt-rpc;charset=UTF-8",
-                        "X-GWT-Module-Base": LexinService.URL,
-                        "X-GWT-Permutation": "28B9DF7353B58D7F508C74030B83DEAE" ]
-        return (body, headers)
-    }
-    
-    fileprivate func parseHtml(text: String) throws -> [LexinServiceResultItem] {
-        let items = try htmlParser.parse(html: text, query: "Word")
-        if !items.isEmpty {
-            return try items.map { word -> LexinServiceResultItem in
-                let baseLang = try LexinServiceResultItem.parseLang(root: "BaseLang > ", element: word)
-                let targetLang = try LexinServiceResultItem.parseLang(root: "TargetLang > ", element: word)
-                let value = (try word.attribute("Value")).removeQuotes()
-                let type = (try word.attribute("Type")).removeQuotes()
-                return LexinServiceResultItem(word: value,
-                                          type: type,
-                                          baseLang: baseLang,
-                                          targetLang: targetLang,
-                                          lexemes: nil)
-            }
-        }
-        return try htmlParser.parse(html: text, query: "Lemma").map { word ->LexinServiceResultItem in
-            let value = (try word.attribute("Value")).removeQuotes()
-            let type = (try word.attribute("Type")).removeQuotes()
-            let lexems = try LexinServiceResultItem.parseLangs(id: "Lexeme",element: word)
-            return LexinServiceResultItem(word: value, type: type, baseLang:nil, targetLang: nil, lexemes: lexems)
-        }
-    }
-}
-
-extension LexinServiceResultItem {
-    fileprivate static func parseLang(root: String, element: HtmlParserElement) throws -> Lang {
-        return Lang(meaning: try parseMeaning(root: root, element: element),
-                    phonetic: try? element.selectText(root + "Phonetic"),
-                    inflection: try? element.selectTexts(root + "Inflection"),
-                    grammar: try? element.selectText(root + "Graminfo"),
-                    example: try? element.selectLexinServiceResultItems(root + "Example"),
-                    idiom: try? element.selectLexinServiceResultItems(root + "Idiom"),
-                    compound: try? element.selectLexinServiceResultItems(root + "Compound"),
-                    translation: try? element.selectText(root + "Translation"),
-                    reference: try? parseReference(root: root, element: element),
-                    synonym: try? element.selectText(root + "Synonym"))
-    }
-    
-    fileprivate static func parseLangs(id: String, element: HtmlParserElement) throws -> [Lang] {
-        let phonetic = try element.selectText("Phonetic")
-        var langs: [Lang] = try element.selectElements(id).map {
-            var lang = try parseLang(root: "", element: $0)
-            lang.phonetic = phonetic
-            return lang
-        }
-        if langs.isEmpty {
-            let reference = try? parseReference(root: "", element: element)
-            langs.append(LexinServiceResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: nil, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil))
-        }
-        return langs
-    }
-    
-    fileprivate static func parseReference(root: String, element: HtmlParserElement) throws -> String? {
-        let reference = try? element.selectElements(root + "Reference").first
-        return try? reference?.attribute("Value").removeQuotes()
-    }
-    
-    fileprivate static func parseMeaning(root: String, element: HtmlParserElement) throws -> String? {
-        var meaning = try? element.selectText(root + "Meaning")
-        meaning = (meaning == "") ? (try? element.selectTexts(root + "Definition").first) : meaning
-        meaning = (meaning == "") ? (try? element.selectTexts(root + "Gramcom").first) : meaning
-        return meaning
-    }
-}
-
-extension HtmlParserElement {
-    func selectLexinServiceResultItems(_ query: String) throws -> [LexinServiceResultItem.Item] {
-        return try selectElements(query).map { element in LexinServiceResultItem.Item(id: try element.attribute("ID"),
-                                                                                      value: try element.text()) }
-    }
-}
-
-extension String {
-    func removeQuotes() -> String {
-        return self.replacingOccurrences(of: "\\\"", with: "")
     }
 }

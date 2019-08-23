@@ -12,29 +12,61 @@ import SwinjectStoryboard
 
 func createContainer() -> Container {
     let container = Container()
-    // Platform
+    
+    configurePlatform(container: container)
+    configureService(container: container)
+    configureModel(container: container)
+    configureView(container: container)
+    
+    return container
+}
+
+func configurePlatform(container: Container) {
     container.register(Network.self) { _ in Network() }
         .inObjectScope(.container)
     container.register(HtmlParser.self) { _ in HtmlParser() }
         .inObjectScope(.container)
     container.register(Markdown.self) { _ in Markdown() }
         .inObjectScope(.container)
-    
-    // Services
+}
+
+func configureService(container: Container) {
+    // Parsers
+    container.register(LexinServiceParserDefault.self) { _ in
+        LexinServiceParserDefault(htmlParser: container.resolve(HtmlParser.self)!)
+        }.inObjectScope(.container)
+    container.register(LexinServiceParserFolkets.self) { _ in
+        LexinServiceParserFolkets(htmlParser: container.resolve(HtmlParser.self)!)
+        }.inObjectScope(.container)
+    container.register(LexinServiceParserSwedish.self) { _ in
+        LexinServiceParserSwedish(htmlParser: container.resolve(HtmlParser.self)!)
+        }.inObjectScope(.container)
+
+    // Formatter
     container.register(LexinServiceFormatter.self) { _ in
         LexinServiceFormatter(markdown: container.resolve(Markdown.self)!) }
         .inObjectScope(.container)
+    // Parameters
     container.register(LexinServiceParameters.self) { _ in
         LexinServiceParameters(language: LexinServiceParameters.defaultLanguage) }
         .inObjectScope(.container)
+    // Provider
+    container.register(LexinServiceProvider.self) { _ in
+        LexinServiceProvider(defaultParser: container.resolve(LexinServiceParserDefault.self)!,
+                             folketsParser: container.resolve(LexinServiceParserFolkets.self)!,
+                             swedishParser: container.resolve(LexinServiceParserSwedish.self)!)
+        }
+        .inObjectScope(.container)
+    // Lexin Service
     container.register(LexinService.self) { _ in
         LexinService(network: container.resolve(Network.self)!,
-                     htmlParser: container.resolve(HtmlParser.self)!,
                      parameters: container.resolve(LexinServiceParameters.self)!,
-                     formatter: container.resolve(LexinServiceFormatter.self)!) }
+                     formatter: container.resolve(LexinServiceFormatter.self)!,
+                     provider: container.resolve(LexinServiceProvider.self)!) }
         .inObjectScope(.container)
-    
-    // Models
+}
+
+func configureModel(container: Container) {
     container.register(WordsViewModel.self) { container in
         WordsViewModel(lexin: container.resolve(LexinService.self)!) }
         .inObjectScope(.container)
@@ -44,8 +76,9 @@ func createContainer() -> Container {
     container.register(SettingsLanguageViewModel.self) { container in
         SettingsLanguageViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!) }
         .inObjectScope(.container)
-    
-    // View
+}
+
+func configureView(container: Container) {
     container.storyboardInitCompleted(WordsTableViewController.self) { container, view in
         view.model = container.resolve(WordsViewModel.self)
     }
@@ -55,5 +88,4 @@ func createContainer() -> Container {
     container.storyboardInitCompleted(SettingsLanguageTableViewController.self) { container, view in
         view.model = container.resolve(SettingsLanguageViewModel.self)
     }
-    return container
 }
