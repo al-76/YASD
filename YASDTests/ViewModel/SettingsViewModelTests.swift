@@ -27,7 +27,7 @@ class SettingsViewModelTests: XCTestCase {
             .next(150, testValues[1])
             ])
         let outputSelectedLanguages = scheduler.createObserver(String.self)
-        let parameters = MockLexinServiceParameters(language: testValues[0])
+        let parameters = createLexinServiceParameters(language: testValues[0])
         inputLanguages.bind(to: parameters.language).disposed(by: disposeBag)
         let viewModel = SettingsViewModel(lexinParameters: parameters)
         let output = viewModel.transform(input: SettingsViewModel.Input())
@@ -41,5 +41,13 @@ class SettingsViewModelTests: XCTestCase {
             .next(0, testValues[0].name),
             .next(150, testValues[1].name)
             ])
+    }
+    
+    fileprivate func createLexinServiceParameters(language: LexinServiceParameters.Language) -> MockLexinServiceParameters {
+        let mock = MockLexinServiceParameters(storage: MockStorage(), language: language)
+        stub(mock) { stub in
+            when(stub.load()).thenDoNothing()
+        }
+        return mock
     }
 }

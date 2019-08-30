@@ -5,4 +5,3 @@ github "donileo/RMessage"
 github "scinfu/SwiftSoup"
 github "Brightify/Cuckoo"
 github "ivanbruel/MarkdownKit"
-github "honghaoz/Ji" ~> 5.0.0

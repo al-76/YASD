@@ -73,8 +73,8 @@ class LexinServiceParsersTests: XCTestCase {
     
     fileprivate func createMockHtmlParser() -> MockHtmlParser {
         let mock = MockHtmlParser()
-        stub(mock) { mock in
-            when(mock.parse(html: any(), query: any())).then { html, query in
+        stub(mock) { stub in
+            when(stub.parse(html: any(), query: any())).then { html, query in
                 return [ MockHtmlParserElement1(data: html), MockHtmlParserElement2(data: html)]
             }
         }
@@ -83,8 +83,8 @@ class LexinServiceParsersTests: XCTestCase {
     
     fileprivate func createMockHtmlParserError(error: Error) -> MockHtmlParser {
         let mock = MockHtmlParser()
-        stub (mock) { mock in
-            when(mock.parse(html: any(), query: any())).thenThrow(error)
+        stub (mock) { stub in
+            when(stub.parse(html: any(), query: any())).thenThrow(error)
         }
         return mock
     }

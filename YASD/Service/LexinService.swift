@@ -36,15 +36,22 @@ class LexinServiceParameters {
     ]
     public static let defaultLanguage = LexinServiceParameters.supportedLanguages[17]
     
-    struct Language {
+    struct Language: Codable {
         var name: String
         var code: String
     }
     
     public let language: BehaviorRelay<Language>
     
-    init(language: Language) {
+    private let storage: Storage
+    
+    init(storage: Storage, language: Language) {
+        self.storage = storage
         self.language = BehaviorRelay<Language>(value: language)
+    }
+    
+    func load() {
+        setLanguage(language: storage.get(id: "language", defaultObject: language.value))
     }
     
     func get() -> String {
@@ -53,6 +60,11 @@ class LexinServiceParameters {
     
     func getLanguageCode() -> String {
         return language.value.code
+    }
+    
+    func setLanguage(language: Language) {
+        try? storage.save(id: "language", object: language)
+        self.language.accept(language)
     }
 }
 

@@ -54,14 +54,14 @@ class LexinServiceTests: XCTestCase {
 
     fileprivate func createLexinService(parser: LexinServiceParser) -> LexinService {
         return LexinService(network: createMockNetwork(),
-                            parameters: LexinServiceParameters(language: MockLexinServiceParameters.Language(name: "test", code: "test")),
+                            parameters: LexinServiceParameters(storage: createMockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test")),
                             formatter: MockLexinServiceFormatter(markdown: MockMarkdown()),
                             provider: createMockLexinServiceProvider(parser: parser))
     }
     
     
     fileprivate func createLexinServiceParameters() -> LexinServiceParameters {
-        let mock = MockLexinServiceParameters(language: MockLexinServiceParameters.Language(name: "test", code: "test"))
+        let mock = MockLexinServiceParameters(storage: createMockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test"))
         stub(mock) { stub in
             when(stub.get()).thenReturn("test")
         }
@@ -123,6 +123,16 @@ class LexinServiceTests: XCTestCase {
                 return Observable<String>.just("")
             }
         }
+        return mock
+    }
+    
+    fileprivate func createMockStorage() -> MockStorage {
+        let mock = MockStorage()
+        stub(mock) { stub in
+            when(stub.get(id: anyString(), defaultObject: any(LexinServiceParameters.Language.self))).then { id, defaultObject -> LexinServiceParameters.Language in return defaultObject }
+            when(stub.save(id: anyString(), object: any(LexinServiceParameters.Language.self))).thenDoNothing()
+        }
+        
         return mock
     }
 }

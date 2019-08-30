@@ -28,6 +28,8 @@ func configurePlatform(container: Container) {
         .inObjectScope(.container)
     container.register(Markdown.self) { _ in Markdown() }
         .inObjectScope(.container)
+    container.register(Storage.self) { _ in Storage() }
+        .inObjectScope(.container)
 }
 
 func configureService(container: Container) {
@@ -48,7 +50,8 @@ func configureService(container: Container) {
         .inObjectScope(.container)
     // Parameters
     container.register(LexinServiceParameters.self) { _ in
-        LexinServiceParameters(language: LexinServiceParameters.defaultLanguage) }
+        LexinServiceParameters(storage: container.resolve(Storage.self)!,
+                               language: LexinServiceParameters.defaultLanguage) }
         .inObjectScope(.container)
     // Provider
     container.register(LexinServiceProvider.self) { _ in

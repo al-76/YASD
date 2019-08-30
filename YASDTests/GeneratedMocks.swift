@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-08-23 13:30:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-08-30 15:38:36 +0000
 
 
 //
@@ -317,7 +317,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-08-23 13:30:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-08-30 15:38:36 +0000
 
 //
 //  MarkdownParser.swift
@@ -424,7 +424,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-08-23 13:30:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-08-30 15:38:36 +0000
 
 //
 //  Network.swift
@@ -531,7 +531,143 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-08-23 13:30:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-08-30 15:38:36 +0000
+
+//
+//  Storage.swift
+//  YASD
+//
+//  Created by Vyacheslav Konopkin on 26/08/2019.
+//  Copyright © 2019 yac. All rights reserved.
+//
+
+import Cuckoo
+@testable import YASD
+
+import Foundation
+
+
+ class MockStorage: Storage, Cuckoo.ClassMock {
+    
+     typealias MocksType = Storage
+    
+     typealias Stubbing = __StubbingProxy_Storage
+     typealias Verification = __VerificationProxy_Storage
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+
+    
+    private var __defaultImplStub: Storage?
+
+     func enableDefaultImplementation(_ stub: Storage) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     override func get<T: Codable>(id: String, defaultObject: T) -> T {
+        
+    return cuckoo_manager.call("get(id: String, defaultObject: T) -> T",
+            parameters: (id, defaultObject),
+            escapingParameters: (id, defaultObject),
+            superclassCall:
+                
+                super.get(id: id, defaultObject: defaultObject)
+                ,
+            defaultCall: __defaultImplStub!.get(id: id, defaultObject: defaultObject))
+        
+    }
+    
+    
+    
+     override func save<T: Codable>(id: String, object: T) throws {
+        
+    return try cuckoo_manager.callThrows("save(id: String, object: T) throws",
+            parameters: (id, object),
+            escapingParameters: (id, object),
+            superclassCall:
+                
+                super.save(id: id, object: object)
+                ,
+            defaultCall: __defaultImplStub!.save(id: id, object: object))
+        
+    }
+    
+
+	 struct __StubbingProxy_Storage: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func get<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, T: Codable>(id: M1, defaultObject: M2) -> Cuckoo.ClassStubFunction<(String, T), T> where M1.MatchedType == String, M2.MatchedType == T {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, T)>] = [wrap(matchable: id) { $0.0 }, wrap(matchable: defaultObject) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockStorage.self, method: "get(id: String, defaultObject: T) -> T", parameterMatchers: matchers))
+	    }
+	    
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, T: Codable>(id: M1, object: M2) -> Cuckoo.ClassStubNoReturnThrowingFunction<(String, T)> where M1.MatchedType == String, M2.MatchedType == T {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, T)>] = [wrap(matchable: id) { $0.0 }, wrap(matchable: object) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockStorage.self, method: "save(id: String, object: T) throws", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_Storage: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func get<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, T: Codable>(id: M1, defaultObject: M2) -> Cuckoo.__DoNotUse<(String, T), T> where M1.MatchedType == String, M2.MatchedType == T {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, T)>] = [wrap(matchable: id) { $0.0 }, wrap(matchable: defaultObject) { $0.1 }]
+	        return cuckoo_manager.verify("get(id: String, defaultObject: T) -> T", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable, T: Codable>(id: M1, object: M2) -> Cuckoo.__DoNotUse<(String, T), Void> where M1.MatchedType == String, M2.MatchedType == T {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, T)>] = [wrap(matchable: id) { $0.0 }, wrap(matchable: object) { $0.1 }]
+	        return cuckoo_manager.verify("save(id: String, object: T) throws", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class StorageStub: Storage {
+    
+
+    
+
+    
+     override func get<T: Codable>(id: String, defaultObject: T) -> T  {
+        return DefaultValueRegistry.defaultValue(for: (T).self)
+    }
+    
+     override func save<T: Codable>(id: String, object: T) throws  {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-08-30 15:38:36 +0000
 
 //
 //  LexinService.swift
@@ -574,6 +710,21 @@ import UIKit
     
     
     
+     override func load()  {
+        
+    return cuckoo_manager.call("load()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                super.load()
+                ,
+            defaultCall: __defaultImplStub!.load())
+        
+    }
+    
+    
+    
      override func get() -> String {
         
     return cuckoo_manager.call("get() -> String",
@@ -602,6 +753,21 @@ import UIKit
         
     }
     
+    
+    
+     override func setLanguage(language: Language)  {
+        
+    return cuckoo_manager.call("setLanguage(language: Language)",
+            parameters: (language),
+            escapingParameters: (language),
+            superclassCall:
+                
+                super.setLanguage(language: language)
+                ,
+            defaultCall: __defaultImplStub!.setLanguage(language: language))
+        
+    }
+    
 
 	 struct __StubbingProxy_LexinServiceParameters: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -611,6 +777,11 @@ import UIKit
 	    }
 	    
 	    
+	    func load() -> Cuckoo.ClassStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinServiceParameters.self, method: "load()", parameterMatchers: matchers))
+	    }
+	    
 	    func get() -> Cuckoo.ClassStubFunction<(), String> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinServiceParameters.self, method: "get() -> String", parameterMatchers: matchers))
@@ -619,6 +790,11 @@ import UIKit
 	    func getLanguageCode() -> Cuckoo.ClassStubFunction<(), String> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinServiceParameters.self, method: "getLanguageCode() -> String", parameterMatchers: matchers))
+	    }
+	    
+	    func setLanguage<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.ClassStubNoReturnFunction<(Language)> where M1.MatchedType == Language {
+	        let matchers: [Cuckoo.ParameterMatcher<(Language)>] = [wrap(matchable: language) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinServiceParameters.self, method: "setLanguage(language: Language)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -638,6 +814,12 @@ import UIKit
 	
 	    
 	    @discardableResult
+	    func load() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("load()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
 	    func get() -> Cuckoo.__DoNotUse<(), String> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
 	        return cuckoo_manager.verify("get() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
@@ -649,6 +831,12 @@ import UIKit
 	        return cuckoo_manager.verify("getLanguageCode() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func setLanguage<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.__DoNotUse<(Language), Void> where M1.MatchedType == Language {
+	        let matchers: [Cuckoo.ParameterMatcher<(Language)>] = [wrap(matchable: language) { $0 }]
+	        return cuckoo_manager.verify("setLanguage(language: Language)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -658,12 +846,20 @@ import UIKit
     
 
     
+     override func load()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
      override func get() -> String  {
         return DefaultValueRegistry.defaultValue(for: (String).self)
     }
     
      override func getLanguageCode() -> String  {
         return DefaultValueRegistry.defaultValue(for: (String).self)
+    }
+    
+     override func setLanguage(language: Language)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
@@ -760,7 +956,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-08-23 13:30:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-08-30 15:38:36 +0000
 
 //
 //  LexinService+Format.swift
@@ -866,7 +1062,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-08-23 13:30:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-08-30 15:38:36 +0000
 
 //
 //  LexinServiceProvider.swift

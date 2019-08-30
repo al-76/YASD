@@ -100,11 +100,11 @@ class WordsViewModelTests: XCTestCase {
     func createMockLexinService(errorWord: String) -> MockLexinService {
         let mockParser = MockLexinServiceParser()
         let mock = MockLexinService(network: MockNetwork(),
-                                    parameters: LexinServiceParameters(language: MockLexinServiceParameters.Language(name: "test", code: "test")),
+                                    parameters: LexinServiceParameters(storage: MockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test")),
                                     formatter: createMockLexinServiceFormatter(),
                                     provider: MockLexinServiceProvider(defaultParser: mockParser, folketsParser: mockParser, swedishParser: mockParser))
-        stub(mock) { mock in
-            when(mock.search(word: anyString())).then { word in
+        stub(mock) { stub in
+            when(stub.search(word: anyString())).then { word in
                 return Observable<LexinServiceResult>.create { observable in
                     if word == errorWord {
                         observable.on(.error(TestError.someError))
@@ -122,8 +122,8 @@ class WordsViewModelTests: XCTestCase {
     
     func createMockLexinServiceFormatter() -> MockLexinServiceFormatter {
         let mock = MockLexinServiceFormatter(markdown: MockMarkdown())
-        stub(mock) { mock in
-            when(mock.format(result: any())).then { result in
+        stub(mock) { stub in
+            when(stub.format(result: any())).then { result in
                 switch result {
                 case .success(let items):
                     return .success(items.map { NSAttributedString(string: $0.word) })
