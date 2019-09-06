@@ -21,6 +21,20 @@
 		2F3EE25E229D79CC0083CDE9 /* RxRelay.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FF62C91228DAAB400B4946C /* RxRelay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F3EE261229D7B7B0083CDE9 /* LexinServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3EE260229D7B7B0083CDE9 /* LexinServiceTests.swift */; };
 		2F3EE262229D7F4E0083CDE9 /* RxBlocking.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F97576C2277474200B343B4 /* RxBlocking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2F5F8BAC2322879900EF6A85 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62CBC229444BE00B4946C /* ViewModel.swift */; };
+		2F5F8BAD2322879900EF6A85 /* WordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C80228AA89400B4946C /* WordsViewModel.swift */; };
+		2F5F8BAE2322879900EF6A85 /* SettingsLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F31739C22CCF84A008944EE /* SettingsLanguageViewModel.swift */; };
+		2F5F8BAF2322879900EF6A85 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2EC4B522EB259000B1D4C7 /* SettingsViewModel.swift */; };
+		2F5F8BB02322879E00EF6A85 /* LexinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F97577822786F6F00B343B4 /* LexinService.swift */; };
+		2F5F8BB12322879E00EF6A85 /* LexinServiceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatter.swift */; };
+		2F5F8BB22322879E00EF6A85 /* LexinServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBF7EF32302F65E004D5E10 /* LexinServiceProvider.swift */; };
+		2F5F8BB3232287DA00EF6A85 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB2DE022A111540053B758 /* Network.swift */; };
+		2F5F8BB4232287DA00EF6A85 /* HtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7422B5273B002F769B /* HtmlParser.swift */; };
+		2F5F8BB6232287DA00EF6A85 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7321862313E4A000CC0822 /* Storage.swift */; };
+		2F5F8BB7232287DF00EF6A85 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDEFF5E2295494200A82F43 /* Result.swift */; };
+		2F5F8BB9232289AA00EF6A85 /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7622B5284F002F769B /* Markdown.swift */; };
+		2F5F8BBB23228BB000EF6A85 /* MarkdownKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F5F8BBA23228BB000EF6A85 /* MarkdownKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2F5F8BBD23228C1600EF6A85 /* SwiftSoup.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F5F8BBC23228C1600EF6A85 /* SwiftSoup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F661B362272E16300C68A5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F661B352272E16300C68A5F /* AppDelegate.swift */; };
 		2F661B382272E16300C68A5F /* WordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F661B372272E16300C68A5F /* WordsTableViewController.swift */; };
 		2F661B3A2272E16300C68A5F /* SettingsLanguageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F661B392272E16300C68A5F /* SettingsLanguageTableViewController.swift */; };
@@ -80,6 +94,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				2F5F8BBD23228C1600EF6A85 /* SwiftSoup.framework in CopyFiles */,
+				2F5F8BBB23228BB000EF6A85 /* MarkdownKit.framework in CopyFiles */,
 				2F3EE262229D7F4E0083CDE9 /* RxBlocking.framework in CopyFiles */,
 				2F3EE25E229D79CC0083CDE9 /* RxRelay.framework in CopyFiles */,
 				2F3EE25D229D79BE0083CDE9 /* RxSwift.framework in CopyFiles */,
@@ -102,6 +118,8 @@
 		2F3EE258229D2EAC0083CDE9 /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
 		2F3EE259229D2EAC0083CDE9 /* SwinjectStoryboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwinjectStoryboard.framework; path = Carthage/Build/iOS/SwinjectStoryboard.framework; sourceTree = "<group>"; };
 		2F3EE260229D7B7B0083CDE9 /* LexinServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceTests.swift; sourceTree = "<group>"; };
+		2F5F8BBA23228BB000EF6A85 /* MarkdownKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarkdownKit.framework; path = Carthage/Build/iOS/MarkdownKit.framework; sourceTree = "<group>"; };
+		2F5F8BBC23228C1600EF6A85 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		2F661B322272E16300C68A5F /* YASD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YASD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F661B352272E16300C68A5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F661B372272E16300C68A5F /* WordsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +229,8 @@
 		2F661B292272E16300C68A5F = {
 			isa = PBXGroup;
 			children = (
+				2F5F8BBC23228C1600EF6A85 /* SwiftSoup.framework */,
+				2F5F8BBA23228BB000EF6A85 /* MarkdownKit.framework */,
 				2F661B342272E16300C68A5F /* YASD */,
 				2F661B4B2272E16400C68A5F /* YASDTests */,
 				2F661B562272E16400C68A5F /* YASDUITests */,
@@ -401,7 +421,6 @@
 					};
 					2F661B472272E16400C68A5F = {
 						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = 2F661B312272E16300C68A5F;
 					};
 					2F661B522272E16400C68A5F = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -541,13 +560,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F3EE261229D7B7B0083CDE9 /* LexinServiceTests.swift in Sources */,
+				2F5F8BAC2322879900EF6A85 /* ViewModel.swift in Sources */,
+				2F5F8BB3232287DA00EF6A85 /* Network.swift in Sources */,
+				2F5F8BB6232287DA00EF6A85 /* Storage.swift in Sources */,
 				2FFA8D31230E82DE006A0368 /* LexinServiceProviderTests.swift in Sources */,
+				2F5F8BB22322879E00EF6A85 /* LexinServiceProvider.swift in Sources */,
+				2F5F8BB7232287DF00EF6A85 /* Result.swift in Sources */,
 				2FE7682222BCEEBA00375292 /* LexinServiceResultItem+Extensions.swift in Sources */,
 				2F69AD0922F838C5001942E6 /* SettingsLanguageViewModelTests.swift in Sources */,
 				2FF62C9C228E98EF00B4946C /* GeneratedMocks.swift in Sources */,
+				2F5F8BB02322879E00EF6A85 /* LexinService.swift in Sources */,
+				2F5F8BB12322879E00EF6A85 /* LexinServiceFormatter.swift in Sources */,
 				2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */,
 				2FE7682022BCC30E00375292 /* LexinServiceFormatterTests.swift in Sources */,
+				2F5F8BAD2322879900EF6A85 /* WordsViewModel.swift in Sources */,
 				2F69AD0722F81775001942E6 /* SettingsViewModelTests.swift in Sources */,
+				2F5F8BB9232289AA00EF6A85 /* Markdown.swift in Sources */,
+				2F5F8BAE2322879900EF6A85 /* SettingsLanguageViewModel.swift in Sources */,
+				2F5F8BB4232287DA00EF6A85 /* HtmlParser.swift in Sources */,
+				2F5F8BAF2322879900EF6A85 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -760,7 +791,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5S3B7XJFC;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -777,7 +807,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YASD.app/YASD";
 			};
 			name = Debug;
 		};
@@ -785,7 +814,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5S3B7XJFC;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -802,7 +830,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YASD.app/YASD";
 			};
 			name = Release;
 		};
