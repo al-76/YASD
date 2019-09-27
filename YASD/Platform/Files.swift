@@ -15,4 +15,8 @@ class Files {
         directory.appendPathComponent(name)
         return directory
     }
+    
+    func writeData(to: URL, data: Data) throws {
+        try data.write(to: to)
+    }
 }

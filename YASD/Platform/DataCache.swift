@@ -29,7 +29,7 @@ class DataCache {
             if let self = self {
                 do {
                     let file = try self.files.createTempFile(name: self.name)
-                    try data.write(to: file)
+                    try self.files.writeData(to: file, data: data)
                     self.cache = Cache(key: key, file: file)
                     observer.onNext(file)
                     observer.onCompleted()

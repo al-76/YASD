@@ -51,7 +51,6 @@ class PlayerServiceTests: XCTestCase {
             .next(200, .success(true)),
             .completed(200)
             ])
-
     }
     
     func testPlaySoundInvalidUrl() {
@@ -84,8 +83,25 @@ class PlayerServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, .failure(PlayerServiceError.selfIsNil)),
+            .next(200, .success(false)),
             .completed(200)
+            ])
+    }
+    
+    func testPlaySoundPlayerError() {
+        // Arrange
+        let scheduler = TestScheduler(initialClock: 0)
+        let service = PlayerService(player: createMockPlayerError(),
+                                    cache: createMockDataCache(empty: false),
+                                    network: MockNetwork())
+        
+        // Act
+        let played = service.playSound(stringUrl: "test")
+        let res = scheduler.start { played }
+        
+        // Assert
+        XCTAssertEqual(res.events, [
+            .error(200, TestError.someError)
             ])
     }
     
@@ -114,4 +130,13 @@ class PlayerServiceTests: XCTestCase {
         }
         return mock
     }
+    
+    private func createMockPlayerError() -> MockPlayer {
+        let mock = MockPlayer()
+        stub(mock) { stub in
+            when(stub.play(url: any())).thenThrow(TestError.someError)
+        }
+        return mock
+    }
+
 }

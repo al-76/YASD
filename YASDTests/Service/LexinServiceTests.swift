@@ -32,7 +32,6 @@ class LexinServiceTests: XCTestCase {
             .next(200, LexinServiceResult.failure(testError)),
             .completed(200)
             ])
-
     }
     
     func testSearch() {

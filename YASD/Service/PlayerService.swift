@@ -16,10 +16,6 @@ private struct CachedFile {
 
 typealias PlayerServiceResult = Result<Bool>
 
-enum PlayerServiceError: Error {
-    case selfIsNil
-}
-
 class PlayerService {
     private let player: Player
     private let cache: DataCache
@@ -40,16 +36,13 @@ class PlayerService {
     
     private func playSound(url: URL) -> Observable<PlayerServiceResult> {
         return cache.load(key: url.absoluteString)
-            .flatMap { [weak self] file -> Observable<URL> in
-                guard let self = self else { throw PlayerServiceError.selfIsNil }
-                if let loadedFromCache = file {
-                    return Observable.just(loadedFromCache)
-                }
+            .flatMap { [weak self] file -> Observable<URL?> in
+                guard let self = self, file == nil else { return Observable.just(file) }
                 return self.loadFromNetAndUpdateCache(url: url)
             }
             .flatMap { [weak self] file -> Observable<PlayerServiceResult> in
-                guard let self = self else { return Observable.just(.success(false)) }
-                return self.playSoundAction(file: file)
+                guard let self = self, let playFile = file else { return Observable.just(.success(false)) }
+                return self.playSoundAction(file: playFile)
         }
     }
     
@@ -67,10 +60,14 @@ class PlayerService {
         }
     }
     
-    private func loadFromNetAndUpdateCache(url: URL) -> Observable<URL> {
-        return network.getRequest(url: url.absoluteString).flatMap { [weak self] data -> Observable<URL> in
-            guard let self = self else { throw PlayerServiceError.selfIsNil }
-            return self.cache.save(key: url.absoluteString, data: data)
+    private func loadFromNetAndUpdateCache(url: URL) -> Observable<URL?> {
+        return network.getRequest(url: url.absoluteString).flatMap { [weak self] data -> Observable<URL?> in
+            guard let self = self else { return Observable.just(nil) }
+            return self.saveCache(url: url, data: data)
         }
+    }
+    
+    private func saveCache(url: URL, data: Data) -> Observable<URL?> {
+        return cache.save(key: url.absoluteString, data: data).map { $0 }
     }
 }

@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  DataCache.swift
@@ -135,7 +135,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  Files.swift
@@ -190,6 +190,21 @@ import RxSwift
         
     }
     
+    
+    
+     override func writeData(to: URL, data: Data) throws {
+        
+    return try cuckoo_manager.callThrows("writeData(to: URL, data: Data) throws",
+            parameters: (to, data),
+            escapingParameters: (to, data),
+            superclassCall:
+                
+                super.writeData(to: to, data: data)
+                ,
+            defaultCall: __defaultImplStub!.writeData(to: to, data: data))
+        
+    }
+    
 
 	 struct __StubbingProxy_Files: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -202,6 +217,11 @@ import RxSwift
 	    func createTempFile<M1: Cuckoo.Matchable>(name: M1) -> Cuckoo.ClassStubThrowingFunction<(String), URL> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: name) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockFiles.self, method: "createTempFile(name: String) throws -> URL", parameterMatchers: matchers))
+	    }
+	    
+	    func writeData<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(to: M1, data: M2) -> Cuckoo.ClassStubNoReturnThrowingFunction<(URL, Data)> where M1.MatchedType == URL, M2.MatchedType == Data {
+	        let matchers: [Cuckoo.ParameterMatcher<(URL, Data)>] = [wrap(matchable: to) { $0.0 }, wrap(matchable: data) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockFiles.self, method: "writeData(to: URL, data: Data) throws", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -226,6 +246,12 @@ import RxSwift
 	        return cuckoo_manager.verify("createTempFile(name: String) throws -> URL", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func writeData<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(to: M1, data: M2) -> Cuckoo.__DoNotUse<(URL, Data), Void> where M1.MatchedType == URL, M2.MatchedType == Data {
+	        let matchers: [Cuckoo.ParameterMatcher<(URL, Data)>] = [wrap(matchable: to) { $0.0 }, wrap(matchable: data) { $0.1 }]
+	        return cuckoo_manager.verify("writeData(to: URL, data: Data) throws", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -239,10 +265,14 @@ import RxSwift
         return DefaultValueRegistry.defaultValue(for: (URL).self)
     }
     
+     override func writeData(to: URL, data: Data) throws  {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-09-27 20:51:17 +0000
 
 
 //
@@ -561,7 +591,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  MarkdownParser.swift
@@ -668,7 +698,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  Network.swift
@@ -805,7 +835,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  Player.swift
@@ -956,7 +986,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  Storage.swift
@@ -1092,7 +1122,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  LexinService.swift
@@ -1381,7 +1411,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  LexinService+Format.swift
@@ -1487,7 +1517,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  LexinServiceProvider.swift
@@ -2198,7 +2228,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-09-27 15:20:52 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-09-27 20:51:17 +0000
 
 //
 //  PlayerService.swift
