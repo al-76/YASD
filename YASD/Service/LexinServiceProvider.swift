@@ -35,7 +35,8 @@ protocol LexinServiceParser {
 
 // Default Lexin
 class LexinServiceParserDefault : LexinServiceParser {
-    private static let URL: String = "https://lexin.nada.kth.se/lexin/lexin/"
+    private static let URL = "https://lexin.nada.kth.se/lexin/lexin/"
+    private static let SOUND_URL = "https://lexin.nada.kth.se/sound/"
     
     internal let htmlParser: HtmlParser
     
@@ -81,7 +82,8 @@ class LexinServiceParserDefault : LexinServiceParser {
                     compound: try? element.selectLexinServiceResultItems(root + "Compound"),
                     translation: try? element.selectText(root + "Translation"),
                     reference: try? parseReference(root: root, element: element),
-                    synonym: try? element.selectTexts(root + "Synonym"))
+                    synonym: try? element.selectTexts(root + "Synonym"),
+                    soundUrl: try? parseSoundUrl(root: root, element: element))
     }
     
     fileprivate static func parseReference(root: String, element: HtmlParserElement) throws -> String? {
@@ -91,6 +93,15 @@ class LexinServiceParserDefault : LexinServiceParser {
             return ""
         }
         return try? reference?.attribute("Value").removeQuotes()
+    }
+    
+    fileprivate static func parseSoundUrl(root: String, element: HtmlParserElement) throws -> String? {
+        let phonetic = try? element.selectElements(root + "Phonetic").first
+        if let res = try? phonetic?.attribute("File").removeQuotes() {
+            return (res.filter { !$0.isASCII }.count > 0 ?
+                nil : SOUND_URL + res)
+        }
+        return nil
     }
     
     fileprivate static func parseMeaning(root: String, element: HtmlParserElement) throws -> String? {
@@ -123,7 +134,7 @@ class LexinServiceParserSwedish : LexinServiceParserDefault {
         }
         if langs.isEmpty {
             let reference = try? parseReference(root: "", element: element)
-            langs.append(LexinServiceResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: inflection, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil))
+            langs.append(LexinServiceResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: inflection, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil, soundUrl: nil))
         }
         return langs
     }
@@ -213,14 +224,15 @@ class LexinServiceParserFolkets : LexinServiceParser {
                                            compound: nil,
                                            translation: try? element.selectValue("translation"),
                                            reference: nil,
-                                           synonym: try? element.selectValues("synonym"))
+                                           synonym: try? element.selectValues("synonym"),
+                                           soundUrl: nil)
         return lang
     }
     
     fileprivate static func parseTranslatedLang(element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
         let example = try element.selectElements("example")
             .map { LexinServiceResultItem.Item(id: try $0.attribute("id"), value: (try $0.selectValue("translation") ?? "")) }
-        let lang = LexinServiceResultItem.Lang(meaning: nil, phonetic: nil, inflection: nil, grammar: nil, example: example, idiom: nil, compound: nil, translation: nil, reference: nil, synonym: nil)
+        let lang = LexinServiceResultItem.Lang(meaning: nil, phonetic: nil, inflection: nil, grammar: nil, example: example, idiom: nil, compound: nil, translation: nil, reference: nil, synonym: nil, soundUrl: nil)
         return lang
     }
 }

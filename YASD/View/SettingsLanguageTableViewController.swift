@@ -34,7 +34,7 @@ class SettingsLanguageTableViewController: UITableViewController {
             }.asDriver(onErrorJustReturn: "")
         let input = SettingsLanguageViewModel.Input(selectedLanguage: language)
         let output = model.transform(input: input)
-        output.languages.drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { [weak self] (_, result, cell) in
+        output.languages.drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { (_, result, cell) in
                 if let settingsCell = cell as? SettingsLanguageTableViewCell,
                     let cellLabel = settingsCell.textLabel {
                     cellLabel.text = result.language.name

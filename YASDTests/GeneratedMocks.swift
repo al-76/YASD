@@ -1,4 +1,248 @@
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-09-06 12:44:27 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-09-27 15:20:52 +0000
+
+//
+//  DataCache.swift
+//  YASD
+//
+//  Created by Vyacheslav Konopkin on 27/09/2019.
+//  Copyright © 2019 yac. All rights reserved.
+//
+
+import Cuckoo
+@testable import YASD
+
+import Foundation
+import RxSwift
+
+
+ class MockDataCache: DataCache, Cuckoo.ClassMock {
+    
+     typealias MocksType = DataCache
+    
+     typealias Stubbing = __StubbingProxy_DataCache
+     typealias Verification = __VerificationProxy_DataCache
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+
+    
+    private var __defaultImplStub: DataCache?
+
+     func enableDefaultImplementation(_ stub: DataCache) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     override func save(key: String, data: Data) -> Observable<URL> {
+        
+    return cuckoo_manager.call("save(key: String, data: Data) -> Observable<URL>",
+            parameters: (key, data),
+            escapingParameters: (key, data),
+            superclassCall:
+                
+                super.save(key: key, data: data)
+                ,
+            defaultCall: __defaultImplStub!.save(key: key, data: data))
+        
+    }
+    
+    
+    
+     override func load(key: String) -> Observable<URL?> {
+        
+    return cuckoo_manager.call("load(key: String) -> Observable<URL?>",
+            parameters: (key),
+            escapingParameters: (key),
+            superclassCall:
+                
+                super.load(key: key)
+                ,
+            defaultCall: __defaultImplStub!.load(key: key))
+        
+    }
+    
+
+	 struct __StubbingProxy_DataCache: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, data: M2) -> Cuckoo.ClassStubFunction<(String, Data), Observable<URL>> where M1.MatchedType == String, M2.MatchedType == Data {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, Data)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: data) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "save(key: String, data: Data) -> Observable<URL>", parameterMatchers: matchers))
+	    }
+	    
+	    func load<M1: Cuckoo.Matchable>(key: M1) -> Cuckoo.ClassStubFunction<(String), Observable<URL?>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: key) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "load(key: String) -> Observable<URL?>", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_DataCache: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, data: M2) -> Cuckoo.__DoNotUse<(String, Data), Observable<URL>> where M1.MatchedType == String, M2.MatchedType == Data {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, Data)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: data) { $0.1 }]
+	        return cuckoo_manager.verify("save(key: String, data: Data) -> Observable<URL>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func load<M1: Cuckoo.Matchable>(key: M1) -> Cuckoo.__DoNotUse<(String), Observable<URL?>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: key) { $0 }]
+	        return cuckoo_manager.verify("load(key: String) -> Observable<URL?>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class DataCacheStub: DataCache {
+    
+
+    
+
+    
+     override func save(key: String, data: Data) -> Observable<URL>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<URL>).self)
+    }
+    
+     override func load(key: String) -> Observable<URL?>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<URL?>).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-09-27 15:20:52 +0000
+
+//
+//  Files.swift
+//  YASD
+//
+//  Created by Vyacheslav Konopkin on 13/09/2019.
+//  Copyright © 2019 yac. All rights reserved.
+//
+
+import Cuckoo
+@testable import YASD
+
+import Foundation
+import RxSwift
+
+
+ class MockFiles: Files, Cuckoo.ClassMock {
+    
+     typealias MocksType = Files
+    
+     typealias Stubbing = __StubbingProxy_Files
+     typealias Verification = __VerificationProxy_Files
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+
+    
+    private var __defaultImplStub: Files?
+
+     func enableDefaultImplementation(_ stub: Files) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     override func createTempFile(name: String) throws -> URL {
+        
+    return try cuckoo_manager.callThrows("createTempFile(name: String) throws -> URL",
+            parameters: (name),
+            escapingParameters: (name),
+            superclassCall:
+                
+                super.createTempFile(name: name)
+                ,
+            defaultCall: __defaultImplStub!.createTempFile(name: name))
+        
+    }
+    
+
+	 struct __StubbingProxy_Files: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func createTempFile<M1: Cuckoo.Matchable>(name: M1) -> Cuckoo.ClassStubThrowingFunction<(String), URL> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: name) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockFiles.self, method: "createTempFile(name: String) throws -> URL", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_Files: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func createTempFile<M1: Cuckoo.Matchable>(name: M1) -> Cuckoo.__DoNotUse<(String), URL> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: name) { $0 }]
+	        return cuckoo_manager.verify("createTempFile(name: String) throws -> URL", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class FilesStub: Files {
+    
+
+    
+
+    
+     override func createTempFile(name: String) throws -> URL  {
+        return DefaultValueRegistry.defaultValue(for: (URL).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-09-27 15:20:52 +0000
 
 
 //
@@ -317,7 +561,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-09-06 12:44:27 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-09-27 15:20:52 +0000
 
 //
 //  MarkdownParser.swift
@@ -424,7 +668,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-09-06 12:44:27 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-09-27 15:20:52 +0000
 
 //
 //  Network.swift
@@ -479,6 +723,21 @@ import RxSwift
         
     }
     
+    
+    
+     override func getRequest(url: String) -> Observable<Data> {
+        
+    return cuckoo_manager.call("getRequest(url: String) -> Observable<Data>",
+            parameters: (url),
+            escapingParameters: (url),
+            superclassCall:
+                
+                super.getRequest(url: url)
+                ,
+            defaultCall: __defaultImplStub!.getRequest(url: url))
+        
+    }
+    
 
 	 struct __StubbingProxy_Network: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -491,6 +750,11 @@ import RxSwift
 	    func postRequest<M1: Cuckoo.Matchable, M2: Cuckoo.OptionalMatchable>(url: M1, parameters: M2) -> Cuckoo.ClassStubFunction<(String, (String?, [String: String]?)?), Observable<String>> where M1.MatchedType == String, M2.OptionalMatchedType == (String?, [String: String]?) {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, (String?, [String: String]?)?)>] = [wrap(matchable: url) { $0.0 }, wrap(matchable: parameters) { $0.1 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockNetwork.self, method: "postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<String>", parameterMatchers: matchers))
+	    }
+	    
+	    func getRequest<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<Data>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockNetwork.self, method: "getRequest(url: String) -> Observable<Data>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -515,6 +779,12 @@ import RxSwift
 	        return cuckoo_manager.verify("postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<String>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func getRequest<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.__DoNotUse<(String), Observable<Data>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
+	        return cuckoo_manager.verify("getRequest(url: String) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -528,10 +798,165 @@ import RxSwift
         return DefaultValueRegistry.defaultValue(for: (Observable<String>).self)
     }
     
+     override func getRequest(url: String) -> Observable<Data>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
+    }
+    
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-09-06 12:44:27 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-09-27 15:20:52 +0000
+
+//
+//  Player.swift
+//  YASD
+//
+//  Created by Vyacheslav Konopkin on 06/09/2019.
+//  Copyright © 2019 yac. All rights reserved.
+//
+
+import Cuckoo
+@testable import YASD
+
+import AVFoundation
+import Foundation
+
+
+ class MockPlayer: Player, Cuckoo.ClassMock {
+    
+     typealias MocksType = Player
+    
+     typealias Stubbing = __StubbingProxy_Player
+     typealias Verification = __VerificationProxy_Player
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+
+    
+    private var __defaultImplStub: Player?
+
+     func enableDefaultImplementation(_ stub: Player) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+     override var player: AVAudioPlayer? {
+        get {
+            return cuckoo_manager.getter("player",
+                superclassCall:
+                    
+                    super.player
+                    ,
+                defaultCall: __defaultImplStub!.player)
+        }
+        
+        set {
+            cuckoo_manager.setter("player",
+                value: newValue,
+                superclassCall:
+                    
+                    super.player = newValue
+                    ,
+                defaultCall: __defaultImplStub!.player = newValue)
+        }
+        
+    }
+    
+
+    
+
+    
+    
+    
+     override func play(url: URL) throws {
+        
+    return try cuckoo_manager.callThrows("play(url: URL) throws",
+            parameters: (url),
+            escapingParameters: (url),
+            superclassCall:
+                
+                super.play(url: url)
+                ,
+            defaultCall: __defaultImplStub!.play(url: url))
+        
+    }
+    
+
+	 struct __StubbingProxy_Player: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    var player: Cuckoo.ClassToBeStubbedOptionalProperty<MockPlayer, AVAudioPlayer> {
+	        return .init(manager: cuckoo_manager, name: "player")
+	    }
+	    
+	    
+	    func play<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ClassStubNoReturnThrowingFunction<(URL)> where M1.MatchedType == URL {
+	        let matchers: [Cuckoo.ParameterMatcher<(URL)>] = [wrap(matchable: url) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayer.self, method: "play(url: URL) throws", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_Player: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	    
+	    var player: Cuckoo.VerifyOptionalProperty<AVAudioPlayer> {
+	        return .init(manager: cuckoo_manager, name: "player", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    }
+	    
+	
+	    
+	    @discardableResult
+	    func play<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.__DoNotUse<(URL), Void> where M1.MatchedType == URL {
+	        let matchers: [Cuckoo.ParameterMatcher<(URL)>] = [wrap(matchable: url) { $0 }]
+	        return cuckoo_manager.verify("play(url: URL) throws", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class PlayerStub: Player {
+    
+    
+     override var player: AVAudioPlayer? {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (AVAudioPlayer?).self)
+        }
+        
+        set { }
+        
+    }
+    
+
+    
+
+    
+     override func play(url: URL) throws  {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-09-27 15:20:52 +0000
 
 //
 //  Storage.swift
@@ -667,7 +1092,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-09-06 12:44:27 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-09-27 15:20:52 +0000
 
 //
 //  LexinService.swift
@@ -956,7 +1381,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-09-06 12:44:27 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-09-27 15:20:52 +0000
 
 //
 //  LexinService+Format.swift
@@ -1062,7 +1487,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-09-06 12:44:27 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-09-27 15:20:52 +0000
 
 //
 //  LexinServiceProvider.swift
@@ -1768,6 +2193,113 @@ import UIKit
     
      override func parseHtml(text: String) throws -> [LexinServiceResultItem]  {
         return DefaultValueRegistry.defaultValue(for: ([LexinServiceResultItem]).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-09-27 15:20:52 +0000
+
+//
+//  PlayerService.swift
+//  YASD
+//
+//  Created by Vyacheslav Konopkin on 13/09/2019.
+//  Copyright © 2019 yac. All rights reserved.
+//
+
+import Cuckoo
+@testable import YASD
+
+import Foundation
+import RxSwift
+
+
+ class MockPlayerService: PlayerService, Cuckoo.ClassMock {
+    
+     typealias MocksType = PlayerService
+    
+     typealias Stubbing = __StubbingProxy_PlayerService
+     typealias Verification = __VerificationProxy_PlayerService
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+
+    
+    private var __defaultImplStub: PlayerService?
+
+     func enableDefaultImplementation(_ stub: PlayerService) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     override func playSound(stringUrl: String) -> Observable<PlayerServiceResult> {
+        
+    return cuckoo_manager.call("playSound(stringUrl: String) -> Observable<PlayerServiceResult>",
+            parameters: (stringUrl),
+            escapingParameters: (stringUrl),
+            superclassCall:
+                
+                super.playSound(stringUrl: stringUrl)
+                ,
+            defaultCall: __defaultImplStub!.playSound(stringUrl: stringUrl))
+        
+    }
+    
+
+	 struct __StubbingProxy_PlayerService: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func playSound<M1: Cuckoo.Matchable>(stringUrl: M1) -> Cuckoo.ClassStubFunction<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: stringUrl) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerService.self, method: "playSound(stringUrl: String) -> Observable<PlayerServiceResult>", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_PlayerService: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func playSound<M1: Cuckoo.Matchable>(stringUrl: M1) -> Cuckoo.__DoNotUse<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: stringUrl) { $0 }]
+	        return cuckoo_manager.verify("playSound(stringUrl: String) -> Observable<PlayerServiceResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class PlayerServiceStub: PlayerService {
+    
+
+    
+
+    
+     override func playSound(stringUrl: String) -> Observable<PlayerServiceResult>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<PlayerServiceResult>).self)
     }
     
 }

@@ -8,7 +8,11 @@
 
 import Foundation
 
-typealias LexinServiceResultFormatted = Result<[NSAttributedString]>
+struct LexinServiceResultFormattedItem {
+    let formatted: NSAttributedString
+    let soundUrl: String?
+}
+typealias LexinServiceResultFormatted = Result<[LexinServiceResultFormattedItem]>
 
 class LexinServiceFormatter {
     private let markdown: Markdown
@@ -20,7 +24,7 @@ class LexinServiceFormatter {
     func format(result: LexinServiceResult) -> LexinServiceResultFormatted {
         switch result {
         case .success(let items):
-            return .success(items.map { format(item: $0) })
+            return .success(items.map { LexinServiceResultFormattedItem(formatted: format(item: $0), soundUrl: $0.baseLang?.soundUrl) })
         case .failure(let error):
             return .failure(error)
         }

@@ -31,17 +31,17 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
             ])
         let foundWords = scheduler.createObserver(LexinServiceResultFormatted.self)
-        let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: errorWord))
+        let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: errorWord), player: createMockPlayerService())
         viewModel.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
 
         // Act
         scheduler.start()
-
+        
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(200, LexinServiceResultFormatted.success([NSAttributedString(string: "test2")])),
-            .next(250, LexinServiceResultFormatted.success([NSAttributedString(string: "test3")])),
+            .next(200, LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "test2"), soundUrl: nil) ])),
+            .next(250, LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "test3"), soundUrl: nil) ])),
             .next(350, LexinServiceResultFormatted.failure(TestError.someError))
             ])
     }
@@ -55,7 +55,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
             ])
         let foundWords = scheduler.createObserver(LexinServiceResultFormatted.self)
-        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(errorWord: "error_word"))
+        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(errorWord: "error_word"), player: createMockPlayerService())
         viewModel?.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
 
@@ -80,7 +80,7 @@ class WordsViewModelTests: XCTestCase {
             ])
         let foundWords = scheduler.createObserver(LexinServiceResultFormatted.self)
         let lexin = createMockLexinService(errorWord: errorWord)
-        let viewModel = WordsViewModel(lexin: lexin)
+        let viewModel = WordsViewModel(lexin: lexin, player: createMockPlayerService())
         viewModel.transform(input: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
 
@@ -91,10 +91,18 @@ class WordsViewModelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(200, LexinServiceResultFormatted.success([NSAttributedString(string: "test2")])),
-            .next(400, LexinServiceResultFormatted.success([NSAttributedString(string: "test2")]))
+            .next(200, LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "test2"), soundUrl: nil) ])),
+            .next(400, LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "test2"), soundUrl: nil) ]))
             ])
-
+    }
+    
+    func testNewCell() {
+        // Arrange
+        let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: "test"), player: createMockPlayerService())
+        
+        let cell = viewModel.newCell()
+        
+        XCTAssertNotNil(cell)
     }
     
     func createMockLexinService(errorWord: String) -> MockLexinService {
@@ -126,12 +134,16 @@ class WordsViewModelTests: XCTestCase {
             when(stub.format(result: any())).then { result in
                 switch result {
                 case .success(let items):
-                    return .success(items.map { NSAttributedString(string: $0.word) })
+                    return .success(items.map { LexinServiceResultFormattedItem(formatted: NSAttributedString(string: $0.word), soundUrl: nil) })
                 case .failure(let error):
                     return .failure(error)
                 }
             }
         }
         return mock
+    }
+    
+    func createMockPlayerService() -> MockPlayerService {
+        return MockPlayerService(player: MockPlayer(), cache: DataCache(name: "test", files: MockFiles()), network: MockNetwork())
     }
 }

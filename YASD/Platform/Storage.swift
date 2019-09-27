@@ -26,6 +26,6 @@ class Storage {
     }
     
     fileprivate func getUrl(from: String) -> URL? {
-        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent(from, isDirectory: false)
+        return try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(from, isDirectory: false)
     }
 }

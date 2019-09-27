@@ -6,10 +6,20 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
+import RxSwift
 import UIKit
 
 class WordsTableViewCell: UITableViewCell {    
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var buttonPlay: UIButton!
+    
+    var model: WordsCellModel!
+    var disposeBag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,5 +31,4 @@ class WordsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

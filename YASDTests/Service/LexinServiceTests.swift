@@ -51,6 +51,23 @@ class LexinServiceTests: XCTestCase {
             .completed(200)
             ])
     }
+    
+    func testSearchEmpty() {
+        // Arrange
+        let testData = "test"
+        let scheduler = TestScheduler(initialClock: 0)
+        let service = createLexinService(parser: MockLexinServiceParser(data: testData))
+        
+        // Act
+        let found = service.search(word: "")
+        let res = scheduler.start { found }
+        
+        // Assert
+        XCTAssertEqual(res.events, [
+            .next(200, LexinServiceResult.success([])),
+            .completed(200)
+            ])
+    }
 
     fileprivate func createLexinService(parser: LexinServiceParser) -> LexinService {
         return LexinService(network: createMockNetwork(),
@@ -58,7 +75,6 @@ class LexinServiceTests: XCTestCase {
                             formatter: MockLexinServiceFormatter(markdown: MockMarkdown()),
                             provider: createMockLexinServiceProvider(parser: parser))
     }
-    
     
     fileprivate func createLexinServiceParameters() -> LexinServiceParameters {
         let mock = MockLexinServiceParameters(storage: createMockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test"))

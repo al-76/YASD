@@ -92,6 +92,7 @@ struct LexinServiceResultItem {
         var translation: String?
         var reference: String?
         var synonym: [String?]?
+        var soundUrl: String?
     }
     
     var word: String

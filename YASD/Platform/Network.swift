@@ -20,6 +20,14 @@ class Network {
         }.share()
     }
     
+    func getRequest(url: String) -> Observable<Data> {
+        let request = createUrlRequest(url: url, type: "GET", parameters: nil)
+        return URLSession.shared.rx
+            .data(request: request)
+            .retry(3)
+            .share()
+    }
+    
     private func createUrlRequest(url: String, type: String, parameters: (String?, [String: String]?)?) -> URLRequest {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = type

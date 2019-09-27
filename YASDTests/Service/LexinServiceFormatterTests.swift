@@ -29,18 +29,19 @@ class LexinServiceFormatterTests: XCTestCase {
                                                compound: nil,
                                                translation: nil,
                                                reference: "reference",
-                                               synonym: ["synonym"])
+                                               synonym: ["synonym"],
+                                               soundUrl: nil)
     }
     
     func testFormat1() {
         let result = LexinServiceResult.success([ LexinServiceResultItem(word: "word") ])
-        let formattedResult = LexinServiceResultFormatted.success([ NSAttributedString(string: "# word (test)\n") ])
+        let formattedResult = LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "# word (test)\n"), soundUrl: nil) ])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
     func testFormat2() {
         let result = LexinServiceResult.success([ LexinServiceResultItem(word: "word", type: nil) ])
-        let formattedResult = LexinServiceResultFormatted.success([ NSAttributedString(string: "# word \n") ])
+        let formattedResult = LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "# word \n"), soundUrl: nil) ])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -49,7 +50,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                                          baseLang: testLang,
                                                                          targetLang: testLang,
                                                                          lexemes: nil) ])
-        let formattedResult = LexinServiceResultFormatted.success([ NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example - example\n") ])
+        let formattedResult = LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example - example\n"), soundUrl: nil) ])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -58,7 +59,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                                          baseLang: testLang,
                                                                          targetLang: nil,
                                                                          lexemes: nil) ])
-        let formattedResult = LexinServiceResultFormatted.success([ NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n") ])
+        let formattedResult = LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil) ])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -67,7 +68,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                                          baseLang: nil,
                                                                          targetLang: nil,
                                                                          lexemes: [testLang, testLang]) ])
-        let formattedResult = LexinServiceResultFormatted.success([ NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n\n*meaning*\n\n## Exempel:\n* example\n") ])
+        let formattedResult = LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil) ])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -76,7 +77,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                                          baseLang: testLang,
                                                                          targetLang: nil,
                                                                          lexemes: [testLang, testLang]) ])
-        let formattedResult = LexinServiceResultFormatted.success([ NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n") ])
+        let formattedResult = LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil) ])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -85,7 +86,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                                          baseLang: nil,
                                                                          targetLang: nil,
                                                                          lexemes: nil) ])
-        let formattedResult = LexinServiceResultFormatted.success([ NSAttributedString(string: "# word (type)\n") ])
+        let formattedResult = LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "# word (type)\n"), soundUrl: nil) ])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -95,7 +96,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                                          baseLang: testLang,
                                                                          targetLang: nil,
                                                                          lexemes: nil) ])
-        let formattedResult = LexinServiceResultFormatted.success([ NSAttributedString(string: "# word [phonetic] (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n") ])
+        let formattedResult = LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "# word [phonetic] (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil) ])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -126,8 +127,6 @@ class LexinServiceFormatterTests: XCTestCase {
         let mock = MockMarkdown()
         stub (mock) { mock in
             when(mock.parse(data: any())).then { data in
-                print("line")
-                print(data)
                 return NSAttributedString(string: data)
             }
         }
