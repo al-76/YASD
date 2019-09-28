@@ -32,20 +32,19 @@ class WordsViewModel: ViewModel {
         // Search a word
         let searchedBar = input.searchBar
             .flatMapLatest { [weak self] word -> Driver<LexinServiceResult> in
-                self?.lastWord = word
-                return self?.searchWord(word: word) ?? Driver.just(.success([]))
+                guard let self = self else { return Driver.just(.success([])) }
+                self.lastWord = word
+                return self.searchWord(word: word)
         }
         let updateSearch = lexin.parameters.language.asDriver()
             .flatMapLatest { [weak self] _ -> Driver<LexinServiceResult> in
-            if let model = self,
-                let word = self?.lastWord {
-                return model.searchWord(word: word)
-            }
-            return Driver.just(.success([]))
+                guard let self = self else { return Driver.just(.success([])) }
+                return self.searchWord(word: self.lastWord)
         }
         let searched = Driver.merge(searchedBar, updateSearch)
-        let formatted = searched.flatMap { [weak self] in
-            Driver.just(self?.lexin.formatter.format(result: $0) ?? .success([]))
+        let formatted = searched.flatMap { [weak self] word -> Driver<LexinServiceResultFormatted> in
+            guard let self = self else { return Driver.just(.success([])) }
+            return Driver.just(self.lexin.formatter.format(result: word))
         }
         return Output(foundWords: formatted)
     }
