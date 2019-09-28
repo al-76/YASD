@@ -75,29 +75,30 @@ class WordsTableViewController: UITableViewController {
     }
     
     private func configureButtonPlay(cell: WordsTableViewCell, url: String?) {
+        cell.buttonPlay.isHidden = (url == nil)
         if url == nil {
-            cell.buttonPlay.isHidden = true
-        } else {
-            if cell.model == nil {
-                cell.model = model.newCell()
-            }
-            let inputUrl = cell.buttonPlay.rx.tap.asDriver().map { url! }
-            let output = cell.model
-                .transform(input: WordsCellModel.Input(url: inputUrl))
-            output.played.asObservable()
-                .subscribe { [weak self] event in
-                    if let played = event.element {
-                        switch played {
-                        case .success:
-                            break
-                        case .failure(let error):
-                            self?.handleError(error: error)
-                            break
-                        }
+            return
+        }
+        cell.buttonPlay.isHidden = false
+        if cell.model == nil {
+            cell.model = model.newCell()
+        }
+        let inputUrl = cell.buttonPlay.rx.tap.asDriver().map { url! }
+        let output = cell.model
+            .transform(input: WordsCellModel.Input(url: inputUrl))
+        output.played.asObservable()
+            .subscribe { [weak self] event in
+                if let played = event.element {
+                    switch played {
+                    case .success:
+                        break
+                    case .failure(let error):
+                        self?.handleError(error: error)
+                        break
                     }
                 }
-                .disposed(by: cell.disposeBag)
-        }
+            }
+            .disposed(by: cell.disposeBag)
     }
     
     private func handleError(error: Error) {

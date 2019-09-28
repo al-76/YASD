@@ -24,7 +24,7 @@ class LexinServiceFormatter {
     func format(result: LexinServiceResult) -> LexinServiceResultFormatted {
         switch result {
         case .success(let items):
-            return .success(items.map { LexinServiceResultFormattedItem(formatted: format(item: $0), soundUrl: $0.baseLang?.soundUrl) })
+            return .success(items.map { LexinServiceResultFormattedItem(formatted: format(item: $0), soundUrl: getSoundUrl(item: $0)) })
         case .failure(let error):
             return .failure(error)
         }
@@ -136,5 +136,14 @@ class LexinServiceFormatter {
     
     private func textType(text: String) -> String {
         return (text == "" ? "" : "(" + text + ")")
+    }
+    
+    private func getSoundUrl(item: LexinServiceResultItem) -> String? {
+        if let baseLang = item.baseLang {
+            return baseLang.soundUrl
+        } else if let lexeme = item.lexemes?.first {
+            return lexeme.soundUrl
+        }
+        return nil
     }
 }

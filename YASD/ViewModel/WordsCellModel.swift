@@ -25,14 +25,11 @@ class WordsCellModel: ViewModel {
     }
     
     func transform(input: Input) -> Output {
-        let played = input
-            .url
+        let played = input.url
             .flatMapLatest { [weak self] url -> Driver<PlayerServiceResult> in
-                if let player = self?.player {
-                    return player.playSound(stringUrl: url)
-                        .asDriver { Driver.just(.failure($0)) }
-                }
-                return Driver.just(.success(false))
+                guard let self = self else { return Driver.just(.success(false)) }
+                return self.player.playSound(stringUrl: url)
+                    .asDriver { Driver.just(.failure($0)) }
         }
         return Output(played: played)
     }

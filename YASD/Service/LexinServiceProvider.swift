@@ -95,11 +95,10 @@ class LexinServiceParserDefault : LexinServiceParser {
         return try? reference?.attribute("Value").removeQuotes()
     }
     
-    private static func parseSoundUrl(root: String, element: HtmlParserElement) throws -> String? {
+    fileprivate static func parseSoundUrl(root: String, element: HtmlParserElement) throws -> String? {
         let phonetic = try? element.selectElements(root + "Phonetic").first
         if let res = try? phonetic?.attribute("File").removeQuotes() {
-            return (res.filter { !$0.isASCII }.count > 0 ?
-                nil : SOUND_URL + res)
+            return SOUND_URL + res.replaceNonAscii()
         }
         return nil
     }
@@ -125,16 +124,21 @@ class LexinServiceParserSwedish : LexinServiceParserDefault {
     
     private static func parseLexems(id: String, element: HtmlParserElement) throws -> [LexinServiceResultItem.Lang] {
         let phonetic = parsePhonetic(phonetic: try element.selectText("Phonetic"))
+        var soundUrl: String? = nil
+        if let phoneticElement = try element.selectElements("Phonetic").first {
+            soundUrl = try parseSoundUrl(root: "", element: phoneticElement)
+        }
         let inflection = try element.selectTexts("Inflection")
         var langs: [LexinServiceResultItem.Lang] = try element.selectElements(id).map {
             var lang = try parseLang(root: "", element: $0)
             lang.phonetic = phonetic
             lang.inflection = inflection
+            lang.soundUrl = soundUrl
             return lang
         }
         if langs.isEmpty {
             let reference = try? parseReference(root: "", element: element)
-            langs.append(LexinServiceResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: inflection, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil, soundUrl: nil))
+            langs.append(LexinServiceResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: inflection, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil, soundUrl: soundUrl))
         }
         return langs
     }
@@ -161,11 +165,17 @@ private extension String {
     func removeQuotes() -> String {
         return self.replacingOccurrences(of: "\\\"", with: "")
     }
+    
+    func replaceNonAscii() -> String {
+        return self.replacingOccurrences(of: "ä", with: "0344")
+            .replacingOccurrences(of: "Ä", with: "0344")
+    }
 }
 
 // Folkets Lexikon
 class LexinServiceParserFolkets : LexinServiceParser {
     private static let URL = "https://folkets-lexikon.csc.kth.se/folkets/folkets/"
+    private static let SOUND_URL = "https://lexin.nada.kth.se/sound/"
     private static let wordTypes = [ "ab": "adv.",
                                      "vb": "verb",
                                      "nn": "subst.",
@@ -225,7 +235,7 @@ class LexinServiceParserFolkets : LexinServiceParser {
                                            translation: try? element.selectValue("translation"),
                                            reference: nil,
                                            synonym: try? element.selectValues("synonym"),
-                                           soundUrl: nil)
+                                           soundUrl: try? parseSoundUrl(element: element))
         return lang
     }
     
@@ -234,6 +244,14 @@ class LexinServiceParserFolkets : LexinServiceParser {
             .map { LexinServiceResultItem.Item(id: try $0.attribute("id"), value: (try $0.selectValue("translation") ?? "")) }
         let lang = LexinServiceResultItem.Lang(meaning: nil, phonetic: nil, inflection: nil, grammar: nil, example: example, idiom: nil, compound: nil, translation: nil, reference: nil, synonym: nil, soundUrl: nil)
         return lang
+    }
+    
+    private static func parseSoundUrl(element: HtmlParserElement) throws -> String? {
+        let phonetic = try? element.selectElements("phonetic").first
+        if let res = try? phonetic?.attribute("soundFile").removeQuotes() {
+            return SOUND_URL + res.replacingOccurrences(of: "swf", with: "mp3").replaceNonAscii()
+        }
+        return nil
     }
 }
 
