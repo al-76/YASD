@@ -95,7 +95,7 @@ class LexinServiceParserDefault : LexinServiceParser {
         return try? reference?.attribute("Value").removeQuotes()
     }
     
-    fileprivate static func parseSoundUrl(root: String, element: HtmlParserElement) throws -> String? {
+    private static func parseSoundUrl(root: String, element: HtmlParserElement) throws -> String? {
         let phonetic = try? element.selectElements(root + "Phonetic").first
         if let res = try? phonetic?.attribute("File").removeQuotes() {
             return (res.filter { !$0.isASCII }.count > 0 ?
@@ -104,7 +104,7 @@ class LexinServiceParserDefault : LexinServiceParser {
         return nil
     }
     
-    fileprivate static func parseMeaning(root: String, element: HtmlParserElement) throws -> String? {
+    private static func parseMeaning(root: String, element: HtmlParserElement) throws -> String? {
         var meaning = try? element.selectText(root + "Meaning")
         meaning = (meaning == "") ? (try? element.selectTexts(root + "Definition").first) : meaning
         meaning = (meaning == "") ? (try? element.selectTexts(root + "Gramcom").first) : meaning
@@ -123,7 +123,7 @@ class LexinServiceParserSwedish : LexinServiceParserDefault {
         }
     }
     
-    fileprivate static func parseLexems(id: String, element: HtmlParserElement) throws -> [LexinServiceResultItem.Lang] {
+    private static func parseLexems(id: String, element: HtmlParserElement) throws -> [LexinServiceResultItem.Lang] {
         let phonetic = parsePhonetic(phonetic: try element.selectText("Phonetic"))
         let inflection = try element.selectTexts("Inflection")
         var langs: [LexinServiceResultItem.Lang] = try element.selectElements(id).map {
@@ -140,7 +140,7 @@ class LexinServiceParserSwedish : LexinServiceParserDefault {
     }
 }
 
-fileprivate extension HtmlParserElement {
+private extension HtmlParserElement {
     func selectLexinServiceResultItems(_ query: String) throws -> [LexinServiceResultItem.Item] {
         return try selectElements(query).map { element in
             let value = try element.text()
@@ -157,7 +157,7 @@ fileprivate extension HtmlParserElement {
     }
 }
 
-fileprivate extension String {
+private extension String {
     func removeQuotes() -> String {
         return self.replacingOccurrences(of: "\\\"", with: "")
     }
@@ -210,11 +210,11 @@ class LexinServiceParserFolkets : LexinServiceParser {
         }
     }
     
-    fileprivate static func parseType(type: String) -> String {
+    private static func parseType(type: String) -> String {
         return wordTypes[type] ?? type
     }
     
-    fileprivate static func parseLang(element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
+    private static func parseLang(element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
         let lang = LexinServiceResultItem.Lang(meaning: try? element.selectValue("definition"),
                                                phonetic: parsePhonetic(phonetic: (try? element.selectValue("phonetic")) ?? ""),
                                            inflection: try? element.selectValues( "inflection"),
@@ -229,7 +229,7 @@ class LexinServiceParserFolkets : LexinServiceParser {
         return lang
     }
     
-    fileprivate static func parseTranslatedLang(element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
+    private static func parseTranslatedLang(element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
         let example = try element.selectElements("example")
             .map { LexinServiceResultItem.Item(id: try $0.attribute("id"), value: (try $0.selectValue("translation") ?? "")) }
         let lang = LexinServiceResultItem.Lang(meaning: nil, phonetic: nil, inflection: nil, grammar: nil, example: example, idiom: nil, compound: nil, translation: nil, reference: nil, synonym: nil, soundUrl: nil)
@@ -237,7 +237,7 @@ class LexinServiceParserFolkets : LexinServiceParser {
     }
 }
 
-fileprivate func parsePhonetic(phonetic: String) -> String {
+private func parsePhonetic(phonetic: String) -> String {
     if phonetic.isEmpty {
         return ""
     }

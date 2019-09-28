@@ -30,7 +30,7 @@ class LexinServiceFormatter {
         }
     }
     
-    fileprivate func format(item: LexinServiceResultItem) -> NSAttributedString {
+    private func format(item: LexinServiceResultItem) -> NSAttributedString {
         if let baseLang = item.baseLang {
             return markdown.parse(data: formatWordDefinition(lang: baseLang, item: item) + formatWordExample(lang: baseLang, targetLang: item.targetLang))
         } else if let lexemes = item.lexemes {
@@ -46,7 +46,7 @@ class LexinServiceFormatter {
         return markdown.parse(data: formatWordDefinition(lang: nil, item: item))
     }
     
-    fileprivate func formatWordDefinition(lang: LexinServiceResultItem.Lang?, item: LexinServiceResultItem) -> String {
+    private func formatWordDefinition(lang: LexinServiceResultItem.Lang?, item: LexinServiceResultItem) -> String {
         var phonetic = ""
         if let langPhonetic = lang?.phonetic {
             phonetic = "[" + langPhonetic + "] "
@@ -62,7 +62,7 @@ class LexinServiceFormatter {
         return (word + inflection + formatTranslation(lang: lang, item: item))
     }
     
-    fileprivate func formatTranslation(lang: LexinServiceResultItem.Lang?, item: LexinServiceResultItem) -> String {
+    private func formatTranslation(lang: LexinServiceResultItem.Lang?, item: LexinServiceResultItem) -> String {
         var translation = textOrEmpty(text: (item.targetLang?.translation ?? "") + formatSynonym(lang: item.targetLang))
         if translation == "" {
             translation = textOrEmpty(text: (lang?.translation ?? "") + formatSynonym(lang: lang))
@@ -70,7 +70,7 @@ class LexinServiceFormatter {
         return translation
     }
     
-    fileprivate func formatSynonym(lang: LexinServiceResultItem.Lang?) -> String {
+    private func formatSynonym(lang: LexinServiceResultItem.Lang?) -> String {
         var res = ""
         if let synonym = lang?.synonym, synonym.count > 0 {
             res = " (" + textStrings(strings: synonym) + ")"
@@ -78,7 +78,7 @@ class LexinServiceFormatter {
         return res
     }
     
-    fileprivate func formatWordExample(lang: LexinServiceResultItem.Lang, targetLang: LexinServiceResultItem.Lang?) -> String {
+    private func formatWordExample(lang: LexinServiceResultItem.Lang, targetLang: LexinServiceResultItem.Lang?) -> String {
         let meaning = textItalicOrEmpty(text: lang.meaning ?? "")
         let example = textTranslatedItems(items1opt: lang.example, items2opt: targetLang?.example)
         let idiom = textTranslatedItems(items1opt: lang.idiom, items2opt: targetLang?.idiom)
@@ -89,13 +89,13 @@ class LexinServiceFormatter {
             addLabel(to: compound, label: "Sammansättningar"))
     }
     
-    fileprivate func textStrings(strings: [String?]) -> String {
+    private func textStrings(strings: [String?]) -> String {
         return strings
             .compactMap { $0 }
             .joined(separator: ", ")
     }
     
-    fileprivate func textTranslatedItems(items1opt: [LexinServiceResultItem.Item]?, items2opt: [LexinServiceResultItem.Item]?) -> String {
+    private func textTranslatedItems(items1opt: [LexinServiceResultItem.Item]?, items2opt: [LexinServiceResultItem.Item]?) -> String {
         let separator = "\n* "
         var res = ""
         if let items1 = items1opt,
@@ -109,7 +109,7 @@ class LexinServiceFormatter {
         return res
     }
     
-    fileprivate func textMatchedItems(items1: [LexinServiceResultItem.Item], items2: [LexinServiceResultItem.Item], separator: String) -> String {
+    private func textMatchedItems(items1: [LexinServiceResultItem.Item], items2: [LexinServiceResultItem.Item], separator: String) -> String {
         let matchedItems = items1.compactMap { first in
             ( first, items2.first { $0.id == first.id } ) }
             .compactMap { $0 }
@@ -122,19 +122,19 @@ class LexinServiceFormatter {
             .reduce("") { $0 + separator + $1 }
     }
     
-    fileprivate func addLabel(to: String, label: String) -> String {
+    private func addLabel(to: String, label: String) -> String {
         return (to == "" ? "" : "\n## " + label + ":" + to + "\n")
     }
     
-    fileprivate func textOrEmpty(text: String) -> String {
+    private func textOrEmpty(text: String) -> String {
         return (text == "" ? "" : text + "\n");
     }
     
-    fileprivate func textItalicOrEmpty(text: String) -> String {
+    private func textItalicOrEmpty(text: String) -> String {
         return (text == "" ? "" : "*" + text + "*\n");
     }
     
-    fileprivate func textType(text: String) -> String {
+    private func textType(text: String) -> String {
         return (text == "" ? "" : "(" + text + ")")
     }
 }

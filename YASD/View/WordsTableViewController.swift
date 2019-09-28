@@ -31,7 +31,7 @@ class WordsTableViewController: UITableViewController {
     }
     
     private func customizeView() {
-        searchController.dimsBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 70

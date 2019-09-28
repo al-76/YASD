@@ -41,11 +41,11 @@ class SettingsLanguageViewModelTests: XCTestCase {
         }
     }
     
-    fileprivate func getSelectedItem(items: [SettingsLanguageViewModel.SettingsItem]) -> SettingsLanguageViewModel.SettingsItem? {
+    private func getSelectedItem(items: [SettingsLanguageViewModel.SettingsItem]) -> SettingsLanguageViewModel.SettingsItem? {
         return items.first(where: { $0.selected })
     }
     
-    fileprivate func createLexinServiceParameters(language: LexinServiceParameters.Language) -> MockLexinServiceParameters {
+    private func createLexinServiceParameters(language: LexinServiceParameters.Language) -> MockLexinServiceParameters {
         let mock = MockLexinServiceParameters(storage: MockStorage(), language: language)
         stub(mock) { stub in
             when(stub.load()).thenDoNothing()

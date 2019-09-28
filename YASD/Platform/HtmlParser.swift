@@ -68,7 +68,7 @@ private let characterEntities : [ Substring : Character ] = [
     "&diams;"   : "♦",
 ]
 
-fileprivate extension String {
+private extension String {
     var htmlDecoded: String {
         // ===== Utility functions =====
         

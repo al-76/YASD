@@ -25,7 +25,7 @@ class Storage {
         FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
     }
     
-    fileprivate func getUrl(from: String) -> URL? {
+    private func getUrl(from: String) -> URL? {
         return try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(from, isDirectory: false)
     }
 }

@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  DataCache.swift
@@ -135,7 +135,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  Files.swift
@@ -272,7 +272,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-09-28 07:39:26 +0000
 
 
 //
@@ -591,7 +591,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  MarkdownParser.swift
@@ -698,7 +698,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  Network.swift
@@ -835,7 +835,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  Player.swift
@@ -986,7 +986,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  Storage.swift
@@ -1122,7 +1122,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  LexinService.swift
@@ -1411,7 +1411,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  LexinService+Format.swift
@@ -1517,7 +1517,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  LexinServiceProvider.swift
@@ -2228,7 +2228,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-09-27 20:51:17 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-09-28 07:39:26 +0000
 
 //
 //  PlayerService.swift

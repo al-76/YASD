@@ -43,7 +43,7 @@ class SettingsViewModelTests: XCTestCase {
             ])
     }
     
-    fileprivate func createLexinServiceParameters(language: LexinServiceParameters.Language) -> MockLexinServiceParameters {
+    private func createLexinServiceParameters(language: LexinServiceParameters.Language) -> MockLexinServiceParameters {
         let mock = MockLexinServiceParameters(storage: MockStorage(), language: language)
         stub(mock) { stub in
             when(stub.load()).thenDoNothing()

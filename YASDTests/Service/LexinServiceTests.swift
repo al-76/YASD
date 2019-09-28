@@ -68,14 +68,14 @@ class LexinServiceTests: XCTestCase {
             ])
     }
 
-    fileprivate func createLexinService(parser: LexinServiceParser) -> LexinService {
+    private func createLexinService(parser: LexinServiceParser) -> LexinService {
         return LexinService(network: createMockNetwork(),
                             parameters: LexinServiceParameters(storage: createMockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test")),
                             formatter: MockLexinServiceFormatter(markdown: MockMarkdown()),
                             provider: createMockLexinServiceProvider(parser: parser))
     }
     
-    fileprivate func createLexinServiceParameters() -> LexinServiceParameters {
+    private func createLexinServiceParameters() -> LexinServiceParameters {
         let mock = MockLexinServiceParameters(storage: createMockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test"))
         stub(mock) { stub in
             when(stub.get()).thenReturn("test")
@@ -83,7 +83,7 @@ class LexinServiceTests: XCTestCase {
         return mock
     }
     
-    fileprivate func createMockLexinServiceProvider(parser: LexinServiceParser) -> LexinServiceProvider {
+    private func createMockLexinServiceProvider(parser: LexinServiceParser) -> LexinServiceProvider {
         let mock = MockLexinServiceProvider(defaultParser: parser, folketsParser: parser, swedishParser: parser)
         stub(mock) { stub in
             when(stub.getParser(language: any())).thenReturn(parser)
@@ -131,7 +131,7 @@ class LexinServiceTests: XCTestCase {
         }
     }
 
-    fileprivate func createMockNetwork() -> MockNetwork {
+    private func createMockNetwork() -> MockNetwork {
         let mock = MockNetwork()
         stub(mock) { stub in
             when(stub.postRequest(url: anyString(), parameters: any())).then { url, parameters in
@@ -141,13 +141,12 @@ class LexinServiceTests: XCTestCase {
         return mock
     }
     
-    fileprivate func createMockStorage() -> MockStorage {
+    private func createMockStorage() -> MockStorage {
         let mock = MockStorage()
         stub(mock) { stub in
             when(stub.get(id: anyString(), defaultObject: any(LexinServiceParameters.Language.self))).then { id, defaultObject -> LexinServiceParameters.Language in return defaultObject }
             when(stub.save(id: anyString(), object: any(LexinServiceParameters.Language.self))).thenDoNothing()
         }
-        
         return mock
     }
 }

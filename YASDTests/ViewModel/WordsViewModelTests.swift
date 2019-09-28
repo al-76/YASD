@@ -108,7 +108,7 @@ class WordsViewModelTests: XCTestCase {
     func createMockLexinService(errorWord: String) -> MockLexinService {
         let mockParser = MockLexinServiceParser()
         let mock = MockLexinService(network: MockNetwork(),
-                                    parameters: LexinServiceParameters(storage: MockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test")),
+                                    parameters: createMockLexinServiceParameters(),
                                     formatter: createMockLexinServiceFormatter(),
                                     provider: MockLexinServiceProvider(defaultParser: mockParser, folketsParser: mockParser, swedishParser: mockParser))
         stub(mock) { stub in
@@ -124,6 +124,15 @@ class WordsViewModelTests: XCTestCase {
                     return Disposables.create {}
                 }
             }
+        }
+        
+        return mock
+    }
+    
+    private func createMockLexinServiceParameters() -> MockLexinServiceParameters {
+        let mock = MockLexinServiceParameters(storage: MockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test"))
+        stub(mock) { stub in
+            when(stub.load()).thenDoNothing()
         }
         return mock
     }

@@ -51,7 +51,7 @@ class SettingsLanguageViewModel: ViewModel {
         }
     }
     
-    fileprivate static func createSettingsLanguageItems(language: LexinServiceParameters.Language) -> [SettingsItem] {
+    private static func createSettingsLanguageItems(language: LexinServiceParameters.Language) -> [SettingsItem] {
         var res = LexinServiceParameters.supportedLanguages.map {
             SettingsItem(selected: false, language: $0)
         }
