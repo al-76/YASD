@@ -28,6 +28,7 @@ class WordsViewModel: ViewModel {
     }
     
     func transform(input: Input) -> Output {
+        lexin.parameters.load()
         // Search a word
         let searchedBar = input.searchBar
             .flatMapLatest { [weak self] word -> Driver<LexinServiceResult> in
