@@ -1,4 +1,5 @@
 // MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-09-30 10:19:29 +0000
+=======
 
 //
 //  DataCache.swift
