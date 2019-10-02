@@ -34,67 +34,86 @@ func configurePlatform(container: Container) {
         .inObjectScope(.container)
     container.register(Player.self) { _ in Player() }
         .inObjectScope(.container)
-    container.register(DataCache.self) { _, name in DataCache(name: name, files: container.resolve(Files.self)!) }
+    container.register(DataCache.self) { _, name in try! DataCache(name: name) }
 }
 
 func configureService(container: Container) {
     // Parsers
     container.register(LexinServiceParserDefault.self) { _ in
         LexinServiceParserDefault(htmlParser: container.resolve(HtmlParser.self)!)
-        }.inObjectScope(.container)
+    }
+    .inObjectScope(.container)
     container.register(LexinServiceParserFolkets.self) { _ in
         LexinServiceParserFolkets(htmlParser: container.resolve(HtmlParser.self)!)
-        }.inObjectScope(.container)
+    }
+    .inObjectScope(.container)
     container.register(LexinServiceParserSwedish.self) { _ in
         LexinServiceParserSwedish(htmlParser: container.resolve(HtmlParser.self)!)
-        }.inObjectScope(.container)
+    }
+    .inObjectScope(.container)
     
     // Formatter
     container.register(LexinServiceFormatter.self) { _ in
-        LexinServiceFormatter(markdown: container.resolve(Markdown.self)!) }
-        .inObjectScope(.container)
+        LexinServiceFormatter(markdown: container.resolve(Markdown.self)!)
+        
+    }
+    .inObjectScope(.container)
     
     // Parameters
     container.register(LexinServiceParameters.self) { _ in
         LexinServiceParameters(storage: container.resolve(Storage.self)!,
-                               language: LexinServiceParameters.defaultLanguage) }
-        .inObjectScope(.container)
+                               language: LexinServiceParameters.defaultLanguage)
+    }
+    .inObjectScope(.container)
     
     // Provider
     container.register(LexinServiceProvider.self) { _ in
         LexinServiceProvider(defaultParser: container.resolve(LexinServiceParserDefault.self)!,
                              folketsParser: container.resolve(LexinServiceParserFolkets.self)!,
                              swedishParser: container.resolve(LexinServiceParserSwedish.self)!)
-        }
-        .inObjectScope(.container)
+    }
+    .inObjectScope(.container)
+    
+    // Cache Service
+    container.register(CacheService.self) { _ in
+        CacheService(cache: container.resolve(DataCache.self, argument: "CacheService")!)
+    }
+    .inObjectScope(.container)
     
     // Player Service
     container.register(PlayerService.self) { _ in
         PlayerService(player: container.resolve(Player.self)!,
-                      cache: container.resolve(DataCache.self, argument: "last_sound")!,
+                      cache: container.resolve(CacheService.self)!,
                       network: container.resolve(Network.self)!)
-        }
-        .inObjectScope(.container)
+    }
+    .inObjectScope(.container)
     
     // Lexin Service
     container.register(LexinService.self) { _ in
         LexinService(network: container.resolve(Network.self)!,
                      parameters: container.resolve(LexinServiceParameters.self)!,
                      formatter: container.resolve(LexinServiceFormatter.self)!,
-                     provider: container.resolve(LexinServiceProvider.self)!) }
-        .inObjectScope(.container)
+                     provider: container.resolve(LexinServiceProvider.self)!)
+        
+    }
+    .inObjectScope(.container)
 }
 
 func configureModel(container: Container) {
     container.register(WordsViewModel.self) { container in
-        WordsViewModel(lexin: container.resolve(LexinService.self)!, player: container.resolve(PlayerService.self)!) }
-        .inObjectScope(.container)
+        WordsViewModel(lexin: container.resolve(LexinService.self)!,
+                       player: container.resolve(PlayerService.self)!)
+    }
+    .inObjectScope(.container)
     container.register(SettingsViewModel.self) { container in
-        SettingsViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!) }
-        .inObjectScope(.container)
+        SettingsViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!)
+        
+    }
+    .inObjectScope(.container)
     container.register(SettingsLanguageViewModel.self) { container in
-        SettingsLanguageViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!) }
-        .inObjectScope(.container)
+        SettingsLanguageViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!)
+    }
+    .inObjectScope(.container)
 }
 
 func configureView(container: Container) {

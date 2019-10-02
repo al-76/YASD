@@ -1,5 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-09-30 10:19:29 +0000
-=======
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  DataCache.swift
@@ -12,6 +11,7 @@
 import Cuckoo
 @testable import YASD
 
+import Cache
 import Foundation
 import RxSwift
 
@@ -41,9 +41,9 @@ import RxSwift
     
     
     
-     override func save(key: String, data: Data) -> Observable<URL> {
+     override func save(key: String, data: Data) -> Observable<Data> {
         
-    return cuckoo_manager.call("save(key: String, data: Data) -> Observable<URL>",
+    return cuckoo_manager.call("save(key: String, data: Data) -> Observable<Data>",
             parameters: (key, data),
             escapingParameters: (key, data),
             superclassCall:
@@ -56,9 +56,9 @@ import RxSwift
     
     
     
-     override func load(key: String) -> Observable<URL?> {
+     override func load(key: String) -> Observable<Data?> {
         
-    return cuckoo_manager.call("load(key: String) -> Observable<URL?>",
+    return cuckoo_manager.call("load(key: String) -> Observable<Data?>",
             parameters: (key),
             escapingParameters: (key),
             superclassCall:
@@ -78,14 +78,14 @@ import RxSwift
 	    }
 	    
 	    
-	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, data: M2) -> Cuckoo.ClassStubFunction<(String, Data), Observable<URL>> where M1.MatchedType == String, M2.MatchedType == Data {
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, data: M2) -> Cuckoo.ClassStubFunction<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, Data)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: data) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "save(key: String, data: Data) -> Observable<URL>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "save(key: String, data: Data) -> Observable<Data>", parameterMatchers: matchers))
 	    }
 	    
-	    func load<M1: Cuckoo.Matchable>(key: M1) -> Cuckoo.ClassStubFunction<(String), Observable<URL?>> where M1.MatchedType == String {
+	    func load<M1: Cuckoo.Matchable>(key: M1) -> Cuckoo.ClassStubFunction<(String), Observable<Data?>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: key) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "load(key: String) -> Observable<URL?>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "load(key: String) -> Observable<Data?>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -105,15 +105,15 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, data: M2) -> Cuckoo.__DoNotUse<(String, Data), Observable<URL>> where M1.MatchedType == String, M2.MatchedType == Data {
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, data: M2) -> Cuckoo.__DoNotUse<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, Data)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: data) { $0.1 }]
-	        return cuckoo_manager.verify("save(key: String, data: Data) -> Observable<URL>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("save(key: String, data: Data) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func load<M1: Cuckoo.Matchable>(key: M1) -> Cuckoo.__DoNotUse<(String), Observable<URL?>> where M1.MatchedType == String {
+	    func load<M1: Cuckoo.Matchable>(key: M1) -> Cuckoo.__DoNotUse<(String), Observable<Data?>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: key) { $0 }]
-	        return cuckoo_manager.verify("load(key: String) -> Observable<URL?>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("load(key: String) -> Observable<Data?>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -125,18 +125,18 @@ import RxSwift
     
 
     
-     override func save(key: String, data: Data) -> Observable<URL>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<URL>).self)
+     override func save(key: String, data: Data) -> Observable<Data>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
     }
     
-     override func load(key: String) -> Observable<URL?>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<URL?>).self)
+     override func load(key: String) -> Observable<Data?>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<Data?>).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  Files.swift
@@ -273,7 +273,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-10-02 14:15:44 +0000
 
 
 //
@@ -592,7 +592,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  MarkdownParser.swift
@@ -699,7 +699,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  Network.swift
@@ -836,7 +836,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  Player.swift
@@ -902,16 +902,16 @@ import Foundation
     
     
     
-     override func play(url: URL) throws {
+     override func play(data: Data) throws {
         
-    return try cuckoo_manager.callThrows("play(url: URL) throws",
-            parameters: (url),
-            escapingParameters: (url),
+    return try cuckoo_manager.callThrows("play(data: Data) throws",
+            parameters: (data),
+            escapingParameters: (data),
             superclassCall:
                 
-                super.play(url: url)
+                super.play(data: data)
                 ,
-            defaultCall: __defaultImplStub!.play(url: url))
+            defaultCall: __defaultImplStub!.play(data: data))
         
     }
     
@@ -929,9 +929,9 @@ import Foundation
 	    }
 	    
 	    
-	    func play<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ClassStubNoReturnThrowingFunction<(URL)> where M1.MatchedType == URL {
-	        let matchers: [Cuckoo.ParameterMatcher<(URL)>] = [wrap(matchable: url) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockPlayer.self, method: "play(url: URL) throws", parameterMatchers: matchers))
+	    func play<M1: Cuckoo.Matchable>(data: M1) -> Cuckoo.ClassStubNoReturnThrowingFunction<(Data)> where M1.MatchedType == Data {
+	        let matchers: [Cuckoo.ParameterMatcher<(Data)>] = [wrap(matchable: data) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayer.self, method: "play(data: Data) throws", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -956,9 +956,9 @@ import Foundation
 	
 	    
 	    @discardableResult
-	    func play<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.__DoNotUse<(URL), Void> where M1.MatchedType == URL {
-	        let matchers: [Cuckoo.ParameterMatcher<(URL)>] = [wrap(matchable: url) { $0 }]
-	        return cuckoo_manager.verify("play(url: URL) throws", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func play<M1: Cuckoo.Matchable>(data: M1) -> Cuckoo.__DoNotUse<(Data), Void> where M1.MatchedType == Data {
+	        let matchers: [Cuckoo.ParameterMatcher<(Data)>] = [wrap(matchable: data) { $0 }]
+	        return cuckoo_manager.verify("play(data: Data) throws", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -980,14 +980,14 @@ import Foundation
     
 
     
-     override func play(url: URL) throws  {
+     override func play(data: Data) throws  {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  Storage.swift
@@ -1123,7 +1123,114 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-10-02 14:15:44 +0000
+
+//
+//  CacheService.swift
+//  YASD
+//
+//  Created by Vyacheslav Konopkin on 01/10/2019.
+//  Copyright © 2019 yac. All rights reserved.
+//
+
+import Cuckoo
+@testable import YASD
+
+import Foundation
+import RxSwift
+
+
+ class MockCacheService: CacheService, Cuckoo.ClassMock {
+    
+     typealias MocksType = CacheService
+    
+     typealias Stubbing = __StubbingProxy_CacheService
+     typealias Verification = __VerificationProxy_CacheService
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+
+    
+    private var __defaultImplStub: CacheService?
+
+     func enableDefaultImplementation(_ stub: CacheService) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     override func runAction(key: String, action: @escaping CachableAction) -> Observable<Data> {
+        
+    return cuckoo_manager.call("runAction(key: String, action: @escaping CachableAction) -> Observable<Data>",
+            parameters: (key, action),
+            escapingParameters: (key, action),
+            superclassCall:
+                
+                super.runAction(key: key, action: action)
+                ,
+            defaultCall: __defaultImplStub!.runAction(key: key, action: action))
+        
+    }
+    
+
+	 struct __StubbingProxy_CacheService: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func runAction<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, action: M2) -> Cuckoo.ClassStubFunction<(String, CachableAction), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == CachableAction {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, CachableAction)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: action) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockCacheService.self, method: "runAction(key: String, action: @escaping CachableAction) -> Observable<Data>", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_CacheService: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func runAction<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, action: M2) -> Cuckoo.__DoNotUse<(String, CachableAction), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == CachableAction {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, CachableAction)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: action) { $0.1 }]
+	        return cuckoo_manager.verify("runAction(key: String, action: @escaping CachableAction) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class CacheServiceStub: CacheService {
+    
+
+    
+
+    
+     override func runAction(key: String, action: @escaping CachableAction) -> Observable<Data>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  LexinService.swift
@@ -1412,7 +1519,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  LexinService+Format.swift
@@ -1518,7 +1625,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  LexinServiceProvider.swift
@@ -2229,7 +2336,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-09-30 10:19:29 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-10-02 14:15:44 +0000
 
 //
 //  PlayerService.swift
@@ -2271,16 +2378,16 @@ import RxSwift
     
     
     
-     override func playSound(stringUrl: String) -> Observable<PlayerServiceResult> {
+     override func playSound(url: String) -> Observable<PlayerServiceResult> {
         
-    return cuckoo_manager.call("playSound(stringUrl: String) -> Observable<PlayerServiceResult>",
-            parameters: (stringUrl),
-            escapingParameters: (stringUrl),
+    return cuckoo_manager.call("playSound(url: String) -> Observable<PlayerServiceResult>",
+            parameters: (url),
+            escapingParameters: (url),
             superclassCall:
                 
-                super.playSound(stringUrl: stringUrl)
+                super.playSound(url: url)
                 ,
-            defaultCall: __defaultImplStub!.playSound(stringUrl: stringUrl))
+            defaultCall: __defaultImplStub!.playSound(url: url))
         
     }
     
@@ -2293,9 +2400,9 @@ import RxSwift
 	    }
 	    
 	    
-	    func playSound<M1: Cuckoo.Matchable>(stringUrl: M1) -> Cuckoo.ClassStubFunction<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: stringUrl) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerService.self, method: "playSound(stringUrl: String) -> Observable<PlayerServiceResult>", parameterMatchers: matchers))
+	    func playSound<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerService.self, method: "playSound(url: String) -> Observable<PlayerServiceResult>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -2315,9 +2422,9 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func playSound<M1: Cuckoo.Matchable>(stringUrl: M1) -> Cuckoo.__DoNotUse<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: stringUrl) { $0 }]
-	        return cuckoo_manager.verify("playSound(stringUrl: String) -> Observable<PlayerServiceResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func playSound<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.__DoNotUse<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
+	        return cuckoo_manager.verify("playSound(url: String) -> Observable<PlayerServiceResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -2329,7 +2436,7 @@ import RxSwift
     
 
     
-     override func playSound(stringUrl: String) -> Observable<PlayerServiceResult>  {
+     override func playSound(url: String) -> Observable<PlayerServiceResult>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<PlayerServiceResult>).self)
     }
     

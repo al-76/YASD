@@ -8,30 +8,25 @@
 
 import RxSwift
 import Foundation
+import Cache
 
 class DataCache {
-    private struct Cache {
-        let key: String
-        let file: URL
+    let storage: Cache.Storage<Data>
+    
+    init(name: String) throws {
+        let diskConfig = DiskConfig(name: name)
+        let memoryConfig = MemoryConfig(expiry: .date(Date().addingTimeInterval(2 * 60)), countLimit: 10, totalCostLimit: 10)
+        self.storage = try Cache.Storage(diskConfig: diskConfig,
+                                         memoryConfig: memoryConfig,
+                                         transformer: TransformerFactory.forCodable(ofType: Data.self))
     }
     
-    private let name: String
-    private let files: Files
-    private var cache: Cache? = nil
-    
-    init(name: String, files: Files) {
-        self.name = name
-        self.files = files
-    }
-    
-    func save(key: String, data: Data) -> Observable<URL> {
+    func save(key: String, data: Data) -> Observable<Data> {
         return Observable.create { [weak self] observer in
             if let self = self {
                 do {
-                    let file = try self.files.createTempFile(name: self.name)
-                    try self.files.writeData(to: file, data: data)
-                    self.cache = Cache(key: key, file: file)
-                    observer.onNext(file)
+                    try self.storage.setObject(data, forKey: key)
+                    observer.onNext(data)
                     observer.onCompleted()
                 } catch let error {
                     observer.onError(error)
@@ -40,13 +35,13 @@ class DataCache {
             return Disposables.create()
         }
     }
-    
-    func load(key: String) -> Observable<URL?> {
+
+    func load(key: String) -> Observable<Data?> {
         return Observable.create { [weak self] observer in
             if let self = self {
-                if let cache = self.cache, cache.key == key {
-                    observer.onNext(cache.file)
-                } else {
+                do {
+                    observer.onNext(try self.storage.object(forKey: key))
+                } catch {
                     observer.onNext(nil)
                 }
             }

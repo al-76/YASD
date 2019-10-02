@@ -28,7 +28,7 @@ class WordsCellModel: ViewModel {
         let played = input.url
             .flatMapLatest { [weak self] url -> Driver<PlayerServiceResult> in
                 guard let self = self else { return Driver.just(.success(false)) }
-                return self.player.playSound(stringUrl: url)
+                return self.player.playSound(url: url)
                     .asDriver { Driver.just(.failure($0)) }
         }
         return Output(played: played)

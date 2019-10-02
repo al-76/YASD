@@ -153,6 +153,6 @@ class WordsViewModelTests: XCTestCase {
     }
     
     func createMockPlayerService() -> MockPlayerService {
-        return MockPlayerService(player: MockPlayer(), cache: DataCache(name: "test", files: MockFiles()), network: MockNetwork())
+        return MockPlayerService(player: MockPlayer(), cache: MockCacheService(cache: try! MockDataCache(name: "test")), network: MockNetwork())
     }
 }

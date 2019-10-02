@@ -12,8 +12,8 @@ import AVFoundation
 class Player {
     var player: AVAudioPlayer?
     
-    func play(url: URL) throws {
-        player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+    func play(data: Data) throws {
+        player = try AVAudioPlayer(data: data)
         player?.prepareToPlay()
         player?.play()
     }

@@ -17,54 +17,20 @@ class PlayerServiceTests: XCTestCase {
         case someError
     }
     
-    func testPlaySoundFromNetwork() {
+    func testPlaySound() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         let service = PlayerService(player: createMockPlayer(),
-                                    cache: createMockDataCache(empty: true),
+                                    cache: createMockCacheService(),
                                     network: createMockNetwork())
         
         // Act
-        let played = service.playSound(stringUrl: "test")
+        let played = service.playSound(url: "test")
         let res = scheduler.start { played }
         
         // Assert
         XCTAssertEqual(res.events, [
             .next(200, .success(true)),
-            .completed(200)
-            ])
-    }
-    
-    func testPlaySoundFromCache() {
-        // Arrange
-        let scheduler = TestScheduler(initialClock: 0)
-        let service = PlayerService(player: createMockPlayer(),
-                                    cache: createMockDataCache(empty: false),
-                                    network: MockNetwork())
-        
-        // Act
-        let played = service.playSound(stringUrl: "test")
-        let res = scheduler.start { played }
-        
-        // Assert
-        XCTAssertEqual(res.events, [
-            .next(200, .success(true)),
-            .completed(200)
-            ])
-    }
-    
-    func testPlaySoundInvalidUrl() {
-        // Arrange
-        let scheduler = TestScheduler(initialClock: 0)
-        let service = PlayerService(player: MockPlayer(), cache: createMockDataCache(empty: false), network: Network())
-        
-        // Act
-        let played = service.playSound(stringUrl: "")
-        let res = scheduler.start { played }
-        
-        // Assert
-        XCTAssertEqual(res.events, [
-            .next(200, .success(false)),
             .completed(200)
             ])
     }
@@ -73,11 +39,11 @@ class PlayerServiceTests: XCTestCase {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         var service: PlayerService? = PlayerService(player: createMockPlayer(),
-                                    cache: createMockDataCache(empty: true),
-                                    network: createMockNetwork())
+                                                    cache: createMockCacheService(),
+                                                    network: createMockNetwork())
         
         // Act
-        let played = service!.playSound(stringUrl: "test")
+        let played = service!.playSound(url: "test")
         service = nil
         let res = scheduler.start { played }
         
@@ -92,25 +58,26 @@ class PlayerServiceTests: XCTestCase {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         let service = PlayerService(player: createMockPlayerError(),
-                                    cache: createMockDataCache(empty: false),
-                                    network: MockNetwork())
+                                    cache: createMockCacheService(),
+                                    network: createMockNetwork())
         
         // Act
-        let played = service.playSound(stringUrl: "test")
+        let played = service.playSound(url: "test")
         let res = scheduler.start { played }
         
         // Assert
         XCTAssertEqual(res.events, [
-            .error(200, TestError.someError)
+            .next(200, .failure(TestError.someError)),
+            .completed(200)
             ])
     }
     
-    private func createMockDataCache(empty: Bool) -> MockDataCache {
-        let testUrl = URL(string: "test")
-        let mock = MockDataCache(name: "test", files: MockFiles())
+    private func createMockCacheService() -> MockCacheService {
+        let mock = MockCacheService(cache: try! MockDataCache(name: "test"))
         stub(mock) { stub in
-            stub.load(key: anyString()).thenReturn(Observable.just(empty ? nil : testUrl))
-            stub.save(key: anyString(), data: any()).thenReturn(Observable.just(testUrl!))
+            when(stub.runAction(key: any(), action: any())).then { _, action in
+                return action()
+            }
         }
         return mock
     }
@@ -126,7 +93,7 @@ class PlayerServiceTests: XCTestCase {
     private func createMockPlayer() -> MockPlayer {
         let mock = MockPlayer()
         stub(mock) { stub in
-            when(stub.play(url: any())).thenDoNothing()
+            when(stub.play(data: any())).thenDoNothing()
         }
         return mock
     }
@@ -134,7 +101,7 @@ class PlayerServiceTests: XCTestCase {
     private func createMockPlayerError() -> MockPlayer {
         let mock = MockPlayer()
         stub(mock) { stub in
-            when(stub.play(url: any())).thenThrow(TestError.someError)
+            when(stub.play(data: any())).thenThrow(TestError.someError)
         }
         return mock
     }
