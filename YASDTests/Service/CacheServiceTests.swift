@@ -70,7 +70,7 @@ class CacheServiceTests: XCTestCase {
     }
     
     private func createMockDataCache(data: Data?) -> MockDataCache {
-        let mock = try! MockDataCache(name: "test")
+        let mock = MockDataCache(name: "test")
         stub(mock) { stub in
             when(stub.load(key: any())).thenReturn(Observable.just(data))
             when(stub.save(key: any(), data: any())).then { _, data in

@@ -9,6 +9,7 @@
 
 import XCTest
 import RxSwift
+import RxCocoa
 import RxTest
 import Cuckoo
 
@@ -86,7 +87,7 @@ class WordsViewModelTests: XCTestCase {
 
         // Act
         scheduler.start()
-        lexin.parameters.language
+        lexin.language()
             .accept(LexinServiceParameters.Language(name: "test2", code: "test2_code"))
 
         // Assert
@@ -105,21 +106,26 @@ class WordsViewModelTests: XCTestCase {
         XCTAssertNotNil(cell)
     }
     
-    func createMockLexinService(errorWord: String) -> MockLexinService {
+    func createMockLexinService(errorWord: String) -> MockFormattedLexinService {
         let mockParser = MockLexinServiceParser()
-        let mock = MockLexinService(network: MockNetwork(),
-                                    parameters: createMockLexinServiceParameters(),
-                                    formatter: createMockLexinServiceFormatter(),
+        let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
+                                             network: MockNetwork())
+        let mockParameters = createMockLexinServiceParameters()
+        let mockLexin = MockLexinService(network: mockNetwork,
+                                    parameters: mockParameters,
                                     provider: MockLexinServiceProvider(defaultParser: mockParser, folketsParser: mockParser, swedishParser: mockParser))
+        let mock = MockFormattedLexinService(service: mockLexin, formatter: createMockLexinServiceFormatter())
         stub(mock) { stub in
+            when(stub.language()).thenReturn(mockParameters.language)
+            when(stub.load()).thenDoNothing()
             when(stub.search(word: anyString())).then { word in
-                return Observable<LexinServiceResult>.create { observable in
+                return Observable<LexinServiceResultFormatted>.create { observable in
                     if word == errorWord {
                         observable.on(.error(TestError.someError))
                     } else if word.isEmpty {
                         observable.on(.completed)
                     } else {
-                        observable.on(.next(.success([LexinServiceResultItem(word: word)])))
+                        observable.on(.next(.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: word), soundUrl: nil) ])))
                     }
                     return Disposables.create {}
                 }
@@ -130,11 +136,11 @@ class WordsViewModelTests: XCTestCase {
     }
     
     private func createMockLexinServiceParameters() -> MockLexinServiceParameters {
-        let mock = MockLexinServiceParameters(storage: MockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test"))
-        stub(mock) { stub in
-            when(stub.load()).thenDoNothing()
-        }
-        return mock
+       return MockLexinServiceParameters(storage: MockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test"))
+//        stub(mock) { stub in
+//            when(stub.load()).thenDoNothing()
+//        }
+//        return mock
     }
     
     func createMockLexinServiceFormatter() -> MockLexinServiceFormatter {
@@ -153,6 +159,6 @@ class WordsViewModelTests: XCTestCase {
     }
     
     func createMockPlayerService() -> MockPlayerService {
-        return MockPlayerService(player: MockPlayer(), cache: MockCacheService(cache: try! MockDataCache(name: "test")), network: MockNetwork())
+        return MockPlayerService(player: MockPlayer(), cache: MockCacheService(cache: MockDataCache(name: "test")), network: MockNetwork())
     }
 }

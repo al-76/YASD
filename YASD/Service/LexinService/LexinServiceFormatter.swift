@@ -7,12 +7,39 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 struct LexinServiceResultFormattedItem {
     let formatted: NSAttributedString
     let soundUrl: String?
 }
 typealias LexinServiceResultFormatted = Result<[LexinServiceResultFormattedItem]>
+
+class FormattedLexinService {
+    private let service: LexinService
+    internal let formatter: LexinServiceFormatter
+    
+    init(service: LexinService, formatter: LexinServiceFormatter) {
+        self.service = service
+        self.formatter = formatter
+    }
+    
+    func load() {
+        service.parameters.load()
+    }
+    
+    func search(word: String) -> Observable<LexinServiceResultFormatted> {
+        return service.search(word: word).map { [weak self] found in
+            guard let self = self else { return .success([]) }
+            return self.formatter.format(result: found)
+        }
+    }
+    
+    func language() -> BehaviorRelay<LexinServiceParameters.Language> {
+        return service.parameters.language
+    }
+}
 
 class LexinServiceFormatter {
     private let markdown: Markdown

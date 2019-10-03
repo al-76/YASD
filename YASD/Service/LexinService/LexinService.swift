@@ -103,16 +103,14 @@ struct LexinServiceResultItem {
 }
 
 class LexinService {
-    public let formatter: LexinServiceFormatter
     public let parameters: LexinServiceParameters
     
-    private let network: Network
+    private let network: NetworkService
     private let provider: LexinServiceProvider
     
-    init(network: Network, parameters: LexinServiceParameters, formatter: LexinServiceFormatter, provider: LexinServiceProvider) {
+    init(network: NetworkService, parameters: LexinServiceParameters, provider: LexinServiceProvider) {
         self.network = network
         self.parameters = parameters
-        self.formatter = formatter
         self.provider = provider
     }
     
@@ -124,7 +122,8 @@ class LexinService {
         return network.postRequest(url: parser.getUrl(),
                                    parameters: parser.getRequestParameters(word: word, parameters: parameters.get()))
             .map { do {
-                    return try .success(parser.parseHtml(text: $0))
+                    let text = String(data: $0, encoding: .utf8) ?? ""
+                    return try .success(parser.parseHtml(text: text))
                 } catch let error {
                     return .failure(error)
                 }

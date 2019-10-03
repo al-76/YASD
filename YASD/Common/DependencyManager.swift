@@ -34,7 +34,7 @@ func configurePlatform(container: Container) {
         .inObjectScope(.container)
     container.register(Player.self) { _ in Player() }
         .inObjectScope(.container)
-    container.register(DataCache.self) { _, name in try! DataCache(name: name) }
+    container.register(DataCache.self) { _, name in DataCache(name: name) }
 }
 
 func configureService(container: Container) {
@@ -88,20 +88,30 @@ func configureService(container: Container) {
     }
     .inObjectScope(.container)
     
+    // Cache Network Service
+    container.register(NetworkService.self) { _ in
+        NetworkService(cache: container.resolve(CacheService.self)!,
+        network: container.resolve(Network.self)!)
+    }
+    .inObjectScope(.container)
+    
     // Lexin Service
     container.register(LexinService.self) { _ in
-        LexinService(network: container.resolve(Network.self)!,
+        LexinService(network: container.resolve(NetworkService.self)!,
                      parameters: container.resolve(LexinServiceParameters.self)!,
-                     formatter: container.resolve(LexinServiceFormatter.self)!,
                      provider: container.resolve(LexinServiceProvider.self)!)
-        
+    }
+    .inObjectScope(.container)
+    container.register(FormattedLexinService.self) { _ in
+        FormattedLexinService(service: container.resolve(LexinService.self)!,
+                              formatter: container.resolve(LexinServiceFormatter.self)!)
     }
     .inObjectScope(.container)
 }
 
 func configureModel(container: Container) {
     container.register(WordsViewModel.self) { container in
-        WordsViewModel(lexin: container.resolve(LexinService.self)!,
+        WordsViewModel(lexin: container.resolve(FormattedLexinService.self)!,
                        player: container.resolve(PlayerService.self)!)
     }
     .inObjectScope(.container)

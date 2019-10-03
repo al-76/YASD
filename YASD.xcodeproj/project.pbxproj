@@ -13,6 +13,8 @@
 		2F18E2E4234381EA003F91FD /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
 		2F1E1E762344D8A1007C128B /* Cache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F1E1E752344D8A1007C128B /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F1E1E782344E6DB007C128B /* CacheServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */; };
+		2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
+		2F1E1E7F23463434007C128B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
 		2F266E8222AA8DBF0069D8B8 /* LexinServiceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatter.swift */; };
 		2F2EC4B422EB22FD00B1D4C7 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2EC4B322EB22FD00B1D4C7 /* SettingsTableViewController.swift */; };
 		2F2EC4B622EB259000B1D4C7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2EC4B522EB259000B1D4C7 /* SettingsViewModel.swift */; };
@@ -132,6 +134,7 @@
 		2F18E2E223437097003F91FD /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		2F1E1E752344D8A1007C128B /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = "<group>"; };
 		2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceTests.swift; sourceTree = "<group>"; };
+		2F1E1E7D23463434007C128B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceFormatter.swift; sourceTree = "<group>"; };
 		2F2EC4B322EB22FD00B1D4C7 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		2F2EC4B522EB259000B1D4C7 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -242,6 +245,26 @@
 			path = Platform;
 			sourceTree = "<group>";
 		};
+		2F1E1E7B23462D75007C128B /* LexinService */ = {
+			isa = PBXGroup;
+			children = (
+				2F97577822786F6F00B343B4 /* LexinService.swift */,
+				2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatter.swift */,
+				2FBF7EF32302F65E004D5E10 /* LexinServiceProvider.swift */,
+			);
+			path = LexinService;
+			sourceTree = "<group>";
+		};
+		2F1E1E7C23462D87007C128B /* LexinService */ = {
+			isa = PBXGroup;
+			children = (
+				2F3EE260229D7B7B0083CDE9 /* LexinServiceTests.swift */,
+				2FE7681F22BCC30E00375292 /* LexinServiceFormatterTests.swift */,
+				2FFA8D30230E82DE006A0368 /* LexinServiceProviderTests.swift */,
+			);
+			path = LexinService;
+			sourceTree = "<group>";
+		};
 		2F3EE2542297EC730083CDE9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,9 +279,7 @@
 		2F3EE25F229D7ADE0083CDE9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				2F3EE260229D7B7B0083CDE9 /* LexinServiceTests.swift */,
-				2FE7681F22BCC30E00375292 /* LexinServiceFormatterTests.swift */,
-				2FFA8D30230E82DE006A0368 /* LexinServiceProviderTests.swift */,
+				2F1E1E7C23462D87007C128B /* LexinService */,
 				2F393ACB233E118100F315FC /* PlayerServiceTests.swift */,
 				2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */,
 			);
@@ -374,11 +395,10 @@
 		2FF62C87228D4B2B00B4946C /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				2F97577822786F6F00B343B4 /* LexinService.swift */,
-				2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatter.swift */,
-				2FBF7EF32302F65E004D5E10 /* LexinServiceProvider.swift */,
+				2F1E1E7B23462D75007C128B /* LexinService */,
 				2F9B8BB3232BB709000D6BC1 /* PlayerService.swift */,
 				2F18E2E223437097003F91FD /* CacheService.swift */,
+				2F1E1E7D23463434007C128B /* NetworkService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -572,7 +592,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PROJECT_DIR}/Carthage/Checkouts/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/ViewModel/WordsTableViewModel.swift\" \\\n\"${INPUT_DIR}/Service/LexinService.swift\" \\\n\"${INPUT_DIR}/Service/LexinServiceFormatter.swift\" \\\n\"${INPUT_DIR}/Service/LexinServiceProvider.swift\" \\\n\"${INPUT_DIR}/Service/PlayerService.swift\" \\\n\"${INPUT_DIR}/Service/CacheService.swift\" \\\n\"${INPUT_DIR}/Platform/Network.swift\" \\\n\"${INPUT_DIR}/Platform/HtmlParser.swift\" \\\n\"${INPUT_DIR}/Platform/Markdown.swift\" \\\n\"${INPUT_DIR}/Platform/Storage.swift\" \\\n\"${INPUT_DIR}/Platform/Player.swift\" \\\n\"${INPUT_DIR}/Platform/Files.swift\" \\\n\"${INPUT_DIR}/Platform/DataCache.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PROJECT_DIR}/Carthage/Checkouts/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/ViewModel/WordsTableViewModel.swift\" \\\n\"${INPUT_DIR}/Service/LexinService/LexinService.swift\" \\\n\"${INPUT_DIR}/Service/LexinService/LexinServiceFormatter.swift\" \\\n\"${INPUT_DIR}/Service/LexinService/LexinServiceProvider.swift\" \\\n\"${INPUT_DIR}/Service/PlayerService.swift\" \\\n\"${INPUT_DIR}/Service/CacheService.swift\" \\\n\"${INPUT_DIR}/Service/NetworkService.swift\" \\\n\"${INPUT_DIR}/Platform/Network.swift\" \\\n\"${INPUT_DIR}/Platform/HtmlParser.swift\" \\\n\"${INPUT_DIR}/Platform/Markdown.swift\" \\\n\"${INPUT_DIR}/Platform/Storage.swift\" \\\n\"${INPUT_DIR}/Platform/Player.swift\" \\\n\"${INPUT_DIR}/Platform/Files.swift\" \\\n\"${INPUT_DIR}/Platform/DataCache.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -604,6 +624,7 @@
 				2F661B362272E16300C68A5F /* AppDelegate.swift in Sources */,
 				2F9B8BB4232BB709000D6BC1 /* PlayerService.swift in Sources */,
 				2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */,
+				2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */,
 				2F661B382272E16300C68A5F /* WordsTableViewController.swift in Sources */,
 				2F7321872313E4A000CC0822 /* Storage.swift in Sources */,
 			);
@@ -616,6 +637,7 @@
 				2F393ACF233E255500F315FC /* DataCache.swift in Sources */,
 				2F9B8BB62333C612000D6BC1 /* Player.swift in Sources */,
 				2F1E1E782344E6DB007C128B /* CacheServiceTests.swift in Sources */,
+				2F1E1E7F23463434007C128B /* NetworkService.swift in Sources */,
 				2F3EE261229D7B7B0083CDE9 /* LexinServiceTests.swift in Sources */,
 				2F5F8BAC2322879900EF6A85 /* ViewModel.swift in Sources */,
 				2F18E2E4234381EA003F91FD /* CacheService.swift in Sources */,

@@ -11,21 +11,18 @@ import Foundation
 import Cache
 
 class DataCache {
-    let storage: Cache.Storage<Data>
+    private let name: String
+    private var storage: Cache.Storage<Data>? = nil
     
-    init(name: String) throws {
-        let diskConfig = DiskConfig(name: name)
-        let memoryConfig = MemoryConfig(expiry: .date(Date().addingTimeInterval(2 * 60)), countLimit: 10, totalCostLimit: 10)
-        self.storage = try Cache.Storage(diskConfig: diskConfig,
-                                         memoryConfig: memoryConfig,
-                                         transformer: TransformerFactory.forCodable(ofType: Data.self))
+    init(name: String) {
+        self.name = name
     }
     
     func save(key: String, data: Data) -> Observable<Data> {
         return Observable.create { [weak self] observer in
             if let self = self {
                 do {
-                    try self.storage.setObject(data, forKey: key)
+                    try self.getStorage().setObject(data, forKey: key)
                     observer.onNext(data)
                     observer.onCompleted()
                 } catch let error {
@@ -40,7 +37,7 @@ class DataCache {
         return Observable.create { [weak self] observer in
             if let self = self {
                 do {
-                    observer.onNext(try self.storage.object(forKey: key))
+                    observer.onNext(try self.getStorage().object(forKey: key))
                 } catch {
                     observer.onNext(nil)
                 }
@@ -48,5 +45,18 @@ class DataCache {
             observer.onCompleted()
             return Disposables.create()
         }
+    }
+    
+    private func getStorage() throws -> Cache.Storage<Data> {
+        if storage == nil {
+            let diskConfig = DiskConfig(name: name)
+            let memoryConfig = MemoryConfig(expiry: .date(Date().addingTimeInterval(10 * 60)),
+                                            countLimit: 10,
+                                            totalCostLimit: 10)
+            return try Cache.Storage(diskConfig: diskConfig,
+                memoryConfig: memoryConfig,
+                transformer: TransformerFactory.forCodable(ofType: Data.self))
+        }
+        return storage!
     }
 }

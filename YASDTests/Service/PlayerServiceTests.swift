@@ -73,7 +73,7 @@ class PlayerServiceTests: XCTestCase {
     }
     
     private func createMockCacheService() -> MockCacheService {
-        let mock = MockCacheService(cache: try! MockDataCache(name: "test"))
+        let mock = MockCacheService(cache: MockDataCache(name: "test"))
         stub(mock) { stub in
             when(stub.runAction(key: any(), action: any())).then { _, action in
                 return action()

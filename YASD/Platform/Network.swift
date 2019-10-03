@@ -10,12 +10,9 @@ import RxSwift
 import Foundation
 
 class Network {
-    func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<String> {
+    func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data> {
         let request = createRequest(url: url, type: "POST", parameters: parameters)
         return executeRequest(request: request)
-            .map { data -> String in
-                return String(data: data, encoding: .utf8) ?? ""
-        }
     }
     
     func getRequest(url: String) -> Observable<Data> {
@@ -23,7 +20,7 @@ class Network {
         return executeRequest(request: request)
     }
     
-    private func createRequest(url: String, type: String, parameters: (String?, [String: String]?)?) -> URLRequest {
+    private func createRequest(url: String, type: String, parameters: (body: String?, headers: [String: String]?)?) -> URLRequest {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = type
         if let body = parameters?.0 {

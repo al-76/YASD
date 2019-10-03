@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  DataCache.swift
@@ -136,7 +136,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  Files.swift
@@ -273,7 +273,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-10-03 15:47:14 +0000
 
 
 //
@@ -592,7 +592,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  MarkdownParser.swift
@@ -699,7 +699,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  Network.swift
@@ -741,9 +741,9 @@ import RxSwift
     
     
     
-     override func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<String> {
+     override func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data> {
         
-    return cuckoo_manager.call("postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<String>",
+    return cuckoo_manager.call("postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data>",
             parameters: (url, parameters),
             escapingParameters: (url, parameters),
             superclassCall:
@@ -778,9 +778,9 @@ import RxSwift
 	    }
 	    
 	    
-	    func postRequest<M1: Cuckoo.Matchable, M2: Cuckoo.OptionalMatchable>(url: M1, parameters: M2) -> Cuckoo.ClassStubFunction<(String, (String?, [String: String]?)?), Observable<String>> where M1.MatchedType == String, M2.OptionalMatchedType == (String?, [String: String]?) {
+	    func postRequest<M1: Cuckoo.Matchable, M2: Cuckoo.OptionalMatchable>(url: M1, parameters: M2) -> Cuckoo.ClassStubFunction<(String, (String?, [String: String]?)?), Observable<Data>> where M1.MatchedType == String, M2.OptionalMatchedType == (String?, [String: String]?) {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, (String?, [String: String]?)?)>] = [wrap(matchable: url) { $0.0 }, wrap(matchable: parameters) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockNetwork.self, method: "postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<String>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockNetwork.self, method: "postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data>", parameterMatchers: matchers))
 	    }
 	    
 	    func getRequest<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<Data>> where M1.MatchedType == String {
@@ -805,9 +805,9 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func postRequest<M1: Cuckoo.Matchable, M2: Cuckoo.OptionalMatchable>(url: M1, parameters: M2) -> Cuckoo.__DoNotUse<(String, (String?, [String: String]?)?), Observable<String>> where M1.MatchedType == String, M2.OptionalMatchedType == (String?, [String: String]?) {
+	    func postRequest<M1: Cuckoo.Matchable, M2: Cuckoo.OptionalMatchable>(url: M1, parameters: M2) -> Cuckoo.__DoNotUse<(String, (String?, [String: String]?)?), Observable<Data>> where M1.MatchedType == String, M2.OptionalMatchedType == (String?, [String: String]?) {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, (String?, [String: String]?)?)>] = [wrap(matchable: url) { $0.0 }, wrap(matchable: parameters) { $0.1 }]
-	        return cuckoo_manager.verify("postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<String>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -825,8 +825,8 @@ import RxSwift
     
 
     
-     override func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<String>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<String>).self)
+     override func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
     }
     
      override func getRequest(url: String) -> Observable<Data>  {
@@ -836,7 +836,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  Player.swift
@@ -987,7 +987,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  Storage.swift
@@ -1123,7 +1123,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  CacheService.swift
@@ -1230,7 +1230,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  LexinService.swift
@@ -1519,7 +1519,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceFormatter.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  LexinService+Format.swift
@@ -1533,6 +1533,159 @@ import Cuckoo
 @testable import YASD
 
 import Foundation
+import RxCocoa
+import RxSwift
+
+
+ class MockFormattedLexinService: FormattedLexinService, Cuckoo.ClassMock {
+    
+     typealias MocksType = FormattedLexinService
+    
+     typealias Stubbing = __StubbingProxy_FormattedLexinService
+     typealias Verification = __VerificationProxy_FormattedLexinService
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+
+    
+    private var __defaultImplStub: FormattedLexinService?
+
+     func enableDefaultImplementation(_ stub: FormattedLexinService) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     override func load()  {
+        
+    return cuckoo_manager.call("load()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                super.load()
+                ,
+            defaultCall: __defaultImplStub!.load())
+        
+    }
+    
+    
+    
+     override func search(word: String) -> Observable<LexinServiceResultFormatted> {
+        
+    return cuckoo_manager.call("search(word: String) -> Observable<LexinServiceResultFormatted>",
+            parameters: (word),
+            escapingParameters: (word),
+            superclassCall:
+                
+                super.search(word: word)
+                ,
+            defaultCall: __defaultImplStub!.search(word: word))
+        
+    }
+    
+    
+    
+     override func language() -> BehaviorRelay<LexinServiceParameters.Language> {
+        
+    return cuckoo_manager.call("language() -> BehaviorRelay<LexinServiceParameters.Language>",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                super.language()
+                ,
+            defaultCall: __defaultImplStub!.language())
+        
+    }
+    
+
+	 struct __StubbingProxy_FormattedLexinService: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func load() -> Cuckoo.ClassStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockFormattedLexinService.self, method: "load()", parameterMatchers: matchers))
+	    }
+	    
+	    func search<M1: Cuckoo.Matchable>(word: M1) -> Cuckoo.ClassStubFunction<(String), Observable<LexinServiceResultFormatted>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: word) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockFormattedLexinService.self, method: "search(word: String) -> Observable<LexinServiceResultFormatted>", parameterMatchers: matchers))
+	    }
+	    
+	    func language() -> Cuckoo.ClassStubFunction<(), BehaviorRelay<LexinServiceParameters.Language>> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockFormattedLexinService.self, method: "language() -> BehaviorRelay<LexinServiceParameters.Language>", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_FormattedLexinService: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func load() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("load()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func search<M1: Cuckoo.Matchable>(word: M1) -> Cuckoo.__DoNotUse<(String), Observable<LexinServiceResultFormatted>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: word) { $0 }]
+	        return cuckoo_manager.verify("search(word: String) -> Observable<LexinServiceResultFormatted>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func language() -> Cuckoo.__DoNotUse<(), BehaviorRelay<LexinServiceParameters.Language>> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("language() -> BehaviorRelay<LexinServiceParameters.Language>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class FormattedLexinServiceStub: FormattedLexinService {
+    
+
+    
+
+    
+     override func load()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     override func search(word: String) -> Observable<LexinServiceResultFormatted>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<LexinServiceResultFormatted>).self)
+    }
+    
+     override func language() -> BehaviorRelay<LexinServiceParameters.Language>  {
+        return DefaultValueRegistry.defaultValue(for: (BehaviorRelay<LexinServiceParameters.Language>).self)
+    }
+    
+}
+
 
 
  class MockLexinServiceFormatter: LexinServiceFormatter, Cuckoo.ClassMock {
@@ -1625,7 +1778,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinServiceProvider.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceProvider.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  LexinServiceProvider.swift
@@ -2336,7 +2489,144 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-10-02 14:15:44 +0000
+// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-10-03 15:47:14 +0000
+
+//
+//  NetworkService.swift
+//  YASD
+//
+//  Created by Vyacheslav Konopkin on 03/10/2019.
+//  Copyright © 2019 yac. All rights reserved.
+//
+
+import Cuckoo
+@testable import YASD
+
+import Foundation
+import RxSwift
+
+
+ class MockNetworkService: NetworkService, Cuckoo.ClassMock {
+    
+     typealias MocksType = NetworkService
+    
+     typealias Stubbing = __StubbingProxy_NetworkService
+     typealias Verification = __VerificationProxy_NetworkService
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+
+    
+    private var __defaultImplStub: NetworkService?
+
+     func enableDefaultImplementation(_ stub: NetworkService) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     override func getRequest(url: String) -> Observable<Data> {
+        
+    return cuckoo_manager.call("getRequest(url: String) -> Observable<Data>",
+            parameters: (url),
+            escapingParameters: (url),
+            superclassCall:
+                
+                super.getRequest(url: url)
+                ,
+            defaultCall: __defaultImplStub!.getRequest(url: url))
+        
+    }
+    
+    
+    
+     override func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data> {
+        
+    return cuckoo_manager.call("postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data>",
+            parameters: (url, parameters),
+            escapingParameters: (url, parameters),
+            superclassCall:
+                
+                super.postRequest(url: url, parameters: parameters)
+                ,
+            defaultCall: __defaultImplStub!.postRequest(url: url, parameters: parameters))
+        
+    }
+    
+
+	 struct __StubbingProxy_NetworkService: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func getRequest<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<Data>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockNetworkService.self, method: "getRequest(url: String) -> Observable<Data>", parameterMatchers: matchers))
+	    }
+	    
+	    func postRequest<M1: Cuckoo.Matchable, M2: Cuckoo.OptionalMatchable>(url: M1, parameters: M2) -> Cuckoo.ClassStubFunction<(String, (String?, [String: String]?)?), Observable<Data>> where M1.MatchedType == String, M2.OptionalMatchedType == (String?, [String: String]?) {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, (String?, [String: String]?)?)>] = [wrap(matchable: url) { $0.0 }, wrap(matchable: parameters) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockNetworkService.self, method: "postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data>", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_NetworkService: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func getRequest<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.__DoNotUse<(String), Observable<Data>> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
+	        return cuckoo_manager.verify("getRequest(url: String) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func postRequest<M1: Cuckoo.Matchable, M2: Cuckoo.OptionalMatchable>(url: M1, parameters: M2) -> Cuckoo.__DoNotUse<(String, (String?, [String: String]?)?), Observable<Data>> where M1.MatchedType == String, M2.OptionalMatchedType == (String?, [String: String]?) {
+	        let matchers: [Cuckoo.ParameterMatcher<(String, (String?, [String: String]?)?)>] = [wrap(matchable: url) { $0.0 }, wrap(matchable: parameters) { $0.1 }]
+	        return cuckoo_manager.verify("postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class NetworkServiceStub: NetworkService {
+    
+
+    
+
+    
+     override func getRequest(url: String) -> Observable<Data>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
+    }
+    
+     override func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-10-03 15:47:14 +0000
 
 //
 //  PlayerService.swift

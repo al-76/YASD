@@ -78,7 +78,7 @@ class WordsCellModelTests: XCTestCase {
     }
     
     func createMockPlayerService(errorUrl: String) -> MockPlayerService {
-        let mock = MockPlayerService(player: MockPlayer(), cache: MockCacheService(cache: try! MockDataCache(name: "test")), network: MockNetwork())
+        let mock = MockPlayerService(player: MockPlayer(), cache: MockCacheService(cache: MockDataCache(name: "test")), network: MockNetwork())
         stub(mock) { stub in
             when(stub.playSound(url: anyString())).then { stringUrl in
                 return Observable<PlayerServiceResult>.create {

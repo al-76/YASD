@@ -71,7 +71,6 @@ class LexinServiceTests: XCTestCase {
     private func createLexinService(parser: LexinServiceParser) -> LexinService {
         return LexinService(network: createMockNetwork(),
                             parameters: LexinServiceParameters(storage: createMockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test")),
-                            formatter: MockLexinServiceFormatter(markdown: MockMarkdown()),
                             provider: createMockLexinServiceProvider(parser: parser))
     }
     
@@ -131,11 +130,12 @@ class LexinServiceTests: XCTestCase {
         }
     }
 
-    private func createMockNetwork() -> MockNetwork {
-        let mock = MockNetwork()
+    private func createMockNetwork() -> MockNetworkService {
+        let mockCache = MockCacheService(cache: MockDataCache(name: "Test"))
+        let mock = MockNetworkService(cache: mockCache, network: MockNetwork())
         stub(mock) { stub in
             when(stub.postRequest(url: anyString(), parameters: any())).then { url, parameters in
-                return Observable<String>.just("")
+                return Observable.just(Data())
             }
         }
         return mock
