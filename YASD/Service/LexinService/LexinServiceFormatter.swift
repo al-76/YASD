@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
 
 struct LexinServiceResultFormattedItem {
     let formatted: NSAttributedString
@@ -36,7 +35,7 @@ class FormattedLexinService {
         }
     }
     
-    func language() -> BehaviorRelay<LexinServiceParameters.Language> {
+    func language() -> BehaviorSubject<LexinServiceParameters.Language> {
         return service.parameters.language
     }
 }

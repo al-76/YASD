@@ -28,7 +28,7 @@ class SettingsLanguageViewModel: ViewModel {
     
     init(lexinParameters: LexinServiceParameters) {
         self.lexinParameters = lexinParameters
-        self.languageItems = SettingsLanguageViewModel.createSettingsLanguageItems(language: lexinParameters.language.value)
+        self.languageItems = SettingsLanguageViewModel.createSettingsLanguageItems(language: lexinParameters.getLanguage())
     }
     
     func transform(input: Input) -> Output {

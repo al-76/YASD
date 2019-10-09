@@ -50,6 +50,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
         stub(mock) { stub in
             when(stub.load()).thenDoNothing()
             when(stub.setLanguage(language: any())).thenDoNothing()
+            when(stub.getLanguage()).thenReturn(language)
         }
         return mock
     }

@@ -88,7 +88,7 @@ class WordsViewModelTests: XCTestCase {
         // Act
         scheduler.start()
         lexin.language()
-            .accept(LexinServiceParameters.Language(name: "test2", code: "test2_code"))
+            .onNext(LexinServiceParameters.Language(name: "test2", code: "test2_code"))
 
         // Assert
         XCTAssertEqual(foundWords.events, [

@@ -36,7 +36,8 @@ class WordsViewModel: ViewModel {
                 self.lastWord = word
                 return self.searchWord(word: word)
         }
-        let updateSearch = lexin.language().asDriver()
+        let updateSearch = lexin.language()
+            .asDriver(onErrorJustReturn: LexinServiceParameters.defaultLanguage)
             .flatMapLatest { [weak self] _ -> Driver<LexinServiceResultFormatted> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.searchWord(word: self.lastWord)

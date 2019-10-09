@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  DataCache.swift
@@ -136,7 +136,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  Files.swift
@@ -273,7 +273,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-10-09 13:11:05 +0000
 
 
 //
@@ -592,7 +592,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  MarkdownParser.swift
@@ -699,7 +699,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  Network.swift
@@ -836,7 +836,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  Player.swift
@@ -987,7 +987,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  Storage.swift
@@ -1123,7 +1123,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  CacheService.swift
@@ -1230,7 +1230,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  LexinService.swift
@@ -1243,9 +1243,7 @@ import RxSwift
 import Cuckoo
 @testable import YASD
 
-import RxCocoa
 import RxSwift
-import UIKit
 
 
  class MockLexinServiceParameters: LexinServiceParameters, Cuckoo.ClassMock {
@@ -1331,6 +1329,21 @@ import UIKit
         
     }
     
+    
+    
+     override func getLanguage() -> Language {
+        
+    return cuckoo_manager.call("getLanguage() -> Language",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                super.getLanguage()
+                ,
+            defaultCall: __defaultImplStub!.getLanguage())
+        
+    }
+    
 
 	 struct __StubbingProxy_LexinServiceParameters: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
@@ -1358,6 +1371,11 @@ import UIKit
 	    func setLanguage<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.ClassStubNoReturnFunction<(Language)> where M1.MatchedType == Language {
 	        let matchers: [Cuckoo.ParameterMatcher<(Language)>] = [wrap(matchable: language) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinServiceParameters.self, method: "setLanguage(language: Language)", parameterMatchers: matchers))
+	    }
+	    
+	    func getLanguage() -> Cuckoo.ClassStubFunction<(), Language> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinServiceParameters.self, method: "getLanguage() -> Language", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1400,6 +1418,12 @@ import UIKit
 	        return cuckoo_manager.verify("setLanguage(language: Language)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
+	    @discardableResult
+	    func getLanguage() -> Cuckoo.__DoNotUse<(), Language> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("getLanguage() -> Language", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
 	}
 }
 
@@ -1423,6 +1447,10 @@ import UIKit
     
      override func setLanguage(language: Language)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     override func getLanguage() -> Language  {
+        return DefaultValueRegistry.defaultValue(for: (Language).self)
     }
     
 }
@@ -1519,7 +1547,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  LexinService+Format.swift
@@ -1533,7 +1561,6 @@ import Cuckoo
 @testable import YASD
 
 import Foundation
-import RxCocoa
 import RxSwift
 
 
@@ -1592,9 +1619,9 @@ import RxSwift
     
     
     
-     override func language() -> BehaviorRelay<LexinServiceParameters.Language> {
+     override func language() -> BehaviorSubject<LexinServiceParameters.Language> {
         
-    return cuckoo_manager.call("language() -> BehaviorRelay<LexinServiceParameters.Language>",
+    return cuckoo_manager.call("language() -> BehaviorSubject<LexinServiceParameters.Language>",
             parameters: (),
             escapingParameters: (),
             superclassCall:
@@ -1624,9 +1651,9 @@ import RxSwift
 	        return .init(stub: cuckoo_manager.createStub(for: MockFormattedLexinService.self, method: "search(word: String) -> Observable<LexinServiceResultFormatted>", parameterMatchers: matchers))
 	    }
 	    
-	    func language() -> Cuckoo.ClassStubFunction<(), BehaviorRelay<LexinServiceParameters.Language>> {
+	    func language() -> Cuckoo.ClassStubFunction<(), BehaviorSubject<LexinServiceParameters.Language>> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockFormattedLexinService.self, method: "language() -> BehaviorRelay<LexinServiceParameters.Language>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockFormattedLexinService.self, method: "language() -> BehaviorSubject<LexinServiceParameters.Language>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1658,9 +1685,9 @@ import RxSwift
 	    }
 	    
 	    @discardableResult
-	    func language() -> Cuckoo.__DoNotUse<(), BehaviorRelay<LexinServiceParameters.Language>> {
+	    func language() -> Cuckoo.__DoNotUse<(), BehaviorSubject<LexinServiceParameters.Language>> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("language() -> BehaviorRelay<LexinServiceParameters.Language>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("language() -> BehaviorSubject<LexinServiceParameters.Language>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1680,8 +1707,8 @@ import RxSwift
         return DefaultValueRegistry.defaultValue(for: (Observable<LexinServiceResultFormatted>).self)
     }
     
-     override func language() -> BehaviorRelay<LexinServiceParameters.Language>  {
-        return DefaultValueRegistry.defaultValue(for: (BehaviorRelay<LexinServiceParameters.Language>).self)
+     override func language() -> BehaviorSubject<LexinServiceParameters.Language>  {
+        return DefaultValueRegistry.defaultValue(for: (BehaviorSubject<LexinServiceParameters.Language>).self)
     }
     
 }
@@ -1778,7 +1805,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceProvider.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceProvider.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  LexinServiceProvider.swift
@@ -2489,7 +2516,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  NetworkService.swift
@@ -2626,7 +2653,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-10-03 15:47:14 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-10-09 13:11:05 +0000
 
 //
 //  PlayerService.swift
