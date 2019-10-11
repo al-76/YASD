@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		17A9BC7522B5273B002F769B /* HtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7422B5273B002F769B /* HtmlParser.swift */; };
 		17A9BC7722B5284F002F769B /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7622B5284F002F769B /* Markdown.swift */; };
+		17F940052350F0AD00FBFD54 /* Swinject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */; };
 		2F18E2E323437097003F91FD /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
 		2F18E2E4234381EA003F91FD /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
 		2F1E1E762344D8A1007C128B /* Cache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F1E1E752344D8A1007C128B /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -131,6 +132,7 @@
 /* Begin PBXFileReference section */
 		17A9BC7422B5273B002F769B /* HtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlParser.swift; sourceTree = "<group>"; };
 		17A9BC7622B5284F002F769B /* Markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
+		17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swinject+Extensions.swift"; sourceTree = "<group>"; };
 		2F18E2E223437097003F91FD /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		2F1E1E752344D8A1007C128B /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = "<group>"; };
 		2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceTests.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				2F661B352272E16300C68A5F /* AppDelegate.swift */,
 				2F9757692277330500B343B4 /* DependencyManager.swift */,
 				2FDEFF5E2295494200A82F43 /* Result.swift */,
+				17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 				2F9B8BB4232BB709000D6BC1 /* PlayerService.swift in Sources */,
 				2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */,
 				2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */,
+				17F940052350F0AD00FBFD54 /* Swinject+Extensions.swift in Sources */,
 				2F661B382272E16300C68A5F /* WordsTableViewController.swift in Sources */,
 				2F7321872313E4A000CC0822 /* Storage.swift in Sources */,
 			);

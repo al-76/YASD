@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func createRootViewController(container: Container) -> UIViewController? {
-        let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: container)
+        let storyboard = SwinjectStoryboard.getStoryboard(name: "Main", bundle: nil, container: container)
         return storyboard.instantiateInitialViewController()
     }
 }
