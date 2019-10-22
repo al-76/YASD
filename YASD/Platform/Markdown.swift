@@ -11,6 +11,14 @@ import MarkdownKit
 
 class Markdown {
     func parse(data: String) -> NSAttributedString {
-        return MarkdownParser().parse(data)
+        return Markdown.getParser().parse(data)
+    }
+    
+    private class func getParser() -> MarkdownParser {
+        if #available(iOS 13.0, *) {
+            return MarkdownParser(font: MarkdownParser.defaultFont, color: UIColor.label, enabledElements: .all, customElements: [])
+        } else {
+            return MarkdownParser()
+        }
     }
 }

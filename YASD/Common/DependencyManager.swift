@@ -51,6 +51,14 @@ func configureService(container: Container) {
         LexinServiceParserSwedish(htmlParser: container.resolve(HtmlParser.self)!)
     }
     .inObjectScope(.container)
+    container.register(LexinSuggestionParserDefault.self) { _ in
+        LexinSuggestionParserDefault()
+    }
+    .inObjectScope(.container)
+    container.register(LexinSuggestionParserFolkets.self) { _ in
+        LexinSuggestionParserFolkets()
+    }
+    .inObjectScope(.container)
     
     // Formatter
     container.register(LexinServiceFormatter.self) { _ in
@@ -66,11 +74,13 @@ func configureService(container: Container) {
     }
     .inObjectScope(.container)
     
-    // Provider
-    container.register(LexinServiceProvider.self) { _ in
-        LexinServiceProvider(defaultParser: container.resolve(LexinServiceParserDefault.self)!,
-                             folketsParser: container.resolve(LexinServiceParserFolkets.self)!,
-                             swedishParser: container.resolve(LexinServiceParserSwedish.self)!)
+    // Providers
+    container.register(LexinServiceProviderWords.self) { _ in
+        LexinServiceProviderWords(defaultParser: container.resolve(LexinServiceParserDefault.self)!, folketsParser: container.resolve(LexinServiceParserFolkets.self)!, swedishParser: container.resolve(LexinServiceParserSwedish.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(LexinServiceProviderSuggestion.self) { _ in
+        LexinServiceProviderSuggestion(defaultParser: container.resolve(LexinSuggestionParserDefault.self)!, folketsParser: container.resolve(LexinSuggestionParserFolkets.self)!, swedishParser: container.resolve(LexinSuggestionParserDefault.self)!)
     }
     .inObjectScope(.container)
     
@@ -96,10 +106,14 @@ func configureService(container: Container) {
     .inObjectScope(.container)
     
     // Lexin Service
+    container.register(LexinServiceSuggestion.self) { _ in
+        LexinServiceSuggestion(network: container.resolve(NetworkService.self)!)
+    }
+    .inObjectScope(.container)
     container.register(LexinService.self) { _ in
         LexinService(network: container.resolve(NetworkService.self)!,
                      parameters: container.resolve(LexinServiceParameters.self)!,
-                     provider: container.resolve(LexinServiceProvider.self)!)
+                     provider: container.resolve(LexinServiceProviderWords.self)!)
     }
     .inObjectScope(.container)
     container.register(FormattedLexinService.self) { _ in
@@ -110,16 +124,23 @@ func configureService(container: Container) {
 }
 
 func configureModel(container: Container) {
+    container.register(WordsSuggestionViewModel.self) { container in
+        WordsSuggestionViewModel(suggestion: container.resolve(LexinServiceSuggestion.self)!)
+    }
+    .inObjectScope(.container)
+    
     container.register(WordsViewModel.self) { container in
         WordsViewModel(lexin: container.resolve(FormattedLexinService.self)!,
                        player: container.resolve(PlayerService.self)!)
     }
     .inObjectScope(.container)
+    
     container.register(SettingsViewModel.self) { container in
         SettingsViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!)
         
     }
     .inObjectScope(.container)
+    
     container.register(SettingsLanguageViewModel.self) { container in
         SettingsLanguageViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!)
     }
@@ -127,8 +148,13 @@ func configureModel(container: Container) {
 }
 
 func configureView(container: Container) {
+    container.registerForStoryboard(WordsSuggestionTableViewController.self,
+                                    withIdentifier: "WordsSuggestionTableViewController") { container, view  in
+        view.model = container.resolve(WordsSuggestionViewModel.self)!
+    }
     container.storyboardInitCompleted(WordsTableViewController.self) { container, view in
         view.model = container.resolve(WordsViewModel.self)
+        view.searchResultsController = container.resolve(WordsSuggestionTableViewController.self)
     }
     container.storyboardInitCompleted(SettingsTableViewController.self) { container, view in
         view.model = container.resolve(SettingsViewModel.self)

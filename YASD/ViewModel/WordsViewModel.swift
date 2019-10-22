@@ -28,7 +28,6 @@ class WordsViewModel: ViewModel {
     }
     
     func transform(input: Input) -> Output {
-        lexin.load()
         // Search a word
         let searchedBar = input.searchBar
             .flatMapLatest { [weak self] word -> Driver<LexinServiceResultFormatted> in
@@ -54,3 +53,30 @@ class WordsViewModel: ViewModel {
         return lexin.search(word: word).asDriver { Driver.just(.failure($0)) }
     }
 }
+
+
+//protocol SearchService {
+//    associatedtype T
+//    
+//    func search(key: String) -> Observable<T>
+//}
+//
+//class SearchViewModel: ViewModel {
+//    struct Input {
+//        let searchBar: Driver<String>
+//    }
+//
+//    struct Output {
+//        let found: Driver<LexinServiceResultFormatted>
+//    }
+//    
+//    private let service: SearchService
+//    
+//    init(service: SearchService) {
+//        self.service = service
+//    }
+//    
+//    func transform(input: Input) -> Output {
+//
+//    }
+//}

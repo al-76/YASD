@@ -32,7 +32,6 @@ class SettingsLanguageViewModel: ViewModel {
     }
     
     func transform(input: Input) -> Output {
-        lexinParameters.load()
         let selectedLanguage = input.selectedLanguage.flatMapLatest { [weak self] selected -> Driver<[SettingsItem]> in
             guard let self = self else { return Driver.just([]) }
             self.updateParameters(language: selected)

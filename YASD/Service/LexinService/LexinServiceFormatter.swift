@@ -23,11 +23,7 @@ class FormattedLexinService {
         self.service = service
         self.formatter = formatter
     }
-    
-    func load() {
-        service.parameters.load()
-    }
-    
+        
     func search(word: String) -> Observable<LexinServiceResultFormatted> {
         return service.search(word: word).map { [weak self] found in
             guard let self = self else { return .success([]) }
