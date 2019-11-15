@@ -8,7 +8,13 @@
 
 import UIKit
 
-extension ProtocolLexinServiceParser {
+protocol LexinServiceSuggestionParser {
+    func getUrl() -> String
+    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?)
+    func parse(text: String) throws -> [LexinServiceSuggestionResultItem]
+}
+
+extension LexinServiceSuggestionParser {
     func parse(text: String) throws -> [LexinServiceSuggestionResultItem] {
         let index = text.firstIndex(of: "\"") ?? text.startIndex
         let res = text[index...]
@@ -23,16 +29,8 @@ extension ProtocolLexinServiceParser {
     }
 }
 
-typealias LexinServiceProviderSuggestion = LexinServiceProvider<ProtocolLexinServiceParser>
-
-//protocol LexinServiceSuggestionParser {
-//    func getUrl() -> String
-//    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?)
-//    func parse(text: String) throws -> [LexinServiceSuggestionResultItem]
-//}
-
 // Default Lexin
-class LexinSuggestionParserDefault : ProtocolLexinServiceParser {
+class LexinSuggestionParserDefault : LexinServiceSuggestionParser {
     private static let URL = "https://lexin.nada.kth.se/lexin/lexin/"
 
     func getUrl() -> String {
@@ -48,7 +46,7 @@ class LexinSuggestionParserDefault : ProtocolLexinServiceParser {
     }
 }
 
-class LexinSuggestionParserFolkets : ProtocolLexinServiceParser {
+class LexinSuggestionParserFolkets : LexinServiceSuggestionParser {
     private static let URL = "https://folkets-lexikon.csc.kth.se/folkets/folkets/"
 
     func getUrl() -> String {

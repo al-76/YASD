@@ -10,18 +10,18 @@ import UIKit
 
 //typealias LexinServiceProviderWords = LexinServiceProvider<ProtocolLexinServiceParser>
 
-//protocol LexinServiceParser {
-//    func getUrl() -> String
-//    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?)
-//    func parse(text: String) throws -> [LexinServiceResultItem]
-//}
-
-internal extension ProtocolLexinServiceParser {
-    typealias ResultType = LexinServiceResultItem
+protocol LexinServiceParser {
+    func getUrl() -> String
+    func getRequestHeaders(word: String, parameters: String) -> (String?, [String: String]?)
+    func parse(text: String) throws -> [LexinServiceResultItem]
 }
 
+//internal extension ProtocolLexinServiceParser {
+//    typealias ResultType = LexinServiceResultItem
+//}
+
 // Default Lexin
-class LexinServiceParserDefault : ProtocolLexinServiceParser {
+class LexinServiceParserDefault : LexinServiceParser {
     private static let URL = "https://lexin.nada.kth.se/lexin/lexin/"
     private static let SOUND_URL = "https://lexin.nada.kth.se/sound/"
     
@@ -35,7 +35,7 @@ class LexinServiceParserDefault : ProtocolLexinServiceParser {
         return LexinServiceParserDefault.URL + "lookupword"
     }
     
-    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?) {
+    func getRequestHeaders(word: String, parameters: String) -> (String?, [String: String]?) {
         let body = "7|0|7|" + LexinServiceParserDefault.URL + "|FCDCCA88916BAACF8B03FB48D294BA89|se.jojoman.lexin.lexingwt.client.LookUpService|lookUpWord|se.jojoman.lexin.lexingwt.client.LookUpRequest/682723451|" +
             parameters + "|" +
             word + "|1|2|3|4|1|5|5|1|6|0|7|"
@@ -160,7 +160,7 @@ private extension String {
 }
 
 // Folkets Lexikon
-class LexinServiceParserFolkets : ProtocolLexinServiceParser {
+class LexinServiceParserFolkets : LexinServiceParser {
     private static let URL = "https://folkets-lexikon.csc.kth.se/folkets/folkets/"
     private static let SOUND_URL = "https://lexin.nada.kth.se/sound/"
     private static let wordTypes = [ "ab": "adv.",
@@ -184,7 +184,7 @@ class LexinServiceParserFolkets : ProtocolLexinServiceParser {
         return LexinServiceParserFolkets.URL + "lookupword"
     }
     
-    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?) {
+    func getRequestHeaders(word: String, parameters: String) -> (String?, [String: String]?) {
         let body = "7|0|6|" + LexinServiceParserFolkets.URL + "|1F6DF5ACEAE7CE88AACB1E5E4208A6EC|se.algoritmica.folkets.client.LookUpService|lookUpWord|se.algoritmica.folkets.client.LookUpRequest/1089007912|" +
             word.lowercased() + "|1|2|3|4|1|5|5|1|0|0|6|"
         let headers = [ "Content-Type": "text/x-gwt-rpc;charset=UTF-8",

@@ -10,8 +10,9 @@ import RxSwift
 import Foundation
 
 class Network {
-    func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data> {
-        let request = createRequest(url: url, type: "POST", parameters: parameters)
+    typealias PostParameters = (url: String, headers: (String?, [String: String]?)?)
+    func postRequest(with: PostParameters) -> Observable<Data> {
+        let request = createRequest(url: with.url, type: "POST", parameters: with.headers)
         return executeRequest(request: request)
     }
     

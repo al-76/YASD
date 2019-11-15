@@ -18,26 +18,30 @@ class NetworkService {
         self.network = network
     }
     
-    func getRequest(url: String) -> Observable<Data> {
+    func getRequest(url: String) -> Observable<String> {
         return cache.runAction(key: url, action: { [weak self] in
             guard let self = self else { return Observable.just(Data()) }
             return self.network.getRequest(url: url)
-        })
+        }).map { NetworkService.toString($0) }
     }
     
-    func postRequest(url: String, parameters: (String?, [String: String]?)?) -> Observable<Data> {
-        let key = postRequestKey(url: url, parameters: parameters)
+    func postRequest(with parameters: Network.PostParameters) -> Observable<String> {
+        let key = postRequestKey(parameters)
         return cache.runAction(key: key, action: { [weak self] in
             guard let self = self else { return Observable.just(Data()) }
-            return self.network.postRequest(url: url, parameters: parameters)
-        })
+            return self.network.postRequest(with: parameters)
+        }).map { NetworkService.toString($0) }
     }
     
-    private func postRequestKey(url: String, parameters: (String?, [String: String]?)?) -> String {
-        var res = url
-        if let body = parameters?.0 {
+    private func postRequestKey(_ parameters: Network.PostParameters) -> String {
+        var res = parameters.url
+        if let body = parameters.headers?.0 {
             res += body
         }
         return res
+    }
+    
+    private static func toString(_ data: Data) -> String {
+        return String(data: data, encoding: .utf8) ?? ""
     }
 }

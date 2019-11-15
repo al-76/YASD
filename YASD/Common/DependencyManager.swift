@@ -80,7 +80,7 @@ func configureService(container: Container) {
     }
     .inObjectScope(.container)
     container.register(LexinServiceProviderSuggestion.self) { _ in
-        LexinServiceProviderSuggestion(defaultParser: container.resolve(LexinSuggestionParserDefault.self)!, folketsParser: container.resolve(LexinSuggestionParserFolkets.self)!, swedishParser: container.resolve(LexinSuggestionParserDefault.self)!)
+        LexinServiceProviderSuggestion(defaultParser: container.resolve(LexinSuggestionParserDefault.self)!, folketsParser: container.resolve(LexinSuggestionParserFolkets.self)!)
     }
     .inObjectScope(.container)
     
@@ -107,7 +107,9 @@ func configureService(container: Container) {
     
     // Lexin Service
     container.register(LexinServiceSuggestion.self) { _ in
-        LexinServiceSuggestion(network: container.resolve(NetworkService.self)!)
+        LexinServiceSuggestion(network: container.resolve(NetworkService.self)!,
+                               parameters: container.resolve(LexinServiceParameters.self)!,
+                               provider: container.resolve(LexinServiceProviderSuggestion.self)!)
     }
     .inObjectScope(.container)
     container.register(LexinService.self) { _ in

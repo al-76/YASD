@@ -27,11 +27,10 @@ class LexinServiceSuggestion {
             return Observable.just(.success([nil]))
         }
         let parser = provider.getParser(language: parameters.getLanguage())
-        return network.postRequest(url: parser.getUrl(),
-                                   parameters: parser.getRequestParameters(word: word, parameters: parameters.get()))
+        return network.postRequest(with: (url: parser.getUrl(),
+                                   headers: parser.getRequestParameters(word: word, parameters: parameters.get())))
             .map { do {
-                    let text = String(data: $0, encoding: .utf8) ?? ""
-                    return try .success(parser.parse(text: text))
+                    return try .success(parser.parse(text: $0))
                 } catch let error {
                     return .failure(error)
                 }
@@ -39,31 +38,31 @@ class LexinServiceSuggestion {
     }
 }
 
-class LexinServiceAbstract<TypeProvider, TypeParser> {
-    let parameters: LexinServiceParameters
-    
-    private let network: NetworkService
-    private let provider: LexinServiceProvider<TypeProvider>
-    
-    init(network: NetworkService, parameters: LexinServiceParameters, provider: LexinServiceProvider<TypeProvider>) {
-        self.network = network
-        self.parameters = parameters
-        self.provider = provider
-    }
-
-    func search(word: String) -> Observable<LexinServiceResult> {
-        if word.isEmpty {
-            return Observable.just(.success([nil]))
-        }
-        let parser = provider.getParser(language: parameters.getLanguage())
-        return network.postRequest(url: parser.getUrl(),
-                                   parameters: parser.getRequestParameters(word: word, parameters: parameters.get()))
-            .map { do {
-                    let text = String(data: $0, encoding: .utf8) ?? ""
-                    return try .success(parser.parse(text: text))
-                } catch let error {
-                    return .failure(error)
-                }
-            }
-    }
-}
+//class LexinServiceAbstract<TypeProvider, TypeParser> {
+//    let parameters: LexinServiceParameters
+//
+//    private let network: NetworkService
+//    private let provider: LexinServiceProvider<TypeProvider>
+//
+//    init(network: NetworkService, parameters: LexinServiceParameters, provider: LexinServiceProvider<TypeProvider>) {
+//        self.network = network
+//        self.parameters = parameters
+//        self.provider = provider
+//    }
+//
+//    func search(word: String) -> Observable<LexinServiceResult> {
+//        if word.isEmpty {
+//            return Observable.just(.success([nil]))
+//        }
+//        let parser = provider.getParser(language: parameters.getLanguage())
+//        return network.postRequest(url: parser.getUrl(),
+//                                   parameters: parser.getRequestParameters(word: word, parameters: parameters.get()))
+//            .map { do {
+//                    let text = String(data: $0, encoding: .utf8) ?? ""
+//                    return try .success(parser.parse(text: text))
+//                } catch let error {
+//                    return .failure(error)
+//                }
+//            }
+//    }
+//}

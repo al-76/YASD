@@ -9,25 +9,42 @@
 import Foundation
 import UIKit
 
-protocol ProtocolLexinServiceParser {
-    associatedtype ResultType
-    
-    func getUrl() -> String
-    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?)
-    func parse(text: String) throws -> [ResultType]
-}
+//protocol ProtocolLexinServiceParser {
+//    associatedtype ResultType
+//
+//    func getUrl() -> String
+//    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?)
+//    func parse(text: String) throws -> [ResultType]
+//}
 
-class LexinServiceProvider<T: ProtocolLexinServiceParser> {
-    private let defaultParser: T//LexinServiceParser
-    private let parsers: [String: T]//LexinServiceParser]
+class LexinServiceProviderWords {
+    private let defaultParser: LexinServiceParser
+    private let parsers: [String: LexinServiceParser]
     
-    init(defaultParser: T/*LexinServiceParser*/, folketsParser: T/*LexinServiceParser*/, swedishParser: T/*LexinServiceParser*/) {
+    init(defaultParser: LexinServiceParser, folketsParser: LexinServiceParser, swedishParser: LexinServiceParser) {
         self.defaultParser = defaultParser
         self.parsers = [ "eng": folketsParser,
                         "swe": swedishParser ]
     }
     
-    func getParser(language: LexinServiceParameters.Language) -> T { //LexinServiceParser {
+    func getParser(language: LexinServiceParameters.Language) -> LexinServiceParser {
+        guard let parser = parsers[language.code] else {
+            return defaultParser
+        }
+        return parser
+    }
+}
+
+class LexinServiceProviderSuggestion {
+    private let defaultParser: LexinServiceSuggestionParser
+    private let parsers: [String: LexinServiceSuggestionParser]
+    
+    init(defaultParser: LexinServiceSuggestionParser, folketsParser: LexinServiceSuggestionParser) {
+        self.defaultParser = defaultParser
+        self.parsers = [ "eng": folketsParser ]
+    }
+    
+    func getParser(language: LexinServiceParameters.Language) -> LexinServiceSuggestionParser {
         guard let parser = parsers[language.code] else {
             return defaultParser
         }

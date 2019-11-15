@@ -9,7 +9,7 @@
 import RxSwift
 import Foundation
 
-class LexinServiceParameters : SearchServiceParameters {
+class LexinServiceParameters {
     public static let supportedLanguages = [
         Language(name: "albanska", code: "alb"),
         Language(name: "amhariska", code: "amh"),
@@ -107,33 +107,30 @@ struct LexinServiceResultItem {
     var lexemes: [Lang]?
 }
 
-typealias LexinService = SearchService<LexinServiceParameters>
+class LexinService {
+    let parameters: LexinServiceParameters
 
-//class LexinService {
-//    let parameters: LexinServiceParameters
-//
-//    private let network: NetworkService
-//    private let provider: LexinServiceProviderWords
-//
-//    init(network: NetworkService, parameters: LexinServiceParameters, provider: LexinServiceProviderWords) {
-//        self.network = network
-//        self.parameters = parameters
-//        self.provider = provider
-//    }
-//
-//    func search(word: String) -> Observable<LexinServiceResult> {
-//        if word.isEmpty {
-//            return Observable<LexinServiceResult>.just(.success([]))
-//        }
-//        let parser = provider.getParser(language: parameters.getLanguage())
-//        return network.postRequest(url: parser.getUrl(),
-//                                   parameters: parser.getRequestParameters(word: word, parameters: parameters.get()))
-//            .map { do {
-//                    let text = String(data: $0, encoding: .utf8) ?? ""
-//                    return try .success(parser.parse(text: text))
-//                } catch let error {
-//                    return .failure(error)
-//                }
-//            }
-//    }
-//}
+    private let network: NetworkService
+    private let provider: LexinServiceProviderWords
+
+    init(network: NetworkService, parameters: LexinServiceParameters, provider: LexinServiceProviderWords) {
+        self.network = network
+        self.parameters = parameters
+        self.provider = provider
+    }
+
+    func search(word: String) -> Observable<LexinServiceResult> {
+        if word.isEmpty {
+            return Observable<LexinServiceResult>.just(.success([]))
+        }
+        let parser = provider.getParser(language: parameters.getLanguage())
+        return network.postRequest(with: (url: parser.getUrl(),
+                                   headers: parser.getRequestHeaders(word: word, parameters: parameters.get())))
+            .map { do {
+                    return try .success(parser.parse(text: $0))
+                } catch let error {
+                    return .failure(error)
+                }
+            }
+    }
+}
