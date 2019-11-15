@@ -11,8 +11,9 @@ import UIKit
 //typealias LexinServiceProviderWords = LexinServiceProvider<ProtocolLexinServiceParser>
 
 protocol LexinServiceParser {
-    func getUrl() -> String
-    func getRequestHeaders(word: String, parameters: String) -> (String?, [String: String]?)
+//    func getUrl() -> String
+//    func getRequestHeaders(word: String, parameters: String) -> (String?, [String: String]?)
+    func getRequestParameters(word: String, language: String) -> Network.PostParameters
     func parse(text: String) throws -> [LexinServiceResultItem]
 }
 
@@ -31,13 +32,17 @@ class LexinServiceParserDefault : LexinServiceParser {
         self.htmlParser = htmlParser
     }
     
-    func getUrl() -> String {
+    func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+        return (url: getUrl(), headers: getRequestHeaders(word, language))
+    }
+    
+    private func getUrl() -> String {
         return LexinServiceParserDefault.URL + "lookupword"
     }
     
-    func getRequestHeaders(word: String, parameters: String) -> (String?, [String: String]?) {
+    private func getRequestHeaders(_ word: String, _ language: String) -> (String?, [String: String]?) {
         let body = "7|0|7|" + LexinServiceParserDefault.URL + "|FCDCCA88916BAACF8B03FB48D294BA89|se.jojoman.lexin.lexingwt.client.LookUpService|lookUpWord|se.jojoman.lexin.lexingwt.client.LookUpRequest/682723451|" +
-            parameters + "|" +
+            language + "|" +
             word + "|1|2|3|4|1|5|5|1|6|0|7|"
         let headers = [ "Content-Type": "text/x-gwt-rpc;charset=UTF-8",
                         "X-GWT-Module-Base": LexinServiceParserDefault.URL,
@@ -180,11 +185,15 @@ class LexinServiceParserFolkets : LexinServiceParser {
         self.htmlParser = htmlParser
     }
     
-    func getUrl() -> String {
+    func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+        return (url: getUrl(), headers: getRequestHeaders(word, language))
+    }
+    
+    private func getUrl() -> String {
         return LexinServiceParserFolkets.URL + "lookupword"
     }
     
-    func getRequestHeaders(word: String, parameters: String) -> (String?, [String: String]?) {
+    private func getRequestHeaders(_ word: String, _ language: String) -> (String?, [String: String]?) {
         let body = "7|0|6|" + LexinServiceParserFolkets.URL + "|1F6DF5ACEAE7CE88AACB1E5E4208A6EC|se.algoritmica.folkets.client.LookUpService|lookUpWord|se.algoritmica.folkets.client.LookUpRequest/1089007912|" +
             word.lowercased() + "|1|2|3|4|1|5|5|1|0|0|6|"
         let headers = [ "Content-Type": "text/x-gwt-rpc;charset=UTF-8",

@@ -9,6 +9,6 @@
 import RxSwift
 
 protocol LexinApi {
-    func search(word: String, add: String) -> Observable<LexinServiceResult>
-    func suggestion(word: String, add: String) -> Observable<LexinServiceSuggestionResult>
+    func search(word: String, language: String) -> Observable<LexinServiceResult>
+    func suggestion(word: String, language: String) -> Observable<LexinServiceSuggestionResult>
 }

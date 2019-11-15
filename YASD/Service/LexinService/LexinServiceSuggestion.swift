@@ -27,8 +27,7 @@ class LexinServiceSuggestion {
             return Observable.just(.success([nil]))
         }
         let parser = provider.getParser(language: parameters.getLanguage())
-        return network.postRequest(with: (url: parser.getUrl(),
-                                   headers: parser.getRequestParameters(word: word, parameters: parameters.get())))
+        return network.postRequest(with: parser.getRequestParameters(word: word, language: parameters.getLanguageString()))
             .map { do {
                     return try .success(parser.parse(text: $0))
                 } catch let error {

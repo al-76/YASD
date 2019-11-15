@@ -19,13 +19,12 @@ class LexinApiDefault : LexinApi {
         self.parserSuggestions = parserSuggestions
     }
     
-    func search(word: String, add: String) -> Observable<LexinServiceResult> {
+    func search(word: String, language: String) -> Observable<LexinServiceResult> {
         if word.isEmpty {
             return Observable<LexinServiceResult>.just(.success([]))
         }
         
-        let parameters = (url: parserWords.getUrl(),
-                          headers: parserWords.getRequestHeaders(word: word, parameters: add))
+        let parameters = parserWords.getRequestParameters(word: word, language: language)
         return network.postRequest(with: parameters).map { [weak self] result in
             guard let self = self else { return .success([]) }
             do {
@@ -36,13 +35,12 @@ class LexinApiDefault : LexinApi {
         }
     }
     
-    func suggestion(word: String, add: String) -> Observable<LexinServiceSuggestionResult> {
+    func suggestion(word: String, language: String) -> Observable<LexinServiceSuggestionResult> {
         if word.isEmpty {
                 return Observable.just(.success([]))
         }
         
-        let parameters = (url: parserSuggestions.getUrl(),
-                          headers: parserSuggestions.getRequestParameters(word: word, parameters: add))
+        let parameters = parserSuggestions.getRequestParameters(word: word, language: language)
         return network.postRequest(with: parameters).map { [weak self] result in
             guard let self = self else { return .success([]) }
             do {
