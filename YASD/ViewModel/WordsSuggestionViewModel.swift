@@ -10,18 +10,18 @@ import RxSwift
 import RxCocoa
 
 class WordsSuggestionViewModel: ViewModel {
-    private let suggestion: LexinServiceSuggestion
+    private let lexin: LexinService
 
     struct Input {
         let searchBar: Driver<String>
     }
 
     struct Output {
-        let suggestions: Driver<LexinServiceSuggestionResult>
+        let suggestions: Driver<LexinParserSuggestionResult>
     }
     
-    init(suggestion: LexinServiceSuggestion) {
-        self.suggestion = suggestion
+    init(lexin: LexinService) {
+        self.lexin = lexin
     }
     
     func transform(input: Input) -> Output {
@@ -31,7 +31,7 @@ class WordsSuggestionViewModel: ViewModel {
         })
     }
     
-    private func suggest(word: String) -> Driver<LexinServiceSuggestionResult> {
-        return suggestion.suggest(word: word).asDriver { Driver.just(.failure($0)) }
+    private func suggest(word: String) -> Driver<LexinParserSuggestionResult> {
+        return lexin.suggest(word: word).asDriver { Driver.just(.failure($0)) }
     }
 }

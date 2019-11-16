@@ -1847,7 +1847,7 @@ import UIKit
     
     
     
-     override func getParser(language: LexinServiceParameters.Language) -> LexinServiceParser {
+     override func getParser(language: LexinServiceParameters.Language) -> LexinParserWords {
         
     return cuckoo_manager.call("getParser(language: LexinServiceParameters.Language) -> LexinServiceParser",
             parameters: (language),
@@ -1869,7 +1869,7 @@ import UIKit
 	    }
 	    
 	    
-	    func getParser<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.ClassStubFunction<(LexinServiceParameters.Language), LexinServiceParser> where M1.MatchedType == LexinServiceParameters.Language {
+	    func getParser<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.ClassStubFunction<(LexinServiceParameters.Language), LexinParserWords> where M1.MatchedType == LexinServiceParameters.Language {
 	        let matchers: [Cuckoo.ParameterMatcher<(LexinServiceParameters.Language)>] = [wrap(matchable: language) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinServiceProvider.self, method: "getParser(language: LexinServiceParameters.Language) -> LexinServiceParser", parameterMatchers: matchers))
 	    }
@@ -1891,7 +1891,7 @@ import UIKit
 	
 	    
 	    @discardableResult
-	    func getParser<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.__DoNotUse<(LexinServiceParameters.Language), LexinServiceParser> where M1.MatchedType == LexinServiceParameters.Language {
+	    func getParser<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.__DoNotUse<(LexinServiceParameters.Language), LexinParserWords> where M1.MatchedType == LexinServiceParameters.Language {
 	        let matchers: [Cuckoo.ParameterMatcher<(LexinServiceParameters.Language)>] = [wrap(matchable: language) { $0 }]
 	        return cuckoo_manager.verify("getParser(language: LexinServiceParameters.Language) -> LexinServiceParser", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
@@ -1905,17 +1905,17 @@ import UIKit
     
 
     
-     override func getParser(language: LexinServiceParameters.Language) -> LexinServiceParser  {
-        return DefaultValueRegistry.defaultValue(for: (LexinServiceParser).self)
+     override func getParser(language: LexinServiceParameters.Language) -> LexinParserWords  {
+        return DefaultValueRegistry.defaultValue(for: (LexinParserWords).self)
     }
     
 }
 
 
 
- class MockLexinServiceParser: LexinServiceParser, Cuckoo.ProtocolMock {
+ class MockLexinServiceParser: LexinParserWords, Cuckoo.ProtocolMock {
     
-     typealias MocksType = LexinServiceParser
+     typealias MocksType = LexinParserWords
     
      typealias Stubbing = __StubbingProxy_LexinServiceParser
      typealias Verification = __VerificationProxy_LexinServiceParser
@@ -1923,9 +1923,9 @@ import UIKit
      let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
 
     
-    private var __defaultImplStub: LexinServiceParser?
+    private var __defaultImplStub: LexinParserWords?
 
-     func enableDefaultImplementation(_ stub: LexinServiceParser) {
+     func enableDefaultImplementation(_ stub: LexinParserWords) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
@@ -2042,7 +2042,7 @@ import UIKit
 	}
 }
 
- class LexinServiceParserStub: LexinServiceParser {
+ class LexinServiceParserStub: LexinParserWords {
     
 
     

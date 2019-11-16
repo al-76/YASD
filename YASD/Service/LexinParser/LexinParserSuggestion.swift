@@ -8,15 +8,16 @@
 
 import UIKit
 
-protocol LexinServiceSuggestionParser {
-//    func getUrl() -> String
-//    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?)
+typealias LexinParserSuggestionResultItem = String?
+typealias LexinParserSuggestionResult = Result<[LexinParserSuggestionResultItem]>
+
+protocol LexinParserSuggestion {
     func getRequestParameters(word: String, language: String) -> Network.PostParameters
-    func parse(text: String) throws -> [LexinServiceSuggestionResultItem]
+    func parse(text: String) throws -> [LexinParserSuggestionResultItem]
 }
 
-extension LexinServiceSuggestionParser {
-    func parse(text: String) throws -> [LexinServiceSuggestionResultItem] {
+extension LexinParserSuggestion {
+    func parse(text: String) throws -> [LexinParserSuggestionResultItem] {
         let index = text.firstIndex(of: "\"") ?? text.startIndex
         let res = text[index...]
             .replacingOccurrences(of: "],0,7]", with: "")
@@ -31,7 +32,7 @@ extension LexinServiceSuggestionParser {
 }
 
 // Default Lexin
-class LexinSuggestionParserDefault : LexinServiceSuggestionParser {
+class LexinParserSuggestionDefault : LexinParserSuggestion {
     private static let URL = "https://lexin.nada.kth.se/lexin/lexin/"
 
     func getRequestParameters(word: String, language: String) -> Network.PostParameters {
@@ -39,19 +40,19 @@ class LexinSuggestionParserDefault : LexinServiceSuggestionParser {
     }
     
     private func getUrl() -> String {
-        return LexinSuggestionParserDefault.URL + "generatecompletion"
+        return LexinParserSuggestionDefault.URL + "generatecompletion"
     }
 
     private func getRequestHeaders(_ word: String, _ language: String) -> (String?, [String : String]?) {
-        let body = "7|0|8|" + LexinSuggestionParserDefault.URL +  "|CA6A42B3B5F751C0CF9E859210723485|se.jojoman.lexin.lexingwt.client.CompletionService|getSuggestions|se.jojoman.lexin.lexingwt.client.CompletionRequest/881062947|" + language +  "|com.google.gwt.user.client.ui.SuggestOracle$Request/3707347745|" + word.lowercased() + "|1|2|3|4|1|5|5|6|0|7|5|8|"
+        let body = "7|0|8|" + LexinParserSuggestionDefault.URL +  "|CA6A42B3B5F751C0CF9E859210723485|se.jojoman.lexin.lexingwt.client.CompletionService|getSuggestions|se.jojoman.lexin.lexingwt.client.CompletionRequest/881062947|" + language +  "|com.google.gwt.user.client.ui.SuggestOracle$Request/3707347745|" + word.lowercased() + "|1|2|3|4|1|5|5|6|0|7|5|8|"
         let headers = [ "Content-Type": "text/x-gwt-rpc;charset=UTF-8",
-                        "X-GWT-Module-Base": LexinSuggestionParserDefault.URL,
+                        "X-GWT-Module-Base": LexinParserSuggestionDefault.URL,
                         "X-GWT-Permutation": "40C84AD510047132F939801CA3CEBA81" ]
         return (body, headers)
     }
 }
 
-class LexinSuggestionParserFolkets : LexinServiceSuggestionParser {
+class LexinParserSuggestionFolkets : LexinParserSuggestion {
     private static let URL = "https://folkets-lexikon.csc.kth.se/folkets/folkets/"
 
     func getRequestParameters(word: String, language: String) -> Network.PostParameters {
@@ -59,14 +60,14 @@ class LexinSuggestionParserFolkets : LexinServiceSuggestionParser {
     }
     
     private func getUrl() -> String {
-        return LexinSuggestionParserFolkets.URL + "generatecompletion"
+        return LexinParserSuggestionFolkets.URL + "generatecompletion"
     }
     
     private func getRequestHeaders(_ word: String, _ language: String) -> (String?, [String : String]?) {
-        let body = "7|0|7|" + LexinSuggestionParserFolkets.URL + "|72408650102EFF3C0092D16FF6C6E52F|se.algoritmica.folkets.client.ItemSuggestService|getSuggestions|se.algoritmica.folkets.client.ProposalRequest/3613917143|com.google.gwt.user.client.ui.SuggestOracle$Request/3707347745|" + word.lowercased() + "|1|2|3|4|1|5|5|0|6|5|7|"
+        let body = "7|0|7|" + LexinParserSuggestionFolkets.URL + "|72408650102EFF3C0092D16FF6C6E52F|se.algoritmica.folkets.client.ItemSuggestService|getSuggestions|se.algoritmica.folkets.client.ProposalRequest/3613917143|com.google.gwt.user.client.ui.SuggestOracle$Request/3707347745|" + word.lowercased() + "|1|2|3|4|1|5|5|0|6|5|7|"
         
         let headers = [ "Content-Type": "text/x-gwt-rpc;charset=UTF-8",
-                        "X-GWT-Module-Base": LexinSuggestionParserFolkets.URL,
+                        "X-GWT-Module-Base": LexinParserSuggestionFolkets.URL,
                         "X-GWT-Permutation": "4D1B9CF6325020F77FB7233CD72CF011" ]
         return (body, headers)
     }

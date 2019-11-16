@@ -79,57 +79,32 @@ extension LexinServiceParameters.Language: Equatable {
     }
 }
 
-typealias LexinServiceResult = Result<[LexinServiceResultItem]>
-
-struct LexinServiceResultItem {
-    struct Item {
-        var id: String
-        var value: String
-    }
-    struct Lang {
-        var meaning: String?
-        var phonetic: String?
-        var inflection: [String?]?
-        var grammar: String?
-        var example: [Item]?
-        var idiom: [Item]?
-        var compound: [Item]?
-        var translation: String?
-        var reference: String?
-        var synonym: [String?]?
-        var soundUrl: String?
-    }
-    
-    var word: String
-    var type: String?
-    var baseLang: Lang?
-    var targetLang: Lang?
-    var lexemes: [Lang]?
-}
-
 class LexinService {
-    let parameters: LexinServiceParameters
+    private let formatter: LexinServiceFormatter
+    private let parameters: LexinServiceParameters
+    private let provider: LexinApiProvider
 
-    private let network: NetworkService
-    private let provider: LexinServiceProviderWords
-
-    init(network: NetworkService, parameters: LexinServiceParameters, provider: LexinServiceProviderWords) {
-        self.network = network
+    init(formatter: LexinServiceFormatter, parameters: LexinServiceParameters, provider: LexinApiProvider) {
+        self.formatter = formatter
         self.parameters = parameters
         self.provider = provider
     }
 
-    func search(word: String) -> Observable<LexinServiceResult> {
-        if word.isEmpty {
-            return Observable<LexinServiceResult>.just(.success([]))
+    func search(word: String) -> Observable<LexinServiceResultFormatted> {
+        return provider.getApi(language: parameters.getLanguage())
+            .search(word: word, language: parameters.getLanguageString())
+            .map { [weak self] result in
+                guard let self = self else { return .success([]) }
+                return self.formatter.format(result: result)
         }
-        let parser = provider.getParser(language: parameters.getLanguage())
-        return network.postRequest(with: parser.getRequestParameters(word: word, language: parameters.getLanguageString()))
-            .map { do {
-                    return try .success(parser.parse(text: $0))
-                } catch let error {
-                    return .failure(error)
-                }
-            }
+    }
+    
+    func suggest(word: String) -> Observable<LexinParserSuggestionResult> {
+        return provider.getApi(language: parameters.getLanguage())
+            .suggestion(word: word, language: parameters.getLanguageString())
+    }
+    
+    func language() -> BehaviorSubject<LexinServiceParameters.Language> {
+        return parameters.language
     }
 }

@@ -8,20 +8,20 @@
 
 import RxSwift
 
-class LexinApiDefault : LexinApi {
+class LexinApi {
     private let network: NetworkService
-    private let parserWords: LexinServiceParser
-    private let parserSuggestions: LexinServiceSuggestionParser
+    private let parserWords: LexinParserWords
+    private let parserSuggestions: LexinParserSuggestion
     
-    init(network: NetworkService, parserWords: LexinServiceParser, parserSuggestions: LexinServiceSuggestionParser) {
+    init(network: NetworkService, parserWords: LexinParserWords, parserSuggestions: LexinParserSuggestion) {
         self.network = network
         self.parserWords = parserWords
         self.parserSuggestions = parserSuggestions
     }
     
-    func search(word: String, language: String) -> Observable<LexinServiceResult> {
+    func search(word: String, language: String) -> Observable<LexinParserWordsResult> {
         if word.isEmpty {
-            return Observable<LexinServiceResult>.just(.success([]))
+            return Observable<LexinParserWordsResult>.just(.success([]))
         }
         
         let parameters = parserWords.getRequestParameters(word: word, language: language)
@@ -35,7 +35,7 @@ class LexinApiDefault : LexinApi {
         }
     }
     
-    func suggestion(word: String, language: String) -> Observable<LexinServiceSuggestionResult> {
+    func suggestion(word: String, language: String) -> Observable<LexinParserSuggestionResult> {
         if word.isEmpty {
                 return Observable.just(.success([]))
         }
