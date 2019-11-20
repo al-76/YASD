@@ -51,7 +51,7 @@ class LexinServiceParameters {
         load()
     }
     
-   private func load() {
+    private func load() {
         setLanguage(language: storage.get(id: "language", defaultObject: getLanguage()))
     }
     
@@ -80,23 +80,17 @@ extension LexinServiceParameters.Language: Equatable {
 }
 
 class LexinService {
-    private let formatter: LexinServiceFormatter
     private let parameters: LexinServiceParameters
     private let provider: LexinApiProvider
 
-    init(formatter: LexinServiceFormatter, parameters: LexinServiceParameters, provider: LexinApiProvider) {
-        self.formatter = formatter
+    init(parameters: LexinServiceParameters, provider: LexinApiProvider) {
         self.parameters = parameters
         self.provider = provider
     }
 
-    func search(word: String) -> Observable<LexinServiceResultFormatted> {
+    func search(word: String) -> Observable<LexinParserWordsResult> {
         return provider.getApi(language: parameters.getLanguage())
             .search(word: word, language: parameters.getLanguageString())
-            .map { [weak self] result in
-                guard let self = self else { return .success([]) }
-                return self.formatter.format(result: result)
-        }
     }
     
     func suggest(word: String) -> Observable<LexinParserSuggestionResult> {

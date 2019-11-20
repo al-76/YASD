@@ -11,6 +11,7 @@ import RxCocoa
 
 class WordsViewModel: ViewModel {
     private let lexin: LexinService
+    private let formatter: LexinServiceFormatter
     private let player: PlayerService
     private var lastWord = ""
     
@@ -22,8 +23,9 @@ class WordsViewModel: ViewModel {
         let foundWords: Driver<LexinServiceResultFormatted>
     }
     
-    init(lexin: LexinService, player: PlayerService) {
+    init(lexin: LexinService, formatter: LexinServiceFormatter, player: PlayerService) {
         self.lexin = lexin
+        self.formatter = formatter
         self.player = player
     }
     
@@ -50,6 +52,10 @@ class WordsViewModel: ViewModel {
     }
     
     private func searchWord(word: String) -> Driver<LexinServiceResultFormatted> {
-        return lexin.search(word: word).asDriver { Driver.just(.failure($0)) }
+        return lexin.search(word: word)
+            .map { [weak self] result in
+                guard let self = self else { return .success([]) }
+                return self.formatter.format(result: result) }
+            .asDriver { Driver.just(.failure($0)) }
     }
 }

@@ -118,8 +118,7 @@ func configureService(container: Container) {
     
     // Lexin Service
     container.register(LexinService.self) { _ in
-        LexinService(formatter: container.resolve(LexinServiceFormatter.self)!,
-                     parameters: container.resolve(LexinServiceParameters.self)!,
+        LexinService(parameters: container.resolve(LexinServiceParameters.self)!,
                      provider: container.resolve(LexinApiProvider.self)!)
     }
     .inObjectScope(.container)
@@ -133,6 +132,7 @@ func configureModel(container: Container) {
     
     container.register(WordsViewModel.self) { container in
         WordsViewModel(lexin: container.resolve(LexinService.self)!,
+                       formatter: container.resolve(LexinServiceFormatter.self)!,
                        player: container.resolve(PlayerService.self)!)
     }
     .inObjectScope(.container)

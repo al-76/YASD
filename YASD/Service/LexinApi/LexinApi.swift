@@ -1,5 +1,5 @@
 //
-//  LexinApiDefault.swift
+//  LexinApi.swift
 //  YASD
 //
 //  Created by Vyacheslav Konopkin on 15.11.2019.
