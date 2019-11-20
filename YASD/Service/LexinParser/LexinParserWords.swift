@@ -1,40 +1,48 @@
 //
-//  LexinServiceProvider.swift
+//  LexinServiceProviderWords.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 13/08/2019.
+//  Created by Vyacheslav Konopkin on 15.10.2019.
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class LexinServiceProvider {
-    private let defaultParser: LexinServiceParser
-    private let parsers: [String: LexinServiceParser]
-    
-    init(defaultParser: LexinServiceParser, folketsParser: LexinServiceParser, swedishParser: LexinServiceParser) {
-        self.defaultParser = defaultParser
-        self.parsers = [ "eng": folketsParser,
-                        "swe": swedishParser ]
+typealias LexinParserWordsResult = Result<[LexinParserWordsResultItem]>
+
+struct LexinParserWordsResultItem {
+    struct Item {
+        var id: String
+        var value: String
+    }
+    struct Lang {
+        var meaning: String?
+        var phonetic: String?
+        var inflection: [String?]?
+        var grammar: String?
+        var example: [Item]?
+        var idiom: [Item]?
+        var compound: [Item]?
+        var translation: String?
+        var reference: String?
+        var synonym: [String?]?
+        var soundUrl: String?
     }
     
-    func getParser(language: LexinServiceParameters.Language) -> LexinServiceParser {
-        guard let parser = parsers[language.code] else {
-            return defaultParser
-        }
-        return parser
-    }
+    var word: String
+    var type: String?
+    var baseLang: Lang?
+    var targetLang: Lang?
+    var lexemes: [Lang]?
 }
 
-protocol LexinServiceParser {
-    func getUrl() -> String
-    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?)
-    func parseHtml(text: String) throws -> [LexinServiceResultItem]
+protocol LexinParserWords {
+    func getRequestParameters(word: String, language: String) -> Network.PostParameters
+    func parse(text: String) throws -> [LexinParserWordsResultItem]
 }
 
 // Default Lexin
-class LexinServiceParserDefault : LexinServiceParser {
+class LexinParserWordsDefault : LexinParserWords {
     private static let URL = "https://lexin.nada.kth.se/lexin/lexin/"
     private static let SOUND_URL = "https://lexin.nada.kth.se/sound/"
     
@@ -44,27 +52,31 @@ class LexinServiceParserDefault : LexinServiceParser {
         self.htmlParser = htmlParser
     }
     
-    func getUrl() -> String {
-        return LexinServiceParserDefault.URL + "lookupword"
+    func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+        return (url: getUrl(), headers: getRequestHeaders(word, language))
     }
     
-    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?) {
-        let body = "7|0|7|" + LexinServiceParserDefault.URL + "|FCDCCA88916BAACF8B03FB48D294BA89|se.jojoman.lexin.lexingwt.client.LookUpService|lookUpWord|se.jojoman.lexin.lexingwt.client.LookUpRequest/682723451|" +
-            parameters + "|" +
+    private func getUrl() -> String {
+        return LexinParserWordsDefault.URL + "lookupword"
+    }
+    
+    private func getRequestHeaders(_ word: String, _ language: String) -> (String?, [String: String]?) {
+        let body = "7|0|7|" + LexinParserWordsDefault.URL + "|FCDCCA88916BAACF8B03FB48D294BA89|se.jojoman.lexin.lexingwt.client.LookUpService|lookUpWord|se.jojoman.lexin.lexingwt.client.LookUpRequest/682723451|" +
+            language + "|" +
             word + "|1|2|3|4|1|5|5|1|6|0|7|"
         let headers = [ "Content-Type": "text/x-gwt-rpc;charset=UTF-8",
-                        "X-GWT-Module-Base": LexinServiceParserDefault.URL,
+                        "X-GWT-Module-Base": LexinParserWordsDefault.URL,
                         "X-GWT-Permutation": "28B9DF7353B58D7F508C74030B83DEAE" ]
         return (body, headers)
     }
     
-    func parseHtml(text: String) throws -> [LexinServiceResultItem] {
-        return try htmlParser.parse(html: text, query: "Word").map { word -> LexinServiceResultItem in
-                let baseLang = try LexinServiceParserDefault.parseLang(root: "BaseLang > ", element: word)
-                let targetLang = try LexinServiceParserDefault.parseLang(root: "TargetLang > ", element: word)
+    func parse(text: String) throws -> [LexinParserWordsResultItem] {
+        return try htmlParser.parse(html: text, query: "Word").map { word -> LexinParserWordsResultItem in
+                let baseLang = try LexinParserWordsDefault.parseLang(root: "BaseLang > ", element: word)
+                let targetLang = try LexinParserWordsDefault.parseLang(root: "TargetLang > ", element: word)
                 let value = (try word.attribute("Value")).removeQuotes()
                 let type = (try word.attribute("Type")).removeQuotes()
-                return LexinServiceResultItem(word: value,
+                return LexinParserWordsResultItem(word: value,
                                               type: type,
                                               baseLang: baseLang,
                                               targetLang: targetLang,
@@ -72,8 +84,8 @@ class LexinServiceParserDefault : LexinServiceParser {
         }
     }
     
-    fileprivate static func parseLang(root: String, element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
-        return LexinServiceResultItem.Lang(meaning: try parseMeaning(root: root, element: element),
+    fileprivate static func parseLang(root: String, element: HtmlParserElement) throws -> LexinParserWordsResultItem.Lang {
+        return LexinParserWordsResultItem.Lang(meaning: try parseMeaning(root: root, element: element),
                                            phonetic: parsePhonetic(phonetic: (try? element.selectText(root + "Phonetic")) ?? ""),
                     inflection: try? element.selectTexts(root + "Inflection"),
                     grammar: try? element.selectText(root + "Graminfo"),
@@ -111,25 +123,25 @@ class LexinServiceParserDefault : LexinServiceParser {
     }
 }
 
-class LexinServiceParserSwedish : LexinServiceParserDefault {
-    override func parseHtml(text: String) throws -> [LexinServiceResultItem] {
+class LexinParserWordsSwedish : LexinParserWordsDefault {
+    override func parse(text: String) throws -> [LexinParserWordsResultItem] {
         return try htmlParser.parse(html: text.replacingOccurrences(of: "\\n", with: ""), query: "Lemma")
-            .map { word ->LexinServiceResultItem in
+            .map { word ->LexinParserWordsResultItem in
             let value = (try word.attribute("Value")).removeQuotes()
             let type = (try word.attribute("Type")).removeQuotes()
-            let lexems = try LexinServiceParserSwedish.parseLexems(id: "Lexeme", element: word)
-            return LexinServiceResultItem(word: value, type: type, baseLang: nil, targetLang: nil, lexemes: lexems)
+            let lexems = try LexinParserWordsSwedish.parseLexems(id: "Lexeme", element: word)
+            return LexinParserWordsResultItem(word: value, type: type, baseLang: nil, targetLang: nil, lexemes: lexems)
         }
     }
     
-    private static func parseLexems(id: String, element: HtmlParserElement) throws -> [LexinServiceResultItem.Lang] {
+    private static func parseLexems(id: String, element: HtmlParserElement) throws -> [LexinParserWordsResultItem.Lang] {
         let phonetic = parsePhonetic(phonetic: try element.selectText("Phonetic"))
         var soundUrl: String? = nil
         if let phoneticElement = try element.selectElements("Phonetic").first {
             soundUrl = try parseSoundUrl(root: "", element: phoneticElement)
         }
         let inflection = try element.selectTexts("Inflection")
-        var langs: [LexinServiceResultItem.Lang] = try element.selectElements(id).map {
+        var langs: [LexinParserWordsResultItem.Lang] = try element.selectElements(id).map {
             var lang = try parseLang(root: "", element: $0)
             lang.phonetic = phonetic
             lang.inflection = inflection
@@ -138,17 +150,17 @@ class LexinServiceParserSwedish : LexinServiceParserDefault {
         }
         if langs.isEmpty {
             let reference = try? parseReference(root: "", element: element)
-            langs.append(LexinServiceResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: inflection, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil, soundUrl: soundUrl))
+            langs.append(LexinParserWordsResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: inflection, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil, soundUrl: soundUrl))
         }
         return langs
     }
 }
 
 private extension HtmlParserElement {
-    func selectLexinServiceResultItems(_ query: String) throws -> [LexinServiceResultItem.Item] {
+    func selectLexinServiceResultItems(_ query: String) throws -> [LexinParserWordsResultItem.Item] {
         return try selectElements(query).map { element in
             let value = try element.text()
-            return LexinServiceResultItem.Item(id: try element.attribute("ID"),
+            return LexinParserWordsResultItem.Item(id: try element.attribute("ID"),
                                         value: (value == "") ? try element.attribute("value") : value) }
     }
     
@@ -173,7 +185,7 @@ private extension String {
 }
 
 // Folkets Lexikon
-class LexinServiceParserFolkets : LexinServiceParser {
+class LexinParserWordsFolkets : LexinParserWords {
     private static let URL = "https://folkets-lexikon.csc.kth.se/folkets/folkets/"
     private static let SOUND_URL = "https://lexin.nada.kth.se/sound/"
     private static let wordTypes = [ "ab": "adv.",
@@ -193,30 +205,34 @@ class LexinServiceParserFolkets : LexinServiceParser {
         self.htmlParser = htmlParser
     }
     
-    func getUrl() -> String {
-        return LexinServiceParserFolkets.URL + "lookupword"
+    func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+        return (url: getUrl(), headers: getRequestHeaders(word, language))
     }
     
-    func getRequestParameters(word: String, parameters: String) -> (String?, [String: String]?) {
-        let body = "7|0|6|" + LexinServiceParserFolkets.URL + "|1F6DF5ACEAE7CE88AACB1E5E4208A6EC|se.algoritmica.folkets.client.LookUpService|lookUpWord|se.algoritmica.folkets.client.LookUpRequest/1089007912|" +
+    private func getUrl() -> String {
+        return LexinParserWordsFolkets.URL + "lookupword"
+    }
+    
+    private func getRequestHeaders(_ word: String, _ language: String) -> (String?, [String: String]?) {
+        let body = "7|0|6|" + LexinParserWordsFolkets.URL + "|1F6DF5ACEAE7CE88AACB1E5E4208A6EC|se.algoritmica.folkets.client.LookUpService|lookUpWord|se.algoritmica.folkets.client.LookUpRequest/1089007912|" +
             word.lowercased() + "|1|2|3|4|1|5|5|1|0|0|6|"
         let headers = [ "Content-Type": "text/x-gwt-rpc;charset=UTF-8",
                         "Proxy-Authorization": "Basic cm9ib3QuYWw3NkBnbWFpbC5jb206M2FUOURLeXlYTGlNSG82aE51WFQ=",
                         "Referer" : "https://folkets-lexikon.csc.kth.se/folkets",
-                        "X-GWT-Module-Base": LexinServiceParserFolkets.URL,
+                        "X-GWT-Module-Base": LexinParserWordsFolkets.URL,
                         "X-GWT-Permutation": "B3C49266B86D6B1708051F4318E5E0D1" ]
         return (body, headers)
     }
     
-    func parseHtml(text: String) throws -> [LexinServiceResultItem] {
+    func parse(text: String) throws -> [LexinParserWordsResultItem] {
         return try htmlParser.parse(html: text.replacingOccurrences(of: "\\", with: ""),
                                     query: "word")
-            .map { word ->LexinServiceResultItem in
+            .map { word ->LexinParserWordsResultItem in
             let value = (try word.attribute("value")).removeQuotes()
-            let type = LexinServiceParserFolkets.parseType(type: (try word.attribute("class")).removeQuotes())
-            let baseLang = try LexinServiceParserFolkets.parseLang(element: word)
-            let targetLang = try LexinServiceParserFolkets.parseTranslatedLang(element: word)
-            return LexinServiceResultItem(word: value, type: type, baseLang: baseLang, targetLang: targetLang, lexemes: nil)
+            let type = LexinParserWordsFolkets.parseType(type: (try word.attribute("class")).removeQuotes())
+            let baseLang = try LexinParserWordsFolkets.parseLang(element: word)
+            let targetLang = try LexinParserWordsFolkets.parseTranslatedLang(element: word)
+            return LexinParserWordsResultItem(word: value, type: type, baseLang: baseLang, targetLang: targetLang, lexemes: nil)
         }
     }
     
@@ -224,8 +240,8 @@ class LexinServiceParserFolkets : LexinServiceParser {
         return wordTypes[type] ?? type
     }
     
-    private static func parseLang(element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
-        let lang = LexinServiceResultItem.Lang(meaning: try? element.selectValue("definition"),
+    private static func parseLang(element: HtmlParserElement) throws -> LexinParserWordsResultItem.Lang {
+        let lang = LexinParserWordsResultItem.Lang(meaning: try? element.selectValue("definition"),
                                                phonetic: parsePhonetic(phonetic: (try? element.selectValue("phonetic")) ?? ""),
                                            inflection: try? element.selectValues( "inflection"),
                                            grammar: try? element.selectValue("graminfo"),
@@ -239,10 +255,10 @@ class LexinServiceParserFolkets : LexinServiceParser {
         return lang
     }
     
-    private static func parseTranslatedLang(element: HtmlParserElement) throws -> LexinServiceResultItem.Lang {
+    private static func parseTranslatedLang(element: HtmlParserElement) throws -> LexinParserWordsResultItem.Lang {
         let example = try element.selectElements("example")
-            .map { LexinServiceResultItem.Item(id: try $0.attribute("id"), value: (try $0.selectValue("translation") ?? "")) }
-        let lang = LexinServiceResultItem.Lang(meaning: nil, phonetic: nil, inflection: nil, grammar: nil, example: example, idiom: nil, compound: nil, translation: nil, reference: nil, synonym: nil, soundUrl: nil)
+            .map { LexinParserWordsResultItem.Item(id: try $0.attribute("id"), value: (try $0.selectValue("translation") ?? "")) }
+        let lang = LexinParserWordsResultItem.Lang(meaning: nil, phonetic: nil, inflection: nil, grammar: nil, example: example, idiom: nil, compound: nil, translation: nil, reference: nil, synonym: nil, soundUrl: nil)
         return lang
     }
     
@@ -293,4 +309,3 @@ private extension String {
         return self[range]
     }
 }
-

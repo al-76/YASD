@@ -7,6 +7,7 @@
 //
 
 import RxSwift
+import Foundation
 
 class LexinServiceParameters {
     public static let supportedLanguages = [
@@ -46,13 +47,15 @@ class LexinServiceParameters {
     init(storage: Storage, language: Language) {
         self.storage = storage
         self.language = BehaviorSubject<Language>(value: language)
+        
+        load()
     }
     
-    func load() {
+    private func load() {
         setLanguage(language: storage.get(id: "language", defaultObject: getLanguage()))
     }
     
-    func get() -> String {
+    func getLanguageString() -> String {
         return "swe" + "_" + getLanguageCode()
     }
     
@@ -76,59 +79,26 @@ extension LexinServiceParameters.Language: Equatable {
     }
 }
 
-typealias LexinServiceResult = Result<[LexinServiceResultItem]>
-
-struct LexinServiceResultItem {
-    struct Item {
-        var id: String
-        var value: String
-    }
-    struct Lang {
-        var meaning: String?
-        var phonetic: String?
-        var inflection: [String?]?
-        var grammar: String?
-        var example: [Item]?
-        var idiom: [Item]?
-        var compound: [Item]?
-        var translation: String?
-        var reference: String?
-        var synonym: [String?]?
-        var soundUrl: String?
-    }
-    
-    var word: String
-    var type: String?
-    var baseLang: Lang?
-    var targetLang: Lang?
-    var lexemes: [Lang]?
-}
-
 class LexinService {
-    public let parameters: LexinServiceParameters
-    
-    private let network: NetworkService
-    private let provider: LexinServiceProvider
-    
-    init(network: NetworkService, parameters: LexinServiceParameters, provider: LexinServiceProvider) {
-        self.network = network
+    private let parameters: LexinServiceParameters
+    private let provider: LexinApiProvider
+
+    init(parameters: LexinServiceParameters, provider: LexinApiProvider) {
         self.parameters = parameters
         self.provider = provider
     }
+
+    func search(word: String) -> Observable<LexinParserWordsResult> {
+        return provider.getApi(language: parameters.getLanguage())
+            .search(word: word, language: parameters.getLanguageString())
+    }
     
-    func search(word: String) -> Observable<LexinServiceResult> {
-        if word.isEmpty {
-            return Observable<LexinServiceResult>.just(.success([]))
-        }
-        let parser = provider.getParser(language: parameters.getLanguage())
-        return network.postRequest(url: parser.getUrl(),
-                                   parameters: parser.getRequestParameters(word: word, parameters: parameters.get()))
-            .map { do {
-                    let text = String(data: $0, encoding: .utf8) ?? ""
-                    return try .success(parser.parseHtml(text: text))
-                } catch let error {
-                    return .failure(error)
-                }
-            }
+    func suggest(word: String) -> Observable<LexinParserSuggestionResult> {
+        return provider.getApi(language: parameters.getLanguage())
+            .suggestion(word: word, language: parameters.getLanguageString())
+    }
+    
+    func language() -> BehaviorSubject<LexinServiceParameters.Language> {
+        return parameters.language
     }
 }

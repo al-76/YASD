@@ -25,12 +25,15 @@ extension Result: Equatable where T: Equatable {
 }
 
 extension Result {
-    func getResult() -> T? {
+    func handleResult(_ defaultValue: T, _ onError: ((Error) -> ())?) -> T {
         switch (self) {
         case let .success(value):
             return value
-        default:
-            return nil
+        case let .failure(error):
+            if let callback = onError {
+                callback(error)
+            }
+            return defaultValue
         }
     }
 }

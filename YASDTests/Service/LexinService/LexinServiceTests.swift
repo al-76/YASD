@@ -17,28 +17,11 @@ class LexinServiceTests: XCTestCase {
         case someError
     }
     
-    func testSearchError() {
-        // Arrange
-        let testError = TestError.someError
-        let scheduler = TestScheduler(initialClock: 0)
-        let service = createLexinService(parser: MockLexinServiceParserError(error: testError))
-
-        // Act
-        let found = service.search(word: "test")
-        let res = scheduler.start { found }
-
-        // Assert
-        XCTAssertEqual(res.events, [
-            .next(200, LexinServiceResult.failure(testError)),
-            .completed(200)
-            ])
-    }
-    
     func testSearch() {
         // Arrange
-        let testData = "test"
+        let testData = LexinParserWordsResult.success([ LexinParserWordsResultItem(word: "test") ])
         let scheduler = TestScheduler(initialClock: 0)
-        let service = createLexinService(parser: MockLexinServiceParser(data: testData))
+        let service = createLexinService(createMockApiSearch(testData))
         
         // Act
         let found = service.search(word: "test")
@@ -46,105 +29,75 @@ class LexinServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, LexinServiceResult.success([LexinServiceResultItem(word: testData)])),
+            .next(200, testData),
             .completed(200)
             ])
     }
     
-    func testSearchEmpty() {
+    func testSuggestion() {
         // Arrange
-        let testData = "test"
+        let testData = LexinParserSuggestionResult.success([ "Test" ])
         let scheduler = TestScheduler(initialClock: 0)
-        let service = createLexinService(parser: MockLexinServiceParser(data: testData))
+        let service = createLexinService(createMockApiSuggestion(testData))
         
         // Act
-        let found = service.search(word: "")
+        let found = service.suggest(word: "test")
         let res = scheduler.start { found }
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, LexinServiceResult.success([])),
+            .next(200, testData),
             .completed(200)
             ])
     }
 
-    private func createLexinService(parser: LexinServiceParser) -> LexinService {
-        return LexinService(network: createMockNetwork(),
-                            parameters: LexinServiceParameters(storage: createMockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test")),
-                            provider: createMockLexinServiceProvider(parser: parser))
-    }
-    
-    private func createLexinServiceParameters() -> LexinServiceParameters {
-        let mock = MockLexinServiceParameters(storage: createMockStorage(), language: MockLexinServiceParameters.Language(name: "test", code: "test"))
-        stub(mock) { stub in
-            when(stub.get()).thenReturn("test")
-        }
-        return mock
-    }
-    
-    private func createMockLexinServiceProvider(parser: LexinServiceParser) -> LexinServiceProvider {
-        let mock = MockLexinServiceProvider(defaultParser: parser, folketsParser: parser, swedishParser: parser)
-        stub(mock) { stub in
-            when(stub.getParser(language: any())).thenReturn(parser)
-        }
-        return mock
-    }
-    
-    class MockLexinServiceParser : LexinServiceParser {
-        let data: String
-        
-        init(data: String) {
-            self.data = data
-        }
-        
-        func getUrl() -> String {
-            return "test"
-        }
-        
-        func getRequestParameters(word: String, parameters: String) -> (String?, [String : String]?) {
-            return ("test", ["test": "test"])
-        }
-        
-        func parseHtml(text: String) throws -> [LexinServiceResultItem] {
-            return [ LexinServiceResultItem(word: data) ]
-        }
-    }
-    
-    class MockLexinServiceParserError : LexinServiceParser {
-        let error: Error
-        
-        init(error: Error) {
-            self.error = error
-        }
-        
-        func getUrl() -> String {
-            return "test"
-        }
-        
-        func getRequestParameters(word: String, parameters: String) -> (String?, [String : String]?) {
-            return ("test", ["test": "test"])
-        }
-        
-        func parseHtml(text: String) throws -> [LexinServiceResultItem] {
-            throw(error)
-        }
-    }
 
+    private func createLexinService(_ lexinApi: LexinApi) -> LexinService {
+        return LexinService(parameters: LexinServiceParameters(storage: createMockStorage(),
+                                                               language: MockLexinServiceParameters.Language(name: "test", code: "test")),
+                            provider: createMockLexinApiProvider(lexinApi))
+    }
+    
+    private func createMockApiSuggestion(_ suggestionData: LexinParserSuggestionResult) -> LexinApi {
+        let mock = MockLexinApi(network: createMockNetwork(),
+                                   parserWords: MockLexinParserWords(),
+                                   parserSuggestions: MockLexinParserSuggestion())
+        let suggestionResult = Observable.just(suggestionData)
+        stub(mock) { stub in
+            when(stub.suggestion(word: any(), language: any())).thenReturn(suggestionResult)
+        }
+        return mock
+    }
+    
+    private func createMockApiSearch(_ searchData: LexinParserWordsResult) -> LexinApi {
+        let mock = MockLexinApi(network: createMockNetwork(),
+                                   parserWords: MockLexinParserWords(),
+                                   parserSuggestions: MockLexinParserSuggestion())
+        let searchResult = Observable.just(searchData)
+        stub(mock) { stub in
+            when(stub.search(word: any(), language: any())).thenReturn(searchResult)
+        }
+        return mock
+    }
+    
+    private func createMockLexinApiProvider(_ api: LexinApi) -> LexinApiProvider {
+        let mock = MockLexinApiProvider(defaultApi: api, folketsApi: api, swedishApi: api)
+        stub(mock) { stub in
+            when(stub.getApi(language: any())).thenReturn(api)
+        }
+        return mock
+    }
+    
     private func createMockNetwork() -> MockNetworkService {
         let mockCache = MockCacheService(cache: MockDataCache(name: "Test"))
-        let mock = MockNetworkService(cache: mockCache, network: MockNetwork())
-        stub(mock) { stub in
-            when(stub.postRequest(url: anyString(), parameters: any())).then { url, parameters in
-                return Observable.just(Data())
-            }
-        }
-        return mock
+        return MockNetworkService(cache: mockCache, network: MockNetwork())
     }
-    
+
     private func createMockStorage() -> MockStorage {
         let mock = MockStorage()
         stub(mock) { stub in
-            when(stub.get(id: anyString(), defaultObject: any(LexinServiceParameters.Language.self))).then { id, defaultObject -> LexinServiceParameters.Language in return defaultObject }
+            when(stub.get(id: anyString(), defaultObject: any(LexinServiceParameters.Language.self)))
+                .then { id, defaultObject -> LexinServiceParameters.Language in return defaultObject }
             when(stub.save(id: anyString(), object: any(LexinServiceParameters.Language.self))).thenDoNothing()
         }
         return mock

@@ -8,7 +8,7 @@
 
 @testable import YASD
 
-extension LexinServiceResultItem {
+extension LexinParserWordsResultItem {
     public init(word: String) {
         self.init(word: word, type: "test", baseLang: Lang(), targetLang: Lang(), lexemes: nil)
     }
@@ -18,8 +18,8 @@ extension LexinServiceResultItem {
     }
 }
 
-extension LexinServiceResultItem: Equatable {
-    static public func == (lhs: LexinServiceResultItem, rhs: LexinServiceResultItem) -> Bool {
+extension LexinParserWordsResultItem: Equatable {
+    static public func == (lhs: LexinParserWordsResultItem, rhs: LexinParserWordsResultItem) -> Bool {
         return lhs.word == rhs.word
     }
 }

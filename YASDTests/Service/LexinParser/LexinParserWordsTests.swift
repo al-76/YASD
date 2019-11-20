@@ -11,30 +11,30 @@
 import XCTest
 import Cuckoo
 
-class LexinServiceParsersTests: XCTestCase {
+class LexinParserWordsTests: XCTestCase {
     func testDefaultParser() {
-        testParser(parser: LexinServiceParserDefault(htmlParser: createMockHtmlParser()))
+        testParser(parser: LexinParserWordsDefault(htmlParser: createMockHtmlParser()))
     }
     
     func testSwedishParser() {
-        testParser(parser: LexinServiceParserSwedish(htmlParser: createMockHtmlParser()))
+        testParser(parser: LexinParserWordsSwedish(htmlParser: createMockHtmlParser()))
     }
     
     func testFolketsParser() {
-        testParser(parser: LexinServiceParserFolkets(htmlParser: createMockHtmlParser()))
+        testParser(parser: LexinParserWordsFolkets(htmlParser: createMockHtmlParser()))
     }
     
-    private func testParser(parser: LexinServiceParser) {
+    private func testParser(parser: LexinParserWords) {
         // Arrange
         let testData = "test data"
         
         // Act
-        let res = try? parser.parseHtml(text: testData)
+        let res = try? parser.parse(text: testData)
         
         // Assert
-        XCTAssertEqual(res, [LexinServiceResultItem(word: testData), LexinServiceResultItem(word: testData)])
-        XCTAssertFalse(parser.getUrl().isEmpty)
-        XCTAssert(parser.getRequestParameters(word: testData, parameters: testData).0!.contains(testData))
+        XCTAssertEqual(res, [LexinParserWordsResultItem(word: testData), LexinParserWordsResultItem(word: testData)])
+        XCTAssertFalse(parser.getRequestParameters(word: testData, language: testData).url.isEmpty)
+        XCTAssert(parser.getRequestParameters(word: testData, language: testData).headers!.0!.contains(testData))
     }
     
     class MockHtmlParserElement1 : HtmlParserElement {

@@ -10,7 +10,9 @@ import Swinject
 import SwinjectStoryboard
 
 extension Container {
-    func registerForStoryboard<C: UIViewController>(_ serviceType: C.Type, withIdentifier identifier : String, registered: @escaping (Swinject.Resolver, C) -> ()) {
+    func registerForStoryboard<C: UIViewController>(_ serviceType: C.Type,
+                                                    withIdentifier identifier : String,
+                                                    registered: @escaping (Swinject.Resolver, C) -> ()) {
         register(serviceType.self) { container in
             let storyboard = container.resolve(SwinjectStoryboard.self)!
             let viewController = storyboard.instantiateViewController(withIdentifier: identifier) as! C
@@ -21,16 +23,10 @@ extension Container {
 }
 
 extension SwinjectStoryboard {
-    class func getStoryboard(name: String, bundle storyboardBundleOrNil: Bundle?, container: Container) -> SwinjectStoryboard {
-        if let storyboard = container.resolve(SwinjectStoryboard.self) {
-            return storyboard
-        }
-        
-        let storyboard = SwinjectStoryboard.create(name: name, bundle: storyboardBundleOrNil, container: container)
+    class func register(storyboard: SwinjectStoryboard, container: Container) {
         container.register(SwinjectStoryboard.self) { container in
             storyboard
         }
         .inObjectScope(.container)
-        return storyboard
     }
 }

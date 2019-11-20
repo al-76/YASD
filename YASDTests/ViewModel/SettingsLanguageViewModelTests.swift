@@ -27,7 +27,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
             .next(150, testLanguages[1].name)
             ])
         let outputLanguages = scheduler.createObserver([SettingsLanguageViewModel.SettingsItem].self)
-        let parameters = createLexinServiceParameters(language: testLanguages[0])
+        let parameters = createLexinServiceStub(language: testLanguages[0])
         let viewModel = SettingsLanguageViewModel(lexinParameters: parameters)
         let output = viewModel.transform(input: SettingsLanguageViewModel.Input(selectedLanguage: inputLanguages.asDriver(onErrorJustReturn: "")))
         output.languages.drive(outputLanguages).disposed(by: disposeBag)
@@ -45,13 +45,10 @@ class SettingsLanguageViewModelTests: XCTestCase {
         return items.first(where: { $0.selected })
     }
     
-    private func createLexinServiceParameters(language: LexinServiceParameters.Language) -> MockLexinServiceParameters {
-        let mock = MockLexinServiceParameters(storage: MockStorage(), language: language)
-        stub(mock) { stub in
-            when(stub.load()).thenDoNothing()
-            when(stub.setLanguage(language: any())).thenDoNothing()
-            when(stub.getLanguage()).thenReturn(language)
-        }
-        return mock
+    private func createLexinServiceStub(language: LexinServiceParameters.Language) -> LexinServiceParametersStub {
+        DefaultValueRegistry.register(value: language, forType: LexinServiceParameters.Language.self)
+        let stub = LexinServiceParametersStub(storage: StorageStub(),
+                                              language: language)
+        return stub
     }
 }
