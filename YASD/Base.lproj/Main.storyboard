@@ -44,7 +44,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0El-zz-oW6">
                                                     <rect key="frame" x="0.0" y="40" width="414" height="31"/>
                                                     <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="4"/>
-                                                    <state key="normal" image="speaker.3.fill" catalog="system">
+                                                    <state key="normal" image="speaker.3">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
                                                     </state>
                                                 </button>
@@ -86,14 +86,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WordsSuggestionTableCell" id="bqZ-Ml-D1d" customClass="WordsSuggestionTableViewCell" customModule="YASD" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="51"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="51.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bqZ-Ml-D1d" id="2aw-82-OCo">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="51.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iuL-Da-usg">
-                                            <rect key="frame" x="24" y="15" width="366" height="21"/>
+                                            <rect key="frame" x="24" y="15" width="366" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -174,7 +174,7 @@
         <scene sceneID="b14-U1-XBR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vGh-Y3-JkN" userLabel="Settings" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Inställningar" image="gear" catalog="system" id="WHz-tK-3Cl"/>
+                    <tabBarItem key="tabBarItem" title="Inställningar" image="gear" id="WHz-tK-3Cl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="H5r-iX-Ybt">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -282,7 +282,7 @@
         <scene sceneID="ES0-Td-mp5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZPw-80-Fn5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Ordbook" image="book" catalog="system" id="b26-4Z-GhI"/>
+                    <tabBarItem key="tabBarItem" title="Ordbook" image="book" id="b26-4Z-GhI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="buH-K8-E37">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -299,8 +299,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="book" catalog="system" width="64" height="52"/>
-        <image name="gear" catalog="system" width="64" height="60"/>
-        <image name="speaker.3.fill" catalog="system" width="64" height="44"/>
+        <image name="book" width="28" height="22"/>
+        <image name="gear" width="29" height="33"/>
+        <image name="speaker.3" width="34" height="27"/>
     </resources>
 </document>
