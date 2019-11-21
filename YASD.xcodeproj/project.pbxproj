@@ -13,6 +13,7 @@
 		17FC6BA0237FEF7E00279589 /* LexinApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */; };
 		17FC6BA1237FEF7E00279589 /* LexinApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */; };
 		17FC6BA3237FFBEB00279589 /* LexinParserSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */; };
+		17FC6BA523870ED900279589 /* LexinApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6BA423870ED900279589 /* LexinApiTests.swift */; };
 		2F0D2B26237EA57B00F23F3B /* LexinApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D2B25237EA57B00F23F3B /* LexinApi.swift */; };
 		2F0D2B27237EA57B00F23F3B /* LexinApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D2B25237EA57B00F23F3B /* LexinApi.swift */; };
 		2F18E2E323437097003F91FD /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
@@ -145,6 +146,7 @@
 		17A9BC7622B5284F002F769B /* Markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
 		17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swinject+Extensions.swift"; sourceTree = "<group>"; };
 		17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiProvider.swift; sourceTree = "<group>"; };
+		17FC6BA423870ED900279589 /* LexinApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiTests.swift; sourceTree = "<group>"; };
 		2F0D2B25237EA57B00F23F3B /* LexinApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApi.swift; sourceTree = "<group>"; };
 		2F18E2E223437097003F91FD /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		2F1E1E752344D8A1007C128B /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = "<group>"; };
@@ -274,6 +276,14 @@
 			path = LexinParser;
 			sourceTree = "<group>";
 		};
+		17FC6BA623870EE000279589 /* LexinApi */ = {
+			isa = PBXGroup;
+			children = (
+				17FC6BA423870ED900279589 /* LexinApiTests.swift */,
+			);
+			path = LexinApi;
+			sourceTree = "<group>";
+		};
 		2F0D2B21237E9B9E00F23F3B /* LexinApi */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,6 +327,7 @@
 			children = (
 				2F7DA1612382DDBB00E91C71 /* LexinParser */,
 				2F1E1E7C23462D87007C128B /* LexinService */,
+				17FC6BA623870EE000279589 /* LexinApi */,
 				2F393ACB233E118100F315FC /* PlayerServiceTests.swift */,
 				2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */,
 			);
@@ -737,6 +748,7 @@
 				2F5F8BAD2322879900EF6A85 /* WordsViewModel.swift in Sources */,
 				2F9B8BB5233132BF000D6BC1 /* PlayerService.swift in Sources */,
 				2F393ACC233E118100F315FC /* PlayerServiceTests.swift in Sources */,
+				17FC6BA523870ED900279589 /* LexinApiTests.swift in Sources */,
 				2F69AD0722F81775001942E6 /* SettingsViewModelTests.swift in Sources */,
 				2F5F8BB9232289AA00EF6A85 /* Markdown.swift in Sources */,
 				2F5F8BAE2322879900EF6A85 /* SettingsLanguageViewModel.swift in Sources */,

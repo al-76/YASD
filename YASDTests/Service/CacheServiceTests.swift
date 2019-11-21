@@ -13,10 +13,6 @@ import RxTest
 import Cuckoo
 
 class CacheServiceTests: XCTestCase {
-//    enum TestError: Error {
-//        case someError
-//    }
-
     func testRunActionNotCached() {
         // Arrange
         let testData = Data()
