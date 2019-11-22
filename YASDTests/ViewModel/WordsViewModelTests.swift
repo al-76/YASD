@@ -127,11 +127,10 @@ class WordsViewModelTests: XCTestCase {
                 return Observable<LexinParserWordsResult>.create { observable in
                     if word == errorWord {
                         observable.on(.error(TestError.someError))
-                    } else if word.isEmpty { // ignore initial search on loaded parameters
-                        observable.on(.completed)
-                    } else {
+                    } else if !word.isEmpty { // ignore initial search on loaded parameters
                         observable.on(.next(.success([ LexinParserWordsResultItem(word: word) ])))
                     }
+                    observable.on(.completed)
                     return Disposables.create {}
                 }
             }

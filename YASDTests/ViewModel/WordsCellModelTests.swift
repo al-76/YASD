@@ -88,7 +88,7 @@ class WordsCellModelTests: XCTestCase {
                     } else {
                         observable.on(.next(.success(true)))
                     }
-                    
+                    observable.on(.completed)
                     return Disposables.create {}
                 }
             }

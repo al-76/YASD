@@ -47,6 +47,31 @@ class WordsSuggestionViewModelTests: XCTestCase {
         ])
     }
     
+    func testSuggestionErrorNilViewModel() {
+        // Arrange
+        let scheduler = TestScheduler(initialClock: 0)
+        let inputWords = scheduler.createHotObservable([
+            .next(200, "test2"),
+            .next(250, "test3"),
+            .completed(400)
+        ])
+        let suggestions = scheduler.createObserver(LexinParserSuggestionResult.self)
+        var viewModel: WordsSuggestionViewModel? = WordsSuggestionViewModel(lexin: createMockLexinService(errorWord: "error_word"))
+        viewModel?.transform(input: WordsSuggestionViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
+            .suggestions.drive(suggestions).disposed(by: disposeBag)
+        
+        // Act
+        viewModel = nil
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(suggestions.events, [
+            .next(200, LexinParserSuggestionResult.success([])),
+            .next(250, LexinParserSuggestionResult.success([])),
+            .completed(400)
+        ])
+    }
+    
     func createMockLexinService(errorWord: String) -> MockLexinService {
         let stubParameters = createLexinServiceParametersStub()
         let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
@@ -65,6 +90,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
                     } else {
                         observable.on(.next(.success([ word ])))
                     }
+                    observable.on(.completed)
                     return Disposables.create {}
                 }
             }
