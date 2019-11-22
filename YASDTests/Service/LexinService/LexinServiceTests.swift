@@ -41,7 +41,7 @@ class LexinServiceTests: XCTestCase {
         let service = createLexinService(createMockApiSuggestion(testData))
         
         // Act
-        let found = service.suggest(word: "test")
+        let found = service.suggestion(word: "test")
         let res = scheduler.start { found }
         
         // Assert

@@ -93,7 +93,7 @@ class LexinService {
             .search(word: word, language: parameters.getLanguageString())
     }
     
-    func suggest(word: String) -> Observable<LexinParserSuggestionResult> {
+    func suggestion(word: String) -> Observable<LexinParserSuggestionResult> {
         return provider.getApi(language: parameters.getLanguage())
             .suggestion(word: word, language: parameters.getLanguageString())
     }

@@ -113,7 +113,7 @@ class WordsViewModelTests: XCTestCase {
     }
     
     func createMockLexinService(errorWord: String) -> MockLexinService {
-        let stubParameters = createLexinServiceStub()
+        let stubParameters = createLexinServiceParametersStub()
         let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
                                                      network: MockNetwork())
         let mockApi = MockLexinApi(network: mockNetwork,
@@ -139,7 +139,7 @@ class WordsViewModelTests: XCTestCase {
         return mock
     }
     
-    private func createLexinServiceStub() -> LexinServiceParametersStub {
+    private func createLexinServiceParametersStub() -> LexinServiceParametersStub {
         let language = LexinServiceParameters.Language(name: "test", code: "test")
         DefaultValueRegistry.register(value: language, forType: LexinServiceParameters.Language.self)
         let stub = LexinServiceParametersStub(storage: StorageStub(),
