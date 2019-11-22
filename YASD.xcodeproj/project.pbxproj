@@ -63,6 +63,8 @@
 		2F69AD0722F81775001942E6 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F69AD0622F81775001942E6 /* SettingsViewModelTests.swift */; };
 		2F69AD0922F838C5001942E6 /* SettingsLanguageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F69AD0822F838C5001942E6 /* SettingsLanguageViewModelTests.swift */; };
 		2F7321872313E4A000CC0822 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7321862313E4A000CC0822 /* Storage.swift */; };
+		2F7DA16723882CB400E91C71 /* LexinParserSuggestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7DA16623882CB400E91C71 /* LexinParserSuggestionTests.swift */; };
+		2F7DA1692388303600E91C71 /* LexinApiProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7DA1682388303600E91C71 /* LexinApiProviderTests.swift */; };
 		2F8030222338ECC0008D8730 /* WordsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8030212338ECC0008D8730 /* WordsCellModel.swift */; };
 		2F803023233909D9008D8730 /* WordsCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8030212338ECC0008D8730 /* WordsCellModel.swift */; };
 		2F90DD3D2355FA2300CE8560 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
@@ -184,6 +186,8 @@
 		2F69AD0622F81775001942E6 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		2F69AD0822F838C5001942E6 /* SettingsLanguageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewModelTests.swift; sourceTree = "<group>"; };
 		2F7321862313E4A000CC0822 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		2F7DA16623882CB400E91C71 /* LexinParserSuggestionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserSuggestionTests.swift; sourceTree = "<group>"; };
+		2F7DA1682388303600E91C71 /* LexinApiProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiProviderTests.swift; sourceTree = "<group>"; };
 		2F8030212338ECC0008D8730 /* WordsCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsCellModel.swift; sourceTree = "<group>"; };
 		2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserWords.swift; sourceTree = "<group>"; };
 		2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserSuggestion.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				17FC6BA423870ED900279589 /* LexinApiTests.swift */,
+				2F7DA1682388303600E91C71 /* LexinApiProviderTests.swift */,
 			);
 			path = LexinApi;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */,
+				2F7DA16623882CB400E91C71 /* LexinParserSuggestionTests.swift */,
 			);
 			path = LexinParser;
 			sourceTree = "<group>";
@@ -721,6 +727,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F7DA1692388303600E91C71 /* LexinApiProviderTests.swift in Sources */,
 				2F393ACF233E255500F315FC /* DataCache.swift in Sources */,
 				2F9B8BB62333C612000D6BC1 /* Player.swift in Sources */,
 				2F1E1E782344E6DB007C128B /* CacheServiceTests.swift in Sources */,
@@ -742,6 +749,7 @@
 				2FF62C9C228E98EF00B4946C /* GeneratedMocks.swift in Sources */,
 				2F5F8BB02322879E00EF6A85 /* LexinService.swift in Sources */,
 				2F5F8BB12322879E00EF6A85 /* LexinServiceFormatter.swift in Sources */,
+				2F7DA16723882CB400E91C71 /* LexinParserSuggestionTests.swift in Sources */,
 				2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */,
 				2FE7682022BCC30E00375292 /* LexinServiceFormatterTests.swift in Sources */,
 				2F90DD3E2355FA3800CE8560 /* LexinParserWords.swift in Sources */,

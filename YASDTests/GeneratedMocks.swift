@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  DataCache.swift
@@ -136,7 +136,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  Files.swift
@@ -273,7 +273,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-11-22 15:34:56 +0000
 
 
 //
@@ -592,7 +592,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  MarkdownParser.swift
@@ -699,7 +699,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  Network.swift
@@ -836,7 +836,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  Player.swift
@@ -987,7 +987,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  Storage.swift
@@ -1123,7 +1123,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  CacheService.swift
@@ -1230,7 +1230,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  LexinApi.swift
@@ -1366,7 +1366,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  LexinApiProvider.swift
@@ -1472,7 +1472,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  LexinServiceProviderSuggestion.swift
@@ -1649,7 +1649,7 @@ import UIKit
     
     
     
-     func parse(text: String) throws -> [LexinParserSuggestionResultItem] {
+     override func parse(text: String) throws -> [LexinParserSuggestionResultItem] {
         
     return try cuckoo_manager.callThrows("parse(text: String) throws -> [LexinParserSuggestionResultItem]",
             parameters: (text),
@@ -1676,7 +1676,7 @@ import UIKit
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestionDefault.self, method: "getRequestParameters(word: String, language: String) -> Network.PostParameters", parameterMatchers: matchers))
 	    }
 	    
-	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ProtocolStubThrowingFunction<(String), [LexinParserSuggestionResultItem]> where M1.MatchedType == String {
+	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ClassStubThrowingFunction<(String), [LexinParserSuggestionResultItem]> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: text) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestionDefault.self, method: "parse(text: String) throws -> [LexinParserSuggestionResultItem]", parameterMatchers: matchers))
 	    }
@@ -1722,7 +1722,7 @@ import UIKit
         return DefaultValueRegistry.defaultValue(for: (Network.PostParameters).self)
     }
     
-     func parse(text: String) throws -> [LexinParserSuggestionResultItem]  {
+     override func parse(text: String) throws -> [LexinParserSuggestionResultItem]  {
         return DefaultValueRegistry.defaultValue(for: ([LexinParserSuggestionResultItem]).self)
     }
     
@@ -1770,7 +1770,7 @@ import UIKit
     
     
     
-     func parse(text: String) throws -> [LexinParserSuggestionResultItem] {
+     override func parse(text: String) throws -> [LexinParserSuggestionResultItem] {
         
     return try cuckoo_manager.callThrows("parse(text: String) throws -> [LexinParserSuggestionResultItem]",
             parameters: (text),
@@ -1797,7 +1797,7 @@ import UIKit
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestionFolkets.self, method: "getRequestParameters(word: String, language: String) -> Network.PostParameters", parameterMatchers: matchers))
 	    }
 	    
-	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ProtocolStubThrowingFunction<(String), [LexinParserSuggestionResultItem]> where M1.MatchedType == String {
+	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ClassStubThrowingFunction<(String), [LexinParserSuggestionResultItem]> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: text) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestionFolkets.self, method: "parse(text: String) throws -> [LexinParserSuggestionResultItem]", parameterMatchers: matchers))
 	    }
@@ -1843,14 +1843,14 @@ import UIKit
         return DefaultValueRegistry.defaultValue(for: (Network.PostParameters).self)
     }
     
-     func parse(text: String) throws -> [LexinParserSuggestionResultItem]  {
+     override func parse(text: String) throws -> [LexinParserSuggestionResultItem]  {
         return DefaultValueRegistry.defaultValue(for: ([LexinParserSuggestionResultItem]).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  LexinServiceProviderWords.swift
@@ -2349,7 +2349,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  LexinService.swift
@@ -2697,7 +2697,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  LexinService+Format.swift
@@ -2804,7 +2804,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  NetworkService.swift
@@ -2941,7 +2941,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-11-21 20:38:20 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-11-22 15:34:56 +0000
 
 //
 //  PlayerService.swift
