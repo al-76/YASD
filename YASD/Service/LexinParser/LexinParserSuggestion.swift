@@ -16,7 +16,14 @@ protocol LexinParserSuggestion {
     func parse(text: String) throws -> [LexinParserSuggestionResultItem]
 }
 
-extension LexinParserSuggestion {
+// Default Lexin
+class LexinParserSuggestionDefault : LexinParserSuggestion {
+    private static let URL = "https://lexin.nada.kth.se/lexin/lexin/"
+
+    func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+        return (url: getUrl(), headers: getRequestHeaders(word, language))
+    }
+    
     func parse(text: String) throws -> [LexinParserSuggestionResultItem] {
         let index = text.firstIndex(of: "\"") ?? text.startIndex
         let res = text[index...]
@@ -29,16 +36,7 @@ extension LexinParserSuggestion {
             .map { $0.replacingOccurrences(of: "\"", with: "") }
         return res
     }
-}
 
-// Default Lexin
-class LexinParserSuggestionDefault : LexinParserSuggestion {
-    private static let URL = "https://lexin.nada.kth.se/lexin/lexin/"
-
-    func getRequestParameters(word: String, language: String) -> Network.PostParameters {
-        return (url: getUrl(), headers: getRequestHeaders(word, language))
-    }
-    
     private func getUrl() -> String {
         return LexinParserSuggestionDefault.URL + "generatecompletion"
     }
@@ -57,6 +55,19 @@ class LexinParserSuggestionFolkets : LexinParserSuggestion {
 
     func getRequestParameters(word: String, language: String) -> Network.PostParameters {
         return (url: getUrl(), headers: getRequestHeaders(word, language))
+    }
+    
+    func parse(text: String) throws -> [LexinParserSuggestionResultItem] {
+        let index = text.firstIndex(of: "\"") ?? text.startIndex
+        let res = text[index...]
+            .replacingOccurrences(of: "],0,7]", with: "")
+            .components(separatedBy: ",")
+            .filter { !($0.contains("com.google.gwt") ||
+                $0.contains("java.util.ArrayList") ||
+                $0.contains("se.algoritmica.folkets") ||
+                $0.contains("<")) }
+            .map { $0.replacingOccurrences(of: "\"", with: "") }
+        return res
     }
     
     private func getUrl() -> String {
