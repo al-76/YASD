@@ -69,7 +69,7 @@ class CacheServiceTests: XCTestCase {
         let mock = MockDataCache(name: "test")
         stub(mock) { stub in
             when(stub.load(any())).thenReturn(Observable.just(data))
-            when(stub.save(any(), with: any())).then { _, data in
+            when(stub.save(any(), forKey: any())).then { data, _ in
                 Observable.just(data)
             }
         }

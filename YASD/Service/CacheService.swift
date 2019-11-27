@@ -24,7 +24,7 @@ class CacheService {
             if data == nil {
                 return action().flatMap { [weak self] data -> Observable<Data> in
                     guard let self = self else { return Observable.just(data) }
-                    return self.cache.save(key, with: data)
+                    return self.cache.save(data, forKey: key)
                 }
             }
             return Observable.just(data!)
