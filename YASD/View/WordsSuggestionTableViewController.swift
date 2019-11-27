@@ -35,7 +35,7 @@ class WordsSuggestionTableViewController: UITableViewController {
     private func bindToModel() {
         let text = searchText.asDriver(onErrorJustReturn: "")
         let input = WordsSuggestionViewModel.Input(searchBar: text)
-        model.transform(input: input).suggestions.map { [weak self] result -> [LexinParserSuggestionResultItem] in
+        model.transform(input: input).suggestions.map { [weak self] result -> [Suggestion] in
             return result.handleResult([], self?.handleError)
         }
         .drive(tableView.rx.items(cellIdentifier: "WordsSuggestionTableCell")) { (_, result, cell) in

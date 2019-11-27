@@ -27,7 +27,7 @@ class LexinApiProviderTests: XCTestCase {
         var result: [ LexinApi ] = []
         for name in [ "default", "eng", "swe" ] {
             result.append(apiProvider
-                .getApi(language: LexinServiceParameters.Language(name: name, code: name)))
+                .getApi(language: Language(name: name, code: name)))
         }
         
         // Assert

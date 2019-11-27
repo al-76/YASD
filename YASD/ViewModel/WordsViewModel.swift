@@ -20,7 +20,7 @@ class WordsViewModel: ViewModel {
     }
 
     struct Output {
-        let foundWords: Driver<LexinServiceResultFormatted>
+        let foundWords: Driver<FormattedWordResult>
     }
     
     init(lexin: LexinService, formatter: LexinServiceFormatter, player: PlayerService) {
@@ -32,14 +32,14 @@ class WordsViewModel: ViewModel {
     func transform(input: Input) -> Output {
         // Search a word
         let searchedBar = input.searchBar
-            .flatMapLatest { [weak self] word -> Driver<LexinServiceResultFormatted> in
+            .flatMapLatest { [weak self] word -> Driver<FormattedWordResult> in
                 guard let self = self else { return Driver.just(.success([])) }
                 self.lastWord = word
                 return self.searchWord(word: word)
         }
         let updateSearch = lexin.language()
-            .asDriver(onErrorJustReturn: LexinServiceParameters.defaultLanguage)
-            .flatMapLatest { [weak self] _ -> Driver<LexinServiceResultFormatted> in
+            .asDriver(onErrorJustReturn: ParametersStorage.defaultLanguage)
+            .flatMapLatest { [weak self] _ -> Driver<FormattedWordResult> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.searchWord(word: self.lastWord)
         }
@@ -51,7 +51,7 @@ class WordsViewModel: ViewModel {
         return WordsCellModel(player: player)
     }
     
-    private func searchWord(word: String) -> Driver<LexinServiceResultFormatted> {
+    private func searchWord(word: String) -> Driver<FormattedWordResult> {
         return lexin.search(word: word)
             .map { [weak self] result in
                 guard let self = self else { return .success([]) }

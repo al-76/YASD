@@ -17,7 +17,7 @@ class LexinApiProvider {
         self.api = [ "eng": folketsApi, "swe": swedishApi ]
     }
     
-    func getApi(language: LexinServiceParameters.Language) -> LexinApi {
+    func getApi(language: Language) -> LexinApi {
         guard let api = api[language.code] else {
             return defaultApi
         }

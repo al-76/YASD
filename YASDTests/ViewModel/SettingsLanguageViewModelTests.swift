@@ -19,15 +19,15 @@ class SettingsLanguageViewModelTests: XCTestCase {
     func testSettingsLanguage() {
         // Arrange
         let testLanguages = [
-            LexinServiceParameters.defaultLanguage,
-            LexinServiceParameters.supportedLanguages[0]
+            ParametersStorage.defaultLanguage,
+            ParametersStorage.supportedLanguages[0]
             ]
         let scheduler = TestScheduler(initialClock: 0)
         let inputLanguages = scheduler.createHotObservable([
             .next(150, testLanguages[1].name)
             ])
-        let outputLanguages = scheduler.createObserver([SettingsLanguageViewModel.SettingsItem].self)
-        let parameters = createLexinServiceParametersStub(language: testLanguages[0])
+        let outputLanguages = scheduler.createObserver([SettingsItem].self)
+        let parameters = createParametersStorageStub(language: testLanguages[0])
         let viewModel = SettingsLanguageViewModel(lexinParameters: parameters)
         let output = viewModel.transform(input: SettingsLanguageViewModel.Input(selectedLanguage: inputLanguages.asDriver(onErrorJustReturn: "")))
         output.languages.drive(outputLanguages).disposed(by: disposeBag)
@@ -41,14 +41,13 @@ class SettingsLanguageViewModelTests: XCTestCase {
         }
     }
     
-    private func getSelectedItem(items: [SettingsLanguageViewModel.SettingsItem]) -> SettingsLanguageViewModel.SettingsItem? {
+    private func getSelectedItem(items: [SettingsItem]) -> SettingsItem? {
         return items.first(where: { $0.selected })
     }
     
-    private func createLexinServiceParametersStub(language: LexinServiceParameters.Language) -> LexinServiceParametersStub {
-        DefaultValueRegistry.register(value: language, forType: LexinServiceParameters.Language.self)
-        let stub = LexinServiceParametersStub(storage: StorageStub(),
-                                              language: language)
+    private func createParametersStorageStub(language: Language) -> ParametersStorageStub {
+        DefaultValueRegistry.register(value: language, forType: Language.self)
+        let stub = ParametersStorageStub(storage: StorageStub(), language: language)
         return stub
     }
 }

@@ -32,7 +32,7 @@ class LexinParserWordsTests: XCTestCase {
         let res = try? parser.parse(text: testData)
         
         // Assert
-        XCTAssertEqual(res, [LexinParserWordsResultItem(word: testData), LexinParserWordsResultItem(word: testData)])
+        XCTAssertEqual(res, [LexinWord(word: testData), LexinWord(word: testData)])
         XCTAssertFalse(parser.getRequestParameters(word: testData, language: testData).url.isEmpty)
         XCTAssert(parser.getRequestParameters(word: testData, language: testData).headers!.0!.contains(testData))
     }

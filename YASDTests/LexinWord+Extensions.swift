@@ -1,5 +1,5 @@
 //
-//  LexinServiceResultItem+Extensions.swift
+//  LexinWord+Extensions.swift
 //  YASDTests
 //
 //  Created by Vyacheslav Konopkin on 21/06/2019.
@@ -8,7 +8,7 @@
 
 @testable import YASD
 
-extension LexinParserWordsResultItem {
+extension LexinWord {
     public init(word: String) {
         self.init(word: word, type: "test", baseLang: Lang(), targetLang: Lang(), lexemes: nil)
     }
@@ -18,8 +18,8 @@ extension LexinParserWordsResultItem {
     }
 }
 
-extension LexinParserWordsResultItem: Equatable {
-    static public func == (lhs: LexinParserWordsResultItem, rhs: LexinParserWordsResultItem) -> Bool {
+extension LexinWord: Equatable {
+    static public func == (lhs: LexinWord, rhs: LexinWord) -> Bool {
         return lhs.word == rhs.word
     }
 }

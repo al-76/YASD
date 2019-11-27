@@ -17,7 +17,7 @@ class WordsSuggestionViewModel: ViewModel {
     }
 
     struct Output {
-        let suggestions: Driver<LexinParserSuggestionResult>
+        let suggestions: Driver<SuggestionResult>
     }
     
     init(lexin: LexinService) {
@@ -31,7 +31,7 @@ class WordsSuggestionViewModel: ViewModel {
         })
     }
     
-    private func suggestion(word: String) -> Driver<LexinParserSuggestionResult> {
+    private func suggestion(word: String) -> Driver<SuggestionResult> {
         return lexin.suggestion(word: word).asDriver { Driver.just(.failure($0)) }
     }
 }

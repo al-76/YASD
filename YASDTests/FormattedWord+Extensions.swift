@@ -1,5 +1,5 @@
 //
-//  LexinServiceResultFormattedItem+Extensions.swift
+//  FormattedWord+Extensions.swift
 //  YASDTests
 //
 //  Created by Vyacheslav Konopkin on 20/09/2019.
@@ -8,8 +8,8 @@
 
 @testable import YASD
 
-extension LexinServiceResultFormattedItem: Equatable {
-    static public func == (lhs: LexinServiceResultFormattedItem, rhs: LexinServiceResultFormattedItem) -> Bool {
+extension FormattedWord: Equatable {
+    static public func == (lhs: FormattedWord, rhs: FormattedWord) -> Bool {
         return lhs.formatted == rhs.formatted && lhs.soundUrl == rhs.soundUrl
     }
 }

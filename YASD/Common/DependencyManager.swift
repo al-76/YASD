@@ -89,9 +89,9 @@ func configureService(container: Container) {
     .inObjectScope(.container)
     
     // Parameters
-    container.register(LexinServiceParameters.self) { _ in
-        LexinServiceParameters(storage: container.resolve(Storage.self)!,
-                               language: LexinServiceParameters.defaultLanguage)
+    container.register(ParametersStorage.self) { _ in
+        ParametersStorage(storage: container.resolve(Storage.self)!,
+                               language: ParametersStorage.defaultLanguage)
     }
     .inObjectScope(.container)
     
@@ -118,7 +118,7 @@ func configureService(container: Container) {
     
     // Lexin Service
     container.register(LexinService.self) { _ in
-        LexinService(parameters: container.resolve(LexinServiceParameters.self)!,
+        LexinService(parameters: container.resolve(ParametersStorage.self)!,
                      provider: container.resolve(LexinApiProvider.self)!)
     }
     .inObjectScope(.container)
@@ -138,13 +138,13 @@ func configureModel(container: Container) {
     .inObjectScope(.container)
     
     container.register(SettingsViewModel.self) { container in
-        SettingsViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!)
+        SettingsViewModel(lexinParameters: container.resolve(ParametersStorage.self)!)
         
     }
     .inObjectScope(.container)
     
     container.register(SettingsLanguageViewModel.self) { container in
-        SettingsLanguageViewModel(lexinParameters: container.resolve(LexinServiceParameters.self)!)
+        SettingsLanguageViewModel(lexinParameters: container.resolve(ParametersStorage.self)!)
     }
     .inObjectScope(.container)
 }

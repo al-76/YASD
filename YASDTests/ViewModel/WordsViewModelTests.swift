@@ -30,7 +30,7 @@ class WordsViewModelTests: XCTestCase {
             .next(350, errorWord),
             .completed(400)
             ])
-        let foundWords = scheduler.createObserver(LexinServiceResultFormatted.self)
+        let foundWords = scheduler.createObserver(FormattedWordResult.self)
         let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: errorWord),
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService())
@@ -42,9 +42,9 @@ class WordsViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(200, LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "test2"), soundUrl: nil) ])),
-            .next(250, LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "test3"), soundUrl: nil) ])),
-            .next(350, LexinServiceResultFormatted.failure(TestError.someError))
+            .next(200, FormattedWordResult.success([ FormattedWord(formatted: NSAttributedString(string: "test2"), soundUrl: nil) ])),
+            .next(250, FormattedWordResult.success([ FormattedWord(formatted: NSAttributedString(string: "test3"), soundUrl: nil) ])),
+            .next(350, FormattedWordResult.failure(TestError.someError))
             ])
     }
 
@@ -56,7 +56,7 @@ class WordsViewModelTests: XCTestCase {
             .next(250, "test3"),
             .completed(400)
             ])
-        let foundWords = scheduler.createObserver(LexinServiceResultFormatted.self)
+        let foundWords = scheduler.createObserver(FormattedWordResult.self)
         var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(errorWord: "error_word"),
                                                          formatter: createMockLexinServiceFormatter(),
                                                          player: createMockPlayerService())
@@ -69,8 +69,8 @@ class WordsViewModelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(200, LexinServiceResultFormatted.success([])),
-            .next(250, LexinServiceResultFormatted.success([]))
+            .next(200, FormattedWordResult.success([])),
+            .next(250, FormattedWordResult.success([]))
             ])
     }
 
@@ -82,7 +82,7 @@ class WordsViewModelTests: XCTestCase {
             .next(200, "test2"),
             .completed(400)
             ])
-        let foundWords = scheduler.createObserver(LexinServiceResultFormatted.self)
+        let foundWords = scheduler.createObserver(FormattedWordResult.self)
         let lexin = createMockLexinService(errorWord: errorWord)
         let viewModel = WordsViewModel(lexin: lexin,
                                        formatter: createMockLexinServiceFormatter(),
@@ -93,12 +93,12 @@ class WordsViewModelTests: XCTestCase {
         // Act
         scheduler.start()
         lexin.language()
-            .onNext(LexinServiceParameters.Language(name: "test2", code: "test2_code"))
+            .onNext(Language(name: "test2", code: "test2_code"))
 
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(200, LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "test2"), soundUrl: nil) ])),
-            .next(400, LexinServiceResultFormatted.success([ LexinServiceResultFormattedItem(formatted: NSAttributedString(string: "test2"), soundUrl: nil) ]))
+            .next(200, FormattedWordResult.success([ FormattedWord(formatted: NSAttributedString(string: "test2"), soundUrl: nil) ])),
+            .next(400, FormattedWordResult.success([ FormattedWord(formatted: NSAttributedString(string: "test2"), soundUrl: nil) ]))
             ])
     }
 
@@ -113,7 +113,7 @@ class WordsViewModelTests: XCTestCase {
     }
     
     func createMockLexinService(errorWord: String) -> MockLexinService {
-        let stubParameters = createLexinServiceParametersStub()
+        let stubParameters = createParametersStorageStub()
         let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
                                                      network: MockNetwork())
         let mockApi = MockLexinApi(network: mockNetwork,
@@ -124,11 +124,11 @@ class WordsViewModelTests: XCTestCase {
         stub(mock) { stub in
             when(stub.language()).thenReturn(stubParameters.language)
             when(stub.search(word: any())).then { word in
-                return Observable<LexinParserWordsResult>.create { observable in
+                return Observable<LexinWordResult>.create { observable in
                     if word == errorWord {
                         observable.on(.error(TestError.someError))
                     } else if !word.isEmpty { // ignore initial search on loaded parameters
-                        observable.on(.next(.success([ LexinParserWordsResultItem(word: word) ])))
+                        observable.on(.next(.success([ LexinWord(word: word) ])))
                     }
                     observable.on(.completed)
                     return Disposables.create {}
@@ -138,10 +138,10 @@ class WordsViewModelTests: XCTestCase {
         return mock
     }
     
-    private func createLexinServiceParametersStub() -> LexinServiceParametersStub {
-        let language = LexinServiceParameters.Language(name: "test", code: "test")
-        DefaultValueRegistry.register(value: language, forType: LexinServiceParameters.Language.self)
-        let stub = LexinServiceParametersStub(storage: StorageStub(),
+    private func createParametersStorageStub() -> ParametersStorageStub {
+        let language = Language(name: "test", code: "test")
+        DefaultValueRegistry.register(value: language, forType: Language.self)
+        let stub = ParametersStorageStub(storage: StorageStub(),
                                               language: language)
         return stub
     }
@@ -152,7 +152,7 @@ class WordsViewModelTests: XCTestCase {
             when(stub.format(result: any())).then { result in
                 switch result {
                 case .success(let items):
-                    return .success(items.map { LexinServiceResultFormattedItem(formatted: NSAttributedString(string: $0.word), soundUrl: nil) })
+                    return .success(items.map { FormattedWord(formatted: NSAttributedString(string: $0.word), soundUrl: nil) })
                 case .failure(let error):
                     return .failure(error)
                 }

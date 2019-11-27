@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class SettingsLanguageViewModel: ViewModel {
-    private let lexinParameters: LexinServiceParameters
+    private let lexinParameters: ParametersStorage
     private var languageItems: [SettingsItem]
     
     struct Input {
@@ -20,13 +20,8 @@ class SettingsLanguageViewModel: ViewModel {
     struct Output {
         let languages: Driver<[SettingsItem]>
     }
-
-    struct SettingsItem {
-        var selected: Bool
-        let language: LexinServiceParameters.Language
-    }
     
-    init(lexinParameters: LexinServiceParameters) {
+    init(lexinParameters: ParametersStorage) {
         self.lexinParameters = lexinParameters
         self.languageItems = SettingsLanguageViewModel.createSettingsLanguageItems(language: lexinParameters.getLanguage())
     }
@@ -51,8 +46,8 @@ class SettingsLanguageViewModel: ViewModel {
         }
     }
     
-    private static func createSettingsLanguageItems(language: LexinServiceParameters.Language) -> [SettingsItem] {
-        var res = LexinServiceParameters.supportedLanguages.map {
+    private static func createSettingsLanguageItems(language: Language) -> [SettingsItem] {
+        var res = ParametersStorage.supportedLanguages.map {
             SettingsItem(selected: false, language: $0)
         }
         if let selected = res.firstIndex(where: { $0.language == language  }) {

@@ -19,9 +19,9 @@ class LexinApi {
         self.parserSuggestions = parserSuggestions
     }
     
-    func search(word: String, language: String) -> Observable<LexinParserWordsResult> {
+    func search(word: String, language: String) -> Observable<LexinWordResult> {
         if word.isEmpty {
-            return Observable<LexinParserWordsResult>.just(.success([]))
+            return Observable<LexinWordResult>.just(.success([]))
         }
         
         let parameters = parserWords.getRequestParameters(word: word, language: language)
@@ -35,7 +35,7 @@ class LexinApi {
         }
     }
     
-    func suggestion(word: String, language: String) -> Observable<LexinParserSuggestionResult> {
+    func suggestion(word: String, language: String) -> Observable<SuggestionResult> {
         if word.isEmpty {
             return Observable.just(.success([]))
         }

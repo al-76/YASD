@@ -8,12 +8,9 @@
 
 import UIKit
 
-typealias LexinParserSuggestionResultItem = String?
-typealias LexinParserSuggestionResult = Result<[LexinParserSuggestionResultItem]>
-
 protocol LexinParserSuggestion {
     func getRequestParameters(word: String, language: String) -> Network.PostParameters
-    func parse(text: String) throws -> [LexinParserSuggestionResultItem]
+    func parse(text: String) throws -> [Suggestion]
 }
 
 // Default Lexin
@@ -24,7 +21,7 @@ class LexinParserSuggestionDefault : LexinParserSuggestion {
         return (url: getUrl(), headers: getRequestHeaders(word, language))
     }
     
-    func parse(text: String) throws -> [LexinParserSuggestionResultItem] {
+    func parse(text: String) throws -> [Suggestion] {
         let index = text.firstIndex(of: "\"") ?? text.startIndex
         let res = text[index...]
             .replacingOccurrences(of: "],0,7]", with: "")
@@ -57,7 +54,7 @@ class LexinParserSuggestionFolkets : LexinParserSuggestion {
         return (url: getUrl(), headers: getRequestHeaders(word, language))
     }
     
-    func parse(text: String) throws -> [LexinParserSuggestionResultItem] {
+    func parse(text: String) throws -> [Suggestion] {
         let index = text.firstIndex(of: "\"") ?? text.startIndex
         let res = text[index...]
             .replacingOccurrences(of: "],0,7]", with: "")

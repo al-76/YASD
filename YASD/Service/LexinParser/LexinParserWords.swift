@@ -8,37 +8,9 @@
 
 import UIKit
 
-typealias LexinParserWordsResult = Result<[LexinParserWordsResultItem]>
-
-struct LexinParserWordsResultItem {
-    struct Item {
-        var id: String
-        var value: String
-    }
-    struct Lang {
-        var meaning: String?
-        var phonetic: String?
-        var inflection: [String?]?
-        var grammar: String?
-        var example: [Item]?
-        var idiom: [Item]?
-        var compound: [Item]?
-        var translation: String?
-        var reference: String?
-        var synonym: [String?]?
-        var soundUrl: String?
-    }
-    
-    var word: String
-    var type: String?
-    var baseLang: Lang?
-    var targetLang: Lang?
-    var lexemes: [Lang]?
-}
-
 protocol LexinParserWords {
     func getRequestParameters(word: String, language: String) -> Network.PostParameters
-    func parse(text: String) throws -> [LexinParserWordsResultItem]
+    func parse(text: String) throws -> [LexinWord]
 }
 
 // Default Lexin
@@ -70,13 +42,13 @@ class LexinParserWordsDefault : LexinParserWords {
         return (body, headers)
     }
     
-    func parse(text: String) throws -> [LexinParserWordsResultItem] {
-        return try htmlParser.parse(html: text, query: "Word").map { word -> LexinParserWordsResultItem in
+    func parse(text: String) throws -> [LexinWord] {
+        return try htmlParser.parse(html: text, query: "Word").map { word -> LexinWord in
                 let baseLang = try LexinParserWordsDefault.parseLang(root: "BaseLang > ", element: word)
                 let targetLang = try LexinParserWordsDefault.parseLang(root: "TargetLang > ", element: word)
                 let value = (try word.attribute("Value")).removeQuotes()
                 let type = (try word.attribute("Type")).removeQuotes()
-                return LexinParserWordsResultItem(word: value,
+                return LexinWord(word: value,
                                               type: type,
                                               baseLang: baseLang,
                                               targetLang: targetLang,
@@ -84,8 +56,8 @@ class LexinParserWordsDefault : LexinParserWords {
         }
     }
     
-    fileprivate static func parseLang(root: String, element: HtmlParserElement) throws -> LexinParserWordsResultItem.Lang {
-        return LexinParserWordsResultItem.Lang(meaning: try parseMeaning(root: root, element: element),
+    fileprivate static func parseLang(root: String, element: HtmlParserElement) throws -> LexinWord.Lang {
+        return LexinWord.Lang(meaning: try parseMeaning(root: root, element: element),
                                            phonetic: parsePhonetic(phonetic: (try? element.selectText(root + "Phonetic")) ?? ""),
                     inflection: try? element.selectTexts(root + "Inflection"),
                     grammar: try? element.selectText(root + "Graminfo"),
@@ -124,24 +96,24 @@ class LexinParserWordsDefault : LexinParserWords {
 }
 
 class LexinParserWordsSwedish : LexinParserWordsDefault {
-    override func parse(text: String) throws -> [LexinParserWordsResultItem] {
+    override func parse(text: String) throws -> [LexinWord] {
         return try htmlParser.parse(html: text.replacingOccurrences(of: "\\n", with: ""), query: "Lemma")
-            .map { word ->LexinParserWordsResultItem in
+            .map { word ->LexinWord in
             let value = (try word.attribute("Value")).removeQuotes()
             let type = (try word.attribute("Type")).removeQuotes()
             let lexems = try LexinParserWordsSwedish.parseLexems(id: "Lexeme", element: word)
-            return LexinParserWordsResultItem(word: value, type: type, baseLang: nil, targetLang: nil, lexemes: lexems)
+            return LexinWord(word: value, type: type, baseLang: nil, targetLang: nil, lexemes: lexems)
         }
     }
     
-    private static func parseLexems(id: String, element: HtmlParserElement) throws -> [LexinParserWordsResultItem.Lang] {
+    private static func parseLexems(id: String, element: HtmlParserElement) throws -> [LexinWord.Lang] {
         let phonetic = parsePhonetic(phonetic: try element.selectText("Phonetic"))
         var soundUrl: String? = nil
         if let phoneticElement = try element.selectElements("Phonetic").first {
             soundUrl = try parseSoundUrl(root: "", element: phoneticElement)
         }
         let inflection = try element.selectTexts("Inflection")
-        var langs: [LexinParserWordsResultItem.Lang] = try element.selectElements(id).map {
+        var langs: [LexinWord.Lang] = try element.selectElements(id).map {
             var lang = try parseLang(root: "", element: $0)
             lang.phonetic = phonetic
             lang.inflection = inflection
@@ -150,17 +122,17 @@ class LexinParserWordsSwedish : LexinParserWordsDefault {
         }
         if langs.isEmpty {
             let reference = try? parseReference(root: "", element: element)
-            langs.append(LexinParserWordsResultItem.Lang(meaning: nil, phonetic: phonetic, inflection: inflection, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil, soundUrl: soundUrl))
+            langs.append(LexinWord.Lang(meaning: nil, phonetic: phonetic, inflection: inflection, grammar: nil, example: nil, idiom: nil, compound: nil, translation: nil, reference: reference, synonym: nil, soundUrl: soundUrl))
         }
         return langs
     }
 }
 
 private extension HtmlParserElement {
-    func selectLexinServiceResultItems(_ query: String) throws -> [LexinParserWordsResultItem.Item] {
+    func selectLexinServiceResultItems(_ query: String) throws -> [LexinWord.Item] {
         return try selectElements(query).map { element in
             let value = try element.text()
-            return LexinParserWordsResultItem.Item(id: try element.attribute("ID"),
+            return LexinWord.Item(id: try element.attribute("ID"),
                                         value: (value == "") ? try element.attribute("value") : value) }
     }
     
@@ -224,15 +196,15 @@ class LexinParserWordsFolkets : LexinParserWords {
         return (body, headers)
     }
     
-    func parse(text: String) throws -> [LexinParserWordsResultItem] {
+    func parse(text: String) throws -> [LexinWord] {
         return try htmlParser.parse(html: text.replacingOccurrences(of: "\\", with: ""),
                                     query: "word")
-            .map { word ->LexinParserWordsResultItem in
+            .map { word ->LexinWord in
             let value = (try word.attribute("value")).removeQuotes()
             let type = LexinParserWordsFolkets.parseType(type: (try word.attribute("class")).removeQuotes())
             let baseLang = try LexinParserWordsFolkets.parseLang(element: word)
             let targetLang = try LexinParserWordsFolkets.parseTranslatedLang(element: word)
-            return LexinParserWordsResultItem(word: value, type: type, baseLang: baseLang, targetLang: targetLang, lexemes: nil)
+            return LexinWord(word: value, type: type, baseLang: baseLang, targetLang: targetLang, lexemes: nil)
         }
     }
     
@@ -240,8 +212,8 @@ class LexinParserWordsFolkets : LexinParserWords {
         return wordTypes[type] ?? type
     }
     
-    private static func parseLang(element: HtmlParserElement) throws -> LexinParserWordsResultItem.Lang {
-        let lang = LexinParserWordsResultItem.Lang(meaning: try? element.selectValue("definition"),
+    private static func parseLang(element: HtmlParserElement) throws -> LexinWord.Lang {
+        let lang = LexinWord.Lang(meaning: try? element.selectValue("definition"),
                                                phonetic: parsePhonetic(phonetic: (try? element.selectValue("phonetic")) ?? ""),
                                            inflection: try? element.selectValues( "inflection"),
                                            grammar: try? element.selectValue("graminfo"),
@@ -255,10 +227,10 @@ class LexinParserWordsFolkets : LexinParserWords {
         return lang
     }
     
-    private static func parseTranslatedLang(element: HtmlParserElement) throws -> LexinParserWordsResultItem.Lang {
+    private static func parseTranslatedLang(element: HtmlParserElement) throws -> LexinWord.Lang {
         let example = try element.selectElements("example")
-            .map { LexinParserWordsResultItem.Item(id: try $0.attribute("id"), value: (try $0.selectValue("translation") ?? "")) }
-        let lang = LexinParserWordsResultItem.Lang(meaning: nil, phonetic: nil, inflection: nil, grammar: nil, example: example, idiom: nil, compound: nil, translation: nil, reference: nil, synonym: nil, soundUrl: nil)
+            .map { LexinWord.Item(id: try $0.attribute("id"), value: (try $0.selectValue("translation") ?? "")) }
+        let lang = LexinWord.Lang(meaning: nil, phonetic: nil, inflection: nil, grammar: nil, example: example, idiom: nil, compound: nil, translation: nil, reference: nil, synonym: nil, soundUrl: nil)
         return lang
     }
     

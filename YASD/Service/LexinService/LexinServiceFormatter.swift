@@ -9,12 +9,6 @@
 import Foundation
 import RxSwift
 
-struct LexinServiceResultFormattedItem {
-    let formatted: NSAttributedString
-    let soundUrl: String?
-}
-typealias LexinServiceResultFormatted = Result<[LexinServiceResultFormattedItem]>
-
 class LexinServiceFormatter {
     private let markdown: Markdown
     
@@ -22,16 +16,16 @@ class LexinServiceFormatter {
         self.markdown = markdown
     }
     
-    func format(result: LexinParserWordsResult) -> LexinServiceResultFormatted {
+    func format(result: LexinWordResult) -> FormattedWordResult {
         switch result {
         case .success(let items):
-            return .success(items.map { LexinServiceResultFormattedItem(formatted: format(item: $0), soundUrl: getSoundUrl(item: $0)) })
+            return .success(items.map { FormattedWord(formatted: format(item: $0), soundUrl: getSoundUrl(item: $0)) })
         case .failure(let error):
             return .failure(error)
         }
     }
     
-    private func format(item: LexinParserWordsResultItem) -> NSAttributedString {
+    private func format(item: LexinWord) -> NSAttributedString {
         if let baseLang = item.baseLang {
             return markdown.parse(data: formatWordDefinition(lang: baseLang, item: item) + formatWordExample(lang: baseLang, targetLang: item.targetLang))
         } else if let lexemes = item.lexemes {
@@ -47,7 +41,7 @@ class LexinServiceFormatter {
         return markdown.parse(data: formatWordDefinition(lang: nil, item: item))
     }
     
-    private func formatWordDefinition(lang: LexinParserWordsResultItem.Lang?, item: LexinParserWordsResultItem) -> String {
+    private func formatWordDefinition(lang: LexinWord.Lang?, item: LexinWord) -> String {
         var phonetic = ""
         if let langPhonetic = lang?.phonetic {
             phonetic = "[" + langPhonetic + "] "
@@ -63,7 +57,7 @@ class LexinServiceFormatter {
         return (word + inflection + formatTranslation(lang: lang, item: item))
     }
     
-    private func formatTranslation(lang: LexinParserWordsResultItem.Lang?, item: LexinParserWordsResultItem) -> String {
+    private func formatTranslation(lang: LexinWord.Lang?, item: LexinWord) -> String {
         var translation = textOrEmpty(text: (item.targetLang?.translation ?? "") + formatSynonym(lang: item.targetLang))
         if translation == "" {
             translation = textOrEmpty(text: (lang?.translation ?? "") + formatSynonym(lang: lang))
@@ -71,7 +65,7 @@ class LexinServiceFormatter {
         return translation
     }
     
-    private func formatSynonym(lang: LexinParserWordsResultItem.Lang?) -> String {
+    private func formatSynonym(lang: LexinWord.Lang?) -> String {
         var res = ""
         if let synonym = lang?.synonym, synonym.count > 0 {
             res = " (" + textStrings(strings: synonym) + ")"
@@ -79,7 +73,7 @@ class LexinServiceFormatter {
         return res
     }
     
-    private func formatWordExample(lang: LexinParserWordsResultItem.Lang, targetLang: LexinParserWordsResultItem.Lang?) -> String {
+    private func formatWordExample(lang: LexinWord.Lang, targetLang: LexinWord.Lang?) -> String {
         let meaning = textItalicOrEmpty(text: lang.meaning ?? "")
         let example = textTranslatedItems(items1opt: lang.example, items2opt: targetLang?.example)
         let idiom = textTranslatedItems(items1opt: lang.idiom, items2opt: targetLang?.idiom)
@@ -96,7 +90,7 @@ class LexinServiceFormatter {
             .joined(separator: ", ")
     }
     
-    private func textTranslatedItems(items1opt: [LexinParserWordsResultItem.Item]?, items2opt: [LexinParserWordsResultItem.Item]?) -> String {
+    private func textTranslatedItems(items1opt: [LexinWord.Item]?, items2opt: [LexinWord.Item]?) -> String {
         let separator = "\n* "
         var res = ""
         if let items1 = items1opt,
@@ -110,7 +104,7 @@ class LexinServiceFormatter {
         return res
     }
     
-    private func textMatchedItems(items1: [LexinParserWordsResultItem.Item], items2: [LexinParserWordsResultItem.Item], separator: String) -> String {
+    private func textMatchedItems(items1: [LexinWord.Item], items2: [LexinWord.Item], separator: String) -> String {
         let matchedItems = items1.compactMap { first in
             ( first, items2.first { $0.id == first.id } ) }
             .compactMap { $0 }
@@ -139,7 +133,7 @@ class LexinServiceFormatter {
         return (text == "" ? "" : "(" + text + ")")
     }
     
-    private func getSoundUrl(item: LexinParserWordsResultItem) -> String? {
+    private func getSoundUrl(item: LexinWord) -> String? {
         if let baseLang = item.baseLang {
             return baseLang.soundUrl
         } else if let lexeme = item.lexemes?.first {

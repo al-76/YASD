@@ -19,7 +19,7 @@ class LexinServiceTests: XCTestCase {
     
     func testSearch() {
         // Arrange
-        let testData = LexinParserWordsResult.success([ LexinParserWordsResultItem(word: "test") ])
+        let testData = LexinWordResult.success([ LexinWord(word: "test") ])
         let scheduler = TestScheduler(initialClock: 0)
         let service = createLexinService(createMockApiSearch(testData))
         
@@ -36,7 +36,7 @@ class LexinServiceTests: XCTestCase {
     
     func testSuggestion() {
         // Arrange
-        let testData = LexinParserSuggestionResult.success([ "Test" ])
+        let testData = SuggestionResult.success([ "Test" ])
         let scheduler = TestScheduler(initialClock: 0)
         let service = createLexinService(createMockApiSuggestion(testData))
         
@@ -53,12 +53,12 @@ class LexinServiceTests: XCTestCase {
 
 
     private func createLexinService(_ lexinApi: LexinApi) -> LexinService {
-        return LexinService(parameters: LexinServiceParameters(storage: createMockStorage(),
-                                                               language: MockLexinServiceParameters.Language(name: "test", code: "test")),
+        return LexinService(parameters: ParametersStorage(storage: createMockStorage(),
+                                                               language: Language(name: "test", code: "test")),
                             provider: createMockLexinApiProvider(lexinApi))
     }
     
-    private func createMockApiSuggestion(_ suggestionData: LexinParserSuggestionResult) -> LexinApi {
+    private func createMockApiSuggestion(_ suggestionData: SuggestionResult) -> LexinApi {
         let mock = MockLexinApi(network: createMockNetwork(),
                                    parserWords: MockLexinParserWords(),
                                    parserSuggestions: MockLexinParserSuggestion())
@@ -69,7 +69,7 @@ class LexinServiceTests: XCTestCase {
         return mock
     }
     
-    private func createMockApiSearch(_ searchData: LexinParserWordsResult) -> LexinApi {
+    private func createMockApiSearch(_ searchData: LexinWordResult) -> LexinApi {
         let mock = MockLexinApi(network: createMockNetwork(),
                                    parserWords: MockLexinParserWords(),
                                    parserSuggestions: MockLexinParserSuggestion())
@@ -96,9 +96,9 @@ class LexinServiceTests: XCTestCase {
     private func createMockStorage() -> MockStorage {
         let mock = MockStorage()
         stub(mock) { stub in
-            when(stub.get(id: anyString(), defaultObject: any(LexinServiceParameters.Language.self)))
-                .then { id, defaultObject -> LexinServiceParameters.Language in return defaultObject }
-            when(stub.save(id: anyString(), object: any(LexinServiceParameters.Language.self))).thenDoNothing()
+            when(stub.get(id: anyString(), defaultObject: any(Language.self)))
+                .then { id, defaultObject -> Language in return defaultObject }
+            when(stub.save(id: anyString(), object: any(Language.self))).thenDoNothing()
         }
         return mock
     }

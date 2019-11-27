@@ -19,15 +19,15 @@ class SettingsViewModelTests: XCTestCase {
     func testSelectLanguage() {
         // Arrange
         let testValues = [
-            LexinServiceParameters.Language(name: "initTestLanguage", code: "initTestCode"),
-            LexinServiceParameters.Language(name: "testLanguage", code: "testCode"),
+            Language(name: "initTestLanguage", code: "initTestCode"),
+            Language(name: "testLanguage", code: "testCode"),
         ]
         let scheduler = TestScheduler(initialClock: 0)
         let inputLanguages = scheduler.createHotObservable([
             .next(150, testValues[1])
             ])
         let outputSelectedLanguages = scheduler.createObserver(String.self)
-        let parameters = createLexinServiceParametersStub(language: testValues[0])
+        let parameters = createParametersStorageStub(language: testValues[0])
         inputLanguages.bind(to: parameters.language).disposed(by: disposeBag)
         let viewModel = SettingsViewModel(lexinParameters: parameters)
         let output = viewModel.transform(input: SettingsViewModel.Input())
@@ -43,9 +43,9 @@ class SettingsViewModelTests: XCTestCase {
             ])
     }
     
-    private func createLexinServiceParametersStub(language: LexinServiceParameters.Language) -> LexinServiceParametersStub {
-        DefaultValueRegistry.register(value: language, forType: LexinServiceParameters.Language.self)
-        let stub = LexinServiceParametersStub(storage: StorageStub(),
+    private func createParametersStorageStub(language: Language) -> ParametersStorageStub {
+        DefaultValueRegistry.register(value: language, forType: Language.self)
+        let stub = ParametersStorageStub(storage: StorageStub(),
                                               language: language)
         return stub
     }

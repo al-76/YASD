@@ -47,7 +47,7 @@ class WordsTableViewController: UITableViewController {
             .disposed(by: disposeBag)
         let input = WordsViewModel.Input(searchBar: createSearchDriver())
         model.transform(input: input)
-            .foundWords.map { [weak self] result -> [LexinServiceResultFormattedItem] in
+            .foundWords.map { [weak self] result -> [FormattedWord] in
                 return result.handleResult([], self?.handleError)
             }
             .drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { [weak self] (_, result, cell) in

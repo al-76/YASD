@@ -29,7 +29,7 @@ class SettingsLanguageTableViewController: UITableViewController {
                 return ""
             }
             table.cellForRow(at: $0)?.accessoryType = .checkmark
-            let item = try? table.rx.model(at: $0) as SettingsLanguageViewModel.SettingsItem
+            let item = try? table.rx.model(at: $0) as SettingsItem
             return (item?.language.name ?? "")
             }.asDriver(onErrorJustReturn: "")
         let input = SettingsLanguageViewModel.Input(selectedLanguage: language)

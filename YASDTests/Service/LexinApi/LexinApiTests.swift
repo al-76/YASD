@@ -24,7 +24,7 @@ class LexinApiTests: XCTestCase {
     
     func testSearch() {
         // Arrange
-        let testData = [ LexinParserWordsResultItem(word: "test_result") ]
+        let testData = [ LexinWord(word: "test_result") ]
         let api = LexinApi(network: createNetworkStub(),
                            parserWords: createMockLexinParserWords(testData),
                            parserSuggestions: LexinParserSuggestionStub())
@@ -36,7 +36,7 @@ class LexinApiTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, LexinParserWordsResult.success(testData)),
+            .next(200, LexinWordResult.success(testData)),
             .completed(200)
         ])
     }
@@ -54,7 +54,7 @@ class LexinApiTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, LexinParserWordsResult.failure(TestError.someError)),
+            .next(200, LexinWordResult.failure(TestError.someError)),
             .completed(200)
         ])
     }
@@ -72,7 +72,7 @@ class LexinApiTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, LexinParserWordsResult.success([])),
+            .next(200, LexinWordResult.success([])),
             .completed(200)
         ])
     }
@@ -91,7 +91,7 @@ class LexinApiTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, LexinParserSuggestionResult.success(testData)),
+            .next(200, SuggestionResult.success(testData)),
             .completed(200)
         ])
 
@@ -110,7 +110,7 @@ class LexinApiTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, LexinParserSuggestionResult.failure(TestError.someError)),
+            .next(200, SuggestionResult.failure(TestError.someError)),
             .completed(200)
         ])
 
@@ -129,7 +129,7 @@ class LexinApiTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, LexinParserSuggestionResult.success([])),
+            .next(200, SuggestionResult.success([])),
             .completed(200)
         ])
     }
@@ -139,7 +139,7 @@ class LexinApiTests: XCTestCase {
         return NetworkServiceStub(cache: cache, network: NetworkStub())
     }
     
-    private func createMockLexinParserWords(_ value: [ LexinParserWordsResultItem ]) -> MockLexinParserWords {
+    private func createMockLexinParserWords(_ value: [ LexinWord ]) -> MockLexinParserWords {
         let mock = MockLexinParserWords()
         stub(mock) { stub in
             when(stub.getRequestParameters(word: any(), language: any())).thenReturn(Network.PostParameters(url: "test", headers: nil))
