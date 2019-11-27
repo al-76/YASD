@@ -20,7 +20,7 @@ class CacheServiceTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         
         // Act
-        let runnedAction = service.runAction(key: "test", action: { Observable.just(testData) })
+        let runnedAction = service.run({ Observable.just(testData) }, forKey: "test")
         let res = scheduler.start { runnedAction }
         
         // Assert
@@ -37,7 +37,7 @@ class CacheServiceTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         
         // Act
-        let runnedAction = service.runAction(key: "test", action: { Observable.just(Data()) })
+        let runnedAction = service.run({ Observable.just(Data()) }, forKey: "test")
         let res = scheduler.start { runnedAction }
         
         // Assert
@@ -54,7 +54,7 @@ class CacheServiceTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         
         // Act
-        let runnedAction = service!.runAction(key: "test", action: { Observable.just(testData) })
+        let runnedAction = service!.run({ Observable.just(testData) }, forKey: "test")
         service = nil
         let res = scheduler.start { runnedAction }
         
@@ -69,7 +69,7 @@ class CacheServiceTests: XCTestCase {
         let mock = MockDataCache(name: "test")
         stub(mock) { stub in
             when(stub.load(any())).thenReturn(Observable.just(data))
-            when(stub.save(any(), forData: any())).then { _, data in
+            when(stub.save(any(), with: any())).then { _, data in
                 Observable.just(data)
             }
         }

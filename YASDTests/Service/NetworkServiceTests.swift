@@ -100,7 +100,7 @@ class NetworkServiceTests: XCTestCase {
     func createCacheServiceMock(value: Data, cached: Bool) -> MockCacheService {
         let mock = MockCacheService(cache: DataCacheStub(name: "Test"))
         stub(mock) { stub in
-            when(stub.runAction(key: any(), action: any())).then { key, action in
+            when(stub.run(any(), forKey: any())).then { action, key in
                 if !cached {
                     return action()
                 }
@@ -113,7 +113,7 @@ class NetworkServiceTests: XCTestCase {
     func createCacheServiceNotCachedMock(value: Data) -> MockCacheService {
         let mock = MockCacheService(cache: DataCacheStub(name: "Test"))
         stub (mock) { stub in
-            when(stub.runAction(key: any(), action: any())).then { key, action in
+            when(stub.run(any(), forKey: any())).then { action, key in
                 return Observable<Data>.create { observable in
                     observable.on(.next(value))
                     observable.onCompleted()

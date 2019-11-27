@@ -27,8 +27,7 @@ class PlayerService {
             guard let self = self else { return Observable.just(Data()) }
             return self.network.getRequest(with: url)
         }
-        return cache.runAction(key: url,
-                               action: action)
+        return cache.run(action, forKey: url)
             .map { [weak self] data in
                 guard let self = self else { return .success(false) }
                 return self.playAction(data)

@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  FormattedWord.swift
@@ -13,7 +13,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  LexinWord.swift
@@ -28,7 +28,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  ParametersStorage.swift
@@ -224,7 +224,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Model/SettingsItem.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Model/SettingsItem.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  SettingsItem.swift
@@ -239,7 +239,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  Suggestion.swift
@@ -254,7 +254,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  DataCache.swift
@@ -297,16 +297,16 @@ import RxSwift
     
     
     
-     override func save(_ key: String, forData data: Data) -> Observable<Data> {
+     override func save(_ key: String, with data: Data) -> Observable<Data> {
         
-    return cuckoo_manager.call("save(_: String, forData: Data) -> Observable<Data>",
+    return cuckoo_manager.call("save(_: String, with: Data) -> Observable<Data>",
             parameters: (key, data),
             escapingParameters: (key, data),
             superclassCall:
                 
-                super.save(key, forData: data)
+                super.save(key, with: data)
                 ,
-            defaultCall: __defaultImplStub!.save(key, forData: data))
+            defaultCall: __defaultImplStub!.save(key, with: data))
         
     }
     
@@ -334,9 +334,9 @@ import RxSwift
 	    }
 	    
 	    
-	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ key: M1, forData data: M2) -> Cuckoo.ClassStubFunction<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ key: M1, with data: M2) -> Cuckoo.ClassStubFunction<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, Data)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: data) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "save(_: String, forData: Data) -> Observable<Data>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "save(_: String, with: Data) -> Observable<Data>", parameterMatchers: matchers))
 	    }
 	    
 	    func load<M1: Cuckoo.Matchable>(_ key: M1) -> Cuckoo.ClassStubFunction<(String), Observable<Data?>> where M1.MatchedType == String {
@@ -361,9 +361,9 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ key: M1, forData data: M2) -> Cuckoo.__DoNotUse<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ key: M1, with data: M2) -> Cuckoo.__DoNotUse<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, Data)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: data) { $0.1 }]
-	        return cuckoo_manager.verify("save(_: String, forData: Data) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("save(_: String, with: Data) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -381,7 +381,7 @@ import RxSwift
     
 
     
-     override func save(_ key: String, forData data: Data) -> Observable<Data>  {
+     override func save(_ key: String, with data: Data) -> Observable<Data>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
     }
     
@@ -392,7 +392,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-11-27 15:59:50 +0000
 
 
 //
@@ -711,7 +711,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  MarkdownParser.swift
@@ -818,7 +818,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  Network.swift
@@ -955,7 +955,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  Player.swift
@@ -1106,7 +1106,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  Storage.swift
@@ -1242,7 +1242,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  CacheService.swift
@@ -1284,16 +1284,16 @@ import RxSwift
     
     
     
-     override func runAction(key: String, action: @escaping CachableAction) -> Observable<Data> {
+     override func run(_ action: @escaping CachableAction, forKey key: String) -> Observable<Data> {
         
-    return cuckoo_manager.call("runAction(key: String, action: @escaping CachableAction) -> Observable<Data>",
-            parameters: (key, action),
-            escapingParameters: (key, action),
+    return cuckoo_manager.call("run(_: @escaping CachableAction, forKey: String) -> Observable<Data>",
+            parameters: (action, key),
+            escapingParameters: (action, key),
             superclassCall:
                 
-                super.runAction(key: key, action: action)
+                super.run(action, forKey: key)
                 ,
-            defaultCall: __defaultImplStub!.runAction(key: key, action: action))
+            defaultCall: __defaultImplStub!.run(action, forKey: key))
         
     }
     
@@ -1306,9 +1306,9 @@ import RxSwift
 	    }
 	    
 	    
-	    func runAction<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, action: M2) -> Cuckoo.ClassStubFunction<(String, CachableAction), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == CachableAction {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, CachableAction)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: action) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockCacheService.self, method: "runAction(key: String, action: @escaping CachableAction) -> Observable<Data>", parameterMatchers: matchers))
+	    func run<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ action: M1, forKey key: M2) -> Cuckoo.ClassStubFunction<(CachableAction, String), Observable<Data>> where M1.MatchedType == CachableAction, M2.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(CachableAction, String)>] = [wrap(matchable: action) { $0.0 }, wrap(matchable: key) { $0.1 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockCacheService.self, method: "run(_: @escaping CachableAction, forKey: String) -> Observable<Data>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1328,9 +1328,9 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func runAction<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, action: M2) -> Cuckoo.__DoNotUse<(String, CachableAction), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == CachableAction {
-	        let matchers: [Cuckoo.ParameterMatcher<(String, CachableAction)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: action) { $0.1 }]
-	        return cuckoo_manager.verify("runAction(key: String, action: @escaping CachableAction) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func run<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ action: M1, forKey key: M2) -> Cuckoo.__DoNotUse<(CachableAction, String), Observable<Data>> where M1.MatchedType == CachableAction, M2.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(CachableAction, String)>] = [wrap(matchable: action) { $0.0 }, wrap(matchable: key) { $0.1 }]
+	        return cuckoo_manager.verify("run(_: @escaping CachableAction, forKey: String) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1342,14 +1342,14 @@ import RxSwift
     
 
     
-     override func runAction(key: String, action: @escaping CachableAction) -> Observable<Data>  {
+     override func run(_ action: @escaping CachableAction, forKey key: String) -> Observable<Data>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  LexinApi.swift
@@ -1485,7 +1485,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  LexinApiProvider.swift
@@ -1591,7 +1591,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  LexinServiceProviderSuggestion.swift
@@ -1969,7 +1969,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  LexinServiceProviderWords.swift
@@ -2468,7 +2468,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  LexinService.swift
@@ -2635,7 +2635,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  LexinService+Format.swift
@@ -2742,7 +2742,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  NetworkService.swift
@@ -2879,7 +2879,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-11-27 15:38:47 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-11-27 15:59:50 +0000
 
 //
 //  PlayerService.swift

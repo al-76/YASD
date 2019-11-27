@@ -19,18 +19,18 @@ class NetworkService {
     }
     
     func getRequest(with url: String) -> Observable<String> {
-        return cache.runAction(key: url, action: { [weak self] in
+        return cache.run({ [weak self] in
             guard let self = self else { return Observable.just(Data()) }
             return self.network.getRequest(with: url)
-        }).map { NetworkService.toString($0) }
+            }, forKey: url).map { NetworkService.toString($0) }
     }
     
     func postRequest(with parameters: Network.PostParameters) -> Observable<String> {
         let key = postRequestKey(parameters)
-        return cache.runAction(key: key, action: { [weak self] in
+        return cache.run({ [weak self] in
             guard let self = self else { return Observable.just(Data()) }
             return self.network.postRequest(with: parameters)
-        }).map { NetworkService.toString($0) }
+            }, forKey: key).map { NetworkService.toString($0) }
     }
     
     private func postRequestKey(_ parameters: Network.PostParameters) -> String {
