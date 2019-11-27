@@ -18,7 +18,7 @@ class DataCache {
         self.name = name
     }
     
-    func save(key: String, data: Data) -> Observable<Data> {
+    func save(_ key: String, forData data: Data) -> Observable<Data> {
         return Observable.create { [weak self] observer in
             if let self = self {
                 do {
@@ -33,7 +33,7 @@ class DataCache {
         }
     }
 
-    func load(key: String) -> Observable<Data?> {
+    func load(_ key: String) -> Observable<Data?> {
         return Observable.create { [weak self] observer in
             if let self = self {
                 do {

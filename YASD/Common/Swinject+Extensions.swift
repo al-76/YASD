@@ -23,7 +23,7 @@ extension Container {
 }
 
 extension SwinjectStoryboard {
-    class func register(storyboard: SwinjectStoryboard, container: Container) {
+    class func register(_ storyboard: SwinjectStoryboard, with container: Container) {
         container.register(SwinjectStoryboard.self) { container in
             storyboard
         }

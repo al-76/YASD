@@ -46,14 +46,14 @@ class WordsTableViewController: UITableViewController {
             .drive(searchResultsController.searchText)
             .disposed(by: disposeBag)
         let input = WordsViewModel.Input(searchBar: createSearchDriver())
-        model.transform(input: input)
+        model.transform(from: input)
             .foundWords.map { [weak self] result -> [FormattedWord] in
                 return result.handleResult([], self?.handleError)
             }
             .drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { [weak self] (_, result, cell) in
                 if let wordsCell = cell as? WordsTableViewCell {
                     wordsCell.textView.attributedText = result.formatted
-                    self?.configureButtonPlay(cell: wordsCell, url: result.soundUrl)
+                    self?.configureButtonPlay(wordsCell, with: result.soundUrl)
                 }
             }
             .disposed(by: disposeBag)
@@ -81,7 +81,7 @@ class WordsTableViewController: UITableViewController {
         }
     }
         
-    private func configureButtonPlay(cell: WordsTableViewCell, url: String?) {
+    private func configureButtonPlay(_ cell: WordsTableViewCell, with url: String?) {
         cell.buttonPlay.isHidden = (url == nil)
         if url == nil {
             return
@@ -94,7 +94,7 @@ class WordsTableViewController: UITableViewController {
             return url!
         }
         let output = cell.model
-            .transform(input: WordsCellModel.Input(url: inputUrl))
+            .transform(from: WordsCellModel.Input(url: inputUrl))
         output.played.asObservable()
             .subscribe { [weak self] event in
                 _ = event.element?.handleResult(false, self?.handleError)
@@ -114,7 +114,7 @@ class WordsTableViewController: UITableViewController {
 //        })
     }
     
-    private func handleError(error: Error) {
+    private func handleError(_ error: Error) {
         print(error) // TODO: show alert
     }
 }

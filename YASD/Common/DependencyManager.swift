@@ -13,16 +13,16 @@ import SwinjectStoryboard
 func createContainer() -> Container {
     let container = Container()
     
-    configurePlatform(container: container)
-    configureService(container: container)
-    configureApi(container: container)
-    configureModel(container: container)
-    configureView(container: container)
+    configurePlatform(container)
+    configureService(container)
+    configureApi(container)
+    configureModel(container)
+    configureView(container)
     
     return container
 }
 
-func configurePlatform(container: Container) {
+func configurePlatform(_ container: Container) {
     container.register(Network.self) { _ in Network() }
         .inObjectScope(.container)
     container.register(HtmlParser.self) { _ in HtmlParser() }
@@ -31,14 +31,12 @@ func configurePlatform(container: Container) {
         .inObjectScope(.container)
     container.register(Storage.self) { _ in Storage() }
         .inObjectScope(.container)
-    container.register(Files.self) { _ in Files() }
-        .inObjectScope(.container)
     container.register(Player.self) { _ in Player() }
         .inObjectScope(.container)
     container.register(DataCache.self) { _, name in DataCache(name: name) }
 }
 
-func configureApi(container: Container) {
+func configureApi(_ container: Container) {
     // Api
     container.register(LexinApi.self, name: "LexinApi") { _ in
         LexinApi(network: container.resolve(NetworkService.self)!, parserWords: container.resolve(LexinParserWordsDefault.self)!, parserSuggestions: container.resolve(LexinParserSuggestionDefault.self)!)
@@ -58,7 +56,7 @@ func configureApi(container: Container) {
     .inObjectScope(.container)
 }
 
-func configureService(container: Container) {
+func configureService(_ container: Container) {
     // Parsers
     container.register(LexinParserWordsDefault.self) { _ in
         LexinParserWordsDefault(htmlParser: container.resolve(HtmlParser.self)!)
@@ -124,7 +122,7 @@ func configureService(container: Container) {
     .inObjectScope(.container)
 }
 
-func configureModel(container: Container) {
+func configureModel(_ container: Container) {
     container.register(WordsSuggestionViewModel.self) { container in
         WordsSuggestionViewModel(lexin: container.resolve(LexinService.self)!)
     }
@@ -149,7 +147,7 @@ func configureModel(container: Container) {
     .inObjectScope(.container)
 }
 
-func configureView(container: Container) {
+func configureView(_ container: Container) {
     container.registerForStoryboard(WordsSuggestionTableViewController.self,
                                     withIdentifier: "WordsSuggestionTableViewController") { container, view  in
         view.model = container.resolve(WordsSuggestionViewModel.self)!

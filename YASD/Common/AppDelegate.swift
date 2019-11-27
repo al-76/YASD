@@ -18,21 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        self.window = createMainWindow(container: container)
+        self.window = createMainWindow(container)
         
         return true
     }
     
-    func createMainWindow(container: Container) -> UIWindow {
+    func createMainWindow(_ container: Container) -> UIWindow {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
-        window.rootViewController = createRootViewController(container: container)
+        window.rootViewController = createRootViewController(container)
         return window
     }
     
-    func createRootViewController(container: Container) -> UIViewController? {
+    func createRootViewController(_ container: Container) -> UIViewController? {
         let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: container)
-        SwinjectStoryboard.register(storyboard: storyboard, container: container)
+        SwinjectStoryboard.register(storyboard, with: container)
         return storyboard.instantiateInitialViewController()
     }
 }

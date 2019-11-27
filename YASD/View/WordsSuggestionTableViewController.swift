@@ -35,7 +35,7 @@ class WordsSuggestionTableViewController: UITableViewController {
     private func bindToModel() {
         let text = searchText.asDriver(onErrorJustReturn: "")
         let input = WordsSuggestionViewModel.Input(searchBar: text)
-        model.transform(input: input).suggestions.map { [weak self] result -> [Suggestion] in
+        model.transform(from: input).suggestions.map { [weak self] result -> [Suggestion] in
             return result.handleResult([], self?.handleError)
         }
         .drive(tableView.rx.items(cellIdentifier: "WordsSuggestionTableCell")) { (_, result, cell) in
@@ -47,17 +47,17 @@ class WordsSuggestionTableViewController: UITableViewController {
                 
         tableView.rx.itemSelected.subscribe(onNext: { [weak self] index in
             guard let self = self else { return }
-            self.selectedSuggestion.accept(self.suggestion(index: index))
+            self.selectedSuggestion.accept(self.suggestion(index))
         }).disposed(by: self.disposeBag)
     }
     
-    private func suggestion(index: IndexPath) -> String {
+    private func suggestion(_ index: IndexPath) -> String {
         guard let cell = tableView.cellForRow(at: index) as? WordsSuggestionTableViewCell,
             let text = cell.label.text else { return "" }
         return text
     }
     
-    private func handleError(error: Error) {
+    private func handleError(_ error: Error) {
         print(error) // TODO: show alert
     }
 }

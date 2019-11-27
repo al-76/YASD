@@ -19,12 +19,12 @@ class LexinApi {
         self.parserSuggestions = parserSuggestions
     }
     
-    func search(word: String, language: String) -> Observable<LexinWordResult> {
+    func search(_ word: String, with language: String) -> Observable<LexinWordResult> {
         if word.isEmpty {
             return Observable<LexinWordResult>.just(.success([]))
         }
         
-        let parameters = parserWords.getRequestParameters(word: word, language: language)
+        let parameters = parserWords.getRequestParameters(word, with: language)
         return network.postRequest(with: parameters).map { [weak self] result in
             guard let self = self else { return .success([]) }
             do {
@@ -35,12 +35,12 @@ class LexinApi {
         }
     }
     
-    func suggestion(word: String, language: String) -> Observable<SuggestionResult> {
+    func suggestion(_ word: String, with language: String) -> Observable<SuggestionResult> {
         if word.isEmpty {
             return Observable.just(.success([]))
         }
         
-        let parameters = parserSuggestions.getRequestParameters(word: word, language: language)
+        let parameters = parserSuggestions.getRequestParameters(word, with: language)
         return network.postRequest(with: parameters).map { [weak self] result in
             guard let self = self else { return .success([]) }
             do {

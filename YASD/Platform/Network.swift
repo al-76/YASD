@@ -10,32 +10,32 @@ import RxSwift
 import Foundation
 
 class Network {
-    typealias PostParameters = (url: String, headers: (String?, [String: String]?)?)
-    func postRequest(with: PostParameters) -> Observable<Data> {
-        let request = createRequest(url: with.url, type: "POST", parameters: with.headers)
-        return executeRequest(request: request)
+    typealias PostParameters = (url: String, parameters: (String?, [String: String]?)?)
+    func postRequest(with parameters: PostParameters) -> Observable<Data> {
+        let request = createRequest(parameters.url, type: "POST", parameters: parameters.parameters)
+        return execute(request)
     }
     
-    func getRequest(url: String) -> Observable<Data> {
-        let request = createRequest(url: url, type: "GET", parameters: nil)
-        return executeRequest(request: request)
+    func getRequest(with url: String) -> Observable<Data> {
+        let request = createRequest(url, type: "GET", parameters: nil)
+        return execute(request)
     }
     
-    private func createRequest(url: String, type: String, parameters: (body: String?, headers: [String: String]?)?) -> URLRequest {
+    private func createRequest(_ url: String, type: String, parameters: (body: String?, headers: [String: String]?)?) -> URLRequest {
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = type
         if let body = parameters?.0 {
             request.httpBody = body.data(using: .utf8)
         }
-        if let headers = parameters?.1 {
-            for (key, value) in headers {
+        if let parameters = parameters?.1 {
+            for (key, value) in parameters {
                 request.setValue(value, forHTTPHeaderField: key)
             }
         }
         return request
     }
     
-    private func executeRequest(request: URLRequest) -> Observable<Data> {
+    private func execute(_ request: URLRequest) -> Observable<Data> {
         return URLSession.shared.rx
             .data(request: request)
             .retry(3)

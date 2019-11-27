@@ -19,7 +19,7 @@ class NetworkServiceTests: XCTestCase {
         testRequest(with: str,
                        cache: createCacheServiceMock(value: strData, cached: true),
                        network: NetworkStub(),
-                       action: { $0.getRequest(url: "test") })
+                       action: { $0.getRequest(with: "test") })
     }
     
     func testGetRequestNotCached() {
@@ -28,13 +28,13 @@ class NetworkServiceTests: XCTestCase {
         testRequest(with: str,
                        cache: createCacheServiceMock(value: strData, cached: false),
                        network: createNetworkMock(strData),
-                       action: { $0.getRequest(url: "test") })
+                       action: { $0.getRequest(with: "test") })
     }
     
     func testPostRequestCached() {
         let str = "Test"
         let strData = str.data(using: String.Encoding.utf8)!
-        let parameters = Network.PostParameters(url: "test", headers: ("test", ["key": "value"]))
+        let parameters = Network.PostParameters(url: "test", parameters: ("test", ["key": "value"]))
         testRequest(with: str,
                          cache: createCacheServiceMock(value: strData, cached: true),
                          network: NetworkStub(),
@@ -44,7 +44,7 @@ class NetworkServiceTests: XCTestCase {
     func testPostRequestNotCached() {
         let str = "Test"
         let strData = str.data(using: String.Encoding.utf8)!
-        let parameters = Network.PostParameters(url: "test", headers: ("test", ["key": "value"]))
+        let parameters = Network.PostParameters(url: "test", parameters: ("test", ["key": "value"]))
         testRequest(with: str,
                        cache: createCacheServiceMock(value: strData, cached: false),
                        network: createNetworkMock(strData),
@@ -53,13 +53,13 @@ class NetworkServiceTests: XCTestCase {
     
     func testGetRequestWithInvalidService() {
         testRequestsWithInvalidObject(with: { service in
-            return service.postRequest(with: Network.PostParameters(url: "test", headers: nil))
+            return service.postRequest(with: Network.PostParameters(url: "test", parameters: nil))
         })
     }
     
     func testPostRequestWithInvalidService() {
         testRequestsWithInvalidObject(with: { service in
-            return service.getRequest(url: "test")
+            return service.getRequest(with: "test")
         })
     }
     
@@ -78,7 +78,7 @@ class NetworkServiceTests: XCTestCase {
         XCTAssertEqual(res.events, [
                 .next(200, ""),
                 .completed(200)
-        ])
+       ])
     }
     
     private func testRequest(with testData: String, cache: CacheService, network: Network, action: (NetworkService) -> Observable<String>) {
@@ -94,7 +94,7 @@ class NetworkServiceTests: XCTestCase {
         XCTAssertEqual(res.events, [
               .next(200, testData),
               .completed(200)
-              ])
+             ])
     }
         
     func createCacheServiceMock(value: Data, cached: Bool) -> MockCacheService {
@@ -127,7 +127,7 @@ class NetworkServiceTests: XCTestCase {
     func createNetworkMock(_ value: Data) -> MockNetwork {
         let mock = MockNetwork()
         stub(mock) { stub in
-            when(stub.getRequest(url: any())).thenReturn(Observable.just(value))
+            when(stub.getRequest(with: any())).thenReturn(Observable.just(value))
             when(stub.postRequest(with: any())).thenReturn(Observable.just(value))
         }
         return mock

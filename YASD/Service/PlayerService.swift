@@ -22,22 +22,22 @@ class PlayerService {
         self.network = network
     }
     
-    func playSound(url: String) -> Observable<PlayerServiceResult> {
+    func playSound(with url: String) -> Observable<PlayerServiceResult> {
         let action: CachableAction = { [weak self] in
             guard let self = self else { return Observable.just(Data()) }
-            return self.network.getRequest(url: url)
+            return self.network.getRequest(with: url)
         }
         return cache.runAction(key: url,
                                action: action)
             .map { [weak self] data in
                 guard let self = self else { return .success(false) }
-                return self.playAction(data: data)
+                return self.playAction(data)
         }
     }
     
-    private func playAction(data: Data) -> PlayerServiceResult {
+    private func playAction(_ data: Data) -> PlayerServiceResult {
         do {
-            try self.player.play(data: data)
+            try self.player.play(with: data)
         } catch let error {
             return .failure(error)
         }

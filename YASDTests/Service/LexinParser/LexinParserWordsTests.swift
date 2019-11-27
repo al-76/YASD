@@ -33,8 +33,8 @@ class LexinParserWordsTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res, [LexinWord(word: testData), LexinWord(word: testData)])
-        XCTAssertFalse(parser.getRequestParameters(word: testData, language: testData).url.isEmpty)
-        XCTAssert(parser.getRequestParameters(word: testData, language: testData).headers!.0!.contains(testData))
+        XCTAssertFalse(parser.getRequestParameters(testData, with: testData).url.isEmpty)
+        XCTAssert(parser.getRequestParameters(testData, with: testData).parameters!.0!.contains(testData))
     }
     
     class MockHtmlParserElement1 : HtmlParserElement {
@@ -57,11 +57,11 @@ class LexinParserWordsTests: XCTestCase {
         }
         
         func selectTexts(_ query: String) throws -> [String] {
-            return [ "Texts: " + query ]
+            return ["Texts: " + query]
         }
         
         func selectElements(_ query: String) throws -> [HtmlParserElement] {
-            return [ MockHtmlParserElement1(data: query) ]
+            return [MockHtmlParserElement1(data: query)]
         }
     }
     
@@ -75,16 +75,8 @@ class LexinParserWordsTests: XCTestCase {
         let mock = MockHtmlParser()
         stub(mock) { stub in
             when(stub.parse(html: any(), query: any())).then { html, query in
-                return [ MockHtmlParserElement1(data: html), MockHtmlParserElement2(data: html)]
+                return [MockHtmlParserElement1(data: html), MockHtmlParserElement2(data: html)]
             }
-        }
-        return mock
-    }
-    
-    private func createMockHtmlParserError(error: Error) -> MockHtmlParser {
-        let mock = MockHtmlParser()
-        stub (mock) { stub in
-            when(stub.parse(html: any(), query: any())).thenThrow(error)
         }
         return mock
     }

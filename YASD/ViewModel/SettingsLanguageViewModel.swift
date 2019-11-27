@@ -23,30 +23,30 @@ class SettingsLanguageViewModel: ViewModel {
     
     init(lexinParameters: ParametersStorage) {
         self.lexinParameters = lexinParameters
-        self.languageItems = SettingsLanguageViewModel.createSettingsLanguageItems(language: lexinParameters.getLanguage())
+        self.languageItems = SettingsLanguageViewModel.createSettingsLanguageItems(lexinParameters.getLanguage())
     }
     
-    func transform(input: Input) -> Output {
-        let selectedLanguage = input.selectedLanguage.flatMapLatest { [weak self] selected -> Driver<[SettingsItem]> in
+    func transform(from input: Input) -> Output {
+        let selectedLanguage = input.selectedLanguage.flatMapLatest { [weak self] language -> Driver<[SettingsItem]> in
             guard let self = self else { return Driver.just([]) }
-            self.updateParameters(language: selected)
+            self.updateParameters(with: language)
             return Driver.just(self.languageItems)
         }
         return Output(languages: selectedLanguage.startWith(self.languageItems))
     }
     
-    private func updateParameters(language: String) {
+    private func updateParameters(with language: String) {
         if let new = languageItems.firstIndex(where: { $0.language.name == language}) {
             if let old = languageItems.firstIndex(where: { $0.selected }) {
                 languageItems[old].selected = false
             }
             let newLanguage = languageItems[new].language
-            lexinParameters.setLanguage(language: newLanguage)
+            lexinParameters.setLanguage(newLanguage)
             languageItems[new].selected = true
         }
     }
     
-    private static func createSettingsLanguageItems(language: Language) -> [SettingsItem] {
+    private static func createSettingsLanguageItems(_ language: Language) -> [SettingsItem] {
         var res = ParametersStorage.supportedLanguages.map {
             SettingsItem(selected: false, language: $0)
         }

@@ -18,10 +18,10 @@ class NetworkService {
         self.network = network
     }
     
-    func getRequest(url: String) -> Observable<String> {
+    func getRequest(with url: String) -> Observable<String> {
         return cache.runAction(key: url, action: { [weak self] in
             guard let self = self else { return Observable.just(Data()) }
-            return self.network.getRequest(url: url)
+            return self.network.getRequest(with: url)
         }).map { NetworkService.toString($0) }
     }
     
@@ -35,7 +35,7 @@ class NetworkService {
     
     private func postRequestKey(_ parameters: Network.PostParameters) -> String {
         var res = parameters.url
-        if let body = parameters.headers?.0 {
+        if let body = parameters.parameters?.0 {
             res += body
         }
         return res

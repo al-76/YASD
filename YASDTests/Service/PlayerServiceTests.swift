@@ -25,14 +25,14 @@ class PlayerServiceTests: XCTestCase {
                                     network: createMockNetwork())
         
         // Act
-        let played = service.playSound(url: "test")
+        let played = service.playSound(with: "test")
         let res = scheduler.start { played }
         
         // Assert
         XCTAssertEqual(res.events, [
             .next(200, .success(true)),
             .completed(200)
-            ])
+           ])
     }
     
     func testPlaySoundSelfNil() {
@@ -43,7 +43,7 @@ class PlayerServiceTests: XCTestCase {
                                                     network: createMockNetwork())
         
         // Act
-        let played = service!.playSound(url: "test")
+        let played = service!.playSound(with: "test")
         service = nil
         let res = scheduler.start { played }
         
@@ -51,7 +51,7 @@ class PlayerServiceTests: XCTestCase {
         XCTAssertEqual(res.events, [
             .next(200, .success(false)),
             .completed(200)
-            ])
+           ])
     }
     
     func testPlaySoundPlayerError() {
@@ -62,14 +62,14 @@ class PlayerServiceTests: XCTestCase {
                                     network: createMockNetwork())
         
         // Act
-        let played = service.playSound(url: "test")
+        let played = service.playSound(with: "test")
         let res = scheduler.start { played }
         
         // Assert
         XCTAssertEqual(res.events, [
             .next(200, .failure(TestError.someError)),
             .completed(200)
-            ])
+           ])
     }
     
     private func createMockCacheService() -> MockCacheService {
@@ -85,7 +85,7 @@ class PlayerServiceTests: XCTestCase {
     private func createMockNetwork() -> MockNetwork {
         let mock = MockNetwork()
         stub(mock) { stub in
-            when(stub.getRequest(url: anyString())).thenReturn(Observable.just(Data()))
+            when(stub.getRequest(with: anyString())).thenReturn(Observable.just(Data()))
         }
         return mock
     }
@@ -93,7 +93,7 @@ class PlayerServiceTests: XCTestCase {
     private func createMockPlayer() -> MockPlayer {
         let mock = MockPlayer()
         stub(mock) { stub in
-            when(stub.play(data: any())).thenDoNothing()
+            when(stub.play(with: any())).thenDoNothing()
         }
         return mock
     }
@@ -101,7 +101,7 @@ class PlayerServiceTests: XCTestCase {
     private func createMockPlayerError() -> MockPlayer {
         let mock = MockPlayer()
         stub(mock) { stub in
-            when(stub.play(data: any())).thenThrow(TestError.someError)
+            when(stub.play(with: any())).thenThrow(TestError.someError)
         }
         return mock
     }

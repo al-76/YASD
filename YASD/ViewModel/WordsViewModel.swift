@@ -29,19 +29,19 @@ class WordsViewModel: ViewModel {
         self.player = player
     }
     
-    func transform(input: Input) -> Output {
+    func transform(from input: Input) -> Output {
         // Search a word
         let searchedBar = input.searchBar
             .flatMapLatest { [weak self] word -> Driver<FormattedWordResult> in
                 guard let self = self else { return Driver.just(.success([])) }
                 self.lastWord = word
-                return self.searchWord(word: word)
+                return self.searchWord(word)
         }
         let updateSearch = lexin.language()
             .asDriver(onErrorJustReturn: ParametersStorage.defaultLanguage)
             .flatMapLatest { [weak self] _ -> Driver<FormattedWordResult> in
                 guard let self = self else { return Driver.just(.success([])) }
-                return self.searchWord(word: self.lastWord)
+                return self.searchWord(self.lastWord)
         }
         let searched = Driver.merge(searchedBar, updateSearch)
         return Output(foundWords: searched)
@@ -51,8 +51,8 @@ class WordsViewModel: ViewModel {
         return WordsCellModel(player: player)
     }
     
-    private func searchWord(word: String) -> Driver<FormattedWordResult> {
-        return lexin.search(word: word)
+    private func searchWord(_ word: String) -> Driver<FormattedWordResult> {
+        return lexin.search(word)
             .map { [weak self] result in
                 guard let self = self else { return .success([]) }
                 return self.formatter.format(result: result) }

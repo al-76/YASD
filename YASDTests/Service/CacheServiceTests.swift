@@ -27,7 +27,7 @@ class CacheServiceTests: XCTestCase {
         XCTAssertEqual(res.events, [
             .next(200, testData),
             .completed(200)
-        ])
+       ])
     }
     
     func testRunActionCached() {
@@ -44,7 +44,7 @@ class CacheServiceTests: XCTestCase {
         XCTAssertEqual(res.events, [
             .next(200, testData),
             .completed(200)
-        ])
+       ])
     }
     
     func testRunActionSelfNil() {
@@ -62,14 +62,14 @@ class CacheServiceTests: XCTestCase {
         XCTAssertEqual(res.events, [
             .next(200, testData),
             .completed(200)
-        ])
+       ])
     }
     
     private func createMockDataCache(data: Data?) -> MockDataCache {
         let mock = MockDataCache(name: "test")
         stub(mock) { stub in
-            when(stub.load(key: any())).thenReturn(Observable.just(data))
-            when(stub.save(key: any(), data: any())).then { _, data in
+            when(stub.load(any())).thenReturn(Observable.just(data))
+            when(stub.save(any(), forData: any())).then { _, data in
                 Observable.just(data)
             }
         }

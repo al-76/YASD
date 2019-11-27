@@ -18,14 +18,14 @@ class LexinService {
         self.provider = provider
     }
 
-    func search(word: String) -> Observable<LexinWordResult> {
-        return provider.getApi(language: parameters.getLanguage())
-            .search(word: word, language: parameters.getLanguageString())
+    func search(_ word: String) -> Observable<LexinWordResult> {
+        return provider.getApi(by: parameters.getLanguage())
+            .search(word, with: parameters.getLanguageString())
     }
     
-    func suggestion(word: String) -> Observable<SuggestionResult> {
-        return provider.getApi(language: parameters.getLanguage())
-            .suggestion(word: word, language: parameters.getLanguageString())
+    func suggestion(_ word: String) -> Observable<SuggestionResult> {
+        return provider.getApi(by: parameters.getLanguage())
+            .suggestion(word, with: parameters.getLanguageString())
     }
     
     func language() -> BehaviorSubject<Language> {

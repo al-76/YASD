@@ -23,7 +23,7 @@ class SettingsViewModel: ViewModel {
         self.lexinParameters = lexinParameters
     }
     
-    func transform(input: Input) -> Output {
+    func transform(from input: Input) -> Output {
         let languageUpdate = lexinParameters.language.map { $0.name }
         return Output(selectedLanguage: languageUpdate.asDriver(onErrorJustReturn: ""))
     }

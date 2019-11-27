@@ -12,7 +12,7 @@ import AVFoundation
 class Player {
     var player: AVAudioPlayer?
     
-    func play(data: Data) throws {
+    func play(with data: Data) throws {
         player = try AVAudioPlayer(data: data)
         player?.prepareToPlay()
         player?.play()

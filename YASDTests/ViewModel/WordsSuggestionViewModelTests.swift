@@ -29,10 +29,10 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(250, "test3"),
             .next(350, errorWord),
             .completed(400)
-        ])
+       ])
         let suggestions = scheduler.createObserver(SuggestionResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(errorWord: errorWord))
-        viewModel.transform(input: WordsSuggestionViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
+        viewModel.transform(from: WordsSuggestionViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .suggestions.drive(suggestions).disposed(by: disposeBag)
         
         // Act
@@ -40,11 +40,11 @@ class WordsSuggestionViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(suggestions.events, [
-            .next(200, SuggestionResult.success([ "test2" ])),
-            .next(250, SuggestionResult.success([ "test3" ])),
+            .next(200, SuggestionResult.success(["test2"])),
+            .next(250, SuggestionResult.success(["test3"])),
             .next(350, SuggestionResult.failure(TestError.someError)),
             .completed(400)
-        ])
+       ])
     }
     
     func testSuggestionErrorNilViewModel() {
@@ -54,10 +54,10 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(200, "test2"),
             .next(250, "test3"),
             .completed(400)
-        ])
+       ])
         let suggestions = scheduler.createObserver(SuggestionResult.self)
         var viewModel: WordsSuggestionViewModel? = WordsSuggestionViewModel(lexin: createMockLexinService(errorWord: "error_word"))
-        viewModel?.transform(input: WordsSuggestionViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
+        viewModel?.transform(from: WordsSuggestionViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
             .suggestions.drive(suggestions).disposed(by: disposeBag)
         
         // Act
@@ -69,7 +69,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(200, SuggestionResult.success([])),
             .next(250, SuggestionResult.success([])),
             .completed(400)
-        ])
+       ])
     }
     
     func createMockLexinService(errorWord: String) -> MockLexinService {
@@ -83,12 +83,12 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let mock = MockLexinService(parameters: stubParameters, provider: mockProvider)
         stub(mock) { stub in
             when(stub.language()).thenReturn(stubParameters.language)
-            when(stub.suggestion(word: any())).then { word in
+            when(stub.suggestion(any())).then { word in
                 return Observable<SuggestionResult>.create { observable in
                     if word == errorWord {
                         observable.on(.error(TestError.someError))
                     } else {
-                        observable.on(.next(.success([ word ])))
+                        observable.on(.next(.success([word])))
                     }
                     observable.on(.completed)
                     return Disposables.create {}

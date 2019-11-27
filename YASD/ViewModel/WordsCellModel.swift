@@ -24,11 +24,11 @@ class WordsCellModel: ViewModel {
         self.player = player
     }
     
-    func transform(input: Input) -> Output {
+    func transform(from input: Input) -> Output {
         let played = input.url
             .flatMapLatest { [weak self] url -> Driver<PlayerServiceResult> in
                 guard let self = self else { return Driver.just(.success(false)) }
-                return self.player.playSound(url: url)
+                return self.player.playSound(with: url)
                     .asDriver { Driver.just(.failure($0)) }
         }
         return Output(played: played)

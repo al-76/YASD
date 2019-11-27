@@ -54,7 +54,7 @@ class HtmlParser {
 
 // Mapping from XML/HTML character entity reference to character
 // From http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
-private let characterEntities : [ Substring : Character ] = [
+private let characterEntities : [Substring : Character] = [
     // XML predefined entities:
     "&quot;" : "\"",
     "&amp;" : "&",

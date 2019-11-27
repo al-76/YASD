@@ -24,10 +24,10 @@ class LexinApiProviderTests: XCTestCase {
                                            swedishApi: swedishApi)
         
         // Act
-        var result: [ LexinApi ] = []
-        for name in [ "default", "eng", "swe" ] {
+        var result: [LexinApi] = []
+        for name in ["default", "eng", "swe"] {
             result.append(apiProvider
-                .getApi(language: Language(name: name, code: name)))
+                .getApi(by: Language(name: name, code: name)))
         }
         
         // Assert

@@ -20,11 +20,11 @@ class CacheService {
     }
     
     func runAction(key: String, action: @escaping CachableAction) -> Observable<Data> {
-        return cache.load(key: key).flatMap { [weak self] data -> Observable<Data> in
+        return cache.load(key).flatMap { [weak self] data -> Observable<Data> in
             if data == nil {
                 return action().flatMap { [weak self] data -> Observable<Data> in
                     guard let self = self else { return Observable.just(data) }
-                    return self.cache.save(key: key, data: data)
+                    return self.cache.save(key, forData: data)
                 }
             }
             return Observable.just(data!)

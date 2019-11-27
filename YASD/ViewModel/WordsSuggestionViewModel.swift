@@ -24,14 +24,14 @@ class WordsSuggestionViewModel: ViewModel {
         self.lexin = lexin
     }
     
-    func transform(input: Input) -> Output {
+    func transform(from input: Input) -> Output {
         return Output(suggestions: input.searchBar.flatMapLatest { [weak self] word in
             guard let self = self else { return Driver.just(.success([])) }
-            return self.suggestion(word: word)
+            return self.suggestion(word)
         })
     }
     
-    private func suggestion(word: String) -> Driver<SuggestionResult> {
-        return lexin.suggestion(word: word).asDriver { Driver.just(.failure($0)) }
+    private func suggestion(_ word: String) -> Driver<SuggestionResult> {
+        return lexin.suggestion(word).asDriver { Driver.just(.failure($0)) }
     }
 }

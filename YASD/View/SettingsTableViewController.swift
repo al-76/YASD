@@ -22,7 +22,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        model.transform(input: SettingsViewModel.Input())
+        model.transform(from: SettingsViewModel.Input())
             .selectedLanguage
             .drive(languageLabel.rx.text)
             .disposed(by: disposeBag)

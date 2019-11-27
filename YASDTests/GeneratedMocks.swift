@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  FormattedWord.swift
@@ -13,7 +13,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  LexinWord.swift
@@ -28,7 +28,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  ParametersStorage.swift
@@ -99,16 +99,16 @@ import RxSwift
     
     
     
-     override func setLanguage(language: Language)  {
+     override func setLanguage(_ language: Language)  {
         
-    return cuckoo_manager.call("setLanguage(language: Language)",
+    return cuckoo_manager.call("setLanguage(_: Language)",
             parameters: (language),
             escapingParameters: (language),
             superclassCall:
                 
-                super.setLanguage(language: language)
+                super.setLanguage(language)
                 ,
-            defaultCall: __defaultImplStub!.setLanguage(language: language))
+            defaultCall: __defaultImplStub!.setLanguage(language))
         
     }
     
@@ -146,9 +146,9 @@ import RxSwift
 	        return .init(stub: cuckoo_manager.createStub(for: MockParametersStorage.self, method: "getLanguageCode() -> String", parameterMatchers: matchers))
 	    }
 	    
-	    func setLanguage<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.ClassStubNoReturnFunction<(Language)> where M1.MatchedType == Language {
+	    func setLanguage<M1: Cuckoo.Matchable>(_ language: M1) -> Cuckoo.ClassStubNoReturnFunction<(Language)> where M1.MatchedType == Language {
 	        let matchers: [Cuckoo.ParameterMatcher<(Language)>] = [wrap(matchable: language) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockParametersStorage.self, method: "setLanguage(language: Language)", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockParametersStorage.self, method: "setLanguage(_: Language)", parameterMatchers: matchers))
 	    }
 	    
 	    func getLanguage() -> Cuckoo.ClassStubFunction<(), Language> {
@@ -185,9 +185,9 @@ import RxSwift
 	    }
 	    
 	    @discardableResult
-	    func setLanguage<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.__DoNotUse<(Language), Void> where M1.MatchedType == Language {
+	    func setLanguage<M1: Cuckoo.Matchable>(_ language: M1) -> Cuckoo.__DoNotUse<(Language), Void> where M1.MatchedType == Language {
 	        let matchers: [Cuckoo.ParameterMatcher<(Language)>] = [wrap(matchable: language) { $0 }]
-	        return cuckoo_manager.verify("setLanguage(language: Language)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("setLanguage(_: Language)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -213,7 +213,7 @@ import RxSwift
         return DefaultValueRegistry.defaultValue(for: (String).self)
     }
     
-     override func setLanguage(language: Language)   {
+     override func setLanguage(_ language: Language)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
@@ -224,7 +224,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Model/SettingsItem.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Model/SettingsItem.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  SettingsItem.swift
@@ -239,7 +239,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  Suggestion.swift
@@ -254,7 +254,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  DataCache.swift
@@ -297,31 +297,31 @@ import RxSwift
     
     
     
-     override func save(key: String, data: Data) -> Observable<Data> {
+     override func save(_ key: String, forData data: Data) -> Observable<Data> {
         
-    return cuckoo_manager.call("save(key: String, data: Data) -> Observable<Data>",
+    return cuckoo_manager.call("save(_: String, forData: Data) -> Observable<Data>",
             parameters: (key, data),
             escapingParameters: (key, data),
             superclassCall:
                 
-                super.save(key: key, data: data)
+                super.save(key, forData: data)
                 ,
-            defaultCall: __defaultImplStub!.save(key: key, data: data))
+            defaultCall: __defaultImplStub!.save(key, forData: data))
         
     }
     
     
     
-     override func load(key: String) -> Observable<Data?> {
+     override func load(_ key: String) -> Observable<Data?> {
         
-    return cuckoo_manager.call("load(key: String) -> Observable<Data?>",
+    return cuckoo_manager.call("load(_: String) -> Observable<Data?>",
             parameters: (key),
             escapingParameters: (key),
             superclassCall:
                 
-                super.load(key: key)
+                super.load(key)
                 ,
-            defaultCall: __defaultImplStub!.load(key: key))
+            defaultCall: __defaultImplStub!.load(key))
         
     }
     
@@ -334,14 +334,14 @@ import RxSwift
 	    }
 	    
 	    
-	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, data: M2) -> Cuckoo.ClassStubFunction<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ key: M1, forData data: M2) -> Cuckoo.ClassStubFunction<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, Data)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: data) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "save(key: String, data: Data) -> Observable<Data>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "save(_: String, forData: Data) -> Observable<Data>", parameterMatchers: matchers))
 	    }
 	    
-	    func load<M1: Cuckoo.Matchable>(key: M1) -> Cuckoo.ClassStubFunction<(String), Observable<Data?>> where M1.MatchedType == String {
+	    func load<M1: Cuckoo.Matchable>(_ key: M1) -> Cuckoo.ClassStubFunction<(String), Observable<Data?>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: key) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "load(key: String) -> Observable<Data?>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockDataCache.self, method: "load(_: String) -> Observable<Data?>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -361,15 +361,15 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(key: M1, data: M2) -> Cuckoo.__DoNotUse<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
+	    func save<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ key: M1, forData data: M2) -> Cuckoo.__DoNotUse<(String, Data), Observable<Data>> where M1.MatchedType == String, M2.MatchedType == Data {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, Data)>] = [wrap(matchable: key) { $0.0 }, wrap(matchable: data) { $0.1 }]
-	        return cuckoo_manager.verify("save(key: String, data: Data) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("save(_: String, forData: Data) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func load<M1: Cuckoo.Matchable>(key: M1) -> Cuckoo.__DoNotUse<(String), Observable<Data?>> where M1.MatchedType == String {
+	    func load<M1: Cuckoo.Matchable>(_ key: M1) -> Cuckoo.__DoNotUse<(String), Observable<Data?>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: key) { $0 }]
-	        return cuckoo_manager.verify("load(key: String) -> Observable<Data?>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("load(_: String) -> Observable<Data?>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -381,155 +381,18 @@ import RxSwift
     
 
     
-     override func save(key: String, data: Data) -> Observable<Data>  {
+     override func save(_ key: String, forData data: Data) -> Observable<Data>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
     }
     
-     override func load(key: String) -> Observable<Data?>  {
+     override func load(_ key: String) -> Observable<Data?>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<Data?>).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Files.swift at 2019-11-27 13:47:40 +0000
-
-//
-//  Files.swift
-//  YASD
-//
-//  Created by Vyacheslav Konopkin on 13/09/2019.
-//  Copyright © 2019 yac. All rights reserved.
-//
-
-import Cuckoo
-@testable import YASD
-
-import Foundation
-import RxSwift
-
-
- class MockFiles: Files, Cuckoo.ClassMock {
-    
-     typealias MocksType = Files
-    
-     typealias Stubbing = __StubbingProxy_Files
-     typealias Verification = __VerificationProxy_Files
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
-
-    
-    private var __defaultImplStub: Files?
-
-     func enableDefaultImplementation(_ stub: Files) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-     override func createTempFile(name: String) throws -> URL {
-        
-    return try cuckoo_manager.callThrows("createTempFile(name: String) throws -> URL",
-            parameters: (name),
-            escapingParameters: (name),
-            superclassCall:
-                
-                super.createTempFile(name: name)
-                ,
-            defaultCall: __defaultImplStub!.createTempFile(name: name))
-        
-    }
-    
-    
-    
-     override func writeData(to: URL, data: Data) throws {
-        
-    return try cuckoo_manager.callThrows("writeData(to: URL, data: Data) throws",
-            parameters: (to, data),
-            escapingParameters: (to, data),
-            superclassCall:
-                
-                super.writeData(to: to, data: data)
-                ,
-            defaultCall: __defaultImplStub!.writeData(to: to, data: data))
-        
-    }
-    
-
-	 struct __StubbingProxy_Files: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func createTempFile<M1: Cuckoo.Matchable>(name: M1) -> Cuckoo.ClassStubThrowingFunction<(String), URL> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: name) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockFiles.self, method: "createTempFile(name: String) throws -> URL", parameterMatchers: matchers))
-	    }
-	    
-	    func writeData<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(to: M1, data: M2) -> Cuckoo.ClassStubNoReturnThrowingFunction<(URL, Data)> where M1.MatchedType == URL, M2.MatchedType == Data {
-	        let matchers: [Cuckoo.ParameterMatcher<(URL, Data)>] = [wrap(matchable: to) { $0.0 }, wrap(matchable: data) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockFiles.self, method: "writeData(to: URL, data: Data) throws", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_Files: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func createTempFile<M1: Cuckoo.Matchable>(name: M1) -> Cuckoo.__DoNotUse<(String), URL> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: name) { $0 }]
-	        return cuckoo_manager.verify("createTempFile(name: String) throws -> URL", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func writeData<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(to: M1, data: M2) -> Cuckoo.__DoNotUse<(URL, Data), Void> where M1.MatchedType == URL, M2.MatchedType == Data {
-	        let matchers: [Cuckoo.ParameterMatcher<(URL, Data)>] = [wrap(matchable: to) { $0.0 }, wrap(matchable: data) { $0.1 }]
-	        return cuckoo_manager.verify("writeData(to: URL, data: Data) throws", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class FilesStub: Files {
-    
-
-    
-
-    
-     override func createTempFile(name: String) throws -> URL  {
-        return DefaultValueRegistry.defaultValue(for: (URL).self)
-    }
-    
-     override func writeData(to: URL, data: Data) throws  {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-}
-
-
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-11-27 15:38:47 +0000
 
 
 //
@@ -848,7 +711,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  MarkdownParser.swift
@@ -955,7 +818,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  Network.swift
@@ -997,31 +860,31 @@ import RxSwift
     
     
     
-     override func postRequest(with: PostParameters) -> Observable<Data> {
+     override func postRequest(with parameters: PostParameters) -> Observable<Data> {
         
     return cuckoo_manager.call("postRequest(with: PostParameters) -> Observable<Data>",
-            parameters: (with),
-            escapingParameters: (with),
+            parameters: (parameters),
+            escapingParameters: (parameters),
             superclassCall:
                 
-                super.postRequest(with: with)
+                super.postRequest(with: parameters)
                 ,
-            defaultCall: __defaultImplStub!.postRequest(with: with))
+            defaultCall: __defaultImplStub!.postRequest(with: parameters))
         
     }
     
     
     
-     override func getRequest(url: String) -> Observable<Data> {
+     override func getRequest(with url: String) -> Observable<Data> {
         
-    return cuckoo_manager.call("getRequest(url: String) -> Observable<Data>",
+    return cuckoo_manager.call("getRequest(with: String) -> Observable<Data>",
             parameters: (url),
             escapingParameters: (url),
             superclassCall:
                 
-                super.getRequest(url: url)
+                super.getRequest(with: url)
                 ,
-            defaultCall: __defaultImplStub!.getRequest(url: url))
+            defaultCall: __defaultImplStub!.getRequest(with: url))
         
     }
     
@@ -1034,14 +897,14 @@ import RxSwift
 	    }
 	    
 	    
-	    func postRequest<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.ClassStubFunction<(PostParameters), Observable<Data>> where M1.MatchedType == PostParameters {
-	        let matchers: [Cuckoo.ParameterMatcher<(PostParameters)>] = [wrap(matchable: with) { $0 }]
+	    func postRequest<M1: Cuckoo.Matchable>(with parameters: M1) -> Cuckoo.ClassStubFunction<(PostParameters), Observable<Data>> where M1.MatchedType == PostParameters {
+	        let matchers: [Cuckoo.ParameterMatcher<(PostParameters)>] = [wrap(matchable: parameters) { $0 }]
 	        return .init(stub: cuckoo_manager.createStub(for: MockNetwork.self, method: "postRequest(with: PostParameters) -> Observable<Data>", parameterMatchers: matchers))
 	    }
 	    
-	    func getRequest<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<Data>> where M1.MatchedType == String {
+	    func getRequest<M1: Cuckoo.Matchable>(with url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<Data>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockNetwork.self, method: "getRequest(url: String) -> Observable<Data>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockNetwork.self, method: "getRequest(with: String) -> Observable<Data>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1061,15 +924,15 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func postRequest<M1: Cuckoo.Matchable>(with: M1) -> Cuckoo.__DoNotUse<(PostParameters), Observable<Data>> where M1.MatchedType == PostParameters {
-	        let matchers: [Cuckoo.ParameterMatcher<(PostParameters)>] = [wrap(matchable: with) { $0 }]
+	    func postRequest<M1: Cuckoo.Matchable>(with parameters: M1) -> Cuckoo.__DoNotUse<(PostParameters), Observable<Data>> where M1.MatchedType == PostParameters {
+	        let matchers: [Cuckoo.ParameterMatcher<(PostParameters)>] = [wrap(matchable: parameters) { $0 }]
 	        return cuckoo_manager.verify("postRequest(with: PostParameters) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func getRequest<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.__DoNotUse<(String), Observable<Data>> where M1.MatchedType == String {
+	    func getRequest<M1: Cuckoo.Matchable>(with url: M1) -> Cuckoo.__DoNotUse<(String), Observable<Data>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
-	        return cuckoo_manager.verify("getRequest(url: String) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getRequest(with: String) -> Observable<Data>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1081,18 +944,18 @@ import RxSwift
     
 
     
-     override func postRequest(with: PostParameters) -> Observable<Data>  {
+     override func postRequest(with parameters: PostParameters) -> Observable<Data>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
     }
     
-     override func getRequest(url: String) -> Observable<Data>  {
+     override func getRequest(with url: String) -> Observable<Data>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<Data>).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  Player.swift
@@ -1158,16 +1021,16 @@ import Foundation
     
     
     
-     override func play(data: Data) throws {
+     override func play(with data: Data) throws {
         
-    return try cuckoo_manager.callThrows("play(data: Data) throws",
+    return try cuckoo_manager.callThrows("play(with: Data) throws",
             parameters: (data),
             escapingParameters: (data),
             superclassCall:
                 
-                super.play(data: data)
+                super.play(with: data)
                 ,
-            defaultCall: __defaultImplStub!.play(data: data))
+            defaultCall: __defaultImplStub!.play(with: data))
         
     }
     
@@ -1185,9 +1048,9 @@ import Foundation
 	    }
 	    
 	    
-	    func play<M1: Cuckoo.Matchable>(data: M1) -> Cuckoo.ClassStubNoReturnThrowingFunction<(Data)> where M1.MatchedType == Data {
+	    func play<M1: Cuckoo.Matchable>(with data: M1) -> Cuckoo.ClassStubNoReturnThrowingFunction<(Data)> where M1.MatchedType == Data {
 	        let matchers: [Cuckoo.ParameterMatcher<(Data)>] = [wrap(matchable: data) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockPlayer.self, method: "play(data: Data) throws", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayer.self, method: "play(with: Data) throws", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1212,9 +1075,9 @@ import Foundation
 	
 	    
 	    @discardableResult
-	    func play<M1: Cuckoo.Matchable>(data: M1) -> Cuckoo.__DoNotUse<(Data), Void> where M1.MatchedType == Data {
+	    func play<M1: Cuckoo.Matchable>(with data: M1) -> Cuckoo.__DoNotUse<(Data), Void> where M1.MatchedType == Data {
 	        let matchers: [Cuckoo.ParameterMatcher<(Data)>] = [wrap(matchable: data) { $0 }]
-	        return cuckoo_manager.verify("play(data: Data) throws", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("play(with: Data) throws", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1236,14 +1099,14 @@ import Foundation
     
 
     
-     override func play(data: Data) throws  {
+     override func play(with data: Data) throws  {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  Storage.swift
@@ -1379,7 +1242,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  CacheService.swift
@@ -1486,7 +1349,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  LexinApi.swift
@@ -1527,31 +1390,31 @@ import RxSwift
     
     
     
-     override func search(word: String, language: String) -> Observable<LexinWordResult> {
+     override func search(_ word: String, with language: String) -> Observable<LexinWordResult> {
         
-    return cuckoo_manager.call("search(word: String, language: String) -> Observable<LexinWordResult>",
+    return cuckoo_manager.call("search(_: String, with: String) -> Observable<LexinWordResult>",
             parameters: (word, language),
             escapingParameters: (word, language),
             superclassCall:
                 
-                super.search(word: word, language: language)
+                super.search(word, with: language)
                 ,
-            defaultCall: __defaultImplStub!.search(word: word, language: language))
+            defaultCall: __defaultImplStub!.search(word, with: language))
         
     }
     
     
     
-     override func suggestion(word: String, language: String) -> Observable<SuggestionResult> {
+     override func suggestion(_ word: String, with language: String) -> Observable<SuggestionResult> {
         
-    return cuckoo_manager.call("suggestion(word: String, language: String) -> Observable<SuggestionResult>",
+    return cuckoo_manager.call("suggestion(_: String, with: String) -> Observable<SuggestionResult>",
             parameters: (word, language),
             escapingParameters: (word, language),
             superclassCall:
                 
-                super.suggestion(word: word, language: language)
+                super.suggestion(word, with: language)
                 ,
-            defaultCall: __defaultImplStub!.suggestion(word: word, language: language))
+            defaultCall: __defaultImplStub!.suggestion(word, with: language))
         
     }
     
@@ -1564,14 +1427,14 @@ import RxSwift
 	    }
 	    
 	    
-	    func search<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.ClassStubFunction<(String, String), Observable<LexinWordResult>> where M1.MatchedType == String, M2.MatchedType == String {
+	    func search<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.ClassStubFunction<(String, String), Observable<LexinWordResult>> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinApi.self, method: "search(word: String, language: String) -> Observable<LexinWordResult>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinApi.self, method: "search(_: String, with: String) -> Observable<LexinWordResult>", parameterMatchers: matchers))
 	    }
 	    
-	    func suggestion<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.ClassStubFunction<(String, String), Observable<SuggestionResult>> where M1.MatchedType == String, M2.MatchedType == String {
+	    func suggestion<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.ClassStubFunction<(String, String), Observable<SuggestionResult>> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinApi.self, method: "suggestion(word: String, language: String) -> Observable<SuggestionResult>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinApi.self, method: "suggestion(_: String, with: String) -> Observable<SuggestionResult>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1591,15 +1454,15 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func search<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.__DoNotUse<(String, String), Observable<LexinWordResult>> where M1.MatchedType == String, M2.MatchedType == String {
+	    func search<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.__DoNotUse<(String, String), Observable<LexinWordResult>> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return cuckoo_manager.verify("search(word: String, language: String) -> Observable<LexinWordResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("search(_: String, with: String) -> Observable<LexinWordResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func suggestion<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.__DoNotUse<(String, String), Observable<SuggestionResult>> where M1.MatchedType == String, M2.MatchedType == String {
+	    func suggestion<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.__DoNotUse<(String, String), Observable<SuggestionResult>> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return cuckoo_manager.verify("suggestion(word: String, language: String) -> Observable<SuggestionResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("suggestion(_: String, with: String) -> Observable<SuggestionResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1611,18 +1474,18 @@ import RxSwift
     
 
     
-     override func search(word: String, language: String) -> Observable<LexinWordResult>  {
+     override func search(_ word: String, with language: String) -> Observable<LexinWordResult>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<LexinWordResult>).self)
     }
     
-     override func suggestion(word: String, language: String) -> Observable<SuggestionResult>  {
+     override func suggestion(_ word: String, with language: String) -> Observable<SuggestionResult>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<SuggestionResult>).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  LexinApiProvider.swift
@@ -1663,16 +1526,16 @@ import RxSwift
     
     
     
-     override func getApi(language: Language) -> LexinApi {
+     override func getApi(by language: Language) -> LexinApi {
         
-    return cuckoo_manager.call("getApi(language: Language) -> LexinApi",
+    return cuckoo_manager.call("getApi(by: Language) -> LexinApi",
             parameters: (language),
             escapingParameters: (language),
             superclassCall:
                 
-                super.getApi(language: language)
+                super.getApi(by: language)
                 ,
-            defaultCall: __defaultImplStub!.getApi(language: language))
+            defaultCall: __defaultImplStub!.getApi(by: language))
         
     }
     
@@ -1685,9 +1548,9 @@ import RxSwift
 	    }
 	    
 	    
-	    func getApi<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.ClassStubFunction<(Language), LexinApi> where M1.MatchedType == Language {
+	    func getApi<M1: Cuckoo.Matchable>(by language: M1) -> Cuckoo.ClassStubFunction<(Language), LexinApi> where M1.MatchedType == Language {
 	        let matchers: [Cuckoo.ParameterMatcher<(Language)>] = [wrap(matchable: language) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinApiProvider.self, method: "getApi(language: Language) -> LexinApi", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinApiProvider.self, method: "getApi(by: Language) -> LexinApi", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -1707,9 +1570,9 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func getApi<M1: Cuckoo.Matchable>(language: M1) -> Cuckoo.__DoNotUse<(Language), LexinApi> where M1.MatchedType == Language {
+	    func getApi<M1: Cuckoo.Matchable>(by language: M1) -> Cuckoo.__DoNotUse<(Language), LexinApi> where M1.MatchedType == Language {
 	        let matchers: [Cuckoo.ParameterMatcher<(Language)>] = [wrap(matchable: language) { $0 }]
-	        return cuckoo_manager.verify("getApi(language: Language) -> LexinApi", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getApi(by: Language) -> LexinApi", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -1721,14 +1584,14 @@ import RxSwift
     
 
     
-     override func getApi(language: Language) -> LexinApi  {
+     override func getApi(by language: Language) -> LexinApi  {
         return DefaultValueRegistry.defaultValue(for: (LexinApi).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  LexinServiceProviderSuggestion.swift
@@ -1769,16 +1632,16 @@ import UIKit
     
     
     
-     func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+     func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters {
         
-    return cuckoo_manager.call("getRequestParameters(word: String, language: String) -> Network.PostParameters",
+    return cuckoo_manager.call("getRequestParameters(_: String, with: String) -> Network.PostParameters",
             parameters: (word, language),
             escapingParameters: (word, language),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.getRequestParameters(word: word, language: language))
+            defaultCall: __defaultImplStub!.getRequestParameters(word, with: language))
         
     }
     
@@ -1806,9 +1669,9 @@ import UIKit
 	    }
 	    
 	    
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.ProtocolStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.ProtocolStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestion.self, method: "getRequestParameters(word: String, language: String) -> Network.PostParameters", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestion.self, method: "getRequestParameters(_: String, with: String) -> Network.PostParameters", parameterMatchers: matchers))
 	    }
 	    
 	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ProtocolStubThrowingFunction<(String), [Suggestion]> where M1.MatchedType == String {
@@ -1833,9 +1696,9 @@ import UIKit
 	
 	    
 	    @discardableResult
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return cuckoo_manager.verify("getRequestParameters(word: String, language: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getRequestParameters(_: String, with: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1853,7 +1716,7 @@ import UIKit
     
 
     
-     func getRequestParameters(word: String, language: String) -> Network.PostParameters  {
+     func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters  {
         return DefaultValueRegistry.defaultValue(for: (Network.PostParameters).self)
     }
     
@@ -1890,16 +1753,16 @@ import UIKit
     
     
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters {
         
-    return cuckoo_manager.call("getRequestParameters(word: String, language: String) -> Network.PostParameters",
+    return cuckoo_manager.call("getRequestParameters(_: String, with: String) -> Network.PostParameters",
             parameters: (word, language),
             escapingParameters: (word, language),
             superclassCall:
                 
-                super.getRequestParameters(word: word, language: language)
+                super.getRequestParameters(word, with: language)
                 ,
-            defaultCall: __defaultImplStub!.getRequestParameters(word: word, language: language))
+            defaultCall: __defaultImplStub!.getRequestParameters(word, with: language))
         
     }
     
@@ -1927,9 +1790,9 @@ import UIKit
 	    }
 	    
 	    
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestionDefault.self, method: "getRequestParameters(word: String, language: String) -> Network.PostParameters", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestionDefault.self, method: "getRequestParameters(_: String, with: String) -> Network.PostParameters", parameterMatchers: matchers))
 	    }
 	    
 	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ClassStubThrowingFunction<(String), [Suggestion]> where M1.MatchedType == String {
@@ -1954,9 +1817,9 @@ import UIKit
 	
 	    
 	    @discardableResult
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return cuckoo_manager.verify("getRequestParameters(word: String, language: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getRequestParameters(_: String, with: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -1974,7 +1837,7 @@ import UIKit
     
 
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters  {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters  {
         return DefaultValueRegistry.defaultValue(for: (Network.PostParameters).self)
     }
     
@@ -2011,16 +1874,16 @@ import UIKit
     
     
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters {
         
-    return cuckoo_manager.call("getRequestParameters(word: String, language: String) -> Network.PostParameters",
+    return cuckoo_manager.call("getRequestParameters(_: String, with: String) -> Network.PostParameters",
             parameters: (word, language),
             escapingParameters: (word, language),
             superclassCall:
                 
-                super.getRequestParameters(word: word, language: language)
+                super.getRequestParameters(word, with: language)
                 ,
-            defaultCall: __defaultImplStub!.getRequestParameters(word: word, language: language))
+            defaultCall: __defaultImplStub!.getRequestParameters(word, with: language))
         
     }
     
@@ -2048,9 +1911,9 @@ import UIKit
 	    }
 	    
 	    
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestionFolkets.self, method: "getRequestParameters(word: String, language: String) -> Network.PostParameters", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserSuggestionFolkets.self, method: "getRequestParameters(_: String, with: String) -> Network.PostParameters", parameterMatchers: matchers))
 	    }
 	    
 	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ClassStubThrowingFunction<(String), [Suggestion]> where M1.MatchedType == String {
@@ -2075,9 +1938,9 @@ import UIKit
 	
 	    
 	    @discardableResult
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return cuckoo_manager.verify("getRequestParameters(word: String, language: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getRequestParameters(_: String, with: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -2095,7 +1958,7 @@ import UIKit
     
 
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters  {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters  {
         return DefaultValueRegistry.defaultValue(for: (Network.PostParameters).self)
     }
     
@@ -2106,7 +1969,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  LexinServiceProviderWords.swift
@@ -2147,16 +2010,16 @@ import UIKit
     
     
     
-     func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+     func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters {
         
-    return cuckoo_manager.call("getRequestParameters(word: String, language: String) -> Network.PostParameters",
+    return cuckoo_manager.call("getRequestParameters(_: String, with: String) -> Network.PostParameters",
             parameters: (word, language),
             escapingParameters: (word, language),
             superclassCall:
                 
                 Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.getRequestParameters(word: word, language: language))
+            defaultCall: __defaultImplStub!.getRequestParameters(word, with: language))
         
     }
     
@@ -2184,9 +2047,9 @@ import UIKit
 	    }
 	    
 	    
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.ProtocolStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.ProtocolStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserWords.self, method: "getRequestParameters(word: String, language: String) -> Network.PostParameters", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserWords.self, method: "getRequestParameters(_: String, with: String) -> Network.PostParameters", parameterMatchers: matchers))
 	    }
 	    
 	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ProtocolStubThrowingFunction<(String), [LexinWord]> where M1.MatchedType == String {
@@ -2211,9 +2074,9 @@ import UIKit
 	
 	    
 	    @discardableResult
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return cuckoo_manager.verify("getRequestParameters(word: String, language: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getRequestParameters(_: String, with: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -2231,7 +2094,7 @@ import UIKit
     
 
     
-     func getRequestParameters(word: String, language: String) -> Network.PostParameters  {
+     func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters  {
         return DefaultValueRegistry.defaultValue(for: (Network.PostParameters).self)
     }
     
@@ -2268,16 +2131,16 @@ import UIKit
     
     
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters {
         
-    return cuckoo_manager.call("getRequestParameters(word: String, language: String) -> Network.PostParameters",
+    return cuckoo_manager.call("getRequestParameters(_: String, with: String) -> Network.PostParameters",
             parameters: (word, language),
             escapingParameters: (word, language),
             superclassCall:
                 
-                super.getRequestParameters(word: word, language: language)
+                super.getRequestParameters(word, with: language)
                 ,
-            defaultCall: __defaultImplStub!.getRequestParameters(word: word, language: language))
+            defaultCall: __defaultImplStub!.getRequestParameters(word, with: language))
         
     }
     
@@ -2305,9 +2168,9 @@ import UIKit
 	    }
 	    
 	    
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserWordsDefault.self, method: "getRequestParameters(word: String, language: String) -> Network.PostParameters", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserWordsDefault.self, method: "getRequestParameters(_: String, with: String) -> Network.PostParameters", parameterMatchers: matchers))
 	    }
 	    
 	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ClassStubThrowingFunction<(String), [LexinWord]> where M1.MatchedType == String {
@@ -2332,9 +2195,9 @@ import UIKit
 	
 	    
 	    @discardableResult
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return cuckoo_manager.verify("getRequestParameters(word: String, language: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getRequestParameters(_: String, with: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -2352,7 +2215,7 @@ import UIKit
     
 
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters  {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters  {
         return DefaultValueRegistry.defaultValue(for: (Network.PostParameters).self)
     }
     
@@ -2404,16 +2267,16 @@ import UIKit
     
     
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters {
         
-    return cuckoo_manager.call("getRequestParameters(word: String, language: String) -> Network.PostParameters",
+    return cuckoo_manager.call("getRequestParameters(_: String, with: String) -> Network.PostParameters",
             parameters: (word, language),
             escapingParameters: (word, language),
             superclassCall:
                 
-                super.getRequestParameters(word: word, language: language)
+                super.getRequestParameters(word, with: language)
                 ,
-            defaultCall: __defaultImplStub!.getRequestParameters(word: word, language: language))
+            defaultCall: __defaultImplStub!.getRequestParameters(word, with: language))
         
     }
     
@@ -2431,9 +2294,9 @@ import UIKit
 	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserWordsSwedish.self, method: "parse(text: String) throws -> [LexinWord]", parameterMatchers: matchers))
 	    }
 	    
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserWordsSwedish.self, method: "getRequestParameters(word: String, language: String) -> Network.PostParameters", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserWordsSwedish.self, method: "getRequestParameters(_: String, with: String) -> Network.PostParameters", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -2459,9 +2322,9 @@ import UIKit
 	    }
 	    
 	    @discardableResult
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return cuckoo_manager.verify("getRequestParameters(word: String, language: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getRequestParameters(_: String, with: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -2477,7 +2340,7 @@ import UIKit
         return DefaultValueRegistry.defaultValue(for: ([LexinWord]).self)
     }
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters  {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters  {
         return DefaultValueRegistry.defaultValue(for: (Network.PostParameters).self)
     }
     
@@ -2510,16 +2373,16 @@ import UIKit
     
     
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters {
         
-    return cuckoo_manager.call("getRequestParameters(word: String, language: String) -> Network.PostParameters",
+    return cuckoo_manager.call("getRequestParameters(_: String, with: String) -> Network.PostParameters",
             parameters: (word, language),
             escapingParameters: (word, language),
             superclassCall:
                 
-                super.getRequestParameters(word: word, language: language)
+                super.getRequestParameters(word, with: language)
                 ,
-            defaultCall: __defaultImplStub!.getRequestParameters(word: word, language: language))
+            defaultCall: __defaultImplStub!.getRequestParameters(word, with: language))
         
     }
     
@@ -2547,9 +2410,9 @@ import UIKit
 	    }
 	    
 	    
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.ClassStubFunction<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserWordsFolkets.self, method: "getRequestParameters(word: String, language: String) -> Network.PostParameters", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinParserWordsFolkets.self, method: "getRequestParameters(_: String, with: String) -> Network.PostParameters", parameterMatchers: matchers))
 	    }
 	    
 	    func parse<M1: Cuckoo.Matchable>(text: M1) -> Cuckoo.ClassStubThrowingFunction<(String), [LexinWord]> where M1.MatchedType == String {
@@ -2574,9 +2437,9 @@ import UIKit
 	
 	    
 	    @discardableResult
-	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(word: M1, language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
+	    func getRequestParameters<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(_ word: M1, with language: M2) -> Cuckoo.__DoNotUse<(String, String), Network.PostParameters> where M1.MatchedType == String, M2.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String, String)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: language) { $0.1 }]
-	        return cuckoo_manager.verify("getRequestParameters(word: String, language: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getRequestParameters(_: String, with: String) -> Network.PostParameters", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -2594,7 +2457,7 @@ import UIKit
     
 
     
-     override func getRequestParameters(word: String, language: String) -> Network.PostParameters  {
+     override func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters  {
         return DefaultValueRegistry.defaultValue(for: (Network.PostParameters).self)
     }
     
@@ -2605,7 +2468,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  LexinService.swift
@@ -2647,31 +2510,31 @@ import RxSwift
     
     
     
-     override func search(word: String) -> Observable<LexinWordResult> {
+     override func search(_ word: String) -> Observable<LexinWordResult> {
         
-    return cuckoo_manager.call("search(word: String) -> Observable<LexinWordResult>",
+    return cuckoo_manager.call("search(_: String) -> Observable<LexinWordResult>",
             parameters: (word),
             escapingParameters: (word),
             superclassCall:
                 
-                super.search(word: word)
+                super.search(word)
                 ,
-            defaultCall: __defaultImplStub!.search(word: word))
+            defaultCall: __defaultImplStub!.search(word))
         
     }
     
     
     
-     override func suggestion(word: String) -> Observable<SuggestionResult> {
+     override func suggestion(_ word: String) -> Observable<SuggestionResult> {
         
-    return cuckoo_manager.call("suggestion(word: String) -> Observable<SuggestionResult>",
+    return cuckoo_manager.call("suggestion(_: String) -> Observable<SuggestionResult>",
             parameters: (word),
             escapingParameters: (word),
             superclassCall:
                 
-                super.suggestion(word: word)
+                super.suggestion(word)
                 ,
-            defaultCall: __defaultImplStub!.suggestion(word: word))
+            defaultCall: __defaultImplStub!.suggestion(word))
         
     }
     
@@ -2699,14 +2562,14 @@ import RxSwift
 	    }
 	    
 	    
-	    func search<M1: Cuckoo.Matchable>(word: M1) -> Cuckoo.ClassStubFunction<(String), Observable<LexinWordResult>> where M1.MatchedType == String {
+	    func search<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.ClassStubFunction<(String), Observable<LexinWordResult>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: word) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinService.self, method: "search(word: String) -> Observable<LexinWordResult>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinService.self, method: "search(_: String) -> Observable<LexinWordResult>", parameterMatchers: matchers))
 	    }
 	    
-	    func suggestion<M1: Cuckoo.Matchable>(word: M1) -> Cuckoo.ClassStubFunction<(String), Observable<SuggestionResult>> where M1.MatchedType == String {
+	    func suggestion<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.ClassStubFunction<(String), Observable<SuggestionResult>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: word) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockLexinService.self, method: "suggestion(word: String) -> Observable<SuggestionResult>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockLexinService.self, method: "suggestion(_: String) -> Observable<SuggestionResult>", parameterMatchers: matchers))
 	    }
 	    
 	    func language() -> Cuckoo.ClassStubFunction<(), BehaviorSubject<Language>> {
@@ -2731,15 +2594,15 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func search<M1: Cuckoo.Matchable>(word: M1) -> Cuckoo.__DoNotUse<(String), Observable<LexinWordResult>> where M1.MatchedType == String {
+	    func search<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.__DoNotUse<(String), Observable<LexinWordResult>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: word) { $0 }]
-	        return cuckoo_manager.verify("search(word: String) -> Observable<LexinWordResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("search(_: String) -> Observable<LexinWordResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func suggestion<M1: Cuckoo.Matchable>(word: M1) -> Cuckoo.__DoNotUse<(String), Observable<SuggestionResult>> where M1.MatchedType == String {
+	    func suggestion<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.__DoNotUse<(String), Observable<SuggestionResult>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: word) { $0 }]
-	        return cuckoo_manager.verify("suggestion(word: String) -> Observable<SuggestionResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("suggestion(_: String) -> Observable<SuggestionResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -2757,11 +2620,11 @@ import RxSwift
     
 
     
-     override func search(word: String) -> Observable<LexinWordResult>  {
+     override func search(_ word: String) -> Observable<LexinWordResult>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<LexinWordResult>).self)
     }
     
-     override func suggestion(word: String) -> Observable<SuggestionResult>  {
+     override func suggestion(_ word: String) -> Observable<SuggestionResult>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<SuggestionResult>).self)
     }
     
@@ -2772,7 +2635,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  LexinService+Format.swift
@@ -2879,7 +2742,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  NetworkService.swift
@@ -2921,16 +2784,16 @@ import RxSwift
     
     
     
-     override func getRequest(url: String) -> Observable<String> {
+     override func getRequest(with url: String) -> Observable<String> {
         
-    return cuckoo_manager.call("getRequest(url: String) -> Observable<String>",
+    return cuckoo_manager.call("getRequest(with: String) -> Observable<String>",
             parameters: (url),
             escapingParameters: (url),
             superclassCall:
                 
-                super.getRequest(url: url)
+                super.getRequest(with: url)
                 ,
-            defaultCall: __defaultImplStub!.getRequest(url: url))
+            defaultCall: __defaultImplStub!.getRequest(with: url))
         
     }
     
@@ -2958,9 +2821,9 @@ import RxSwift
 	    }
 	    
 	    
-	    func getRequest<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<String>> where M1.MatchedType == String {
+	    func getRequest<M1: Cuckoo.Matchable>(with url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<String>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockNetworkService.self, method: "getRequest(url: String) -> Observable<String>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockNetworkService.self, method: "getRequest(with: String) -> Observable<String>", parameterMatchers: matchers))
 	    }
 	    
 	    func postRequest<M1: Cuckoo.Matchable>(with parameters: M1) -> Cuckoo.ClassStubFunction<(Network.PostParameters), Observable<String>> where M1.MatchedType == Network.PostParameters {
@@ -2985,9 +2848,9 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func getRequest<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.__DoNotUse<(String), Observable<String>> where M1.MatchedType == String {
+	    func getRequest<M1: Cuckoo.Matchable>(with url: M1) -> Cuckoo.__DoNotUse<(String), Observable<String>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
-	        return cuckoo_manager.verify("getRequest(url: String) -> Observable<String>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getRequest(with: String) -> Observable<String>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
@@ -3005,7 +2868,7 @@ import RxSwift
     
 
     
-     override func getRequest(url: String) -> Observable<String>  {
+     override func getRequest(with url: String) -> Observable<String>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<String>).self)
     }
     
@@ -3016,7 +2879,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-11-27 13:47:40 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-11-27 15:38:47 +0000
 
 //
 //  PlayerService.swift
@@ -3058,16 +2921,16 @@ import RxSwift
     
     
     
-     override func playSound(url: String) -> Observable<PlayerServiceResult> {
+     override func playSound(with url: String) -> Observable<PlayerServiceResult> {
         
-    return cuckoo_manager.call("playSound(url: String) -> Observable<PlayerServiceResult>",
+    return cuckoo_manager.call("playSound(with: String) -> Observable<PlayerServiceResult>",
             parameters: (url),
             escapingParameters: (url),
             superclassCall:
                 
-                super.playSound(url: url)
+                super.playSound(with: url)
                 ,
-            defaultCall: __defaultImplStub!.playSound(url: url))
+            defaultCall: __defaultImplStub!.playSound(with: url))
         
     }
     
@@ -3080,9 +2943,9 @@ import RxSwift
 	    }
 	    
 	    
-	    func playSound<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
+	    func playSound<M1: Cuckoo.Matchable>(with url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerService.self, method: "playSound(url: String) -> Observable<PlayerServiceResult>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerService.self, method: "playSound(with: String) -> Observable<PlayerServiceResult>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -3102,9 +2965,9 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func playSound<M1: Cuckoo.Matchable>(url: M1) -> Cuckoo.__DoNotUse<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
+	    func playSound<M1: Cuckoo.Matchable>(with url: M1) -> Cuckoo.__DoNotUse<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
-	        return cuckoo_manager.verify("playSound(url: String) -> Observable<PlayerServiceResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("playSound(with: String) -> Observable<PlayerServiceResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -3116,7 +2979,7 @@ import RxSwift
     
 
     
-     override func playSound(url: String) -> Observable<PlayerServiceResult>  {
+     override func playSound(with url: String) -> Observable<PlayerServiceResult>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<PlayerServiceResult>).self)
     }
     

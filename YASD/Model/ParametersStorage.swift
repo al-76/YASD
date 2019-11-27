@@ -31,7 +31,7 @@ class ParametersStorage {
         Language(name: "sydkurdiska", code: "sdh"),
         Language(name: "tigrisnka", code: "tir"),
         Language(name: "turkiska", code: "tur")
-    ]
+   ]
     public static let defaultLanguage = ParametersStorage.supportedLanguages[17]
     
     public let language: BehaviorSubject<Language>
@@ -46,7 +46,7 @@ class ParametersStorage {
     }
     
     private func load() {
-        setLanguage(language: storage.get(id: "language", defaultObject: getLanguage()))
+        setLanguage(storage.get(id: "language", defaultObject: getLanguage()))
     }
     
     func getLanguageString() -> String {
@@ -57,7 +57,7 @@ class ParametersStorage {
         return getLanguage().code
     }
     
-    func setLanguage(language: Language) {
+    func setLanguage(_ language: Language) {
         try? storage.save(id: "language", object: language)
         self.language.onNext(language)
     }
