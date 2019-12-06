@@ -65,6 +65,7 @@ class WordsTableViewController: UITableViewController {
             return text
         }
         let dismissSearchController: ((String) -> ()) = { [weak self] value in
+            self?.searchResultsController.forHistoryText.accept(value)
             self?.searchController.searchBar.text = value
             self?.searchController.dismiss(animated: true, completion: nil)
         }

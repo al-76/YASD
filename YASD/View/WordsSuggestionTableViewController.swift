@@ -14,7 +14,9 @@ class WordsSuggestionTableViewController: UITableViewController {
     var model: WordsSuggestionViewModel!
     let disposeBag = DisposeBag()
     let searchText = BehaviorRelay<String>(value: "")
+    let forHistoryText = BehaviorRelay<String>(value: "")
     let selectedSuggestion = BehaviorRelay<String>(value: "")
+    let completed = BehaviorRelay<String>(value: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +35,15 @@ class WordsSuggestionTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        let text = searchText.asDriver(onErrorJustReturn: "")
-        let input = WordsSuggestionViewModel.Input(searchBar: text)
-        model.transform(from: input).suggestions.map { [weak self] result -> [Suggestion] in
+        let input = WordsSuggestionViewModel.Input(searchText: searchText.asDriver(), forHistory: forHistoryText.asDriver())
+        model.transform(from: input).suggestions
+        .map { [weak self] result -> [SuggestionItem] in
             return result.handleResult([], self?.handleError)
         }
         .drive(tableView.rx.items(cellIdentifier: "WordsSuggestionTableCell")) { (_, result, cell) in
             if let suggestionCell = cell as? WordsSuggestionTableViewCell {
-                suggestionCell.label.text = result
+                suggestionCell.label.text = result.suggestion
+//                suggestionCell.removeButton
             }
         }
         .disposed(by: self.disposeBag)

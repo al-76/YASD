@@ -31,7 +31,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ])
         let foundWords = scheduler.createObserver(FormattedWordResult.self)
-        let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: errorWord),
+        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: errorWord),
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService())
         viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
@@ -57,7 +57,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ])
         let foundWords = scheduler.createObserver(FormattedWordResult.self)
-        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(errorWord: "error_word"),
+        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                          formatter: createMockLexinServiceFormatter(),
                                                          player: createMockPlayerService())
         viewModel?.transform(from: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
@@ -83,7 +83,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ])
         let foundWords = scheduler.createObserver(FormattedWordResult.self)
-        let lexin = createMockLexinService(errorWord: errorWord)
+        let lexin = createMockLexinService(whenError: errorWord)
         let viewModel = WordsViewModel(lexin: lexin,
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService())
@@ -104,7 +104,7 @@ class WordsViewModelTests: XCTestCase {
     
     func testNewCell() {
         // Arrange
-        let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: "test"),
+        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: "test"),
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService())
         let cell = viewModel.newCell()
@@ -112,7 +112,7 @@ class WordsViewModelTests: XCTestCase {
         XCTAssertNotNil(cell)
     }
     
-    func createMockLexinService(errorWord: String) -> MockLexinService {
+    func createMockLexinService(whenError errorWord: String) -> MockLexinService {
         let stubParameters = createParametersStorageStub()
         let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
                                              network: MockNetwork())
@@ -130,7 +130,7 @@ class WordsViewModelTests: XCTestCase {
                     } else if !word.isEmpty { // ignore initial search on loaded parameters
                         observable.on(.next(.success([LexinWord(word: word)])))
                     }
-                    observable.on(.completed)
+                    observable.onCompleted()
                     return Disposables.create {}
                 }
             }
