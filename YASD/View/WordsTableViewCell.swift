@@ -13,14 +13,6 @@ class WordsTableViewCell: UITableViewCell {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var buttonPlay: UIButton!
     
-    var model: WordsCellModel!
-    var disposeBag = DisposeBag()
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        disposeBag = DisposeBag()
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

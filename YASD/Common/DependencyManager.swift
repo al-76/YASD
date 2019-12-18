@@ -120,11 +120,18 @@ func configureService(_ container: Container) {
                      provider: container.resolve(LexinApiProvider.self)!)
     }
     .inObjectScope(.container)
+    
+    // History Service
+    container.register(HistoryService.self) { _ in
+        HistoryService(storage: container.resolve(Storage.self)!)
+    }
+    .inObjectScope(.container)
 }
 
 func configureModel(_ container: Container) {
     container.register(WordsSuggestionViewModel.self) { container in
-        WordsSuggestionViewModel(lexin: container.resolve(LexinService.self)!)
+        WordsSuggestionViewModel(lexin: container.resolve(LexinService.self)!,
+                                 history: container.resolve(HistoryService.self)!)
     }
     .inObjectScope(.container)
     

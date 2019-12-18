@@ -29,12 +29,12 @@ class WordsViewModelTests: XCTestCase {
             .next(250, "test3"),
             .next(350, errorWord),
             .completed(400)
-        ])
+        ]).asDriver(onErrorJustReturn: "")
         let foundWords = scheduler.createObserver(FormattedWordResult.self)
-        let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: errorWord),
+        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: errorWord),
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService())
-        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
+        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.just("")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -55,12 +55,12 @@ class WordsViewModelTests: XCTestCase {
             .next(200, "test2"),
             .next(250, "test3"),
             .completed(400)
-        ])
+        ]).asDriver(onErrorJustReturn: "")
         let foundWords = scheduler.createObserver(FormattedWordResult.self)
-        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(errorWord: "error_word"),
+        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                          formatter: createMockLexinServiceFormatter(),
                                                          player: createMockPlayerService())
-        viewModel?.transform(from: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
+        viewModel?.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.just("")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -81,13 +81,13 @@ class WordsViewModelTests: XCTestCase {
         let inputWords = scheduler.createHotObservable([
             .next(200, "test2"),
             .completed(400)
-        ])
+        ]).asDriver(onErrorJustReturn: "")
         let foundWords = scheduler.createObserver(FormattedWordResult.self)
-        let lexin = createMockLexinService(errorWord: errorWord)
+        let lexin = createMockLexinService(whenError: errorWord)
         let viewModel = WordsViewModel(lexin: lexin,
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService())
-        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords.asDriver(onErrorJustReturn: "")))
+        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.just("")))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -102,17 +102,37 @@ class WordsViewModelTests: XCTestCase {
         ])
     }
     
-    func testNewCell() {
+    func testPlay() {
         // Arrange
-        let viewModel = WordsViewModel(lexin: createMockLexinService(errorWord: "test"),
+        let errorUrl = "error"
+        let scheduler = TestScheduler(initialClock: 0)
+        let inputUrls = scheduler.createHotObservable([
+            .next(150, "some_url"),
+            .next(200, "some_url_2"),
+            .next(300, errorUrl),
+            .completed(400)
+        ]).asDriver(onErrorJustReturn: "")
+        let played = scheduler.createObserver(PlayerServiceResult.self)
+        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: ""),
                                        formatter: createMockLexinServiceFormatter(),
-                                       player: createMockPlayerService())
-        let cell = viewModel.newCell()
+                                       player: createMockPlayerService(errorUrl: errorUrl))
+        viewModel.transform(from: WordsViewModel.Input(searchBar: Driver.just(""), playUrl: inputUrls))
+            .played.drive(played)
+            .disposed(by: disposeBag)
         
-        XCTAssertNotNil(cell)
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(played.events, [
+            .next(150, .success(true)),
+            .next(200, .success(true)),
+            .next(300, .failure(TestError.someError)),
+            .completed(400)
+        ])
     }
     
-    func createMockLexinService(errorWord: String) -> MockLexinService {
+    func createMockLexinService(whenError errorWord: String) -> MockLexinService {
         let stubParameters = createParametersStorageStub()
         let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
                                              network: MockNetwork())
@@ -130,7 +150,7 @@ class WordsViewModelTests: XCTestCase {
                     } else if !word.isEmpty { // ignore initial search on loaded parameters
                         observable.on(.next(.success([LexinWord(word: word)])))
                     }
-                    observable.on(.completed)
+                    observable.onCompleted()
                     return Disposables.create {}
                 }
             }
@@ -162,6 +182,25 @@ class WordsViewModelTests: XCTestCase {
     }
     
     func createMockPlayerService() -> MockPlayerService {
-        return MockPlayerService(player: MockPlayer(), cache: MockCacheService(cache: MockDataCache(name: "test")), network: MockNetwork())
+        return createMockPlayerService(errorUrl: "")
+    }
+    
+    func createMockPlayerService(errorUrl: String) -> MockPlayerService {
+        let mock = MockPlayerService(player: MockPlayer(), cache: MockCacheService(cache: MockDataCache(name: "test")), network: MockNetwork())
+        stub(mock) { stub in
+            when(stub.playSound(with: anyString())).then { stringUrl in
+                return Observable<PlayerServiceResult>.create {
+                    observable in
+                    if stringUrl == errorUrl {
+                        observable.on(.error(TestError.someError))
+                    } else {
+                        observable.on(.next(.success(true)))
+                    }
+                    observable.onCompleted()
+                    return Disposables.create {}
+                }
+            }
+        }
+        return mock
     }
 }

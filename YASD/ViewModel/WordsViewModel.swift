@@ -17,10 +17,12 @@ class WordsViewModel: ViewModel {
     
     struct Input {
         let searchBar: Driver<String>
+        let playUrl: Driver<String>
     }
 
     struct Output {
         let foundWords: Driver<FormattedWordResult>
+        let played: Driver<PlayerServiceResult>
     }
     
     init(lexin: LexinService, formatter: LexinServiceFormatter, player: PlayerService) {
@@ -30,7 +32,6 @@ class WordsViewModel: ViewModel {
     }
     
     func transform(from input: Input) -> Output {
-        // Search a word
         let searchedBar = input.searchBar
             .flatMapLatest { [weak self] word -> Driver<FormattedWordResult> in
                 guard let self = self else { return Driver.just(.success([])) }
@@ -44,11 +45,13 @@ class WordsViewModel: ViewModel {
                 return self.searchWord(self.lastWord)
         }
         let searched = Driver.merge(searchedBar, updateSearch)
-        return Output(foundWords: searched)
-    }
-    
-    func newCell() -> WordsCellModel {
-        return WordsCellModel(player: player)
+        let played = input.playUrl
+            .flatMapLatest { [weak self] url -> Driver<PlayerServiceResult> in
+                guard let self = self else { return Driver.just(.success(false)) }
+                return self.player.playSound(with: url)
+                    .asDriver { Driver.just(.failure($0)) }
+        }
+        return Output(foundWords: searched, played: played)
     }
     
     private func searchWord(_ word: String) -> Driver<FormattedWordResult> {
