@@ -123,7 +123,7 @@ func configureService(_ container: Container) {
     
     // History Service
     container.register(HistoryService.self) { _ in
-        HistoryService()
+        HistoryService(storage: container.resolve(Storage.self)!)
     }
     .inObjectScope(.container)
 }

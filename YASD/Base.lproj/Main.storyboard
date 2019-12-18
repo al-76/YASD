@@ -80,7 +80,7 @@
         <scene sceneID="PJB-eJ-7Dy">
             <objects>
                 <tableViewController storyboardIdentifier="WordsSuggestionTableViewController" id="tlO-7e-3Ee" userLabel="Words Suggestion Table View Controller" customClass="WordsSuggestionTableViewController" customModule="YASD" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b72-Ee-Zql">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b72-Ee-Zql" customClass="SearchResultsTableView" customModule="YASD" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -125,6 +125,8 @@
                                 </tableViewCellContentView>
                                 <gestureRecognizers/>
                                 <connections>
+                                    <outlet property="buttonRemove" destination="tdY-hK-OTH" id="h34-h6-EcG"/>
+                                    <outlet property="iconHistory" destination="LhX-wo-NJB" id="5Lt-du-K5Z"/>
                                     <outlet property="label" destination="iuL-Da-usg" id="rfw-ZD-Sek"/>
                                 </connections>
                             </tableViewCell>

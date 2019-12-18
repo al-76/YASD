@@ -15,6 +15,7 @@ class WordsTableViewController: UITableViewController {
     var searchResultsController: WordsSuggestionTableViewController!
     
     private var searchController: UISearchController!
+    private let playUrl = BehaviorRelay<String>(value: "")
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -27,7 +28,9 @@ class WordsTableViewController: UITableViewController {
     private func customizeView() {
         searchController = UISearchController(searchResultsController: searchResultsController)
         searchController.searchBar.placeholder = "Skriv ett ord!"
-        
+        if #available(iOS 13.0, *) {
+            searchController.showsSearchResultsController = true
+        }
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 70
         tableView.tableFooterView = UIView()
@@ -41,13 +44,13 @@ class WordsTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        searchController.searchBar.rx.text.compactMap { $0 }
-            .asDriver(onErrorJustReturn: "")
+        searchController.searchBar.rx.text.distinctUntilChanged()
+            .compactMap { $0 }.asDriver(onErrorJustReturn: "")
             .drive(searchResultsController.searchText)
             .disposed(by: disposeBag)
-        let input = WordsViewModel.Input(searchBar: createSearchDriver())
-        model.transform(from: input)
-            .foundWords.map { [weak self] result -> [FormattedWord] in
+        let input = WordsViewModel.Input(searchBar: createSearchDriver(), playUrl: playUrl.asDriver().filter { $0 != "" })
+        let output = model.transform(from: input)
+        output.foundWords.map { [weak self] result -> [FormattedWord] in
                 return result.handleResult([], self?.handleError)
             }
             .drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { [weak self] (_, result, cell) in
@@ -57,6 +60,10 @@ class WordsTableViewController: UITableViewController {
                 }
             }
             .disposed(by: disposeBag)
+        output.played.asObservable()
+            .subscribe(onNext: { [weak self] result in
+            _ = result.handleResult(false, self?.handleError)
+        }).disposed(by: disposeBag)
     }
     
     private func createSearchDriver() -> Driver<String> {
@@ -87,32 +94,20 @@ class WordsTableViewController: UITableViewController {
         if url == nil {
             return
         }
-        if cell.model == nil {
-            cell.model = model.newCell()
-        }
-        let inputUrl = cell.buttonPlay.rx.tap.asDriver().map { [weak self] _ -> String in
-            self?.animateButton(button: cell.buttonPlay)
-            return url!
-        }
-        let output = cell.model
-            .transform(from: WordsCellModel.Input(url: inputUrl))
-        output.played.asObservable()
-            .subscribe { [weak self] event in
-                _ = event.element?.handleResult(false, self?.handleError)
-            }
-            .disposed(by: cell.disposeBag)
-    }
-    
-    private func animateButton(button: UIButton) {
-//        UIButton.animate(withDuration: 0.2,
-//                         animations: {
-//                            button.transform = CGAffineTransform(scaleX: 1, y: 1.5)
-//        },
-//                         completion: { finish in
-//                            UIButton.animate(withDuration: 0.2, animations: {
-//                                button.transform = CGAffineTransform.identity
-//                            })
-//        })
+//        if cell.model == nil {
+//            cell.model = model.newCell()
+//        }
+        cell.buttonPlay.rx.tap.asDriver()
+            .map { url ?? "" }
+            .drive(playUrl)
+            .disposed(by: disposeBag)
+//        let output = cell.model
+//            .transform(from: WordsCellModel.Input(url: inputUrl))
+//        output.played.asObservable()
+//            .subscribe { [weak self] event in
+//                _ = event.element?.handleResult(false, self?.handleError)
+//            }
+//            .disposed(by: cell.disposeBag)
     }
     
     private func handleError(_ error: Error) {

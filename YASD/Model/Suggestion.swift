@@ -8,7 +8,10 @@
 
 import Foundation
 
-typealias SuggestionItem = (suggestion: Suggestion, removable: Bool)
+struct SuggestionItem {
+    let suggestion: Suggestion
+    let removable: Bool
+}
 typealias SuggestionItemResult = Result<[SuggestionItem]>//(suggestion: SuggestionResult, removable: Bool)
 typealias Suggestion = String?
 typealias SuggestionResult = Result<[Suggestion]>
