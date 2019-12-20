@@ -18,7 +18,7 @@ class WordsSuggestionTableViewController: UITableViewController {
     let forHistoryText = BehaviorRelay<String>(value: "")
     let selectedSuggestion = BehaviorRelay<String>(value: "")
     let completed = BehaviorRelay<String>(value: "")
-    let removeHistoryText = BehaviorRelay<Int>(value: -1)
+    let removeHistoryText = BehaviorRelay<WordsSuggestionViewModel.RemovedItem>(value: ("", ""))
     private let dataSource = createDataSource()
 
     override func viewDidLoad() {
@@ -51,13 +51,10 @@ class WordsSuggestionTableViewController: UITableViewController {
             guard let self = self else { return }
             self.selectedSuggestion.accept(self.suggestion(index))
         }).disposed(by: disposeBag)
-        tableView.rx.itemDeleted.map { $0.row }
-            .bind(to: removeHistoryText)
-            .disposed(by: disposeBag)
-//            .subscribe(onNext: { [weak self] index in
-//            guard let self = self else { return }
-//            self.removeHistoryText.accept((removed: self.suggestion(index), current: self.searchText.value))
-//        }).disposed(by: disposeBag)
+        tableView.rx.itemDeleted.subscribe(onNext: { [weak self] index in
+            guard let self = self else { return }
+            self.removeHistoryText.accept((removed: self.suggestion(index), current: self.searchText.value))
+        }).disposed(by: disposeBag)
     }
     
     private func suggestion(_ index: IndexPath) -> String {
