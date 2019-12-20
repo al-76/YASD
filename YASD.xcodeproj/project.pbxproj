@@ -98,6 +98,8 @@
 		2FDCDBD2234F31F800E6F15F /* WordsSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCDBD0234F31F800E6F15F /* WordsSuggestionViewModel.swift */; };
 		2FDCDBD5234F6A0800E6F15F /* UISearchBar+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCDBD4234F6A0800E6F15F /* UISearchBar+Rx.swift */; };
 		2FDCDBD7234F726C00E6F15F /* WordsSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCDBD6234F726C00E6F15F /* WordsSuggestionTableViewCell.swift */; };
+		2FDD059D23ACF7FA0018F223 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDD059C23ACF7FA0018F223 /* RxDataSources.framework */; };
+		2FDD059F23AD15710018F223 /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDD059E23AD15710018F223 /* Differentiator.framework */; };
 		2FDEFF5F2295494200A82F43 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDEFF5E2295494200A82F43 /* Result.swift */; };
 		2FE7682022BCC30E00375292 /* LexinServiceFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7681F22BCC30E00375292 /* LexinServiceFormatterTests.swift */; };
 		2FE7682222BCEEBA00375292 /* LexinWord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7682122BCEEBA00375292 /* LexinWord+Extensions.swift */; };
@@ -227,6 +229,8 @@
 		2FDCDBD0234F31F800E6F15F /* WordsSuggestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSuggestionViewModel.swift; sourceTree = "<group>"; };
 		2FDCDBD4234F6A0800E6F15F /* UISearchBar+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Rx.swift"; sourceTree = "<group>"; };
 		2FDCDBD6234F726C00E6F15F /* WordsSuggestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSuggestionTableViewCell.swift; sourceTree = "<group>"; };
+		2FDD059C23ACF7FA0018F223 /* RxDataSources.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxDataSources.framework; path = Carthage/Build/iOS/RxDataSources.framework; sourceTree = "<group>"; };
+		2FDD059E23AD15710018F223 /* Differentiator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Differentiator.framework; path = Carthage/Build/iOS/Differentiator.framework; sourceTree = "<group>"; };
 		2FDEFF5E2295494200A82F43 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		2FE7681F22BCC30E00375292 /* LexinServiceFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceFormatterTests.swift; sourceTree = "<group>"; };
 		2FE7682122BCEEBA00375292 /* LexinWord+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LexinWord+Extensions.swift"; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FDD059F23AD15710018F223 /* Differentiator.framework in Frameworks */,
 				2F36F4572342544D00B88649 /* Cache.framework in Frameworks */,
 				2FFF024722B2870800C1DC61 /* MarkdownKit.framework in Frameworks */,
 				2FCB2DDF22A005180053B758 /* SwiftSoup.framework in Frameworks */,
@@ -254,6 +259,7 @@
 				2F9757762277474200B343B4 /* RxSwift.framework in Frameworks */,
 				2FF62C93228DAAE600B4946C /* RxCocoa.framework in Frameworks */,
 				2FF62C9A228E96EE00B4946C /* RxRelay.framework in Frameworks */,
+				2FDD059D23ACF7FA0018F223 /* RxDataSources.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +455,8 @@
 		2F97575A22772FED00B343B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2FDD059E23AD15710018F223 /* Differentiator.framework */,
+				2FDD059C23ACF7FA0018F223 /* RxDataSources.framework */,
 				2F36F4562342544D00B88649 /* Cache.framework */,
 				2F3C080B234245470091CD97 /* Haneke.framework */,
 				2FFF024622B2870800C1DC61 /* MarkdownKit.framework */,
@@ -679,6 +687,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MarkdownKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Cache.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
 			);
 			name = "Carthage Copy";
 			outputFileListPaths = (
@@ -692,6 +702,8 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftSoup.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MarkdownKit.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Cache.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
