@@ -10,15 +10,13 @@ import RxSwift
 import RxCocoa
 
 class WordsSuggestionViewModel: ViewModel {
-    typealias RemovedItem = (current: String, removed: String)
-
     private let lexin: LexinService
     private let history: HistoryService
 
     struct Input {
         let searchText: Driver<String>
         let forHistory: Driver<String>
-        let removeHistory: Driver<RemovedItem>
+        let removeHistory: Driver<String>
     }
 
     struct Output {
@@ -31,17 +29,23 @@ class WordsSuggestionViewModel: ViewModel {
     }
     
     func transform(from input: Input) -> Output {
-        let suggestionResult = input.searchText.flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
+        let suggestionResult = input.searchText
+            .flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
             guard let self = self else { return Driver.just(.success([])) }
             return self.getSuggestionAndHistory(word.lowercased())
         }
-        let updatedHistoryResult = input.forHistory.filter { !$0.isEmpty }.flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
+        let updatedHistoryResult = input.forHistory
+            .filter { !$0.isEmpty }
+            .flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
             guard let self = self else { return Driver.just(.success([])) }
             return self.updateHistory(word.lowercased())
         }
-        let removedHistoryResult = input.removeHistory.filter { $0 != ("", "") }.flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
+        let removedHistoryResult = input.removeHistory
+            .filter { !$0.isEmpty }
+            .withLatestFrom(input.searchText) { removed, current in return (removed, current) }
+            .flatMapLatest { [weak self] item -> Driver<SuggestionItemResult> in
             guard let self = self else { return Driver.just(.success([])) }
-            return self.removeHistory(word.removed, with: word.current)
+            return self.removeHistory(item.0, with: item.1)
         }
         return Output(suggestions: Driver.merge(suggestionResult, updatedHistoryResult, removedHistoryResult))
     }

@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  FormattedWord.swift
@@ -13,7 +13,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  LexinWord.swift
@@ -28,7 +28,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  ParametersStorage.swift
@@ -224,7 +224,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Model/SettingsItem.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Model/SettingsItem.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  SettingsItem.swift
@@ -239,7 +239,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  Suggestion.swift
@@ -254,7 +254,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  DataCache.swift
@@ -392,7 +392,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-12-20 23:53:04 +0000
 
 
 //
@@ -711,7 +711,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  MarkdownParser.swift
@@ -818,7 +818,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  Network.swift
@@ -955,7 +955,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  Player.swift
@@ -1106,7 +1106,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  Storage.swift
@@ -1242,7 +1242,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  CacheService.swift
@@ -1349,7 +1349,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/HistoryService.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/HistoryService.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  HistoryService.swift
@@ -1516,7 +1516,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  LexinApi.swift
@@ -1652,7 +1652,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  LexinApiProvider.swift
@@ -1758,7 +1758,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  LexinServiceProviderSuggestion.swift
@@ -2136,7 +2136,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  LexinServiceProviderWords.swift
@@ -2635,7 +2635,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  LexinService.swift
@@ -2802,7 +2802,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  LexinService+Format.swift
@@ -2909,7 +2909,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  NetworkService.swift
@@ -3046,7 +3046,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-12-18 16:10:23 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-12-20 23:53:04 +0000
 
 //
 //  PlayerService.swift

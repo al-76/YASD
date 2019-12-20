@@ -18,7 +18,7 @@ class WordsSuggestionTableViewController: UITableViewController {
     let forHistoryText = BehaviorRelay<String>(value: "")
     let selectedSuggestion = BehaviorRelay<String>(value: "")
     let completed = BehaviorRelay<String>(value: "")
-    let removeHistoryText = BehaviorRelay<WordsSuggestionViewModel.RemovedItem>(value: ("", ""))
+    let removeHistoryText = BehaviorRelay<String>(value: "")
     private let dataSource = createDataSource()
 
     override func viewDidLoad() {
@@ -46,15 +46,20 @@ class WordsSuggestionTableViewController: UITableViewController {
         .map { suggestions in [SuggestionItemSection(header: "suggestions", items: suggestions)] }
         .drive(tableView.rx.items(dataSource: dataSource))
         .disposed(by: self.disposeBag)
-                
-        tableView.rx.itemSelected.subscribe(onNext: { [weak self] index in
-            guard let self = self else { return }
-            self.selectedSuggestion.accept(self.suggestion(index))
-        }).disposed(by: disposeBag)
-        tableView.rx.itemDeleted.subscribe(onNext: { [weak self] index in
-            guard let self = self else { return }
-            self.removeHistoryText.accept((removed: self.suggestion(index), current: self.searchText.value))
-        }).disposed(by: disposeBag)
+           
+        
+        let suggestion: ((IndexPath) -> String) = { [weak self] index in
+            guard let self = self else { return "" }
+            return self.suggestion(index)
+        }
+        tableView.rx.itemSelected
+            .map { suggestion($0) }
+            .bind(to: selectedSuggestion)
+            .disposed(by: disposeBag)
+        tableView.rx.itemDeleted
+            .map { suggestion($0) }
+            .bind(to: removeHistoryText)
+            .disposed(by: disposeBag)
     }
     
     private func suggestion(_ index: IndexPath) -> String {
@@ -65,29 +70,6 @@ class WordsSuggestionTableViewController: UITableViewController {
     
     private func handleError(_ error: Error) {
         print(error) // TODO: show alert
-    }
-    
-    private func configureCell(_ cell: WordsSuggestionTableViewCell, with result: SuggestionItem) {
-        cell.label.text = result.suggestion
-        cell.setRemovable(result.removable)
-        if !result.removable {
-            return
-        }
-//        cell.buttonRemove.rx.tap
-////            .subscribe({ [weak self] _ in
-////                if let table = self?.tableView, let index = table.indexPath(for: cell) {
-////                    table.deleteRows(at: [index], with: .fade)
-////
-////                    self?.removeHistoryText.accept((removed: result.suggestion ?? "", current: self?.searchText.value ?? ""))
-////
-////                }
-////        })
-//            .asDriver()
-//            .map { [weak self] _ in
-//                (removed: result.suggestion ?? "", current: self?.searchText.value ?? "")
-//            }
-//        .drive(removeHistoryText)
-//        .disposed(by: disposeBag)
     }
 }
 

@@ -48,7 +48,8 @@ class WordsTableViewController: UITableViewController {
             .compactMap { $0 }.asDriver(onErrorJustReturn: "")
             .drive(searchResultsController.searchText)
             .disposed(by: disposeBag)
-        let input = WordsViewModel.Input(searchBar: createSearchDriver(), playUrl: playUrl.asDriver().filter { $0 != "" })
+        let input = WordsViewModel.Input(searchBar: createSearchDriver(),
+                                         playUrl: playUrl.asDriver().filter { $0 != "" })
         let output = model.transform(from: input)
         output.foundWords.map { [weak self] result -> [FormattedWord] in
                 return result.handleResult([], self?.handleError)
@@ -94,20 +95,10 @@ class WordsTableViewController: UITableViewController {
         if url == nil {
             return
         }
-//        if cell.model == nil {
-//            cell.model = model.newCell()
-//        }
         cell.buttonPlay.rx.tap.asDriver()
             .map { url ?? "" }
             .drive(playUrl)
             .disposed(by: disposeBag)
-//        let output = cell.model
-//            .transform(from: WordsCellModel.Input(url: inputUrl))
-//        output.played.asObservable()
-//            .subscribe { [weak self] event in
-//                _ = event.element?.handleResult(false, self?.handleError)
-//            }
-//            .disposed(by: cell.disposeBag)
     }
     
     private func handleError(_ error: Error) {
