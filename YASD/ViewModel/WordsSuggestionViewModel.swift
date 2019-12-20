@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class WordsSuggestionViewModel: ViewModel {
-    typealias RemovedItem = (current: String, removed: String)
+    //typealias RemovedItem = (current: String, removed: String)
 
     private let lexin: LexinService
     private let history: HistoryService
@@ -18,7 +18,7 @@ class WordsSuggestionViewModel: ViewModel {
     struct Input {
         let searchText: Driver<String>
         let forHistory: Driver<String>
-        let removeHistory: Driver<RemovedItem>
+        let removeHistory: Driver<Int>//RemovedItem>
     }
 
     struct Output {
@@ -31,18 +31,25 @@ class WordsSuggestionViewModel: ViewModel {
     }
     
     func transform(from input: Input) -> Output {
-        let suggestionResult = input.searchText.flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
+        let suggestionResult = input.searchText
+            .flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
             guard let self = self else { return Driver.just(.success([])) }
             return self.getSuggestionAndHistory(word.lowercased())
         }
-        let updatedHistoryResult = input.forHistory.filter { !$0.isEmpty }.flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
+        let updatedHistoryResult = input.forHistory
+            .filter { !$0.isEmpty }
+            .flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
             guard let self = self else { return Driver.just(.success([])) }
             return self.updateHistory(word.lowercased())
         }
-        let removedHistoryResult = input.removeHistory.filter { $0 != ("", "") }.flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
-            guard let self = self else { return Driver.just(.success([])) }
-            return self.removeHistory(word.removed, with: word.current)
+        let removedHistoryResult = input.removeHistory
+            .filter { $0 != -1 }
+            .withLatestFrom(input.searchText) { index, current in return (index, current) }
+            .flatMapLatest { [weak self] item -> Driver<SuggestionItemResult> in
+                guard let self = self else { return Driver.just(.success([])) }
+                return self.removeHistory(item.0, with: item.1)
         }
+        
         return Output(suggestions: Driver.merge(suggestionResult, updatedHistoryResult, removedHistoryResult))
     }
     
@@ -60,8 +67,8 @@ class WordsSuggestionViewModel: ViewModel {
         return historyAction(history.add(word), with: word)
     }
     
-    private func removeHistory(_ word: String, with current: String) -> Driver<SuggestionItemResult> {
-        return historyAction(history.remove(word), with: current)
+    private func removeHistory(_ index: Int, with current: String) -> Driver<SuggestionItemResult> {
+        return historyAction(history.remove(at: index), with: current)
     }
     
     private func historyAction(_ action: Observable<Void>, with word: String) -> Driver<SuggestionItemResult> {

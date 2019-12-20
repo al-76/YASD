@@ -52,6 +52,20 @@ class HistoryService {
         }
     }
     
+    func remove(at index: Int) -> Observable<Void> {
+        return Observable.create { [weak self] observer in
+            do {
+                self?.data.remove(at: index)
+                try self?.saveData()
+                observer.onNext(())
+                observer.onCompleted()
+            } catch let error {
+                observer.onError(error)
+            }
+            return Disposables.create {}
+        }
+    }
+    
     func remove(_ word: String) -> Observable<Void> {
         return Observable.create { [weak self] observer in
             do {
