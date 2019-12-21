@@ -91,7 +91,7 @@ class LexinParserWordsDefault : LexinParserWords {
         var meaning = try? element.selectText(root + "Meaning")
         meaning = (meaning == "") ? (try? element.selectTexts(root + "Definition").first) : meaning
         meaning = (meaning == "") ? (try? element.selectTexts(root + "Gramcom").first) : meaning
-        return meaning
+        return meaning?.removeQuotes()
     }
 }
 
@@ -148,6 +148,7 @@ private extension HtmlParserElement {
 private extension String {
     func removeQuotes() -> String {
         return self.replacingOccurrences(of: "\\\"", with: "")
+            .replacingOccurrences(of: "xA0", with: " ")
     }
     
     func replaceNonAscii() -> String {

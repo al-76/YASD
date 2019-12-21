@@ -35,7 +35,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
                                                  history: TestHistoryService(value: [], whenError: ""))
         viewModel.transform(from: WordsSuggestionViewModel.Input(searchText: inputWords,
                                                                  forHistory: Driver.just(""),
-                                                                 removeHistory: Driver.just((current: "", removed: ""))))
+                                                                 removeHistory: Driver.just("")))
             .suggestions.drive(result).disposed(by: disposeBag)
         
         // Act
@@ -66,7 +66,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
                                                  history: TestHistoryService(value: initialValue, whenError: errorWord))
         viewModel.transform(from: WordsSuggestionViewModel.Input(searchText: inputWords,
                                                                  forHistory: Driver.just(""),
-                                                                 removeHistory: Driver.just(("", ""))))
+                                                                 removeHistory: Driver.just("")))
             .suggestions.drive(result).disposed(by: disposeBag)
         
         // Act
@@ -97,7 +97,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                  history: TestHistoryService(value: [], whenError: "error_word"))
         viewModel.transform(from: WordsSuggestionViewModel.Input(searchText: Driver.just(""),
-                                                                 forHistory: historyWords, removeHistory: Driver.just(("", ""))))
+                                                                 forHistory: historyWords, removeHistory: Driver.just("")))
             .suggestions.drive(result).disposed(by: disposeBag)
         
         // Act
@@ -116,9 +116,9 @@ class WordsSuggestionViewModelTests: XCTestCase {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         let inputRemovedWords = scheduler.createHotObservable([
-            .next(200, (current: "test2", removed: "test3")),
+            .next(200, "test3"),
             .completed(400)
-        ]).asDriver(onErrorJustReturn: (current: "", removed: ""))
+        ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                  history: TestHistoryService(value: ["test2", "test3"], whenError: "error_word"))
@@ -137,7 +137,10 @@ class WordsSuggestionViewModelTests: XCTestCase {
                 SuggestionItem(suggestion: "test2", removable: true),
                 SuggestionItem(suggestion: "test3", removable: true)
             ])),
-            .next(200, SuggestionItemResult.success(createSuggestionItems(["test2"], true))),
+            .next(200, SuggestionItemResult.success([
+                SuggestionItem(suggestion: "", removable: false),
+                SuggestionItem(suggestion: "test2", removable: true)
+            ])),
             .completed(400)
         ])
     }
@@ -151,10 +154,10 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let inputRemovedWords = scheduler.createHotObservable([
-            .next(300, (current: "test2", removed: "test2")),
-            .next(350, (current: "test3", removed: "test3")),
+            .next(300, "test2"),
+            .next(350, "test3"),
             .completed(500)
-        ]).asDriver(onErrorJustReturn: (current: "", removed: ""))
+        ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
         var viewModel: WordsSuggestionViewModel? = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                                             history: TestHistoryService(value: [], whenError: ""))
@@ -259,8 +262,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         
         override func remove(_ word: String) -> Observable<Void> {
             return Observable.create { [weak self] observer in
-                if var data = self?.data, let index = data.firstIndex(of: word) {
-                    data.remove(at: index)
+                if let index = self?.data.firstIndex(of: word) {
+                    self?.data.remove(at: index)
                 }
                 observer.onNext(())
                 observer.onCompleted()
