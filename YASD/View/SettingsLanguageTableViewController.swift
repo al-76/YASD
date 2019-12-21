@@ -12,12 +12,25 @@ import RxCocoa
 
 class SettingsLanguageTableViewController: UITableViewController {
     var model: SettingsLanguageViewModel!
-    let disposeBag = DisposeBag()
+    
+    private let disposeBag = DisposeBag()
+    private var searchController: UISearchController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        customizeView()
         bindToModel()
+    }
+    
+    private func customizeView() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Skriv ett språk!"
+        searchController.obscuresBackgroundDuringPresentation = false
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesBackButton = true
+        navigationItem.hidesSearchBarWhenScrolling = false        
     }
     
     private func bindToModel() {
@@ -32,7 +45,10 @@ class SettingsLanguageTableViewController: UITableViewController {
             let item = try? table.rx.model(at: $0) as SettingsItem
             return (item?.language.name ?? "")
         }.asDriver(onErrorJustReturn: "")
-        let input = SettingsLanguageViewModel.Input(selectedLanguage: language)
+        let searchLanguage = searchController.searchBar.rx.text.distinctUntilChanged()
+            .compactMap { $0 }
+            .asDriver(onErrorJustReturn: "")
+        let input = SettingsLanguageViewModel.Input(search: searchLanguage, select: language)
         let output = model.transform(from: input)
         output.languages.drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { (_, result, cell) in
                 if let settingsCell = cell as? SettingsLanguageTableViewCell,
