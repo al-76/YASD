@@ -14,7 +14,8 @@ class SettingsLanguageViewModel: ViewModel {
     private var languageItems: [SettingsItem]
     
     struct Input {
-        let selectedLanguage: Driver<String>
+        let search: Driver<String>
+        let select: Driver<String>
     }
     
     struct Output {
@@ -27,12 +28,18 @@ class SettingsLanguageViewModel: ViewModel {
     }
     
     func transform(from input: Input) -> Output {
-        let selectedLanguage = input.selectedLanguage.flatMapLatest { [weak self] language -> Driver<[SettingsItem]> in
+        let searched = input.search
+            .flatMapLatest { [weak self] language -> Driver<[SettingsItem]> in
             guard let self = self else { return Driver.just([]) }
-            self.updateParameters(with: language)
-            return Driver.just(self.languageItems)
+                return Driver.just(self.filterLanguage(with: language))
         }
-        return Output(languages: selectedLanguage.startWith(self.languageItems))
+        let selected = input.select
+            .withLatestFrom(input.search) { [weak self] selectedLanguage, searchLanguage -> [SettingsItem] in
+                guard let self = self else { return [] }
+                self.updateParameters(with: selectedLanguage)
+                return self.filterLanguage(with: searchLanguage)
+        }
+        return Output(languages: Driver.merge(selected.startWith(self.languageItems), searched))
     }
     
     private func updateParameters(with language: String) {
@@ -44,6 +51,12 @@ class SettingsLanguageViewModel: ViewModel {
             lexinParameters.setLanguage(newLanguage)
             languageItems[new].selected = true
         }
+    }
+    
+    private func filterLanguage(with language: String) -> [SettingsItem] {
+        return languageItems
+            .filter { language.isEmpty || $0.language.name.lowercased().contains(language.lowercased()) }
+            .compactMap { $0 }
     }
     
     private static func createSettingsLanguageItems(_ language: Language) -> [SettingsItem] {

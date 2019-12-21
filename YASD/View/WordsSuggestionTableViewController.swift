@@ -14,11 +14,10 @@ import RxDataSources
 class WordsSuggestionTableViewController: UITableViewController {
     var model: WordsSuggestionViewModel!
     let disposeBag = DisposeBag()
-    let searchText = BehaviorRelay<String>(value: "")
-    let forHistoryText = BehaviorRelay<String>(value: "")
-    let selectedSuggestion = BehaviorRelay<String>(value: "")
-    let completed = BehaviorRelay<String>(value: "")
-    let removeHistoryText = BehaviorRelay<String>(value: "")
+    let search = BehaviorRelay<String>(value: "")
+    let addHistory = BehaviorRelay<String>(value: "")
+    let selectSuggestion = BehaviorRelay<String>(value: "")
+    let removeHistory = BehaviorRelay<String>(value: "")
     private let dataSource = createDataSource()
 
     override func viewDidLoad() {
@@ -38,7 +37,7 @@ class WordsSuggestionTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        let input = WordsSuggestionViewModel.Input(searchText: searchText.asDriver(), forHistory: forHistoryText.asDriver(), removeHistory: removeHistoryText.asDriver())
+        let input = WordsSuggestionViewModel.Input(search: search.asDriver(), addHistory: addHistory.asDriver(), removeHistory: removeHistory.asDriver())
         model.transform(from: input).suggestions
         .map { [weak self] result -> [SuggestionItem] in
             return result.handleResult([], self?.handleError)
@@ -54,11 +53,11 @@ class WordsSuggestionTableViewController: UITableViewController {
         }
         tableView.rx.itemSelected
             .map { suggestion($0) }
-            .bind(to: selectedSuggestion)
+            .bind(to: selectSuggestion)
             .disposed(by: disposeBag)
         tableView.rx.itemDeleted
             .map { suggestion($0) }
-            .bind(to: removeHistoryText)
+            .bind(to: removeHistory)
             .disposed(by: disposeBag)
     }
     

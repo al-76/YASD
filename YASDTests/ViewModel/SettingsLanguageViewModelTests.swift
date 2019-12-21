@@ -10,13 +10,14 @@
 
 import XCTest
 import RxSwift
+import RxCocoa
 import RxTest
 import Cuckoo
 
 class SettingsLanguageViewModelTests: XCTestCase {
     let disposeBag = DisposeBag()
     
-    func testSettingsLanguage() {
+    func testSettingsLanguageSelect() {
         // Arrange
         let testLanguages = [
             ParametersStorage.defaultLanguage,
@@ -25,11 +26,12 @@ class SettingsLanguageViewModelTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         let inputLanguages = scheduler.createHotObservable([
             .next(150, testLanguages[1].name)
-        ])
+        ]).asDriver(onErrorJustReturn: "")
         let outputLanguages = scheduler.createObserver([SettingsItem].self)
         let parameters = createParametersStorageStub(testLanguages[0])
         let viewModel = SettingsLanguageViewModel(lexinParameters: parameters)
-        let output = viewModel.transform(from: SettingsLanguageViewModel.Input(selectedLanguage: inputLanguages.asDriver(onErrorJustReturn: "")))
+        let output = viewModel.transform(from: SettingsLanguageViewModel.Input(search: Driver.never(),
+                                                                               select: inputLanguages))
         output.languages.drive(outputLanguages).disposed(by: disposeBag)
         
         // Act
@@ -38,6 +40,33 @@ class SettingsLanguageViewModelTests: XCTestCase {
         // Assert
         for (index, event) in outputLanguages.events.enumerated() {
             XCTAssertEqual(getSelectedItem(from: event.value.element!)!.language.name, testLanguages[index].name)
+        }
+    }
+    
+    func testSettingsLanguageSearch() {
+        // Arrange
+        let searchLanguage = [
+            ParametersStorage.defaultLanguage,
+            ParametersStorage.supportedLanguages[0]
+        ]
+        let scheduler = TestScheduler(initialClock: 0)
+        let inputLanguages = scheduler.createHotObservable([
+            .next(100, searchLanguage[0].name),
+            .next(150, searchLanguage[1].name)
+        ]).asDriver(onErrorJustReturn: "")
+        let outputLanguages = scheduler.createObserver([SettingsItem].self)
+        let parameters = createParametersStorageStub(searchLanguage[0])
+        let viewModel = SettingsLanguageViewModel(lexinParameters: parameters)
+        let output = viewModel.transform(from: SettingsLanguageViewModel.Input(search: inputLanguages,
+                                                                               select: Driver.never()))
+        output.languages.drive(outputLanguages).disposed(by: disposeBag)
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        for (index, event) in outputLanguages.events.dropFirst().enumerated() {
+            XCTAssertEqual(event.value.element?.first?.language.name, searchLanguage[index].name)
         }
     }
     

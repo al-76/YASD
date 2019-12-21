@@ -46,7 +46,7 @@ class WordsTableViewController: UITableViewController {
     private func bindToModel() {
         searchController.searchBar.rx.text.distinctUntilChanged()
             .compactMap { $0 }.asDriver(onErrorJustReturn: "")
-            .drive(searchResultsController.searchText)
+            .drive(searchResultsController.search)
             .disposed(by: disposeBag)
         let input = WordsViewModel.Input(searchBar: createSearchDriver(),
                                          playUrl: playUrl.asDriver().filter { $0 != "" })
@@ -73,7 +73,7 @@ class WordsTableViewController: UITableViewController {
             return text
         }
         let dismissSearchController: ((String) -> ()) = { [weak self] value in
-            self?.searchResultsController.forHistoryText.accept(value)
+            self?.searchResultsController.addHistory.accept(value)
             self?.searchController.searchBar.text = value
             self?.searchController.dismiss(animated: true, completion: nil)
         }
@@ -81,7 +81,7 @@ class WordsTableViewController: UITableViewController {
             .searchButtonClicked
             .map { _ in inputText() }
             .asDriver(onErrorJustReturn: "")
-        let suggestionText = searchResultsController.selectedSuggestion
+        let suggestionText = searchResultsController.selectSuggestion
             .asDriver(onErrorJustReturn: "")
         return Driver.merge(enteredText, suggestionText)
             .map { value in

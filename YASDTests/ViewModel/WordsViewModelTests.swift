@@ -34,7 +34,7 @@ class WordsViewModelTests: XCTestCase {
         let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: errorWord),
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService())
-        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.just("")))
+        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.never()))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -60,7 +60,7 @@ class WordsViewModelTests: XCTestCase {
         var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                          formatter: createMockLexinServiceFormatter(),
                                                          player: createMockPlayerService())
-        viewModel?.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.just("")))
+        viewModel?.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.never()))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -87,7 +87,7 @@ class WordsViewModelTests: XCTestCase {
         let viewModel = WordsViewModel(lexin: lexin,
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService())
-        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.just("")))
+        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.never()))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -116,7 +116,7 @@ class WordsViewModelTests: XCTestCase {
         let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: ""),
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService(errorUrl: errorUrl))
-        viewModel.transform(from: WordsViewModel.Input(searchBar: Driver.just(""), playUrl: inputUrls))
+        viewModel.transform(from: WordsViewModel.Input(searchBar: Driver.never(), playUrl: inputUrls))
             .played.drive(played)
             .disposed(by: disposeBag)
         
