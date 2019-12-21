@@ -33,8 +33,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: errorWord),
                                                  history: TestHistoryService(value: [], whenError: ""))
-        viewModel.transform(from: WordsSuggestionViewModel.Input(searchText: inputWords,
-                                                                 forHistory: Driver.just(""),
+        viewModel.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
+                                                                 addHistory: Driver.just(""),
                                                                  removeHistory: Driver.just("")))
             .suggestions.drive(result).disposed(by: disposeBag)
         
@@ -64,8 +64,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: ""),
                                                  history: TestHistoryService(value: initialValue, whenError: errorWord))
-        viewModel.transform(from: WordsSuggestionViewModel.Input(searchText: inputWords,
-                                                                 forHistory: Driver.just(""),
+        viewModel.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
+                                                                 addHistory: Driver.just(""),
                                                                  removeHistory: Driver.just("")))
             .suggestions.drive(result).disposed(by: disposeBag)
         
@@ -96,8 +96,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                  history: TestHistoryService(value: [], whenError: "error_word"))
-        viewModel.transform(from: WordsSuggestionViewModel.Input(searchText: Driver.just(""),
-                                                                 forHistory: historyWords, removeHistory: Driver.just("")))
+        viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.just(""),
+                                                                 addHistory: historyWords, removeHistory: Driver.just("")))
             .suggestions.drive(result).disposed(by: disposeBag)
         
         // Act
@@ -122,8 +122,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                  history: TestHistoryService(value: ["test2", "test3"], whenError: "error_word"))
-        viewModel.transform(from: WordsSuggestionViewModel.Input(searchText: Driver.just(""),
-                                                                 forHistory: Driver.just(""),
+        viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.just(""),
+                                                                 addHistory: Driver.just(""),
                                                                  removeHistory: inputRemovedWords))
             .suggestions.drive(result).disposed(by: disposeBag)
         
@@ -161,8 +161,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let result = scheduler.createObserver(SuggestionItemResult.self)
         var viewModel: WordsSuggestionViewModel? = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                                             history: TestHistoryService(value: [], whenError: ""))
-        let transform = viewModel?.transform(from: WordsSuggestionViewModel.Input(searchText: inputWords,
-                                                                                  forHistory: inputWords,
+        let transform = viewModel?.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
+                                                                                  addHistory: inputWords,
                                                                                   removeHistory: inputRemovedWords))
         transform?.suggestions.drive(result).disposed(by: disposeBag)
 

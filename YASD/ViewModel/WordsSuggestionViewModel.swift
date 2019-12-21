@@ -14,8 +14,8 @@ class WordsSuggestionViewModel: ViewModel {
     private let history: HistoryService
 
     struct Input {
-        let searchText: Driver<String>
-        let forHistory: Driver<String>
+        let search: Driver<String>
+        let addHistory: Driver<String>
         let removeHistory: Driver<String>
     }
 
@@ -29,12 +29,12 @@ class WordsSuggestionViewModel: ViewModel {
     }
     
     func transform(from input: Input) -> Output {
-        let suggestionResult = input.searchText
+        let suggestionResult = input.search
             .flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
             guard let self = self else { return Driver.just(.success([])) }
             return self.getSuggestionAndHistory(word.lowercased())
         }
-        let updatedHistoryResult = input.forHistory
+        let updatedHistoryResult = input.addHistory
             .filter { !$0.isEmpty }
             .flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
             guard let self = self else { return Driver.just(.success([])) }
@@ -42,7 +42,7 @@ class WordsSuggestionViewModel: ViewModel {
         }
         let removedHistoryResult = input.removeHistory
             .filter { !$0.isEmpty }
-            .withLatestFrom(input.searchText) { removed, current in return (removed, current) }
+            .withLatestFrom(input.search) { removed, current in return (removed, current) }
             .flatMapLatest { [weak self] item -> Driver<SuggestionItemResult> in
             guard let self = self else { return Driver.just(.success([])) }
             return self.removeHistory(item.0, with: item.1)
