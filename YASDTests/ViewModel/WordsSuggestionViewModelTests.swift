@@ -27,15 +27,14 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let inputWords = scheduler.createHotObservable([
             .next(200, "test2"),
             .next(250, "test3"),
-            .next(350, errorWord),
-            .completed(400)
+            .next(350, errorWord)
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: errorWord),
                                                  history: TestHistoryService(value: [], whenError: ""))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
-                                                                 addHistory: Driver.just(""),
-                                                                 removeHistory: Driver.just("")))
+                                                                 addHistory: Driver.never(),
+                                                                 removeHistory: Driver.never()))
             .suggestions.drive(result).disposed(by: disposeBag)
         
         // Act
@@ -45,8 +44,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
         XCTAssertEqual(result.events, [
             .next(200, SuggestionItemResult.success(createSuggestionItems(["test2"], false))),
             .next(250, SuggestionItemResult.success(createSuggestionItems(["test3"], false))),
-            .next(350, SuggestionItemResult.failure(TestError.someError)),
-            .completed(400)
+            .next(350, SuggestionItemResult.failure(TestError.someError))
        ])
     }
     
@@ -57,16 +55,15 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let inputWords = scheduler.createHotObservable([
             .next(200, "test2"),
             .next(250, "test3"),
-            .next(350, errorWord),
-            .completed(400)
+            .next(350, errorWord)
         ]).asDriver(onErrorJustReturn: "")
         let initialValue = ["test2", "test3_abc", "test3_cde", "some_words"]
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: ""),
                                                  history: TestHistoryService(value: initialValue, whenError: errorWord))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
-                                                                 addHistory: Driver.just(""),
-                                                                 removeHistory: Driver.just("")))
+                                                                 addHistory: Driver.never(),
+                                                                 removeHistory: Driver.never()))
             .suggestions.drive(result).disposed(by: disposeBag)
         
         // Act
@@ -81,7 +78,6 @@ class WordsSuggestionViewModelTests: XCTestCase {
                 SuggestionItem(suggestion: "test3_cde", removable: true)
             ])),
             .next(350, SuggestionItemResult.failure(TestError.someError)),
-            .completed(400)
         ])
     }
     
@@ -90,14 +86,13 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         let historyWords = scheduler.createHotObservable([
             .next(200, "test2"),
-            .next(250, "test3"),
-            .completed(400)
+            .next(250, "test3")
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                  history: TestHistoryService(value: [], whenError: "error_word"))
-        viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.just(""),
-                                                                 addHistory: historyWords, removeHistory: Driver.just("")))
+        viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.never(),
+                                                                 addHistory: historyWords, removeHistory: Driver.never()))
             .suggestions.drive(result).disposed(by: disposeBag)
         
         // Act
@@ -105,10 +100,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(result.events, [
-            .next(0, SuggestionItemResult.success(createSuggestionItems([""], false))),
             .next(200, SuggestionItemResult.success(createSuggestionItems(["test2"], true))),
             .next(250, SuggestionItemResult.success(createSuggestionItems(["test3"], true))),
-            .completed(400)
         ])
     }
     
@@ -116,14 +109,13 @@ class WordsSuggestionViewModelTests: XCTestCase {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         let inputRemovedWords = scheduler.createHotObservable([
-            .next(200, "test3"),
-            .completed(400)
+            .next(200, "test3")
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                  history: TestHistoryService(value: ["test2", "test3"], whenError: "error_word"))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.just(""),
-                                                                 addHistory: Driver.just(""),
+                                                                 addHistory: Driver.never(),
                                                                  removeHistory: inputRemovedWords))
             .suggestions.drive(result).disposed(by: disposeBag)
         
@@ -141,7 +133,6 @@ class WordsSuggestionViewModelTests: XCTestCase {
                 SuggestionItem(suggestion: "", removable: false),
                 SuggestionItem(suggestion: "test2", removable: true)
             ])),
-            .completed(400)
         ])
     }
     
