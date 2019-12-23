@@ -1,5 +1,5 @@
 //
-//  HistoryService.swift
+//  StorageService.swift
 //  YASD
 //
 //  Created by Vyacheslav Konopkin on 29.11.2019.
@@ -9,37 +9,36 @@
 import Foundation
 import RxSwift
 
-class HistoryService {
-    private static let STORAGE_ID = "history"
-    
+class StorageService<T: Encodable & Decodable & Equatable> {
+    private let id: String
     private let storage: Storage
     
-    private lazy var data: [String] = {
-        return self.storage.get(id: HistoryService.STORAGE_ID, defaultObject: [String]())
+    private lazy var data: [T] = {
+        return self.storage.get(id: id, defaultObject: [T]())
     }()
     
-    init(storage: Storage) {
+    init(id: String, storage: Storage) {
+        self.id = id
         self.storage = storage
     }
     
-    func get(with word: String) -> Observable<SuggestionResult> {
+    func get(with word: T, where filterFunc: @escaping (T, T) -> Bool) -> Observable<Result<[T]>> {
         return Observable.create { [weak self] observer in
             if let data = self?.data {
-                let filtered = data.filter { $0.starts(with: word) }
-                observer.onNext(SuggestionResult.success(filtered))
+                let filtered = data.filter { filterFunc($0, word) }
+                observer.onNext(.success(filtered))
             } else {
-                observer.onNext(SuggestionResult.success([]))
+                observer.onNext(.success([]))
             }
             observer.onCompleted()
             return Disposables.create {}
         }
     }
     
-    func add(_ word: String) -> Observable<Void> {
+    func add(_ word: T) -> Observable<Void> {
         return Observable.create { [weak self] observer in
             do {
-                if !word.isEmpty &&
-                    self?.data.firstIndex(of: word) == nil { // yes yes, I know about ordered set
+                if self?.data.firstIndex(where: { $0 == word }) == nil { // yes yes, I know about ordered set
                     self?.data.append(word)
                     try self?.saveData()
                 }
@@ -52,10 +51,10 @@ class HistoryService {
         }
     }
     
-    func remove(_ word: String) -> Observable<Void> {
+    func remove(_ word: T) -> Observable<Void> {
         return Observable.create { [weak self] observer in
             do {
-                if let index = self?.data.firstIndex(of: word) {
+                if let index = self?.data.firstIndex(where: { $0 == word }) {
                     self?.data.remove(at: index)
                     try self?.saveData()
                 }
@@ -69,6 +68,6 @@ class HistoryService {
     }
     
     private func saveData() throws {
-        try storage.save(id: HistoryService.STORAGE_ID, object: data)
+        try storage.save(id: id, object: data)
     }
 }

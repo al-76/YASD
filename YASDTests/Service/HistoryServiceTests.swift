@@ -1,5 +1,5 @@
 //
-//  HistoryServiceTests.swift
+//  StorageServiceTests.swift
 //  YASDTests
 //
 //  Created by Vyacheslav Konopkin on 18.12.2019.
@@ -12,7 +12,7 @@ import RxSwift
 import RxTest
 import Cuckoo
 
-class HistoryServiceTests: XCTestCase {
+class StorageServiceTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
@@ -21,7 +21,7 @@ class HistoryServiceTests: XCTestCase {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         let testData = ["test1", "test2", "abcd"]
-        let service = HistoryService(storage: TestStorage(testData))
+        let service = StorageService<String>(id: "test", storage: TestStorage(testData))
         
         // Act
         let gotData = service.get(with: "test")
@@ -29,7 +29,7 @@ class HistoryServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, SuggestionResult.success(["test1", "test2"])),
+            .next(200, Result.success(["test1", "test2"])),
             .completed(200)
          ])
     }
@@ -38,7 +38,7 @@ class HistoryServiceTests: XCTestCase {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         let testData = ["test1", "test2", "abcd"]
-        let service = HistoryService(storage: TestStorage(testData))
+        let service = StorageService<String>(id: "test", storage: TestStorage(testData))
         
         // Act
         let gotData = service.get(with: "")
@@ -46,7 +46,7 @@ class HistoryServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, SuggestionResult.success(testData)),
+            .next(200, Result.success(testData)),
             .completed(200)
          ])
     }
@@ -55,7 +55,7 @@ class HistoryServiceTests: XCTestCase {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         let testData = ["test1", "test2", "abcd"]
-        let service = HistoryService(storage: TestStorage(testData))
+        let service = StorageService<String>(id: "test", storage: TestStorage(testData))
         
         // Act
         let gotData = service.get(with: "något")
@@ -63,7 +63,7 @@ class HistoryServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, SuggestionResult.success([])),
+            .next(200, Result.success([])),
             .completed(200)
         ])
     }
@@ -71,7 +71,7 @@ class HistoryServiceTests: XCTestCase {
     func testAdd() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        let service = HistoryService(storage: TestStorage([]))
+        let service = StorageService<String>(id: "test", storage: TestStorage([]))
         
         // Act
         let added = service.add("test").flatMap { _ in
@@ -81,7 +81,7 @@ class HistoryServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, SuggestionResult.success(["test"])),
+            .next(200, Result.success(["test"])),
             .completed(200)
         ])
     }
@@ -89,7 +89,7 @@ class HistoryServiceTests: XCTestCase {
     func testAddWithError() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        let service = HistoryService(storage: TestStorageError([]))
+        let service = StorageService<String>(id: "test", storage: TestStorageError([]))
         
         // Act
         let added = service.add("test").flatMap { _ in
@@ -106,7 +106,7 @@ class HistoryServiceTests: XCTestCase {
     func testRemove() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        let service = HistoryService(storage: TestStorage(["test1", "test2", "test3"]))
+        let service = StorageService<String>(id: "test", storage: TestStorage(["test1", "test2", "test3"]))
         
         // Act
         let added = service.remove("test2").flatMap { _ in
@@ -116,7 +116,7 @@ class HistoryServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, SuggestionResult.success(["test1", "test3"])),
+            .next(200, Result.success(["test1", "test3"])),
             .completed(200)
         ])
     }
@@ -124,7 +124,7 @@ class HistoryServiceTests: XCTestCase {
     func testRemoveWithError() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        let service = HistoryService(storage: TestStorageError(["test1", "test2", "test3"]))
+        let service = StorageService<String>(id: "test", storage: TestStorageError(["test1", "test2", "test3"]))
         
         // Act
         let added = service.remove("test2").flatMap { _ in
@@ -157,5 +157,12 @@ class HistoryServiceTests: XCTestCase {
         override func save<T>(id: String, object: T) throws where T : Decodable, T : Encodable {
             throw TestError.someError
         }
+    }
+}
+
+
+private extension StorageService where T == String {
+    func get(with word: String) -> Observable<Result<[String]>> {
+        return get(with: word, where: { $0.starts(with: $1) })
     }
 }

@@ -11,7 +11,7 @@ import RxCocoa
 
 class WordsSuggestionViewModel: ViewModel {
     private let lexin: LexinService
-    private let history: HistoryService
+    private let history: StorageService<Suggestion>
 
     struct Input {
         let search: Driver<String>
@@ -23,7 +23,7 @@ class WordsSuggestionViewModel: ViewModel {
         let suggestions: Driver<SuggestionItemResult>
     }
     
-    init(lexin: LexinService, history: HistoryService) {
+    init(lexin: LexinService, history: StorageService<Suggestion>) {
         self.lexin = lexin
         self.history = history
     }
@@ -52,7 +52,7 @@ class WordsSuggestionViewModel: ViewModel {
     
     private func getSuggestionAndHistory(_ word: String) -> Driver<SuggestionItemResult> {
         return Observable.combineLatest(lexin.suggestion(word),
-                                    history.get(with: word),
+                                        history.get(with: word, where: { $0?.starts(with: $1 ?? "") ?? false }),
                                     resultSelector: { suggestion, history in
                                         let filtered = suggestion.filter(history).toItem(removable: false)
                                         let merged = filtered.merge(history.toItem(removable: true))

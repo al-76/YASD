@@ -121,9 +121,9 @@ func configureService(_ container: Container) {
     }
     .inObjectScope(.container)
     
-    // History Service
-    container.register(HistoryService.self) { _ in
-        HistoryService(storage: container.resolve(Storage.self)!)
+    // Storage Service
+    container.register(StorageService<Suggestion>.self) { _ in
+        StorageService(id: "history", storage: container.resolve(Storage.self)!)
     }
     .inObjectScope(.container)
 }
@@ -131,7 +131,7 @@ func configureService(_ container: Container) {
 func configureModel(_ container: Container) {
     container.register(WordsSuggestionViewModel.self) { container in
         WordsSuggestionViewModel(lexin: container.resolve(LexinService.self)!,
-                                 history: container.resolve(HistoryService.self)!)
+                                 history: container.resolve(StorageService<Suggestion>.self)!)
     }
     .inObjectScope(.container)
     
