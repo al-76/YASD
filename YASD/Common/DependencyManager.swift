@@ -157,6 +157,11 @@ func configureModel(_ container: Container) {
         SettingsLanguageViewModel(lexinParameters: container.resolve(ParametersStorage.self)!)
     }
     .inObjectScope(.container)
+    
+    container.register(BookmarksViewModel.self) { container in
+        BookmarksViewModel(bookmarks: container.resolve(StorageService<FormattedWord>.self)!, player: container.resolve(PlayerService.self)!)
+    }
+    .inObjectScope(.container)
 }
 
 func configureView(_ container: Container) {
@@ -173,5 +178,8 @@ func configureView(_ container: Container) {
     }
     container.storyboardInitCompleted(SettingsLanguageTableViewController.self) { container, view in
         view.model = container.resolve(SettingsLanguageViewModel.self)
+    }
+    container.storyboardInitCompleted(BookmarksTableViewController.self) { container, view in
+        view.model = container.resolve(BookmarksViewModel.self)
     }
 }

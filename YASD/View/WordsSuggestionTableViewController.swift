@@ -119,7 +119,4 @@ fileprivate func getSuggestionItem(from dataSource: TableViewSectionedDataSource
 fileprivate func configureCell(_ cell: WordsSuggestionTableViewCell, with result: SuggestionItem) {
     cell.label.text = result.suggestion
     cell.setRemovable(result.removable)
-    if !result.removable {
-        return
-    }
 }

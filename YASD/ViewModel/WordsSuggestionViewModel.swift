@@ -42,10 +42,10 @@ class WordsSuggestionViewModel: ViewModel {
         }
         let removedHistoryResult = input.removeHistory
             .filter { !$0.isEmpty }
-            .withLatestFrom(input.search) { removed, current in return (removed, current) }
-            .flatMapLatest { [weak self] item -> Driver<SuggestionItemResult> in
+            .withLatestFrom(input.search) { ($0, $1) }
+            .flatMapLatest { [weak self] word, currentWord -> Driver<SuggestionItemResult> in
             guard let self = self else { return Driver.just(.success([])) }
-            return self.removeHistory(item.0, with: item.1)
+            return self.removeHistory(word, with: currentWord)
         }
         return Output(suggestions: Driver.merge(suggestionResult, updatedHistoryResult, removedHistoryResult))
     }

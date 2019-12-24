@@ -43,7 +43,7 @@ class WordsViewModel: ViewModel {
         }
         let updatedSearch = lexin.language()
             .asDriver(onErrorJustReturn: ParametersStorage.defaultLanguage)
-            .withLatestFrom(input.search) { _, lastWord in return lastWord }
+            .withLatestFrom(input.search) { $1 }
             .flatMapLatest { [weak self] lastWord -> Driver<FormattedWordResult> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.searchWord(lastWord)
@@ -62,7 +62,6 @@ class WordsViewModel: ViewModel {
         let removedBookmark = input.removeBookmark.flatMap { [weak self] word -> Driver<StorageServiceResult> in
             guard let self = self else { return Driver.just(.success(false)) }
             return self.bookmarks.remove(word).asDriver { Driver.just(.failure($0)) }
-
         }
         return Output(foundWords: searched, played: played, bookmarked: Driver.merge(addedBookmark, removedBookmark))
     }

@@ -17,7 +17,14 @@ class BookmarksTableViewController: UITableViewController {
     private let disposeBag = DisposeBag()
     private let playUrl = PublishRelay<String>()
     private let removeBookmark = PublishRelay<Int>()
+    private let searchTemp = BehaviorRelay<String>(value: "")
 //    private var searchController: UISearchController!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchTemp.accept("") // update
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +49,7 @@ class BookmarksTableViewController: UITableViewController {
                 .bind(to: self.playUrl)
                 .disposed(by: self.disposeBag)
         })
-        let input = BookmarksViewModel.Input(search: Driver.never(),
+        let input = BookmarksViewModel.Input(search: searchTemp.asDriver(),
                                              playUrl: playUrl.asDriver(onErrorJustReturn: ""),
                                              removeBookmark: removeBookmark.asDriver(onErrorJustReturn: -1))
         let output = model.transform(from: input)
@@ -52,6 +59,9 @@ class BookmarksTableViewController: UITableViewController {
             }
             .map { bookmarks in [BookmarkItemSection(header: "bookmarks", items: bookmarks)] }
             .drive(tableView.rx.items(dataSource: dataSource)),
+            output.played.drive(onNext: { [weak self] result in
+                _ = result.handleResult(false, self?.handleError)
+            }),
             tableView.rx.itemDeleted
                 .map { $0.row }
                 .bind(to: removeBookmark)
@@ -88,7 +98,7 @@ extension BookmarkItemSection: AnimatableSectionModelType {
 fileprivate func createDataSource(_ configureCell: @escaping (BookmarksTableViewCell, FormattedWord) -> Void) -> RxTableViewSectionedAnimatedDataSource<BookmarkItemSection> {
     return RxTableViewSectionedAnimatedDataSource(animationConfiguration: AnimationConfiguration(insertAnimation: .automatic, reloadAnimation: .automatic, deleteAnimation: .automatic),
                                                   configureCell: { (dataSource, tableView, indexPath, word) -> UITableViewCell in
-                                                    let id = "BookmarksSuggestionTableCell"
+                                                    let id = "BookmarksTableCell"
                                                     let cell = tableView.dequeueReusableCell(withIdentifier: id) ?? UITableViewCell(style: .default, reuseIdentifier: id)
                                                     if let bookmarkCell = cell as? BookmarksTableViewCell {
                                                         configureCell(bookmarkCell, word)
