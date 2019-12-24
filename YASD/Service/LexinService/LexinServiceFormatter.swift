@@ -19,7 +19,7 @@ class LexinServiceFormatter {
     func format(result: LexinWordResult) -> FormattedWordResult {
         switch result {
         case .success(let items):
-            return .success(items.map { FormattedWord(formatted: format(item: $0), soundUrl: getSoundUrl(item: $0)) })
+            return .success(items.map { FormattedWord(header: $0.word, formatted: format(item: $0), soundUrl: getSoundUrl(item: $0)) })
         case .failure(let error):
             return .failure(error)
         }

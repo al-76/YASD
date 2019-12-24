@@ -184,7 +184,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yXS-WS-xgU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2365" y="402"/>
+            <point key="canvasLocation" x="2577" y="1146"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -196,12 +196,13 @@
                     </tabBar>
                     <connections>
                         <segue destination="ZPw-80-Fn5" kind="relationship" relationship="viewControllers" id="I7Z-ZG-0tv"/>
-                        <segue destination="vGh-Y3-JkN" kind="relationship" relationship="viewControllers" id="oT9-0J-LWE"/>
+                        <segue destination="ZOw-uO-scV" kind="relationship" relationship="viewControllers" id="Evo-r5-2O7"/>
+                        <segue destination="vGh-Y3-JkN" kind="relationship" relationship="viewControllers" id="aS5-Pc-sV4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0.0" y="0.0"/>
+            <point key="canvasLocation" x="-842" y="-19"/>
         </scene>
         <!--Settings-->
         <scene sceneID="b14-U1-XBR">
@@ -220,7 +221,92 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKh-hp-hsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="747.82608695652175" y="401.78571428571428"/>
+            <point key="canvasLocation" x="748" y="1146"/>
+        </scene>
+        <!--Bookmarks Table View Controller-->
+        <scene sceneID="5bg-du-qa2">
+            <objects>
+                <tableViewController id="ICo-D0-VTm" userLabel="Bookmarks Table View Controller" customClass="BookmarksTableViewController" customModule="YASD" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uQ4-dR-5Y2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookmarksTableCell" id="OQs-zR-XUI" customClass="BookmarksTableViewCell" customModule="YASD" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="269"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OQs-zR-XUI" id="eHy-C9-iK0">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="269"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="3wZ-6C-AvG">
+                                            <rect key="frame" x="5" y="0.0" width="404" height="269"/>
+                                            <subviews>
+                                                <textView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" scrollEnabled="NO" editable="NO" usesAttributedText="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PwE-va-wxr">
+                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="226.5"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment>
+                                                            <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                            <attributes>
+                                                                <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <font key="NSFont" metaFont="system" size="16"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="icC-WZ-fIG">
+                                                    <rect key="frame" x="0.0" y="237.5" width="58" height="31.5"/>
+                                                    <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="12" maxY="4"/>
+                                                    <state key="normal" image="speaker.3.fill">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="3wZ-6C-AvG" secondAttribute="trailing" constant="5" id="283-gO-ClK"/>
+                                        <constraint firstItem="3wZ-6C-AvG" firstAttribute="leading" secondItem="eHy-C9-iK0" secondAttribute="leading" constant="5" id="6Ma-1N-3b9"/>
+                                        <constraint firstAttribute="bottom" secondItem="3wZ-6C-AvG" secondAttribute="bottom" id="j3C-4f-8ou"/>
+                                        <constraint firstItem="3wZ-6C-AvG" firstAttribute="top" secondItem="eHy-C9-iK0" secondAttribute="top" id="jjK-XK-g4R"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="buttonPlay" destination="icC-WZ-fIG" id="NW9-Ub-egc"/>
+                                    <outlet property="textView" destination="PwE-va-wxr" id="Htn-wD-lh3"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ICo-D0-VTm" id="dHA-tI-Ht8"/>
+                            <outlet property="delegate" destination="ICo-D0-VTm" id="DNP-Gb-Syl"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="Hrc-dA-wzQ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VWi-yM-a7Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1648" y="366"/>
+        </scene>
+        <!--Bokmärken-->
+        <scene sceneID="uT2-B1-RVs">
+            <objects>
+                <navigationController id="ZOw-uO-scV" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Bokmärken" image="bookmark" catalog="system" id="cjq-xQ-h0C"/>
+                    <navigationItem key="navigationItem" id="IPt-mm-LOX"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zbQ-yU-CAV">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ICo-D0-VTm" kind="relationship" relationship="rootViewController" id="bZ8-K8-RnN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpd-Ea-SbN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="748" y="366"/>
         </scene>
         <!--Settings Table View Controller-->
         <scene sceneID="F7o-Qk-Vie">
@@ -309,7 +395,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1524.6376811594205" y="401.78571428571428"/>
+            <point key="canvasLocation" x="1648" y="1146"/>
         </scene>
         <!--Ordbook-->
         <scene sceneID="ES0-Td-mp5">
