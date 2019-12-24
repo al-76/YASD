@@ -126,6 +126,10 @@ func configureService(_ container: Container) {
         StorageService(id: "history", storage: container.resolve(Storage.self)!)
     }
     .inObjectScope(.container)
+    container.register(StorageService<FormattedWord>.self) { _ in
+        StorageService(id: "bookmarks", storage: container.resolve(Storage.self)!)
+    }
+    .inObjectScope(.container)
 }
 
 func configureModel(_ container: Container) {
@@ -138,7 +142,8 @@ func configureModel(_ container: Container) {
     container.register(WordsViewModel.self) { container in
         WordsViewModel(lexin: container.resolve(LexinService.self)!,
                        formatter: container.resolve(LexinServiceFormatter.self)!,
-                       player: container.resolve(PlayerService.self)!)
+                       player: container.resolve(PlayerService.self)!,
+                       bookmarks: container.resolve(StorageService<FormattedWord>.self)!)
     }
     .inObjectScope(.container)
     

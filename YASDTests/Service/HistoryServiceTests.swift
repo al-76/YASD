@@ -92,14 +92,12 @@ class StorageServiceTests: XCTestCase {
         let service = StorageService<String>(id: "test", storage: TestStorageError([]))
         
         // Act
-        let added = service.add("test").flatMap { _ in
-            return service.get(with: "")
-        }
+        let added = service.add("test")
         let res = scheduler.start { added }
         
         // Assert
         XCTAssertEqual(res.events, [
-            .error(200, TestError.someError)
+            .next(200, .failure(TestError.someError))
         ])
     }
     
@@ -127,14 +125,12 @@ class StorageServiceTests: XCTestCase {
         let service = StorageService<String>(id: "test", storage: TestStorageError(["test1", "test2", "test3"]))
         
         // Act
-        let added = service.remove("test2").flatMap { _ in
-            return service.get(with: "")
-        }
+        let added = service.remove("test2")
         let res = scheduler.start { added }
         
         // Assert
         XCTAssertEqual(res.events, [
-            .error(200, TestError.someError)
+            .next(200, .failure(TestError.someError))
         ])
     }
     
@@ -149,12 +145,12 @@ class StorageServiceTests: XCTestCase {
             return data as! T
         }
         
-        override func save<T>(id: String, object: T) throws where T : Decodable, T : Encodable {
+        override func save<T>(id: String, object: T) throws where T : Codable {
         }
     }
     
     class TestStorageError: TestStorage {
-        override func save<T>(id: String, object: T) throws where T : Decodable, T : Encodable {
+        override func save<T>(id: String, object: T) throws where T : Codable {
             throw TestError.someError
         }
     }
@@ -163,6 +159,6 @@ class StorageServiceTests: XCTestCase {
 
 private extension StorageService where T == String {
     func get(with word: String) -> Observable<Result<[String]>> {
-        return get(with: word, where: { $0.starts(with: $1) })
+        return get(where: { $0.starts(with: word) })
     }
 }

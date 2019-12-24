@@ -9,7 +9,9 @@
 import Foundation
 import RxSwift
 
-class StorageService<T: Encodable & Decodable & Equatable> {
+typealias StorageServiceResult = Result<Bool>
+
+class StorageService<T: Codable & Equatable> {
     private let id: String
     private let storage: Storage
     
@@ -22,10 +24,10 @@ class StorageService<T: Encodable & Decodable & Equatable> {
         self.storage = storage
     }
     
-    func get(with word: T, where filterFunc: @escaping (T, T) -> Bool) -> Observable<Result<[T]>> {
+    func get(where filterFunc: @escaping (T) -> Bool) -> Observable<Result<[T]>> {
         return Observable.create { [weak self] observer in
             if let data = self?.data {
-                let filtered = data.filter { filterFunc($0, word) }
+                let filtered = data.filter(filterFunc)
                 observer.onNext(.success(filtered))
             } else {
                 observer.onNext(.success([]))
@@ -35,33 +37,33 @@ class StorageService<T: Encodable & Decodable & Equatable> {
         }
     }
     
-    func add(_ word: T) -> Observable<Void> {
+    func add(_ word: T) -> Observable<StorageServiceResult> {
         return Observable.create { [weak self] observer in
             do {
                 if self?.data.firstIndex(where: { $0 == word }) == nil { // yes yes, I know about ordered set
                     self?.data.append(word)
                     try self?.saveData()
                 }
-                observer.onNext(())
+                observer.onNext(.success(true))
                 observer.onCompleted()
             } catch let error {
-                observer.onError(error)
+                observer.onNext(.failure(error))
             }
             return Disposables.create {}
         }
     }
     
-    func remove(_ word: T) -> Observable<Void> {
+    func remove(_ word: T) -> Observable<StorageServiceResult> {
         return Observable.create { [weak self] observer in
             do {
                 if let index = self?.data.firstIndex(where: { $0 == word }) {
                     self?.data.remove(at: index)
                     try self?.saveData()
                 }
-                observer.onNext(())
+                observer.onNext(.success(true))
                 observer.onCompleted()
             } catch let error {
-                observer.onError(error)
+                observer.onNext(.failure(error))
             }
             return Disposables.create {}
         }

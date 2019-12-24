@@ -12,6 +12,7 @@ import UIKit
 class WordsTableViewCell: UITableViewCell {    
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var buttonPlay: UIButton!
+    @IBOutlet weak var buttonBookmark: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

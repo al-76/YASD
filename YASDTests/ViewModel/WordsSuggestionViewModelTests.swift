@@ -26,12 +26,11 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         let inputWords = scheduler.createHotObservable([
             .next(200, "test2"),
-            .next(250, "test3"),
-            .next(350, errorWord)
+            .next(250, "test3")
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: errorWord),
-                                                 history: TestStorageService(value: [], whenError: ""))
+                                                 history: TestStorageService(value: []))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
                                                                  addHistory: Driver.never(),
                                                                  removeHistory: Driver.never()))
@@ -43,24 +42,21 @@ class WordsSuggestionViewModelTests: XCTestCase {
         // Assert
         XCTAssertEqual(result.events, [
             .next(200, SuggestionItemResult.success(createSuggestionItems(["test2"], false))),
-            .next(250, SuggestionItemResult.success(createSuggestionItems(["test3"], false))),
-            .next(350, SuggestionItemResult.failure(TestError.someError))
+            .next(250, SuggestionItemResult.success(createSuggestionItems(["test3"], false)))
        ])
     }
     
     func testGetHistory() {
         // Arrange
-        let errorWord = "error_word"
         let scheduler = TestScheduler(initialClock: 0)
         let inputWords = scheduler.createHotObservable([
             .next(200, "test2"),
-            .next(250, "test3"),
-            .next(350, errorWord)
+            .next(250, "test3")
         ]).asDriver(onErrorJustReturn: "")
         let initialValue = ["test2", "test3_abc", "test3_cde", "some_words"]
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: ""),
-                                                 history: TestStorageService(value: initialValue, whenError: errorWord))
+                                                 history: TestStorageService(value: initialValue))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
                                                                  addHistory: Driver.never(),
                                                                  removeHistory: Driver.never()))
@@ -76,8 +72,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
                 SuggestionItem(suggestion: "test3", removable: false),
                 SuggestionItem(suggestion: "test3_abc", removable: true),
                 SuggestionItem(suggestion: "test3_cde", removable: true)
-            ])),
-            .next(350, SuggestionItemResult.failure(TestError.someError)),
+            ]))
         ])
     }
     
@@ -90,7 +85,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
-                                                 history: TestStorageService(value: [], whenError: "error_word"))
+                                                 history: TestStorageService(value: []))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.never(),
                                                                  addHistory: historyWords, removeHistory: Driver.never()))
             .suggestions.drive(result).disposed(by: disposeBag)
@@ -113,7 +108,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
         let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
-                                                 history: TestStorageService(value: ["test2", "test3"], whenError: "error_word"))
+                                                 history: TestStorageService(value: ["test2", "test3"]))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.just(""),
                                                                  addHistory: Driver.never(),
                                                                  removeHistory: inputRemovedWords))
@@ -151,7 +146,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
         var viewModel: WordsSuggestionViewModel? = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
-                                                                            history: TestStorageService(value: [], whenError: ""))
+                                                                            history: TestStorageService(value: []))
         let transform = viewModel?.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
                                                                                   addHistory: inputWords,
                                                                                   removeHistory: inputRemovedWords))
@@ -217,20 +212,21 @@ class WordsSuggestionViewModelTests: XCTestCase {
     
     class TestStorageService : StorageService<Suggestion> {
         private var data = [Suggestion]()
-        private let errorWord: String
+//        private let errorWord: String
         
-        init(value: [Suggestion], whenError errorWord: String) {
+        init(value: [Suggestion]) {
             self.data = value
-            self.errorWord = errorWord
+//            self.errorWord = errorWord
             super.init(id: "test", storage: StorageStub())
         }
         
-        override func get(with word: Suggestion, where filterFunc: @escaping (Suggestion, Suggestion) -> Bool) -> Observable<Result<[Suggestion]>> {
+        override func get(where filterFunc: @escaping (Suggestion) -> Bool) -> Observable<Result<[Suggestion]>> {
             return Observable.create { [weak self] observer in
-                if word == self?.errorWord {
-                    observer.onError(TestError.someError)
-                } else if let data = self?.data {
-                    observer.onNext(SuggestionResult.success(data.filter { $0?.starts(with: word ?? "") ?? false }))
+//                if word == self?.errorWord {
+//                    observer.onError(TestError.someError)
+//                } else
+                if let data = self?.data {
+                    observer.onNext(SuggestionResult.success(data.filter(filterFunc)))
                 } else {
                     observer.onNext(SuggestionResult.success([]))
                 }
@@ -240,23 +236,23 @@ class WordsSuggestionViewModelTests: XCTestCase {
             }
         }
         
-        override func add(_ word: Suggestion) -> Observable<Void> {
+        override func add(_ word: Suggestion) -> Observable<StorageServiceResult> {
             return Observable.create { [weak self] observer in
                 if !(word?.isEmpty ?? false) {
                     self?.data.append(word)
                 }
-                observer.onNext(())
+                observer.onNext(.success(true))
                 observer.onCompleted()
                 return Disposables.create {}
             }
         }
         
-        override func remove(_ word: Suggestion) -> Observable<Void> {
+        override func remove(_ word: Suggestion) -> Observable<StorageServiceResult> {
             return Observable.create { [weak self] observer in
                 if let index = self?.data.firstIndex(of: word) {
                     self?.data.remove(at: index)
                 }
-                observer.onNext(())
+                observer.onNext(.success(true))
                 observer.onCompleted()
                 return Disposables.create {}
             }

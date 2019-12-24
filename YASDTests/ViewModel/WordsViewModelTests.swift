@@ -33,8 +33,12 @@ class WordsViewModelTests: XCTestCase {
         let foundWords = scheduler.createObserver(FormattedWordResult.self)
         let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: errorWord),
                                        formatter: createMockLexinServiceFormatter(),
-                                       player: createMockPlayerService())
-        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.never()))
+                                       player: createMockPlayerService(),
+                                       bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
+        viewModel.transform(from: WordsViewModel.Input(search: inputWords,
+                                                       playUrl: Driver.never(),
+                                                       addBookmark: Driver.never(),
+                                                       removeBookmark: Driver.never()))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -59,8 +63,12 @@ class WordsViewModelTests: XCTestCase {
         let foundWords = scheduler.createObserver(FormattedWordResult.self)
         var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                          formatter: createMockLexinServiceFormatter(),
-                                                         player: createMockPlayerService())
-        viewModel?.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.never()))
+                                                         player: createMockPlayerService(),
+                                                         bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
+        viewModel?.transform(from: WordsViewModel.Input(search: inputWords,
+                                                        playUrl: Driver.never(),
+                                                        addBookmark: Driver.never(),
+                                                        removeBookmark: Driver.never()))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -86,8 +94,12 @@ class WordsViewModelTests: XCTestCase {
         let lexin = createMockLexinService(whenError: errorWord)
         let viewModel = WordsViewModel(lexin: lexin,
                                        formatter: createMockLexinServiceFormatter(),
-                                       player: createMockPlayerService())
-        viewModel.transform(from: WordsViewModel.Input(searchBar: inputWords, playUrl: Driver.never()))
+                                       player: createMockPlayerService(),
+                                       bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
+        viewModel.transform(from: WordsViewModel.Input(search: inputWords,
+                                                       playUrl: Driver.never(),
+                                                       addBookmark: Driver.never(),
+                                                       removeBookmark: Driver.never()))
             .foundWords.drive(foundWords).disposed(by: disposeBag)
         
         // Act
@@ -115,8 +127,12 @@ class WordsViewModelTests: XCTestCase {
         let played = scheduler.createObserver(PlayerServiceResult.self)
         let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: ""),
                                        formatter: createMockLexinServiceFormatter(),
-                                       player: createMockPlayerService(errorUrl: errorUrl))
-        viewModel.transform(from: WordsViewModel.Input(searchBar: Driver.never(), playUrl: inputUrls))
+                                       player: createMockPlayerService(errorUrl: errorUrl),
+                                       bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
+        viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
+                                                       playUrl: inputUrls,
+                                                       addBookmark: Driver.never(),
+                                                       removeBookmark: Driver.never()))
             .played.drive(played)
             .disposed(by: disposeBag)
         
@@ -129,6 +145,66 @@ class WordsViewModelTests: XCTestCase {
             .next(200, .success(true)),
             .next(300, .failure(TestError.someError)),
             .completed(400)
+        ])
+    }
+    
+    func testAddBookmarks() {
+        // Arrange
+        let scheduler = TestScheduler(initialClock: 0)
+        let inputBookmarks = scheduler.createHotObservable([
+            .next(150, FormattedWord()),
+            .next(200, FormattedWord()),
+            .completed(400)
+        ]).asDriver(onErrorJustReturn: FormattedWord())
+        let bookmarked = scheduler.createObserver(StorageServiceResult.self)
+        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: ""),
+                                       formatter: createMockLexinServiceFormatter(),
+                                       player: createMockPlayerService(errorUrl: ""),
+                                       bookmarks: createBookmarksStub())
+        viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
+                                                       playUrl: Driver.never(),
+                                                       addBookmark: inputBookmarks,
+                                                       removeBookmark: Driver.never()))
+            .bookmarked.drive(bookmarked)
+            .disposed(by: disposeBag)
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(bookmarked.events, [
+            .next(150, .success(true)),
+            .next(200, .success(true))
+        ])
+    }
+    
+    func testRemoveBookmarks() {
+        // Arrange
+        let scheduler = TestScheduler(initialClock: 0)
+        let inputBookmarks = scheduler.createHotObservable([
+            .next(150, FormattedWord()),
+            .next(200, FormattedWord()),
+            .completed(400)
+        ]).asDriver(onErrorJustReturn: FormattedWord())
+        let bookmarked = scheduler.createObserver(StorageServiceResult.self)
+        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: ""),
+                                       formatter: createMockLexinServiceFormatter(),
+                                       player: createMockPlayerService(errorUrl: ""),
+                                       bookmarks: createBookmarksStub())
+        viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
+                                                       playUrl: Driver.never(),
+                                                       addBookmark: Driver.never(),
+                                                       removeBookmark: inputBookmarks))
+            .bookmarked.drive(bookmarked)
+            .disposed(by: disposeBag)
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(bookmarked.events, [
+            .next(150, .success(true)),
+            .next(200, .success(true))
         ])
     }
     
@@ -203,4 +279,10 @@ class WordsViewModelTests: XCTestCase {
         }
         return mock
     }
+    
+    private func createBookmarksStub() -> StorageServiceStub<FormattedWord> {
+        DefaultValueRegistry.register(value: Observable.just(.success(true)), forType:  Observable<StorageServiceResult>.self)
+        return StorageServiceStub<FormattedWord>(id: "bookmarks", storage: StorageStub())
+    }
+
 }

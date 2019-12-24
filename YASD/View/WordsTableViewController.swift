@@ -15,7 +15,9 @@ class WordsTableViewController: UITableViewController {
     var searchResultsController: WordsSuggestionTableViewController!
     
     private var searchController: UISearchController!
-    private let playUrl = BehaviorRelay<String>(value: "")
+    private let playUrl = PublishRelay<String>()
+    private let addBookmark = PublishRelay<FormattedWord>()
+    private let removeBookmark = PublishRelay<FormattedWord>()
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -44,27 +46,29 @@ class WordsTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        searchController.searchBar.rx.text.distinctUntilChanged()
-            .compactMap { $0 }.asDriver(onErrorJustReturn: "")
-            .drive(searchResultsController.search)
-            .disposed(by: disposeBag)
-        let input = WordsViewModel.Input(searchBar: createSearchDriver(),
-                                         playUrl: playUrl.asDriver().filter { $0 != "" })
+        let input = WordsViewModel.Input(search: createSearchDriver(),
+                                         playUrl: playUrl.asDriver(onErrorJustReturn: ""),
+                                         addBookmark: addBookmark.asDriver(onErrorJustReturn: FormattedWord()),
+                                         removeBookmark: removeBookmark.asDriver(onErrorJustReturn: FormattedWord()))
         let output = model.transform(from: input)
-        output.foundWords.map { [weak self] result -> [FormattedWord] in
+        disposeBag.insert(
+            searchController.searchBar.rx.text.distinctUntilChanged()
+                .compactMap { $0 }
+                .bind(to: searchResultsController.search),
+            output.foundWords.map { [weak self] result -> [FormattedWord] in
                 return result.handleResult([], self?.handleError)
             }
             .drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { [weak self] (_, result, cell) in
                 if let wordsCell = cell as? WordsTableViewCell {
                     wordsCell.textView.attributedText = result.formatted
                     self?.configureButtonPlay(wordsCell, with: result.soundUrl)
+                    self?.configureButtonBookmark(wordsCell, with: result)
                 }
-            }
-            .disposed(by: disposeBag)
-        output.played.asObservable()
-            .subscribe(onNext: { [weak self] result in
-            _ = result.handleResult(false, self?.handleError)
-        }).disposed(by: disposeBag)
+            },
+            Driver.merge(output.played, output.bookmarked).drive(onNext: { [weak self] result in
+                _ = result.handleResult(false, self?.handleError)
+            })
+        )
     }
     
     private func createSearchDriver() -> Driver<String> {
@@ -95,10 +99,27 @@ class WordsTableViewController: UITableViewController {
         if url == nil {
             return
         }
-        cell.buttonPlay.rx.tap.asDriver()
+        cell.buttonPlay.rx.tap
             .map { url ?? "" }
-            .drive(playUrl)
+            .bind(to: playUrl)
             .disposed(by: disposeBag)
+    }
+    
+    private func configureButtonBookmark(_ cell: WordsTableViewCell, with word: FormattedWord) {
+        let tapped = cell.buttonBookmark.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .map({ _ -> UIButton in
+                cell.buttonBookmark.isSelected = !cell.buttonBookmark.isSelected
+                return cell.buttonBookmark
+            }).share()
+        disposeBag.insert(
+            tapped.filter { $0.isSelected }
+                .map { _ in word }
+                .bind(to: addBookmark),
+            tapped.filter { !$0.isSelected }
+                .map { _ in word }
+                .bind(to: removeBookmark)
+            )
     }
     
     private func handleError(_ error: Error) {

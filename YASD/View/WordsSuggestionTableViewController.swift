@@ -14,10 +14,10 @@ import RxDataSources
 class WordsSuggestionTableViewController: UITableViewController {
     var model: WordsSuggestionViewModel!
     let disposeBag = DisposeBag()
-    let search = BehaviorRelay<String>(value: "")
-    let addHistory = BehaviorRelay<String>(value: "")
-    let selectSuggestion = BehaviorRelay<String>(value: "")
-    let removeHistory = BehaviorRelay<String>(value: "")
+    let search = PublishRelay<String>()
+    let addHistory = PublishRelay<String>()
+    let selectSuggestion = PublishRelay<String>()
+    let removeHistory = PublishRelay<String>()
     private let dataSource = createDataSource()
 
     override func viewDidLoad() {
@@ -37,7 +37,7 @@ class WordsSuggestionTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        let input = WordsSuggestionViewModel.Input(search: search.asDriver(), addHistory: addHistory.asDriver(), removeHistory: removeHistory.asDriver())
+        let input = WordsSuggestionViewModel.Input(search: search.asDriver(onErrorJustReturn: ""), addHistory: addHistory.asDriver(onErrorJustReturn: ""), removeHistory: removeHistory.asDriver(onErrorJustReturn: ""))
         model.transform(from: input).suggestions
         .map { [weak self] result -> [SuggestionItem] in
             return result.handleResult([], self?.handleError)

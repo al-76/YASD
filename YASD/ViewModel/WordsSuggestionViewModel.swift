@@ -52,7 +52,7 @@ class WordsSuggestionViewModel: ViewModel {
     
     private func getSuggestionAndHistory(_ word: String) -> Driver<SuggestionItemResult> {
         return Observable.combineLatest(lexin.suggestion(word),
-                                        history.get(with: word, where: { $0?.starts(with: $1 ?? "") ?? false }),
+                                        history.get(where: { $0?.starts(with: word) ?? false }),
                                     resultSelector: { suggestion, history in
                                         let filtered = suggestion.filter(history).toItem(removable: false)
                                         let merged = filtered.merge(history.toItem(removable: true))
@@ -68,8 +68,8 @@ class WordsSuggestionViewModel: ViewModel {
         return historyAction(history.remove(word), with: current)
     }
     
-    private func historyAction(_ action: Observable<Void>, with word: String) -> Driver<SuggestionItemResult> {
-        return action.asDriver(onErrorJustReturn: ())
+    private func historyAction(_ action: Observable<StorageServiceResult>, with word: String) -> Driver<SuggestionItemResult> {
+        return action.asDriver { Driver.just(.failure($0)) }
             .flatMap { [weak self] _ -> Driver<SuggestionItemResult> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.getSuggestionAndHistory(word)

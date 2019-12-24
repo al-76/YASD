@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  FormattedWord.swift
@@ -13,7 +13,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  LexinWord.swift
@@ -28,7 +28,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  ParametersStorage.swift
@@ -224,7 +224,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Model/SettingsItem.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Model/SettingsItem.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  SettingsItem.swift
@@ -239,7 +239,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  Suggestion.swift
@@ -254,7 +254,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  DataCache.swift
@@ -392,7 +392,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2019-12-24 14:00:14 +0000
 
 
 //
@@ -711,7 +711,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  MarkdownParser.swift
@@ -818,7 +818,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  Network.swift
@@ -955,7 +955,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  Player.swift
@@ -1106,7 +1106,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  Storage.swift
@@ -1242,7 +1242,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  CacheService.swift
@@ -1349,7 +1349,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  LexinApi.swift
@@ -1485,7 +1485,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  LexinApiProvider.swift
@@ -1591,7 +1591,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  LexinServiceProviderSuggestion.swift
@@ -1969,7 +1969,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  LexinServiceProviderWords.swift
@@ -2468,7 +2468,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  LexinService.swift
@@ -2635,7 +2635,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  LexinService+Format.swift
@@ -2742,7 +2742,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  NetworkService.swift
@@ -2879,7 +2879,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  PlayerService.swift
@@ -2986,7 +2986,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/StorageService.swift at 2019-12-23 13:25:06 +0000
+// MARK: - Mocks generated from file: YASD/Service/StorageService.swift at 2019-12-24 14:00:14 +0000
 
 //
 //  StorageService.swift
@@ -3003,7 +3003,7 @@ import Foundation
 import RxSwift
 
 
- class MockStorageService<T: Encodable & Decodable & Equatable>: StorageService<T>, Cuckoo.ClassMock {
+ class MockStorageService<T: Codable & Equatable>: StorageService<T>, Cuckoo.ClassMock {
     
      typealias MocksType = StorageService<T>
     
@@ -3028,24 +3028,24 @@ import RxSwift
     
     
     
-     override func get(with word: T, where filterFunc: @escaping (T, T) -> Bool) -> Observable<Result<[T]>> {
+     override func get(where filterFunc: @escaping (T) -> Bool) -> Observable<Result<[T]>> {
         
-    return cuckoo_manager.call("get(with: T, where: @escaping (T, T) -> Bool) -> Observable<Result<[T]>>",
-            parameters: (word, filterFunc),
-            escapingParameters: (word, filterFunc),
+    return cuckoo_manager.call("get(where: @escaping (T) -> Bool) -> Observable<Result<[T]>>",
+            parameters: (filterFunc),
+            escapingParameters: (filterFunc),
             superclassCall:
                 
-                super.get(with: word, where: filterFunc)
+                super.get(where: filterFunc)
                 ,
-            defaultCall: __defaultImplStub!.get(with: word, where: filterFunc))
+            defaultCall: __defaultImplStub!.get(where: filterFunc))
         
     }
     
     
     
-     override func add(_ word: T) -> Observable<Void> {
+     override func add(_ word: T) -> Observable<StorageServiceResult> {
         
-    return cuckoo_manager.call("add(_: T) -> Observable<Void>",
+    return cuckoo_manager.call("add(_: T) -> Observable<StorageServiceResult>",
             parameters: (word),
             escapingParameters: (word),
             superclassCall:
@@ -3058,9 +3058,9 @@ import RxSwift
     
     
     
-     override func remove(_ word: T) -> Observable<Void> {
+     override func remove(_ word: T) -> Observable<StorageServiceResult> {
         
-    return cuckoo_manager.call("remove(_: T) -> Observable<Void>",
+    return cuckoo_manager.call("remove(_: T) -> Observable<StorageServiceResult>",
             parameters: (word),
             escapingParameters: (word),
             superclassCall:
@@ -3080,19 +3080,19 @@ import RxSwift
 	    }
 	    
 	    
-	    func get<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(with word: M1, where filterFunc: M2) -> Cuckoo.ClassStubFunction<(T, (T, T) -> Bool), Observable<Result<[T]>>> where M1.MatchedType == T, M2.MatchedType == (T, T) -> Bool {
-	        let matchers: [Cuckoo.ParameterMatcher<(T, (T, T) -> Bool)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: filterFunc) { $0.1 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockStorageService.self, method: "get(with: T, where: @escaping (T, T) -> Bool) -> Observable<Result<[T]>>", parameterMatchers: matchers))
+	    func get<M1: Cuckoo.Matchable>(where filterFunc: M1) -> Cuckoo.ClassStubFunction<((T) -> Bool), Observable<Result<[T]>>> where M1.MatchedType == (T) -> Bool {
+	        let matchers: [Cuckoo.ParameterMatcher<((T) -> Bool)>] = [wrap(matchable: filterFunc) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockStorageService.self, method: "get(where: @escaping (T) -> Bool) -> Observable<Result<[T]>>", parameterMatchers: matchers))
 	    }
 	    
-	    func add<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.ClassStubFunction<(T), Observable<Void>> where M1.MatchedType == T {
+	    func add<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.ClassStubFunction<(T), Observable<StorageServiceResult>> where M1.MatchedType == T {
 	        let matchers: [Cuckoo.ParameterMatcher<(T)>] = [wrap(matchable: word) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockStorageService.self, method: "add(_: T) -> Observable<Void>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockStorageService.self, method: "add(_: T) -> Observable<StorageServiceResult>", parameterMatchers: matchers))
 	    }
 	    
-	    func remove<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.ClassStubFunction<(T), Observable<Void>> where M1.MatchedType == T {
+	    func remove<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.ClassStubFunction<(T), Observable<StorageServiceResult>> where M1.MatchedType == T {
 	        let matchers: [Cuckoo.ParameterMatcher<(T)>] = [wrap(matchable: word) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockStorageService.self, method: "remove(_: T) -> Observable<Void>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockStorageService.self, method: "remove(_: T) -> Observable<StorageServiceResult>", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -3112,42 +3112,42 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func get<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(with word: M1, where filterFunc: M2) -> Cuckoo.__DoNotUse<(T, (T, T) -> Bool), Observable<Result<[T]>>> where M1.MatchedType == T, M2.MatchedType == (T, T) -> Bool {
-	        let matchers: [Cuckoo.ParameterMatcher<(T, (T, T) -> Bool)>] = [wrap(matchable: word) { $0.0 }, wrap(matchable: filterFunc) { $0.1 }]
-	        return cuckoo_manager.verify("get(with: T, where: @escaping (T, T) -> Bool) -> Observable<Result<[T]>>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func get<M1: Cuckoo.Matchable>(where filterFunc: M1) -> Cuckoo.__DoNotUse<((T) -> Bool), Observable<Result<[T]>>> where M1.MatchedType == (T) -> Bool {
+	        let matchers: [Cuckoo.ParameterMatcher<((T) -> Bool)>] = [wrap(matchable: filterFunc) { $0 }]
+	        return cuckoo_manager.verify("get(where: @escaping (T) -> Bool) -> Observable<Result<[T]>>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func add<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.__DoNotUse<(T), Observable<Void>> where M1.MatchedType == T {
+	    func add<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.__DoNotUse<(T), Observable<StorageServiceResult>> where M1.MatchedType == T {
 	        let matchers: [Cuckoo.ParameterMatcher<(T)>] = [wrap(matchable: word) { $0 }]
-	        return cuckoo_manager.verify("add(_: T) -> Observable<Void>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("add(_: T) -> Observable<StorageServiceResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	    @discardableResult
-	    func remove<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.__DoNotUse<(T), Observable<Void>> where M1.MatchedType == T {
+	    func remove<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.__DoNotUse<(T), Observable<StorageServiceResult>> where M1.MatchedType == T {
 	        let matchers: [Cuckoo.ParameterMatcher<(T)>] = [wrap(matchable: word) { $0 }]
-	        return cuckoo_manager.verify("remove(_: T) -> Observable<Void>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("remove(_: T) -> Observable<StorageServiceResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
 }
 
- class StorageServiceStub<T: Encodable & Decodable & Equatable>: StorageService<T> {
+ class StorageServiceStub<T: Codable & Equatable>: StorageService<T> {
     
 
     
 
     
-     override func get(with word: T, where filterFunc: @escaping (T, T) -> Bool) -> Observable<Result<[T]>>  {
+     override func get(where filterFunc: @escaping (T) -> Bool) -> Observable<Result<[T]>>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<Result<[T]>>).self)
     }
     
-     override func add(_ word: T) -> Observable<Void>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<Void>).self)
+     override func add(_ word: T) -> Observable<StorageServiceResult>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<StorageServiceResult>).self)
     }
     
-     override func remove(_ word: T) -> Observable<Void>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<Void>).self)
+     override func remove(_ word: T) -> Observable<StorageServiceResult>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<StorageServiceResult>).self)
     }
     
 }
