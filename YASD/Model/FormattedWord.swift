@@ -49,7 +49,10 @@ struct FormattedWord: Codable {
 
 extension FormattedWord: Equatable {
     static public func == (lhs: FormattedWord, rhs: FormattedWord) -> Bool {
-        return lhs.header == rhs.header && lhs.formatted == rhs.formatted && lhs.soundUrl == rhs.soundUrl
+        let res = (lhs.header == rhs.header &&
+            lhs.formatted == rhs.formatted &&
+            lhs.soundUrl == rhs.soundUrl)
+        return res
     }
 }
 
