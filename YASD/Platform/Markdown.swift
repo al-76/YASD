@@ -16,9 +16,12 @@ class Markdown {
     
     private class func getParser() -> MarkdownParser {
         if #available(iOS 13.0, *) {
-            return MarkdownParser(font: MarkdownParser.defaultFont, color: UIColor.label, enabledElements: .all, customElements: [])
+            return MarkdownParser(font: UIFont.systemFont(ofSize: UIFont.systemFontSize),
+                                  color: UIColor.label,
+                                  enabledElements: .all,
+                                  customElements: [])
         } else {
-            return MarkdownParser()
+            return MarkdownParser(font: UIFont.systemFont(ofSize: UIFont.systemFontSize))
         }
     }
 }

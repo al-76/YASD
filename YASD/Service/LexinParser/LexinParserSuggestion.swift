@@ -30,7 +30,8 @@ class LexinParserSuggestionDefault : LexinParserSuggestion {
                 $0.contains("java.util.ArrayList") ||
                 $0.contains("se.jojoman.lexin") ||
                 $0.contains("<")) }
-            .map { $0.replacingOccurrences(of: "\"", with: "") }
+            .map { $0.replacingOccurrences(of: "\"", with: "")
+                .trimmingCharacters(in: .whitespacesAndNewlines) }
         return res
     }
 
@@ -63,7 +64,8 @@ class LexinParserSuggestionFolkets : LexinParserSuggestion {
                 $0.contains("java.util.ArrayList") ||
                 $0.contains("se.algoritmica.folkets") ||
                 $0.contains("<")) }
-            .map { $0.replacingOccurrences(of: "\"", with: "") }
+            .map { $0.replacingOccurrences(of: "\"", with: "")
+                .trimmingCharacters(in: .whitespacesAndNewlines) }
         return res
     }
     
