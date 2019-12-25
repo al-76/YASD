@@ -18,10 +18,10 @@ class WordsSuggestionTableViewController: UITableViewController {
     let addHistory = PublishRelay<String>()
     let selectSuggestion = PublishRelay<String>()
     private let dataSource = createDataSource()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         customizeView()
         bindToModel()
     }
@@ -46,11 +46,13 @@ class WordsSuggestionTableViewController: UITableViewController {
                    removeHistory: tableView.rx.itemDeleted.map { suggestion($0) }.asDriver(onErrorJustReturn: ""))
         let output = model.transform(from: input)
         disposeBag.insert(
+            // suggestions
             output.suggestions.map { [weak self] result -> [SuggestionItem] in
-                    return result.handleResult([], self?.handleError)
+                return result.handleResult([], self?.handleError)
             }
             .map { suggestions in [SuggestionItemSection(header: "suggestions", items: suggestions)] }
             .drive(tableView.rx.items(dataSource: dataSource)),
+            // item selected
             tableView.rx.itemSelected
                 .map { suggestion($0) }
                 .bind(to: selectSuggestion)

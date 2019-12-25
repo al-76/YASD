@@ -21,9 +21,9 @@ class WordsViewModel: ViewModel {
         let addBookmark: Driver<FormattedWord>
         let removeBookmark: Driver<FormattedWord>
     }
-
+    
     struct Output {
-        let foundWords: Driver<FormattedWordResult>
+        let foundWords: Driver<FoundWordResult>
         let played: Driver<PlayerServiceResult>
         let bookmarked: Driver<StorageServiceResult>
     }
@@ -36,19 +36,20 @@ class WordsViewModel: ViewModel {
     }
     
     func transform(from input: Input) -> Output {
-        let currentSearch = input.search
+        let changedLanguage = lexin.language()
+            .asDriver(onErrorJustReturn: ParametersStorage.defaultLanguage)
+            .withLatestFrom(input.search) { $1 }
+        let changedBookmarks = bookmarks.changed.asDriver(onErrorJustReturn: false).filter { $0 }
+            .withLatestFrom(input.search) { $1 }
+        let found = Driver.merge(input.search, changedLanguage, changedBookmarks)
             .flatMapLatest { [weak self] word -> Driver<FormattedWordResult> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.searchWord(word)
         }
-        let updatedSearch = lexin.language()
-            .asDriver(onErrorJustReturn: ParametersStorage.defaultLanguage)
-            .withLatestFrom(input.search) { $1 }
-            .flatMapLatest { [weak self] lastWord -> Driver<FormattedWordResult> in
-                guard let self = self else { return Driver.just(.success([])) }
-                return self.searchWord(lastWord)
+        .flatMap { [weak self] word -> Driver<FoundWordResult> in
+            guard let self = self else { return Driver.just(.success([])) }
+            return self.checkBookmarked(word)
         }
-        let searched = Driver.merge(currentSearch, updatedSearch)
         let played = input.playUrl
             .flatMapLatest { [weak self] url -> Driver<PlayerServiceResult> in
                 guard let self = self else { return Driver.just(.success(false)) }
@@ -63,7 +64,7 @@ class WordsViewModel: ViewModel {
             guard let self = self else { return Driver.just(.success(false)) }
             return self.bookmarks.remove(word).asDriver { Driver.just(.failure($0)) }
         }
-        return Output(foundWords: searched, played: played, bookmarked: Driver.merge(addedBookmark, removedBookmark))
+        return Output(foundWords: found, played: played, bookmarked: Driver.merge(addedBookmark, removedBookmark))
     }
     
     private func searchWord(_ word: String) -> Driver<FormattedWordResult> {
@@ -72,5 +73,20 @@ class WordsViewModel: ViewModel {
                 guard let self = self else { return .success([]) }
                 return self.formatter.format(result: result) }
             .asDriver { Driver.just(.failure($0)) }
+    }
+    
+    private func checkBookmarked(_ words: FormattedWordResult) -> Driver<FoundWordResult> {
+        switch words {
+        case let .success(res):
+            return Observable.from(res.map { bookmarks.contains($0) }).merge().toArray()
+                .map { bookmarked in
+                    return zip(res, bookmarked)
+                        .map { (word: $0, bookmarked: $1.handleResult(false, nil)) }
+            }
+            .map { .success($0) }
+            .asDriver(onErrorJustReturn: .success([]))
+        case let .failure(error):
+            return Driver.just(.failure(error))
+        }
     }
 }

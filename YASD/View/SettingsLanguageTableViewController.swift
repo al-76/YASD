@@ -15,7 +15,7 @@ class SettingsLanguageTableViewController: UITableViewController {
     
     private let disposeBag = DisposeBag()
     private var searchController: UISearchController!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,9 +34,6 @@ class SettingsLanguageTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        tableView.rx.itemDeselected.asObservable().subscribe(onNext: { [weak self] in
-            self?.tableView.cellForRow(at: $0)?.accessoryType = .none
-        }).disposed(by: disposeBag)
         let language = tableView.rx.itemSelected.map { [weak self] in
             guard let table = self?.tableView else {
                 return ""
@@ -45,17 +42,24 @@ class SettingsLanguageTableViewController: UITableViewController {
             let item = try? table.rx.model(at: $0) as SettingsItem
             return (item?.language.name ?? "")
         }.asDriver(onErrorJustReturn: "")
-        let searchLanguage = searchController.searchBar.rx.text.distinctUntilChanged()
+        let searchLanguage = searchController.searchBar.rx.text
+            .distinctUntilChanged()
             .compactMap { $0 }
             .asDriver(onErrorJustReturn: "")
         let input = SettingsLanguageViewModel.Input(search: searchLanguage, select: language)
         let output = model.transform(from: input)
-        output.languages.drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { (_, result, cell) in
+        disposeBag.insert(
+            // deselected items
+            tableView.rx.itemDeselected.asObservable().subscribe(onNext: { [weak self] in
+                self?.tableView.cellForRow(at: $0)?.accessoryType = .none
+            }),
+            // languages
+            output.languages.drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { (_, result, cell) in
                 if let settingsCell = cell as? SettingsLanguageTableViewCell,
                     let cellLabel = settingsCell.textLabel {
                     cellLabel.text = result.language.name
                 }
                 cell.accessoryType = (result.selected ? .checkmark : .none)
-            }.disposed(by: disposeBag)
+        })
     }
 }

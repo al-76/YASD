@@ -20,6 +20,10 @@ class WordsTableViewController: UITableViewController {
     private let removeBookmark = PublishRelay<FormattedWord>()
     private let disposeBag = DisposeBag()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,19 +56,23 @@ class WordsTableViewController: UITableViewController {
                                          removeBookmark: removeBookmark.asDriver(onErrorJustReturn: FormattedWord()))
         let output = model.transform(from: input)
         disposeBag.insert(
+            // search
             searchController.searchBar.rx.text.distinctUntilChanged()
                 .compactMap { $0 }
                 .bind(to: searchResultsController.search),
-            output.foundWords.map { [weak self] result -> [FormattedWord] in
+            // found words
+            output.foundWords.map { [weak self] result -> [FoundWord] in
                 return result.handleResult([], self?.handleError)
             }
             .drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { [weak self] (_, result, cell) in
                 if let wordsCell = cell as? WordsTableViewCell {
-                    wordsCell.textView.attributedText = result.formatted
-                    self?.configureButtonPlay(wordsCell, with: result.soundUrl)
+                    let word = result.word
+                    wordsCell.textView.attributedText = word.formatted
+                    self?.configureButtonPlay(wordsCell, with: word.soundUrl)
                     self?.configureButtonBookmark(wordsCell, with: result)
                 }
             },
+            // played, bookmarked
             Driver.merge(output.played, output.bookmarked).drive(onNext: { [weak self] result in
                 _ = result.handleResult(false, self?.handleError)
             })
@@ -93,7 +101,7 @@ class WordsTableViewController: UITableViewController {
                 return value
         }
     }
-        
+    
     private func configureButtonPlay(_ cell: WordsTableViewCell, with url: String?) {
         cell.buttonPlay.isHidden = (url == nil)
         if url == nil {
@@ -102,24 +110,25 @@ class WordsTableViewController: UITableViewController {
         cell.buttonPlay.rx.tap
             .map { url ?? "" }
             .bind(to: playUrl)
-            .disposed(by: disposeBag)
+            .disposed(by: cell.disposeBag)
     }
     
-    private func configureButtonBookmark(_ cell: WordsTableViewCell, with word: FormattedWord) {
+    private func configureButtonBookmark(_ cell: WordsTableViewCell, with result: FoundWord) {
+        cell.buttonBookmark.isSelected = result.bookmarked
         let tapped = cell.buttonBookmark.rx.tap
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .map({ _ -> UIButton in
                 cell.buttonBookmark.isSelected = !cell.buttonBookmark.isSelected
                 return cell.buttonBookmark
             }).share()
-        disposeBag.insert(
+        cell.disposeBag.insert(
             tapped.filter { $0.isSelected }
-                .map { _ in word }
+                .map { _ in result.word }
                 .bind(to: addBookmark),
             tapped.filter { !$0.isSelected }
-                .map { _ in word }
+                .map { _ in result.word }
                 .bind(to: removeBookmark)
-            )
+        )
     }
     
     private func handleError(_ error: Error) {

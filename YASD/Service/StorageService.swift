@@ -12,6 +12,8 @@ import RxSwift
 typealias StorageServiceResult = Result<Bool>
 
 class StorageService<T: Codable & Equatable> {
+    let changed = PublishSubject<Bool>()
+    
     private let id: String
     private let storage: Storage
     
@@ -56,10 +58,8 @@ class StorageService<T: Codable & Equatable> {
     func remove(_ word: T) -> Observable<StorageServiceResult> {
         return Observable.create { [weak self] observer in
             do {
-                if let index = self?.data.firstIndex(where: { $0 == word }) {
-                    self?.data.remove(at: index)
-                    try self?.saveData()
-                }
+                self?.data.removeAll(where: { $0 == word })
+                try self?.saveData()
                 observer.onNext(.success(true))
                 observer.onCompleted()
             } catch let error {
@@ -69,7 +69,30 @@ class StorageService<T: Codable & Equatable> {
         }
     }
     
+    func remove(at index: Int) -> Observable<StorageServiceResult> {
+        return Observable.create { [weak self] observer in
+            do {
+                self?.data.remove(at: index)
+                try self?.saveData()
+                observer.onNext(.success(true))
+                observer.onCompleted()
+            } catch let error {
+                observer.onNext(.failure(error))
+            }
+            return Disposables.create {}
+        }
+    }
+    
+    func contains(_ word: T) -> Observable<StorageServiceResult> {
+        return Observable.create { [weak self] observer in
+            observer.onNext(.success(self?.data.contains(word) ?? false))
+            observer.onCompleted()
+            return Disposables.create {}
+        }
+    }
+    
     private func saveData() throws {
         try storage.save(id: id, object: data)
+        changed.onNext(true)
     }
 }

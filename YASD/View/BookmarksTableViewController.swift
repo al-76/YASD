@@ -17,14 +17,7 @@ class BookmarksTableViewController: UITableViewController {
     private let disposeBag = DisposeBag()
     private let playUrl = PublishRelay<String>()
     private let removeBookmark = PublishRelay<Int>()
-    private let searchTemp = BehaviorRelay<String>(value: "")
-//    private var searchController: UISearchController!
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        searchTemp.accept("") // update
-    }
+    private var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +27,18 @@ class BookmarksTableViewController: UITableViewController {
     }
     
     private func customizeView() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Skriv ett ord!"
+        searchController.obscuresBackgroundDuringPresentation = false
+        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 70
         tableView.tableFooterView = UIView()
         tableView.reloadData()
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesBackButton = true
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func bindToModel() {
@@ -47,21 +48,28 @@ class BookmarksTableViewController: UITableViewController {
             cell.buttonPlay.rx.tap
                 .compactMap { word.soundUrl }
                 .bind(to: self.playUrl)
-                .disposed(by: self.disposeBag)
+                .disposed(by: cell.disposeBag)
         })
-        let input = BookmarksViewModel.Input(search: searchTemp.asDriver(),
+        let searchWord = searchController.searchBar.rx.text
+            .distinctUntilChanged()
+            .compactMap { $0 }
+            .asDriver(onErrorJustReturn: "")
+        let input = BookmarksViewModel.Input(search: searchWord,
                                              playUrl: playUrl.asDriver(onErrorJustReturn: ""),
                                              removeBookmark: removeBookmark.asDriver(onErrorJustReturn: -1))
         let output = model.transform(from: input)
         disposeBag.insert(
+            // bookmarks
             output.bookmarks.map { [weak self] result -> [FormattedWord] in
                 return result.handleResult([], self?.handleError)
             }
             .map { bookmarks in [BookmarkItemSection(header: "bookmarks", items: bookmarks)] }
             .drive(tableView.rx.items(dataSource: dataSource)),
+            // played
             output.played.drive(onNext: { [weak self] result in
                 _ = result.handleResult(false, self?.handleError)
             }),
+            // deleted item
             tableView.rx.itemDeleted
                 .map { $0.row }
                 .bind(to: removeBookmark)
