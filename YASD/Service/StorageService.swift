@@ -43,7 +43,7 @@ class StorageService<T: Codable & Equatable> {
         return Observable.create { [weak self] observer in
             do {
                 if self?.data.firstIndex(where: { $0 == word }) == nil { // yes yes, I know about ordered set
-                    self?.data.append(word)
+                    self?.data.insert(word, at: 0)
                     try self?.saveData()
                 }
                 observer.onNext(.success(true))

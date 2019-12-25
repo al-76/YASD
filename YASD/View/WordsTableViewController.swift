@@ -116,7 +116,6 @@ class WordsTableViewController: UITableViewController {
     private func configureButtonBookmark(_ cell: WordsTableViewCell, with result: FoundWord) {
         cell.buttonBookmark.isSelected = result.bookmarked
         let tapped = cell.buttonBookmark.rx.tap
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .map({ _ -> UIButton in
                 cell.buttonBookmark.isSelected = !cell.buttonBookmark.isSelected
                 return cell.buttonBookmark
