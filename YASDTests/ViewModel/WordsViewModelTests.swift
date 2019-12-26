@@ -31,8 +31,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let foundWords = scheduler.createObserver(FoundWordResult.self)
-        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: errorWord),
-                                       formatter: createMockLexinServiceFormatter(),
+        let viewModel = WordsViewModel(words: createMockWordsService(whenError: errorWord),
                                        player: createMockPlayerService(),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: inputWords,
@@ -61,8 +60,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let foundWords = scheduler.createObserver(FoundWordResult.self)
-        var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(whenError: "error_word"),
-                                                         formatter: createMockLexinServiceFormatter(),
+        var viewModel: WordsViewModel?  = WordsViewModel(words: createMockWordsService(whenError: "error_word"),
                                                          player: createMockPlayerService(),
                                                          bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
         viewModel?.transform(from: WordsViewModel.Input(search: inputWords,
@@ -91,9 +89,8 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let foundWords = scheduler.createObserver(FoundWordResult.self)
-        let lexin = createMockLexinService(whenError: errorWord)
-        let viewModel = WordsViewModel(lexin: lexin,
-                                       formatter: createMockLexinServiceFormatter(),
+        let words = createMockWordsService(whenError: errorWord)
+        let viewModel = WordsViewModel(words: words,
                                        player: createMockPlayerService(),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: inputWords,
@@ -104,7 +101,7 @@ class WordsViewModelTests: XCTestCase {
         
         // Act
         scheduler.start()
-        lexin.language()
+        words.language()
             .onNext(Language(name: "test2", code: "test2_code"))
         
         // Assert
@@ -125,8 +122,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let played = scheduler.createObserver(PlayerServiceResult.self)
-        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: ""),
-                                       formatter: createMockLexinServiceFormatter(),
+        let viewModel = WordsViewModel(words: createMockWordsService(whenError: ""),
                                        player: createMockPlayerService(errorUrl: errorUrl),
                                        bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
         viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
@@ -157,8 +153,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: FormattedWord())
         let bookmarked = scheduler.createObserver(StorageServiceResult.self)
-        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: ""),
-                                       formatter: createMockLexinServiceFormatter(),
+        let viewModel = WordsViewModel(words: createMockWordsService(whenError: ""),
                                        player: createMockPlayerService(errorUrl: ""),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
@@ -187,8 +182,7 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: FormattedWord())
         let bookmarked = scheduler.createObserver(StorageServiceResult.self)
-        let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: ""),
-                                       formatter: createMockLexinServiceFormatter(),
+        let viewModel = WordsViewModel(words: createMockWordsService(whenError: ""),
                                        player: createMockPlayerService(errorUrl: ""),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
@@ -208,23 +202,26 @@ class WordsViewModelTests: XCTestCase {
         ])
     }
     
-    func createMockLexinService(whenError errorWord: String) -> MockLexinService {
+    private func createMockWordsService(whenError errorWord: String) -> MockWordsService {
         let stubParameters = createParametersStorageStub()
-        let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
-                                             network: MockNetwork())
-        let mockApi = MockLexinApi(network: mockNetwork,
-                                   parserWords: MockLexinParserWords(),
-                                   parserSuggestions: MockLexinParserSuggestion())
-        let mockProvider = MockLexinApiProvider(defaultApi: mockApi, folketsApi: mockApi, swedishApi: mockApi)
-        let mock = MockLexinService(parameters: stubParameters, provider: mockProvider)
+        let networkStub = NetworkServiceStub(cache: CacheServiceStub(cache: DataCacheStub(name: "test")),
+                                             network: NetworkStub())
+        let stubApi = LexinApiStub(network: networkStub,
+                                   parserWords: LexinParserWordsStub(),
+                                   parserSuggestions: LexinParserSuggestionStub())
+        let stubLexin = LexinServiceStub(parameters: ParametersStorageStub(storage: StorageStub(), language: ParametersStorage.defaultLanguage),
+                                         provider: LexinApiProviderStub(defaultApi: stubApi, folketsApi: stubApi, swedishApi: stubApi))
+        let mock = MockWordsService(lexin: stubLexin,
+                                    formatter: LexinServiceFormatterStub(markdown: MarkdownStub()),
+                                    bookmarks: createBookmarksStub())
         stub(mock) { stub in
             when(stub.language()).thenReturn(stubParameters.language)
             when(stub.search(any())).then { word in
-                return Observable<LexinWordResult>.create { observable in
+                return Observable<FoundWordResult>.create { observable in
                     if word == errorWord {
                         observable.on(.error(TestError.someError))
                     } else if !word.isEmpty { // ignore initial search on loaded parameters
-                        observable.on(.next(.success([LexinWord(word: word)])))
+                        observable.on(.next(.success([FoundWord(word)])))
                     }
                     observable.onCompleted()
                     return Disposables.create {}
@@ -240,21 +237,6 @@ class WordsViewModelTests: XCTestCase {
         let stub = ParametersStorageStub(storage: StorageStub(),
                                          language: language)
         return stub
-    }
-    
-    func createMockLexinServiceFormatter() -> MockLexinServiceFormatter {
-        let mock = MockLexinServiceFormatter(markdown: MockMarkdown())
-        stub(mock) { stub in
-            when(stub.format(result: any())).then { result in
-                switch result {
-                case .success(let items):
-                    return .success(items.map { FormattedWord(header: $0.word, formatted: NSAttributedString(string: $0.word), soundUrl: nil) })
-                case .failure(let error):
-                    return .failure(error)
-                }
-            }
-        }
-        return mock
     }
     
     func createMockPlayerService() -> MockPlayerService {
