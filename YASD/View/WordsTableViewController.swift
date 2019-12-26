@@ -104,11 +104,11 @@ class WordsTableViewController: UITableViewController {
     
     private func configureButtonPlay(_ cell: WordsTableViewCell, with url: String?) {
         cell.buttonPlay.isHidden = (url == nil)
-        if url == nil {
+        if cell.buttonPlay.isHidden {
             return
         }
         cell.buttonPlay.rx.tap
-            .map { url ?? "" }
+            .compactMap { url }
             .bind(to: playUrl)
             .disposed(by: cell.disposeBag)
     }

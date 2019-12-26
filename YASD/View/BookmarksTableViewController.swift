@@ -45,6 +45,10 @@ class BookmarksTableViewController: UITableViewController {
         let dataSource = createDataSource({ [weak self] cell, word in
             guard let self = self else { return }
             cell.textView.attributedText = word.formatted
+            cell.buttonPlay.isHidden = (word.soundUrl == nil)
+            if cell.buttonPlay.isHidden {
+                return
+            }
             cell.buttonPlay.rx.tap
                 .compactMap { word.soundUrl }
                 .bind(to: self.playUrl)
