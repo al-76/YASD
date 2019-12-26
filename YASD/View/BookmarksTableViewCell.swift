@@ -1,18 +1,17 @@
 //
-//  WordsTableViewCell.swift
+//  BookmarksTableViewCell.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 13/05/2019.
+//  Created by Vyacheslav Konopkin on 24.12.2019.
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import RxSwift
 import UIKit
+import RxSwift
 
-class WordsTableViewCell: UITableViewCell {    
+class BookmarksTableViewCell: UITableViewCell {
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var buttonPlay: UIButton!
-    @IBOutlet weak var buttonBookmark: UIButton!
     
     var disposeBag = DisposeBag()
     
@@ -25,10 +24,11 @@ class WordsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
+
 }

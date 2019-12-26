@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import RxSwift
 
 class SettingsLanguageTableViewCell: UITableViewCell {
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

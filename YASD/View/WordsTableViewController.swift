@@ -15,8 +15,14 @@ class WordsTableViewController: UITableViewController {
     var searchResultsController: WordsSuggestionTableViewController!
     
     private var searchController: UISearchController!
-    private let playUrl = BehaviorRelay<String>(value: "")
+    private let playUrl = PublishRelay<String>()
+    private let addBookmark = PublishRelay<FormattedWord>()
+    private let removeBookmark = PublishRelay<FormattedWord>()
     private let disposeBag = DisposeBag()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,27 +50,33 @@ class WordsTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        searchController.searchBar.rx.text.distinctUntilChanged()
-            .compactMap { $0 }.asDriver(onErrorJustReturn: "")
-            .drive(searchResultsController.search)
-            .disposed(by: disposeBag)
-        let input = WordsViewModel.Input(searchBar: createSearchDriver(),
-                                         playUrl: playUrl.asDriver().filter { $0 != "" })
+        let input = WordsViewModel.Input(search: createSearchDriver(),
+                                         playUrl: playUrl.asDriver(onErrorJustReturn: ""),
+                                         addBookmark: addBookmark.asDriver(onErrorJustReturn: FormattedWord()),
+                                         removeBookmark: removeBookmark.asDriver(onErrorJustReturn: FormattedWord()))
         let output = model.transform(from: input)
-        output.foundWords.map { [weak self] result -> [FormattedWord] in
+        disposeBag.insert(
+            // search
+            searchController.searchBar.rx.text.distinctUntilChanged()
+                .compactMap { $0 }
+                .bind(to: searchResultsController.search),
+            // found words
+            output.foundWords.map { [weak self] result -> [FoundWord] in
                 return result.handleResult([], self?.handleError)
             }
             .drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { [weak self] (_, result, cell) in
                 if let wordsCell = cell as? WordsTableViewCell {
-                    wordsCell.textView.attributedText = result.formatted
-                    self?.configureButtonPlay(wordsCell, with: result.soundUrl)
+                    let word = result.word
+                    wordsCell.textView.attributedText = word.formatted
+                    self?.configureButtonPlay(wordsCell, with: word.soundUrl)
+                    self?.configureButtonBookmark(wordsCell, with: result)
                 }
-            }
-            .disposed(by: disposeBag)
-        output.played.asObservable()
-            .subscribe(onNext: { [weak self] result in
-            _ = result.handleResult(false, self?.handleError)
-        }).disposed(by: disposeBag)
+            },
+            // played, bookmarked
+            Driver.merge(output.played, output.bookmarked).drive(onNext: { [weak self] result in
+                _ = result.handleResult(false, self?.handleError)
+            })
+        )
     }
     
     private func createSearchDriver() -> Driver<String> {
@@ -89,16 +101,33 @@ class WordsTableViewController: UITableViewController {
                 return value
         }
     }
-        
+    
     private func configureButtonPlay(_ cell: WordsTableViewCell, with url: String?) {
         cell.buttonPlay.isHidden = (url == nil)
-        if url == nil {
+        if cell.buttonPlay.isHidden {
             return
         }
-        cell.buttonPlay.rx.tap.asDriver()
-            .map { url ?? "" }
-            .drive(playUrl)
-            .disposed(by: disposeBag)
+        cell.buttonPlay.rx.tap
+            .compactMap { url }
+            .bind(to: playUrl)
+            .disposed(by: cell.disposeBag)
+    }
+    
+    private func configureButtonBookmark(_ cell: WordsTableViewCell, with result: FoundWord) {
+        cell.buttonBookmark.isSelected = result.bookmarked
+        let tapped = cell.buttonBookmark.rx.tap
+            .map({ _ -> UIButton in
+                cell.buttonBookmark.isSelected = !cell.buttonBookmark.isSelected
+                return cell.buttonBookmark
+            }).share()
+        cell.disposeBag.insert(
+            tapped.filter { $0.isSelected }
+                .map { _ in result.word }
+                .bind(to: addBookmark),
+            tapped.filter { !$0.isSelected }
+                .map { _ in result.word }
+                .bind(to: removeBookmark)
+        )
     }
     
     private func handleError(_ error: Error) {

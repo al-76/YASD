@@ -11,19 +11,19 @@ import RxCocoa
 
 class WordsSuggestionViewModel: ViewModel {
     private let lexin: LexinService
-    private let history: HistoryService
-
+    private let history: StorageService<Suggestion>
+    
     struct Input {
         let search: Driver<String>
         let addHistory: Driver<String>
         let removeHistory: Driver<String>
     }
-
+    
     struct Output {
         let suggestions: Driver<SuggestionItemResult>
     }
     
-    init(lexin: LexinService, history: HistoryService) {
+    init(lexin: LexinService, history: StorageService<Suggestion>) {
         self.lexin = lexin
         self.history = history
     }
@@ -31,33 +31,33 @@ class WordsSuggestionViewModel: ViewModel {
     func transform(from input: Input) -> Output {
         let suggestionResult = input.search
             .flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
-            guard let self = self else { return Driver.just(.success([])) }
-            return self.getSuggestionAndHistory(word.lowercased())
+                guard let self = self else { return Driver.just(.success([])) }
+                return self.getSuggestionAndHistory(word.lowercased())
         }
         let updatedHistoryResult = input.addHistory
             .filter { !$0.isEmpty }
             .flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
-            guard let self = self else { return Driver.just(.success([])) }
-            return self.updateHistory(word.lowercased())
+                guard let self = self else { return Driver.just(.success([])) }
+                return self.updateHistory(word.lowercased())
         }
         let removedHistoryResult = input.removeHistory
             .filter { !$0.isEmpty }
-            .withLatestFrom(input.search) { removed, current in return (removed, current) }
-            .flatMapLatest { [weak self] item -> Driver<SuggestionItemResult> in
-            guard let self = self else { return Driver.just(.success([])) }
-            return self.removeHistory(item.0, with: item.1)
+            .withLatestFrom(input.search) { ($0, $1) }
+            .flatMapLatest { [weak self] word, currentWord -> Driver<SuggestionItemResult> in
+                guard let self = self else { return Driver.just(.success([])) }
+                return self.removeHistory(word, with: currentWord)
         }
         return Output(suggestions: Driver.merge(suggestionResult, updatedHistoryResult, removedHistoryResult))
     }
     
     private func getSuggestionAndHistory(_ word: String) -> Driver<SuggestionItemResult> {
         return Observable.combineLatest(lexin.suggestion(word),
-                                    history.get(with: word),
-                                    resultSelector: { suggestion, history in
-                                        let filtered = suggestion.filter(history).toItem(removable: false)
-                                        let merged = filtered.merge(history.toItem(removable: true))
-                                        return merged
-            }).asDriver { Driver.just(.failure($0)) }
+                                        history.get(where: { $0?.starts(with: word) ?? false }),
+                                        resultSelector: { suggestion, history in
+                                            let filtered = suggestion.filter(history).toItem(removable: false)
+                                            let merged = filtered.merge(history.toItem(removable: true))
+                                            return merged
+        }).asDriver { Driver.just(.failure($0)) }
     }
     
     private func updateHistory(_ word: String) -> Driver<SuggestionItemResult> {
@@ -68,8 +68,8 @@ class WordsSuggestionViewModel: ViewModel {
         return historyAction(history.remove(word), with: current)
     }
     
-    private func historyAction(_ action: Observable<Void>, with word: String) -> Driver<SuggestionItemResult> {
-        return action.asDriver(onErrorJustReturn: ())
+    private func historyAction(_ action: Observable<StorageServiceResult>, with word: String) -> Driver<SuggestionItemResult> {
+        return action.asDriver { Driver.just(.failure($0)) }
             .flatMap { [weak self] _ -> Driver<SuggestionItemResult> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.getSuggestionAndHistory(word)

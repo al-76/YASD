@@ -21,16 +21,17 @@ class SettingsLanguageViewModelTests: XCTestCase {
         // Arrange
         let testLanguages = [
             ParametersStorage.defaultLanguage,
+            ParametersStorage.defaultLanguage,
             ParametersStorage.supportedLanguages[0]
         ]
         let scheduler = TestScheduler(initialClock: 0)
         let inputLanguages = scheduler.createHotObservable([
-            .next(150, testLanguages[1].name)
+            .next(150, testLanguages[2].name)
         ]).asDriver(onErrorJustReturn: "")
         let outputLanguages = scheduler.createObserver([SettingsItem].self)
         let parameters = createParametersStorageStub(testLanguages[0])
         let viewModel = SettingsLanguageViewModel(lexinParameters: parameters)
-        let output = viewModel.transform(from: SettingsLanguageViewModel.Input(search: Driver.never(),
+        let output = viewModel.transform(from: SettingsLanguageViewModel.Input(search: Driver.just(""),
                                                                                select: inputLanguages))
         output.languages.drive(outputLanguages).disposed(by: disposeBag)
         
@@ -38,6 +39,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
         scheduler.start()
         
         // Assert
+        XCTAssertEqual(testLanguages.count, outputLanguages.events.count)
         for (index, event) in outputLanguages.events.enumerated() {
             XCTAssertEqual(getSelectedItem(from: event.value.element!)!.language.name, testLanguages[index].name)
         }
@@ -65,6 +67,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
         scheduler.start()
         
         // Assert
+        XCTAssertEqual(searchLanguage.count, outputLanguages.events.count - 1)
         for (index, event) in outputLanguages.events.dropFirst().enumerated() {
             XCTAssertEqual(event.value.element?.first?.language.name, searchLanguage[index].name)
         }

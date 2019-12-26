@@ -30,7 +30,7 @@ class SettingsLanguageViewModel: ViewModel {
     func transform(from input: Input) -> Output {
         let searched = input.search
             .flatMapLatest { [weak self] language -> Driver<[SettingsItem]> in
-            guard let self = self else { return Driver.just([]) }
+                guard let self = self else { return Driver.just([]) }
                 return Driver.just(self.filterLanguage(with: language))
         }
         let selected = input.select
@@ -55,7 +55,7 @@ class SettingsLanguageViewModel: ViewModel {
     
     private func filterLanguage(with language: String) -> [SettingsItem] {
         return languageItems
-            .filter { language.isEmpty || $0.language.name.lowercased().contains(language.lowercased()) }
+            .filter { $0.language.name.lowercased().starts(with: language.lowercased()) }
             .compactMap { $0 }
     }
     

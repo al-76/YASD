@@ -14,15 +14,14 @@ import RxDataSources
 class WordsSuggestionTableViewController: UITableViewController {
     var model: WordsSuggestionViewModel!
     let disposeBag = DisposeBag()
-    let search = BehaviorRelay<String>(value: "")
-    let addHistory = BehaviorRelay<String>(value: "")
-    let selectSuggestion = BehaviorRelay<String>(value: "")
-    let removeHistory = BehaviorRelay<String>(value: "")
+    let search = PublishRelay<String>()
+    let addHistory = PublishRelay<String>()
+    let selectSuggestion = PublishRelay<String>()
     private let dataSource = createDataSource()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         customizeView()
         bindToModel()
     }
@@ -37,28 +36,27 @@ class WordsSuggestionTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        let input = WordsSuggestionViewModel.Input(search: search.asDriver(), addHistory: addHistory.asDriver(), removeHistory: removeHistory.asDriver())
-        model.transform(from: input).suggestions
-        .map { [weak self] result -> [SuggestionItem] in
-            return result.handleResult([], self?.handleError)
-        }
-        .map { suggestions in [SuggestionItemSection(header: "suggestions", items: suggestions)] }
-        .drive(tableView.rx.items(dataSource: dataSource))
-        .disposed(by: self.disposeBag)
-           
-        
         let suggestion: ((IndexPath) -> String) = { [weak self] index in
             guard let self = self else { return "" }
             return self.suggestion(index)
         }
-        tableView.rx.itemSelected
-            .map { suggestion($0) }
-            .bind(to: selectSuggestion)
-            .disposed(by: disposeBag)
-        tableView.rx.itemDeleted
-            .map { suggestion($0) }
-            .bind(to: removeHistory)
-            .disposed(by: disposeBag)
+        let input = WordsSuggestionViewModel
+            .Input(search: search.asDriver(onErrorJustReturn: ""),
+                   addHistory: addHistory.asDriver(onErrorJustReturn: ""),
+                   removeHistory: tableView.rx.itemDeleted.map { suggestion($0) }.asDriver(onErrorJustReturn: ""))
+        let output = model.transform(from: input)
+        disposeBag.insert(
+            // suggestions
+            output.suggestions.map { [weak self] result -> [SuggestionItem] in
+                return result.handleResult([], self?.handleError)
+            }
+            .map { suggestions in [SuggestionItemSection(header: "suggestions", items: suggestions)] }
+            .drive(tableView.rx.items(dataSource: dataSource)),
+            // item selected
+            tableView.rx.itemSelected
+                .map { suggestion($0) }
+                .bind(to: selectSuggestion)
+        )
     }
     
     private func suggestion(_ index: IndexPath) -> String {
@@ -106,8 +104,7 @@ fileprivate func createDataSource() -> RxTableViewSectionedAnimatedDataSource<Su
                                                     let id = "WordsSuggestionTableCell"
                                                     let cell = tableView.dequeueReusableCell(withIdentifier: id) ?? UITableViewCell(style: .default, reuseIdentifier: id)
                                                     if let suggestionCell = cell as? WordsSuggestionTableViewCell {
-                                                        configureCell(suggestionCell, with: getSuggestionItem(from: dataSource, with: indexPath))
-//                                                        suggestionCell.setRemovable(getSuggestionItem(from: dataSource, with: indexPath).removable)
+                                                        configureCell(suggestionCell, with: suggestion)
                                                     }
                                                     return cell
     },
@@ -124,7 +121,4 @@ fileprivate func getSuggestionItem(from dataSource: TableViewSectionedDataSource
 fileprivate func configureCell(_ cell: WordsSuggestionTableViewCell, with result: SuggestionItem) {
     cell.label.text = result.suggestion
     cell.setRemovable(result.removable)
-    if !result.removable {
-        return
-    }
 }

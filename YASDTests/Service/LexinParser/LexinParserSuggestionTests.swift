@@ -25,10 +25,10 @@ class LexinParserSuggestionTests: XCTestCase {
         let testData = "test data"
         
         // Act
-        let res = try? parser.parse(text: testData + "," + testData)
+        let res = try? parser.parse(text: testData + "0" + "," + testData + "1")
         
         // Assert
-        XCTAssertEqual(res, [testData, testData])
+        XCTAssertEqual(res, [testData + "0", testData + "1"])
         XCTAssertFalse(parser.getRequestParameters(testData, with: testData).url.isEmpty)
         XCTAssert(parser.getRequestParameters(testData, with: testData).parameters!.0!.contains(testData))
     }

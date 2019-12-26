@@ -121,9 +121,13 @@ func configureService(_ container: Container) {
     }
     .inObjectScope(.container)
     
-    // History Service
-    container.register(HistoryService.self) { _ in
-        HistoryService(storage: container.resolve(Storage.self)!)
+    // Storage Service
+    container.register(StorageService<Suggestion>.self) { _ in
+        StorageService(id: "history", storage: container.resolve(Storage.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(StorageService<FormattedWord>.self) { _ in
+        StorageService(id: "bookmarks", storage: container.resolve(Storage.self)!)
     }
     .inObjectScope(.container)
 }
@@ -131,14 +135,15 @@ func configureService(_ container: Container) {
 func configureModel(_ container: Container) {
     container.register(WordsSuggestionViewModel.self) { container in
         WordsSuggestionViewModel(lexin: container.resolve(LexinService.self)!,
-                                 history: container.resolve(HistoryService.self)!)
+                                 history: container.resolve(StorageService<Suggestion>.self)!)
     }
     .inObjectScope(.container)
     
     container.register(WordsViewModel.self) { container in
         WordsViewModel(lexin: container.resolve(LexinService.self)!,
                        formatter: container.resolve(LexinServiceFormatter.self)!,
-                       player: container.resolve(PlayerService.self)!)
+                       player: container.resolve(PlayerService.self)!,
+                       bookmarks: container.resolve(StorageService<FormattedWord>.self)!)
     }
     .inObjectScope(.container)
     
@@ -150,6 +155,11 @@ func configureModel(_ container: Container) {
     
     container.register(SettingsLanguageViewModel.self) { container in
         SettingsLanguageViewModel(lexinParameters: container.resolve(ParametersStorage.self)!)
+    }
+    .inObjectScope(.container)
+    
+    container.register(BookmarksViewModel.self) { container in
+        BookmarksViewModel(bookmarks: container.resolve(StorageService<FormattedWord>.self)!, player: container.resolve(PlayerService.self)!)
     }
     .inObjectScope(.container)
 }
@@ -168,5 +178,8 @@ func configureView(_ container: Container) {
     }
     container.storyboardInitCompleted(SettingsLanguageTableViewController.self) { container, view in
         view.model = container.resolve(SettingsLanguageViewModel.self)
+    }
+    container.storyboardInitCompleted(BookmarksTableViewController.self) { container, view in
+        view.model = container.resolve(BookmarksViewModel.self)
     }
 }

@@ -11,8 +11,9 @@ import AVFoundation
 
 class Player {
     var player: AVAudioPlayer?
-    
+
     func play(with data: Data) throws {
+        try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
         player = try AVAudioPlayer(data: data)
         player?.prepareToPlay()
         player?.play()
