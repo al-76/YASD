@@ -32,6 +32,7 @@ class LexinParserSuggestionDefault : LexinParserSuggestion {
                 $0.contains("<")) }
             .map { $0.replacingOccurrences(of: "\"", with: "")
                 .trimmingCharacters(in: .whitespacesAndNewlines) }
+            .uniques
         return res
     }
 
@@ -80,5 +81,19 @@ class LexinParserSuggestionFolkets : LexinParserSuggestion {
                         "X-GWT-Module-Base": LexinParserSuggestionFolkets.URL,
                         "X-GWT-Permutation": "4D1B9CF6325020F77FB7233CD72CF011"]
         return (body, parameters)
+    }
+}
+
+private extension Array where Element: Hashable {
+    var uniques: Array {
+        var buffer = Array()
+        var added = Set<Element>()
+        for elem in self {
+            if !added.contains(elem) {
+                buffer.append(elem)
+                added.insert(elem)
+            }
+        }
+        return buffer
     }
 }

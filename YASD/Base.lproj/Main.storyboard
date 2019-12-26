@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
-    <device id="retina6_1" orientation="portrait" appearance="dark"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -53,6 +53,7 @@
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiE-IR-e9h" userLabel="Button Bookmark">
                                                             <rect key="frame" x="347" y="0.0" width="57" height="32.5"/>
+                                                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="12" maxY="4"/>
                                                             <state key="normal" image="bookmark" catalog="system">
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
@@ -125,6 +126,7 @@
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdY-hK-OTH">
                                                     <rect key="frame" x="361.5" y="0.0" width="19.5" height="22.5"/>
+                                                    <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="trash" catalog="system"/>
                                                 </button>
                                             </subviews>
@@ -294,7 +296,7 @@
         <scene sceneID="uT2-B1-RVs">
             <objects>
                 <navigationController id="ZOw-uO-scV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Bokmärken" image="bookmark" catalog="system" id="cjq-xQ-h0C"/>
+                    <tabBarItem key="tabBarItem" title="Bokmärken" image="bookmark.fill" catalog="system" id="cjq-xQ-h0C"/>
                     <navigationItem key="navigationItem" id="IPt-mm-LOX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zbQ-yU-CAV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -317,46 +319,32 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="MJX-mr-fce">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inställingar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dWx-eD-TmB">
-                                    <rect key="frame" x="8" y="0.0" width="398" height="44"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="dWx-eD-TmB" secondAttribute="bottom" id="W9j-fV-cfe"/>
-                                <constraint firstAttribute="trailing" secondItem="dWx-eD-TmB" secondAttribute="trailing" constant="8" id="c3V-8M-Bmc"/>
-                                <constraint firstItem="dWx-eD-TmB" firstAttribute="top" secondItem="MJX-mr-fce" secondAttribute="top" id="eSv-nr-zz7"/>
-                                <constraint firstItem="dWx-eD-TmB" firstAttribute="leading" secondItem="MJX-mr-fce" secondAttribute="leading" constant="8" id="yxB-0y-D4C"/>
-                            </constraints>
                         </view>
                         <sections>
-                            <tableViewSection id="BMX-1O-lhr">
+                            <tableViewSection headerTitle="Välj språk" id="BMX-1O-lhr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="38f-RY-Kjt">
-                                        <rect key="frame" x="0.0" y="62" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="90.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="38f-RY-Kjt" id="aTl-LM-Lfe">
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cwi-6P-aPR">
-                                                    <rect key="frame" x="8" y="11" width="367" height="24.5"/>
+                                                    <rect key="frame" x="18" y="11" width="357" height="24.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Språk" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZu-IK-F5G">
-                                                            <rect key="frame" x="0.0" y="0.0" width="285" height="24.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="281" height="24.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Svenska" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e17-aK-db1">
-                                                            <rect key="frame" x="293" y="0.0" width="74" height="24.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                            <rect key="frame" x="289" y="0.0" width="68" height="24.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -366,7 +354,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="cwi-6P-aPR" secondAttribute="bottom" constant="8" id="8Ob-LE-1mr"/>
                                                 <constraint firstAttribute="trailing" secondItem="cwi-6P-aPR" secondAttribute="trailing" constant="8" id="Dgb-Wp-y1G"/>
-                                                <constraint firstItem="cwi-6P-aPR" firstAttribute="leading" secondItem="aTl-LM-Lfe" secondAttribute="leading" constant="8" id="cuB-4a-Pq2"/>
+                                                <constraint firstItem="cwi-6P-aPR" firstAttribute="leading" secondItem="aTl-LM-Lfe" secondAttribute="leading" constant="18" id="cuB-4a-Pq2"/>
                                                 <constraint firstItem="cwi-6P-aPR" firstAttribute="top" secondItem="aTl-LM-Lfe" secondAttribute="topMargin" id="e1w-MH-DJy"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -377,13 +365,40 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Något annat" id="7LO-NU-QJ8">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="0C5-uA-0tJ">
+                                        <rect key="frame" x="0.0" y="190.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0C5-uA-0tJ" id="ldn-DO-e8H">
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Om" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8BW-La-9Bh">
+                                                    <rect key="frame" x="18" y="9.5" width="352" height="24.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8BW-La-9Bh" firstAttribute="top" secondItem="ldn-DO-e8H" secondAttribute="top" constant="9.5" id="DKR-kV-8v4"/>
+                                                <constraint firstAttribute="bottom" secondItem="8BW-La-9Bh" secondAttribute="bottom" constant="10" id="MzF-8b-lBc"/>
+                                                <constraint firstItem="8BW-La-9Bh" firstAttribute="leading" secondItem="ldn-DO-e8H" secondAttribute="leading" constant="18" id="PLZ-16-z8N"/>
+                                                <constraint firstAttribute="trailing" secondItem="8BW-La-9Bh" secondAttribute="trailing" constant="13" id="tFT-s8-0KY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="m84-Ru-Spg" id="NuZ-Gx-DTd"/>
                             <outlet property="delegate" destination="m84-Ru-Spg" id="7hf-nS-cQn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="wkg-LS-Deb"/>
+                    <navigationItem key="navigationItem" title="Inställingar" id="wkg-LS-Deb"/>
                     <connections>
                         <outlet property="languageLabel" destination="e17-aK-db1" id="zfh-52-Cip"/>
                     </connections>
@@ -395,13 +410,13 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1648" y="1146"/>
+            <point key="canvasLocation" x="1647.826086956522" y="1144.4196428571429"/>
         </scene>
         <!--Ordbook-->
         <scene sceneID="ES0-Td-mp5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZPw-80-Fn5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Ordbook" image="book" id="b26-4Z-GhI"/>
+                    <tabBarItem key="tabBarItem" title="Ordbook" image="book.fill" catalog="system" id="b26-4Z-GhI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="buH-K8-E37">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -418,7 +433,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="book" width="28" height="22"/>
+        <image name="book.fill" catalog="system" width="64" height="50"/>
         <image name="bookmark" catalog="system" width="56" height="64"/>
         <image name="bookmark.fill" catalog="system" width="56" height="64"/>
         <image name="gear" width="29" height="33"/>
