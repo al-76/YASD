@@ -29,8 +29,7 @@ class SettingsLanguageTableViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         
         navigationItem.searchController = searchController
-        navigationItem.hidesBackButton = true
-        navigationItem.hidesSearchBarWhenScrolling = false        
+        navigationItem.hidesSearchBarWhenScrolling = false
     }
     
     private func bindToModel() {
@@ -40,6 +39,7 @@ class SettingsLanguageTableViewController: UITableViewController {
             }
             table.cellForRow(at: $0)?.accessoryType = .checkmark
             let item = try? table.rx.model(at: $0) as SettingsItem
+            self?.searchController.dismiss(animated: true, completion: nil)
             return (item?.language.name ?? "")
         }.asDriver(onErrorJustReturn: "")
         let searchLanguage = searchController.searchBar.rx.text
