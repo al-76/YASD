@@ -35,13 +35,13 @@ class LexinServiceFormatterTests: XCTestCase {
     
     func testFormat1() {
         let result = LexinWordResult.success([LexinWord(word: "word")])
-        let formattedResult = FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "# word (test)\n"), soundUrl: nil)])
+        let formattedResult = FormattedWordResult.success([FormattedWord(header: "word", formatted: NSAttributedString(string: "# word (test)\n"), soundUrl: nil)])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
     func testFormat2() {
         let result = LexinWordResult.success([LexinWord(word: "word", type: nil)])
-        let formattedResult = FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "# word \n"), soundUrl: nil)])
+        let formattedResult = FormattedWordResult.success([FormattedWord(header: "word", formatted: NSAttributedString(string: "# word \n"), soundUrl: nil)])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -50,7 +50,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                         baseLang: testLang,
                                                         targetLang: testLang,
                                                         lexemes: nil)])
-        let formattedResult = FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example - example\n"), soundUrl: nil)])
+        let formattedResult = FormattedWordResult.success([FormattedWord(header: "word", formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example - example\n"), soundUrl: nil)])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -59,7 +59,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                         baseLang: testLang,
                                                         targetLang: nil,
                                                         lexemes: nil)])
-        let formattedResult = FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil)])
+        let formattedResult = FormattedWordResult.success([FormattedWord(header: "word", formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil)])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -68,7 +68,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                         baseLang: nil,
                                                         targetLang: nil,
                                                         lexemes: [testLang, testLang])])
-        let formattedResult = FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil)])
+        let formattedResult = FormattedWordResult.success([FormattedWord(header: "word", formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil)])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -77,7 +77,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                         baseLang: testLang,
                                                         targetLang: nil,
                                                         lexemes: [testLang, testLang])])
-        let formattedResult = FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil)])
+        let formattedResult = FormattedWordResult.success([FormattedWord(header: "word", formatted: NSAttributedString(string: "# word (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil)])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -86,7 +86,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                         baseLang: nil,
                                                         targetLang: nil,
                                                         lexemes: nil)])
-        let formattedResult = FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "# word (type)\n"), soundUrl: nil)])
+        let formattedResult = FormattedWordResult.success([FormattedWord(header: "word", formatted: NSAttributedString(string: "# word (type)\n"), soundUrl: nil)])
         testFormat(result: result, formattedResult: formattedResult)
     }
     
@@ -96,7 +96,7 @@ class LexinServiceFormatterTests: XCTestCase {
                                                         baseLang: testLang,
                                                         targetLang: nil,
                                                         lexemes: nil)])
-        let formattedResult = FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "# word [phonetic] (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil)])
+        let formattedResult = FormattedWordResult.success([FormattedWord(header: "word", formatted: NSAttributedString(string: "# word [phonetic] (type reference)\n### (word, 1, 2)\n (synonym)\n*meaning*\n\n## Exempel:\n* example\n"), soundUrl: nil)])
         testFormat(result: result, formattedResult: formattedResult)
     }
     

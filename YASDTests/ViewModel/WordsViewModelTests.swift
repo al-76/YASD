@@ -30,11 +30,11 @@ class WordsViewModelTests: XCTestCase {
             .next(350, errorWord),
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
-        let foundWords = scheduler.createObserver(FormattedWordResult.self)
+        let foundWords = scheduler.createObserver(FoundWordResult.self)
         let viewModel = WordsViewModel(lexin: createMockLexinService(whenError: errorWord),
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService(),
-                                       bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
+                                       bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: inputWords,
                                                        playUrl: Driver.never(),
                                                        addBookmark: Driver.never(),
@@ -43,12 +43,12 @@ class WordsViewModelTests: XCTestCase {
         
         // Act
         scheduler.start()
-        
+                
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(200, FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "test2"), soundUrl: nil)])),
-            .next(250, FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "test3"), soundUrl: nil)])),
-            .next(350, FormattedWordResult.failure(TestError.someError))
+            .next(200, FoundWordResult.success([FoundWord("test2")])),
+            .next(250, FoundWordResult.success([FoundWord("test3")])),
+            .next(350, FoundWordResult.failure(TestError.someError))
         ])
     }
     
@@ -60,7 +60,7 @@ class WordsViewModelTests: XCTestCase {
             .next(250, "test3"),
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
-        let foundWords = scheduler.createObserver(FormattedWordResult.self)
+        let foundWords = scheduler.createObserver(FoundWordResult.self)
         var viewModel: WordsViewModel?  = WordsViewModel(lexin: createMockLexinService(whenError: "error_word"),
                                                          formatter: createMockLexinServiceFormatter(),
                                                          player: createMockPlayerService(),
@@ -77,8 +77,8 @@ class WordsViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(200, FormattedWordResult.success([])),
-            .next(250, FormattedWordResult.success([]))
+            .next(200, FoundWordResult.success([])),
+            .next(250, FoundWordResult.success([]))
         ])
     }
     
@@ -90,12 +90,12 @@ class WordsViewModelTests: XCTestCase {
             .next(200, "test2"),
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
-        let foundWords = scheduler.createObserver(FormattedWordResult.self)
+        let foundWords = scheduler.createObserver(FoundWordResult.self)
         let lexin = createMockLexinService(whenError: errorWord)
         let viewModel = WordsViewModel(lexin: lexin,
                                        formatter: createMockLexinServiceFormatter(),
                                        player: createMockPlayerService(),
-                                       bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
+                                       bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: inputWords,
                                                        playUrl: Driver.never(),
                                                        addBookmark: Driver.never(),
@@ -109,8 +109,8 @@ class WordsViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(foundWords.events, [
-            .next(200, FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "test2"), soundUrl: nil)])),
-            .next(400, FormattedWordResult.success([FormattedWord(formatted: NSAttributedString(string: "test2"), soundUrl: nil)]))
+            .next(200, FoundWordResult.success([FoundWord("test2")])),
+            .next(400, FoundWordResult.success([FoundWord("test2")]))
         ])
     }
     
@@ -248,7 +248,7 @@ class WordsViewModelTests: XCTestCase {
             when(stub.format(result: any())).then { result in
                 switch result {
                 case .success(let items):
-                    return .success(items.map { FormattedWord(formatted: NSAttributedString(string: $0.word), soundUrl: nil) })
+                    return .success(items.map { FormattedWord(header: $0.word, formatted: NSAttributedString(string: $0.word), soundUrl: nil) })
                 case .failure(let error):
                     return .failure(error)
                 }
@@ -284,5 +284,4 @@ class WordsViewModelTests: XCTestCase {
         DefaultValueRegistry.register(value: Observable.just(.success(true)), forType:  Observable<StorageServiceResult>.self)
         return StorageServiceStub<FormattedWord>(id: "bookmarks", storage: StorageStub())
     }
-
 }

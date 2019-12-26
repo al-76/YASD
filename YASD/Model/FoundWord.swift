@@ -8,5 +8,8 @@
 
 import Foundation
 
-typealias FoundWord = (word: FormattedWord, bookmarked: Bool)
+struct FoundWord {
+    let word: FormattedWord
+    let bookmarked: Bool
+}
 typealias FoundWordResult = Result<[FoundWord]>
