@@ -10,8 +10,7 @@ import RxSwift
 import RxCocoa
 
 class WordsViewModel: ViewModel {
-    private let lexin: LexinService
-    private let formatter: LexinServiceFormatter
+    private let words: WordsService
     private let player: PlayerService
     private let bookmarks: StorageService<FormattedWord>
     
@@ -28,27 +27,23 @@ class WordsViewModel: ViewModel {
         let bookmarked: Driver<StorageServiceResult>
     }
     
-    init(lexin: LexinService, formatter: LexinServiceFormatter, player: PlayerService, bookmarks: StorageService<FormattedWord>) {
-        self.lexin = lexin
-        self.formatter = formatter
+    init(words: WordsService, player: PlayerService, bookmarks: StorageService<FormattedWord>) {
+        self.words = words
         self.player = player
         self.bookmarks = bookmarks
     }
     
     func transform(from input: Input) -> Output {
-        let changedLanguage = lexin.language()
+        let changedLanguage = words.language()
             .asDriver(onErrorJustReturn: ParametersStorage.defaultLanguage)
             .withLatestFrom(input.search) { $1 }
         let changedBookmarks = bookmarks.changed.asDriver(onErrorJustReturn: false).filter { $0 }
             .withLatestFrom(input.search) { $1 }
         let found = Driver.merge(input.search, changedLanguage, changedBookmarks)
-            .flatMapLatest { [weak self] word -> Driver<FormattedWordResult> in
+            .flatMapLatest { [weak self] word -> Driver<FoundWordResult> in
                 guard let self = self else { return Driver.just(.success([])) }
-                return self.searchWord(word)
-        }
-        .flatMap { [weak self] word -> Driver<FoundWordResult> in
-            guard let self = self else { return Driver.just(.success([])) }
-            return self.checkBookmarked(word)
+                return self.words.search(word)
+                    .asDriver { Driver.just(.failure($0)) }
         }
         let played = input.playUrl
             .flatMapLatest { [weak self] url -> Driver<PlayerServiceResult> in
@@ -58,35 +53,14 @@ class WordsViewModel: ViewModel {
         }
         let addedBookmark = input.addBookmark.flatMap { [weak self] word -> Driver<StorageServiceResult> in
             guard let self = self else { return Driver.just(.success(false)) }
-            return self.bookmarks.add(word).asDriver { Driver.just(.failure($0)) }
+            return self.bookmarks.add(word)
+                .asDriver { Driver.just(.failure($0)) }
         }
         let removedBookmark = input.removeBookmark.flatMap { [weak self] word -> Driver<StorageServiceResult> in
             guard let self = self else { return Driver.just(.success(false)) }
-            return self.bookmarks.remove(word).asDriver { Driver.just(.failure($0)) }
+            return self.bookmarks.remove(word)
+                .asDriver { Driver.just(.failure($0)) }
         }
         return Output(foundWords: found, played: played, bookmarked: Driver.merge(addedBookmark, removedBookmark))
-    }
-    
-    private func searchWord(_ word: String) -> Driver<FormattedWordResult> {
-        return lexin.search(word)
-            .map { [weak self] result in
-                guard let self = self else { return .success([]) }
-                return self.formatter.format(result: result) }
-            .asDriver { Driver.just(.failure($0)) }
-    }
-    
-    private func checkBookmarked(_ words: FormattedWordResult) -> Driver<FoundWordResult> {
-        switch words {
-        case let .success(res):
-            return Observable.from(res.map { bookmarks.contains($0) }).merge().toArray()
-                .map { bookmarked in
-                    return zip(res, bookmarked)
-                        .map { FoundWord(word: $0, bookmarked: $1.handleResult(false, nil)) }
-            }
-            .map { .success($0) }
-            .asDriver(onErrorJustReturn: .success([]))
-        case let .failure(error):
-            return Driver.just(.failure(error))
-        }
     }
 }

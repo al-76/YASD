@@ -13,10 +13,6 @@ import RxTest
 import Cuckoo
 
 class LexinServiceTests: XCTestCase {
-    enum TestError: Error {
-        case someError
-    }
-    
     func testSearch() {
         // Arrange
         let testData = LexinWordResult.success([LexinWord(word: "test")])
@@ -29,7 +25,7 @@ class LexinServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, testData),
+            .next(200, LexinWordResult.success([LexinWord(word: "test")])),
             .completed(200)
        ])
     }
@@ -50,7 +46,6 @@ class LexinServiceTests: XCTestCase {
             .completed(200)
            ])
     }
-
 
     private func createLexinService(_ lexinApi: LexinApi) -> LexinService {
         return LexinService(parameters: ParametersStorage(storage: createMockStorage(),

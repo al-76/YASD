@@ -130,6 +130,14 @@ func configureService(_ container: Container) {
         StorageService(id: "bookmarks", storage: container.resolve(Storage.self)!)
     }
     .inObjectScope(.container)
+    
+    // Words Service
+    container.register(WordsService.self) { _ in
+        WordsService(lexin: container.resolve(LexinService.self)!,
+                     formatter: container.resolve(LexinServiceFormatter.self)!,
+                     bookmarks: container.resolve(StorageService<FormattedWord>.self)!)
+    }
+    .inObjectScope(.container)
 }
 
 func configureModel(_ container: Container) {
@@ -140,8 +148,7 @@ func configureModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(WordsViewModel.self) { container in
-        WordsViewModel(lexin: container.resolve(LexinService.self)!,
-                       formatter: container.resolve(LexinServiceFormatter.self)!,
+        WordsViewModel(words: container.resolve(WordsService.self)!,
                        player: container.resolve(PlayerService.self)!,
                        bookmarks: container.resolve(StorageService<FormattedWord>.self)!)
     }
@@ -149,7 +156,6 @@ func configureModel(_ container: Container) {
     
     container.register(SettingsViewModel.self) { container in
         SettingsViewModel(lexinParameters: container.resolve(ParametersStorage.self)!)
-        
     }
     .inObjectScope(.container)
     
