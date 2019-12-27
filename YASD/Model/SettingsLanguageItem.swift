@@ -1,5 +1,5 @@
 //
-//  SettingsItem.swift
+//  SettingsLanguageItem.swift
 //  YASD
 //
 //  Created by Vyacheslav Konopkin on 27.11.2019.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct SettingsItem {
+struct SettingsLanguageItem {
     var selected: Bool
     let language: Language
 }
+typealias SettingsLanguageItemResult = Result<[SettingsLanguageItem]>

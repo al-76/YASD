@@ -38,7 +38,7 @@ class SettingsLanguageTableViewController: UITableViewController {
                 return ""
             }
             table.cellForRow(at: $0)?.accessoryType = .checkmark
-            let item = try? table.rx.model(at: $0) as SettingsItem
+            let item = try? table.rx.model(at: $0) as SettingsLanguageItem
             self?.searchController.dismiss(animated: true, completion: nil)
             return (item?.language.name ?? "")
         }.asDriver(onErrorJustReturn: "")

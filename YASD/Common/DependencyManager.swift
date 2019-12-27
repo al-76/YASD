@@ -138,6 +138,12 @@ func configureService(_ container: Container) {
                      bookmarks: container.resolve(StorageService<FormattedWord>.self)!)
     }
     .inObjectScope(.container)
+    
+    // Language Settings Service
+    container.register(SettingsLanguageService.self) { _ in
+        SettingsLanguageService(parameters: container.resolve(ParametersStorage.self)!)
+    }
+    .inObjectScope(.container)
 }
 
 func configureModel(_ container: Container) {
@@ -160,7 +166,7 @@ func configureModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(SettingsLanguageViewModel.self) { container in
-        SettingsLanguageViewModel(lexinParameters: container.resolve(ParametersStorage.self)!)
+        SettingsLanguageViewModel(settings: container.resolve(SettingsLanguageService.self)!)
     }
     .inObjectScope(.container)
     
