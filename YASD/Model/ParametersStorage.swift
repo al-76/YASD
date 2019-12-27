@@ -42,7 +42,7 @@ class ParametersStorage {
         self.storage = storage
         self.language = BehaviorSubject<Language>(value: language)
         
-        load()
+        load() // FIXME: this is wrong
     }
     
     private func load() {

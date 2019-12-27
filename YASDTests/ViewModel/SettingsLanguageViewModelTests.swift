@@ -19,67 +19,67 @@ class SettingsLanguageViewModelTests: XCTestCase {
     
     func testSettingsLanguageSelect() {
         // Arrange
-        let testLanguages = [
-            ParametersStorage.defaultLanguage,
-            ParametersStorage.defaultLanguage,
-            ParametersStorage.supportedLanguages[0]
-        ]
+        let testLanguage = Language(name: "test", code: "test")
         let scheduler = TestScheduler(initialClock: 0)
         let inputLanguages = scheduler.createHotObservable([
-            .next(150, testLanguages[2].name)
+            .next(150, testLanguage.name)
         ]).asDriver(onErrorJustReturn: "")
-        let outputLanguages = scheduler.createObserver([SettingsItem].self)
-        let parameters = createParametersStorageStub(testLanguages[0])
-        let viewModel = SettingsLanguageViewModel(lexinParameters: parameters)
+        let res = scheduler.createObserver([SettingsLanguageItem].self)
+        let viewModel = SettingsLanguageViewModel(settings: createSettingsLanguageService(testLanguage))
         let output = viewModel.transform(from: SettingsLanguageViewModel.Input(search: Driver.just(""),
                                                                                select: inputLanguages))
-        output.languages.drive(outputLanguages).disposed(by: disposeBag)
-        
-        // Act
+        output.languages.drive(res).disposed(by: disposeBag)
+//
+//        // Act
         scheduler.start()
-        
+//
         // Assert
-        XCTAssertEqual(testLanguages.count, outputLanguages.events.count)
-        for (index, event) in outputLanguages.events.enumerated() {
-            XCTAssertEqual(getSelectedItem(from: event.value.element!)!.language.name, testLanguages[index].name)
-        }
+        XCTAssertEqual(res.events, [
+            .next(0, [ SettingsLanguageItem(selected: false, language: testLanguage) ]),
+            .next(150, [ SettingsLanguageItem(selected: false, language: testLanguage) ])
+        ])
     }
     
     func testSettingsLanguageSearch() {
         // Arrange
-        let searchLanguage = [
-            ParametersStorage.defaultLanguage,
-            ParametersStorage.supportedLanguages[0]
-        ]
+        let testLanguage = Language(name: "test", code: "test")
         let scheduler = TestScheduler(initialClock: 0)
         let inputLanguages = scheduler.createHotObservable([
-            .next(100, searchLanguage[0].name),
-            .next(150, searchLanguage[1].name)
+            .next(150, testLanguage.name)
         ]).asDriver(onErrorJustReturn: "")
-        let outputLanguages = scheduler.createObserver([SettingsItem].self)
-        let parameters = createParametersStorageStub(searchLanguage[0])
-        let viewModel = SettingsLanguageViewModel(lexinParameters: parameters)
+        let res = scheduler.createObserver([SettingsLanguageItem].self)
+        let viewModel = SettingsLanguageViewModel(settings: createSettingsLanguageService(testLanguage))
         let output = viewModel.transform(from: SettingsLanguageViewModel.Input(search: inputLanguages,
                                                                                select: Driver.never()))
-        output.languages.drive(outputLanguages).disposed(by: disposeBag)
+        output.languages.drive(res).disposed(by: disposeBag)
         
         // Act
         scheduler.start()
         
         // Assert
-        XCTAssertEqual(searchLanguage.count, outputLanguages.events.count - 1)
-        for (index, event) in outputLanguages.events.dropFirst().enumerated() {
-            XCTAssertEqual(event.value.element?.first?.language.name, searchLanguage[index].name)
-        }
+        XCTAssertEqual(res.events, [
+            .next(150, [ SettingsLanguageItem(selected: false, language: testLanguage) ])
+        ])
     }
-    
-    private func getSelectedItem(from items: [SettingsItem]) -> SettingsItem? {
-        return items.first(where: { $0.selected })
-    }
+//
+//    private func getSelectedItem(from items: [SettingsItem]) -> SettingsItem? {
+//        return items.first(where: { $0.selected })
+//    }
     
     private func createParametersStorageStub(_ language: Language) -> ParametersStorageStub {
         DefaultValueRegistry.register(value: language, forType: Language.self)
         let stub = ParametersStorageStub(storage: StorageStub(), language: language)
         return stub
+    }
+    
+    private func createSettingsLanguageService(_ language: Language) -> MockSettingsLanguageService {
+        let mock = MockSettingsLanguageService(parameters: createParametersStorageStub(Language(name: "test", code: "test")))
+        stub(mock) { stub in
+            when(stub.update(with: any())).thenReturn(Observable.just(.success(true)))
+            when(stub.get(with: any())).thenReturn(Observable.just(
+                .success([ SettingsLanguageItem(selected: false, language: language) ]
+                )))
+        }
+        return mock
     }
 }
