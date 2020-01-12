@@ -20,6 +20,9 @@ class WordsTableViewController: UITableViewController {
     private let removeBookmark = PublishRelay<FormattedWord>()
     private let disposeBag = DisposeBag()
     
+    @IBOutlet var labelLoading: UIStackView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -37,6 +40,7 @@ class WordsTableViewController: UITableViewController {
         if #available(iOS 13.0, *) {
             searchController.showsSearchResultsController = true
         }
+       
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 70
         tableView.tableFooterView = UIView()
@@ -45,6 +49,7 @@ class WordsTableViewController: UITableViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesBackButton = true
         navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.titleView = labelLoading
         
         definesPresentationContext = true
     }
@@ -75,7 +80,9 @@ class WordsTableViewController: UITableViewController {
             // played, bookmarked
             Driver.merge(output.played, output.bookmarked).drive(onNext: { [weak self] result in
                 _ = result.handleResult(false, self?.handleError)
-            })
+            }),
+            // loading
+            output.loading.drive(activityIndicator.rx.isAnimating)
         )
     }
     
