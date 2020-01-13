@@ -90,6 +90,7 @@
 		2F9B8BB4232BB709000D6BC1 /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B8BB3232BB709000D6BC1 /* PlayerService.swift */; };
 		2F9B8BB5233132BF000D6BC1 /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B8BB3232BB709000D6BC1 /* PlayerService.swift */; };
 		2F9B8BB62333C612000D6BC1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F8BBE2322A7DA00EF6A85 /* Player.swift */; };
+		2FA5040323CCC00D004DA580 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */; };
 		2FBCB84823A2949F0080238A /* SearchResultsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBCB84723A2949F0080238A /* SearchResultsTableView.swift */; };
 		2FC07D0423AA605E00D4D328 /* HistoryServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC07D0323AA605E00D4D328 /* HistoryServiceTests.swift */; };
 		2FCB2DDF22A005180053B758 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCB2DDE22A005180053B758 /* SwiftSoup.framework */; };
@@ -850,6 +851,7 @@
 				2F5F8BAC2322879900EF6A85 /* ViewModel.swift in Sources */,
 				2FDB640B238EACBC00948A52 /* ParametersStorage.swift in Sources */,
 				2F18E2E4234381EA003F91FD /* CacheService.swift in Sources */,
+				2FA5040323CCC00D004DA580 /* ActivityIndicator.swift in Sources */,
 				2F7DA16D238C040900E91C71 /* NetworkServiceTests.swift in Sources */,
 				2F5F8BB3232287DA00EF6A85 /* Network.swift in Sources */,
 				2F5F8BB6232287DA00EF6A85 /* Storage.swift in Sources */,
