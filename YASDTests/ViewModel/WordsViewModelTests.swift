@@ -31,14 +31,18 @@ class WordsViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let foundWords = scheduler.createObserver(FoundWordResult.self)
+        let loading = scheduler.createObserver(Bool.self)
         let viewModel = WordsViewModel(words: createMockWordsService(whenError: errorWord),
                                        player: createMockPlayerService(),
                                        bookmarks: createBookmarksStub())
-        viewModel.transform(from: WordsViewModel.Input(search: inputWords,
+        let output = viewModel.transform(from: WordsViewModel.Input(search: inputWords,
                                                        playUrl: Driver.never(),
                                                        addBookmark: Driver.never(),
                                                        removeBookmark: Driver.never()))
-            .foundWords.drive(foundWords).disposed(by: disposeBag)
+        disposeBag.insert(
+            output.foundWords.drive(foundWords),
+            output.loading.drive(loading)
+        )
         
         // Act
         scheduler.start()
@@ -48,6 +52,15 @@ class WordsViewModelTests: XCTestCase {
             .next(200, FoundWordResult.success([FoundWord("test2")])),
             .next(250, FoundWordResult.success([FoundWord("test3")])),
             .next(350, FoundWordResult.failure(TestError.someError))
+        ])
+        XCTAssertEqual(loading.events, [
+            .next(0, false),
+            .next(200, true),
+            .next(200, false),
+            .next(250, true),
+            .next(250, false),
+            .next(350, true),
+            .next(350, false),
         ])
     }
     

@@ -20,33 +20,25 @@ class DataCache {
     
     func save(_ data: Data, forKey key: String) -> Observable<Data> {
         return Observable.create { [weak self] observer in
-            do {
-                if let self = self {
-                    try self.getStorage().setObject(data, forKey: key)
-                    observer.onNext(data)
-                } else {
-                    observer.onNext(Data())
-                }
-                observer.onCompleted()
-            } catch let error {
-                observer.onError(error)
+            if let self = self {
+                try? self.getStorage().setObject(data, forKey: key)
+                observer.onNext(data)
+            } else {
+                observer.onNext(Data())
             }
+            observer.onCompleted()
             return Disposables.create()
         }
     }
     
     func load(_ key: String) -> Observable<Data?> {
         return Observable.create { [weak self] observer in
-            do {
-                if let self = self {
-                    observer.onNext(try self.getStorage().object(forKey: key))
-                } else {
-                    observer.onNext(nil)
-                }
-                observer.onCompleted()
-            } catch let error {
-                observer.onError(error)
+            if let self = self {
+                observer.onNext(try? self.getStorage().object(forKey: key))
+            } else {
+                observer.onNext(nil)
             }
+            observer.onCompleted()
             return Disposables.create()
         }
     }
