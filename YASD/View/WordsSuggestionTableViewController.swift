@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import RMessage
 
 class WordsSuggestionTableViewController: UITableViewController {
     var model: WordsSuggestionViewModel!
@@ -18,10 +19,12 @@ class WordsSuggestionTableViewController: UITableViewController {
     let addHistory = PublishRelay<String>()
     let selectSuggestion = PublishRelay<String>()
     private let dataSource = createDataSource()
+    private let rmController = RMController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rmController.presentationViewController = self
         customizeView()
         bindToModel()
     }
@@ -66,7 +69,9 @@ class WordsSuggestionTableViewController: UITableViewController {
     }
     
     private func handleError(_ error: Error) {
-        print(error) // TODO: show alert
+        rmController.showMessage(withSpec: errorSpec,
+                                 title: "Error",
+                                 body: error.localizedDescription)
     }
 }
 
