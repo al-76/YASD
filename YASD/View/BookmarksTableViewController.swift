@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import RMessage
 
 class BookmarksTableViewController: UITableViewController {
     var model: BookmarksViewModel!
@@ -18,10 +19,12 @@ class BookmarksTableViewController: UITableViewController {
     private let playUrl = PublishRelay<String>()
     private let removeBookmark = PublishRelay<Int>()
     private var searchController: UISearchController!
+    private let rmController = RMController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rmController.presentationViewController = self
         customizeView()
         bindToModel()
     }
@@ -81,7 +84,9 @@ class BookmarksTableViewController: UITableViewController {
     }
     
     private func handleError(_ error: Error) {
-        print(error) // TODO: show alert
+        rmController.showMessage(withSpec: errorSpec,
+                                 title: "Error",
+                                 body: error.localizedDescription)
     }
 }
 

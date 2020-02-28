@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RMessage
 
 class WordsTableViewController: UITableViewController {
     var model: WordsViewModel!
@@ -19,6 +20,7 @@ class WordsTableViewController: UITableViewController {
     private let addBookmark = PublishRelay<FormattedWord>()
     private let removeBookmark = PublishRelay<FormattedWord>()
     private let disposeBag = DisposeBag()
+    private let rmController = RMController()
     
     @IBOutlet var labelLoading: UIStackView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -30,6 +32,7 @@ class WordsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rmController.presentationViewController = self
         customizeView()
         bindToModel()
     }
@@ -138,6 +141,8 @@ class WordsTableViewController: UITableViewController {
     }
     
     private func handleError(_ error: Error) {
-        print(error) // TODO: show alert
+        rmController.showMessage(withSpec: errorSpec,
+                                 title: "Error",
+                                 body: error.localizedDescription)
     }
 }
