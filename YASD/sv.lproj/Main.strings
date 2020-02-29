@@ -1,0 +1,39 @@
+
+/* Class = "UITableViewSection"; headerTitle = "Något annat"; ObjectID = "7LO-NU-QJ8"; */
+"7LO-NU-QJ8.headerTitle" = "Något annat";
+
+/* Class = "UILabel"; text = "Om"; ObjectID = "8BW-La-9Bh"; */
+"8BW-La-9Bh.text" = "Om";
+
+/* Class = "UITableViewSection"; headerTitle = "Välj språk"; ObjectID = "BMX-1O-lhr"; */
+"BMX-1O-lhr.headerTitle" = "Välj språk";
+
+/* Class = "UINavigationItem"; title = "Sparad"; ObjectID = "Hrc-dA-wzQ"; */
+"Hrc-dA-wzQ.title" = "Sparad";
+
+/* Class = "UITabBarItem"; title = "Inställningar"; ObjectID = "WHz-tK-3Cl"; */
+"WHz-tK-3Cl.title" = "Inställningar";
+
+/* Class = "UINavigationItem"; title = "Slå upp"; ObjectID = "Yc2-8R-Pl0"; */
+"Yc2-8R-Pl0.title" = "Slå upp";
+
+/* Class = "UILabel"; text = "Slå upp"; ObjectID = "ZLP-S8-GkW"; */
+"ZLP-S8-GkW.text" = "Slå upp";
+
+/* Class = "UITabBarItem"; title = "Ordbook"; ObjectID = "b26-4Z-GhI"; */
+"b26-4Z-GhI.title" = "Ordbook";
+
+/* Class = "UITabBarItem"; title = "Bokmärken"; ObjectID = "cjq-xQ-h0C"; */
+"cjq-xQ-h0C.title" = "Bokmärken";
+
+/* Class = "UILabel"; text = "Svenska"; ObjectID = "e17-aK-db1"; */
+"e17-aK-db1.text" = "Svenska";
+
+/* Class = "UILabel"; text = "Språk"; ObjectID = "fZu-IK-F5G"; */
+"fZu-IK-F5G.text" = "Språk";
+
+/* Class = "UILabel"; text = "tsetajsektljlkejalksjetaklej"; ObjectID = "iuL-Da-usg"; */
+"iuL-Da-usg.text" = "tsetajsektljlkejalksjetaklej";
+
+/* Class = "UINavigationItem"; title = "Inställingar"; ObjectID = "wkg-LS-Deb"; */
+"wkg-LS-Deb.title" = "Inställingar";

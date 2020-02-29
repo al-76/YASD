@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		17A9BC7522B5273B002F769B /* HtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7422B5273B002F769B /* HtmlParser.swift */; };
 		17A9BC7722B5284F002F769B /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7622B5284F002F769B /* Markdown.swift */; };
+		17B9B244240A84AA007FDC47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B9B242240A84AA007FDC47 /* Localizable.strings */; };
 		17C1527A23B53B4600EACA94 /* WordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* WordsService.swift */; };
 		17C1527B23B53B4600EACA94 /* WordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* WordsService.swift */; };
 		17C1527D23B5498800EACA94 /* WordsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527C23B5498800EACA94 /* WordsServiceTests.swift */; };
@@ -22,7 +23,6 @@
 		2F0D2B27237EA57B00F23F3B /* LexinApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D2B25237EA57B00F23F3B /* LexinApi.swift */; };
 		2F18E2E323437097003F91FD /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
 		2F18E2E4234381EA003F91FD /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
-		2F1E1E762344D8A1007C128B /* Cache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F1E1E752344D8A1007C128B /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F1E1E782344E6DB007C128B /* CacheServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */; };
 		2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
 		2F1E1E7F23463434007C128B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
@@ -57,8 +57,6 @@
 		2F5F8BB6232287DA00EF6A85 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7321862313E4A000CC0822 /* Storage.swift */; };
 		2F5F8BB7232287DF00EF6A85 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDEFF5E2295494200A82F43 /* Result.swift */; };
 		2F5F8BB9232289AA00EF6A85 /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7622B5284F002F769B /* Markdown.swift */; };
-		2F5F8BBB23228BB000EF6A85 /* MarkdownKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F5F8BBA23228BB000EF6A85 /* MarkdownKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		2F5F8BBD23228C1600EF6A85 /* SwiftSoup.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F5F8BBC23228C1600EF6A85 /* SwiftSoup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F5F8BBF2322A7DA00EF6A85 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F8BBE2322A7DA00EF6A85 /* Player.swift */; };
 		2F661B362272E16300C68A5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F661B352272E16300C68A5F /* AppDelegate.swift */; };
 		2F661B382272E16300C68A5F /* WordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F661B372272E16300C68A5F /* WordsTableViewController.swift */; };
@@ -160,9 +158,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2F1E1E762344D8A1007C128B /* Cache.framework in CopyFiles */,
-				2F5F8BBD23228C1600EF6A85 /* SwiftSoup.framework in CopyFiles */,
-				2F5F8BBB23228BB000EF6A85 /* MarkdownKit.framework in CopyFiles */,
 				2F3EE262229D7F4E0083CDE9 /* RxBlocking.framework in CopyFiles */,
 				2F3EE25E229D79CC0083CDE9 /* RxRelay.framework in CopyFiles */,
 				2F3EE25D229D79BE0083CDE9 /* RxSwift.framework in CopyFiles */,
@@ -177,6 +172,10 @@
 /* Begin PBXFileReference section */
 		17A9BC7422B5273B002F769B /* HtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlParser.swift; sourceTree = "<group>"; };
 		17A9BC7622B5284F002F769B /* Markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
+		17B9B23C240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
+		17B9B23D240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		17B9B243240A84AA007FDC47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = YASD/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		17B9B245240A84B0007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = YASD/sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17C1527923B53B4600EACA94 /* WordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsService.swift; sourceTree = "<group>"; };
 		17C1527C23B5498800EACA94 /* WordsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsServiceTests.swift; sourceTree = "<group>"; };
 		17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -185,7 +184,6 @@
 		17FC6BA423870ED900279589 /* LexinApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiTests.swift; sourceTree = "<group>"; };
 		2F0D2B25237EA57B00F23F3B /* LexinApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApi.swift; sourceTree = "<group>"; };
 		2F18E2E223437097003F91FD /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
-		2F1E1E752344D8A1007C128B /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = "<group>"; };
 		2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceTests.swift; sourceTree = "<group>"; };
 		2F1E1E7D23463434007C128B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceFormatter.swift; sourceTree = "<group>"; };
@@ -203,8 +201,6 @@
 		2F3EE258229D2EAC0083CDE9 /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
 		2F3EE259229D2EAC0083CDE9 /* SwinjectStoryboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwinjectStoryboard.framework; path = Carthage/Build/iOS/SwinjectStoryboard.framework; sourceTree = "<group>"; };
 		2F3EE260229D7B7B0083CDE9 /* LexinServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceTests.swift; sourceTree = "<group>"; };
-		2F5F8BBA23228BB000EF6A85 /* MarkdownKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarkdownKit.framework; path = Carthage/Build/iOS/MarkdownKit.framework; sourceTree = "<group>"; };
-		2F5F8BBC23228C1600EF6A85 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		2F5F8BBE2322A7DA00EF6A85 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2F661B322272E16300C68A5F /* YASD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YASD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F661B352272E16300C68A5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -407,9 +403,6 @@
 		2F661B292272E16300C68A5F = {
 			isa = PBXGroup;
 			children = (
-				2F1E1E752344D8A1007C128B /* Cache.framework */,
-				2F5F8BBC23228C1600EF6A85 /* SwiftSoup.framework */,
-				2F5F8BBA23228BB000EF6A85 /* MarkdownKit.framework */,
 				2F661B342272E16300C68A5F /* YASD */,
 				2F661B4B2272E16400C68A5F /* YASDTests */,
 				2F661B562272E16400C68A5F /* YASDUITests */,
@@ -443,6 +436,7 @@
 				2F661B3E2272E16400C68A5F /* Assets.xcassets */,
 				2F661B402272E16400C68A5F /* LaunchScreen.storyboard */,
 				2F661B432272E16400C68A5F /* Info.plist */,
+				17B9B242240A84AA007FDC47 /* Localizable.strings */,
 			);
 			path = YASD;
 			sourceTree = "<group>";
@@ -677,6 +671,7 @@
 			knownRegions = (
 				en,
 				Base,
+				sv,
 			);
 			mainGroup = 2F661B292272E16300C68A5F;
 			productRefGroup = 2F661B332272E16300C68A5F /* Products */;
@@ -696,6 +691,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F661B422272E16400C68A5F /* LaunchScreen.storyboard in Resources */,
+				17B9B244240A84AA007FDC47 /* Localizable.strings in Resources */,
 				2F661B3F2272E16400C68A5F /* Assets.xcassets in Resources */,
 				2F661B3D2272E16300C68A5F /* Main.storyboard in Resources */,
 			);
@@ -920,10 +916,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		17B9B242240A84AA007FDC47 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17B9B243240A84AA007FDC47 /* Base */,
+				17B9B245240A84B0007FDC47 /* sv */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		2F661B3B2272E16300C68A5F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				2F661B3C2272E16300C68A5F /* Base */,
+				17B9B23C240A789D007FDC47 /* sv */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -932,6 +938,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2F661B412272E16400C68A5F /* Base */,
+				17B9B23D240A789D007FDC47 /* sv */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -943,6 +950,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1004,6 +1012,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1061,7 +1070,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R5S3B7XJFC;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 6894A8BA33;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1072,8 +1082,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gm.YASD;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ors.YASD;
+				PRODUCT_NAME = YASD;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1086,7 +1097,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R5S3B7XJFC;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = 6894A8BA33;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1097,8 +1109,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gm.YASD;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ors.YASD;
+				PRODUCT_NAME = YASD;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

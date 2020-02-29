@@ -86,7 +86,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="" id="Hxm-qk-AJY"/>
-                    <navigationItem key="navigationItem" title="Slå upp" id="Yc2-8R-Pl0"/>
+                    <navigationItem key="navigationItem" title="Search" id="Yc2-8R-Pl0"/>
                     <connections>
                         <outlet property="activityIndicator" destination="w90-2Y-vLO" id="4wX-c7-pNG"/>
                         <outlet property="labelLoading" destination="6QK-Zm-IOK" id="mZg-Jg-3TY"/>
@@ -100,7 +100,7 @@
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="w90-2Y-vLO">
                             <rect key="frame" x="0.0" y="0.0" width="20" height="110"/>
                         </activityIndicatorView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slå upp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLP-S8-GkW">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLP-S8-GkW">
                             <rect key="frame" x="24" y="0.0" width="176" height="110"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <nil key="textColor"/>
@@ -231,7 +231,7 @@
         <scene sceneID="b14-U1-XBR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vGh-Y3-JkN" userLabel="Settings" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Inställningar" image="gear" id="WHz-tK-3Cl"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" id="WHz-tK-3Cl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="H5r-iX-Ybt">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -307,17 +307,17 @@
                             <outlet property="delegate" destination="ICo-D0-VTm" id="DNP-Gb-Syl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Sparad" id="Hrc-dA-wzQ"/>
+                    <navigationItem key="navigationItem" title="Saved" id="Hrc-dA-wzQ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VWi-yM-a7Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1648" y="366"/>
         </scene>
-        <!--Bokmärken-->
+        <!--Bookmarks-->
         <scene sceneID="uT2-B1-RVs">
             <objects>
                 <navigationController id="ZOw-uO-scV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Bokmärken" image="bookmark.fill" catalog="system" id="cjq-xQ-h0C"/>
+                    <tabBarItem key="tabBarItem" title="Bookmarks" image="bookmark.fill" catalog="system" id="cjq-xQ-h0C"/>
                     <navigationItem key="navigationItem" id="IPt-mm-LOX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zbQ-yU-CAV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -345,7 +345,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <sections>
-                            <tableViewSection headerTitle="Välj språk" id="BMX-1O-lhr">
+                            <tableViewSection headerTitle="Choose language" id="BMX-1O-lhr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="38f-RY-Kjt">
                                         <rect key="frame" x="0.0" y="90.5" width="414" height="44"/>
@@ -357,13 +357,13 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cwi-6P-aPR">
                                                     <rect key="frame" x="18" y="11" width="357" height="24.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Språk" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZu-IK-F5G">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Language" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZu-IK-F5G">
                                                             <rect key="frame" x="0.0" y="0.0" width="281" height="24.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Svenska" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e17-aK-db1">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swedish" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e17-aK-db1">
                                                             <rect key="frame" x="289" y="0.0" width="68" height="24.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -386,7 +386,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Något annat" id="7LO-NU-QJ8">
+                            <tableViewSection headerTitle="Something else" id="7LO-NU-QJ8">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="0C5-uA-0tJ">
                                         <rect key="frame" x="0.0" y="190.5" width="414" height="44"/>
@@ -395,7 +395,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Om" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8BW-La-9Bh">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="About" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8BW-La-9Bh">
                                                     <rect key="frame" x="18" y="9.5" width="352" height="24.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
@@ -419,7 +419,7 @@
                             <outlet property="delegate" destination="m84-Ru-Spg" id="7hf-nS-cQn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Inställingar" id="wkg-LS-Deb"/>
+                    <navigationItem key="navigationItem" title="Settings" id="wkg-LS-Deb"/>
                     <connections>
                         <outlet property="languageLabel" destination="e17-aK-db1" id="zfh-52-Cip"/>
                     </connections>
@@ -433,11 +433,11 @@
             </objects>
             <point key="canvasLocation" x="1647.826086956522" y="1144.4196428571429"/>
         </scene>
-        <!--Ordbook-->
+        <!--Dictionary-->
         <scene sceneID="ES0-Td-mp5">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZPw-80-Fn5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Ordbook" image="book.fill" catalog="system" id="b26-4Z-GhI"/>
+                    <tabBarItem key="tabBarItem" title="Dictionary" image="book.fill" catalog="system" id="b26-4Z-GhI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="buH-K8-E37">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
