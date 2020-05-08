@@ -56,9 +56,8 @@ class PlayerServiceTests: XCTestCase {
     
     func testPlaySoundPlayerError() {
         // Arrange
-        let testError = TestError.someError
         let scheduler = TestScheduler(initialClock: 0)
-        let service = PlayerService(player: createMockPlayerError(testError),
+        let service = PlayerService(player: createMockPlayerError(),
                                     cache: createMockCacheService(),
                                     network: createMockNetwork())
         
@@ -68,18 +67,17 @@ class PlayerServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, .failure(testError)),
+            .next(200, .failure(TestError.someError)),
             .completed(200)
            ])
     }
     
     func testPlaySoundPlayerNetworkError() {
         // Arrange
-        let testError = TestError.someError
         let scheduler = TestScheduler(initialClock: 0)
         let service = PlayerService(player: createMockPlayer(),
                                     cache: createMockCacheService(),
-                                    network: createMockNetworkError(testError))
+                                    network: createMockNetworkError())
         
         // Act
         let played = service.playSound(with: "test")
@@ -87,7 +85,7 @@ class PlayerServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, .failure(testError)),
+            .next(200, .failure(TestError.someError)),
             .completed(200)
            ])
     }
@@ -110,10 +108,10 @@ class PlayerServiceTests: XCTestCase {
         return mock
     }
     
-    private func createMockNetworkError(_ error: Error) -> MockNetwork {
+    private func createMockNetworkError() -> MockNetwork {
         let mock = MockNetwork()
         stub(mock) { stub in
-            when(stub.getRequest(with: anyString())).thenReturn(Observable.just(.failure(error)))
+            when(stub.getRequest(with: anyString())).thenReturn(Observable.just(.failure(TestError.someError)))
         }
         return mock
     }
@@ -126,10 +124,10 @@ class PlayerServiceTests: XCTestCase {
         return mock
     }
     
-    private func createMockPlayerError(_ error: Error) -> MockPlayer {
+    private func createMockPlayerError() -> MockPlayer {
         let mock = MockPlayer()
         stub(mock) { stub in
-            when(stub.play(with: any())).thenThrow(error)
+            when(stub.play(with: any())).thenThrow(TestError.someError)
         }
         return mock
     }

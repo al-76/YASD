@@ -68,18 +68,14 @@ class NetworkServiceTests: XCTestCase {
     }
     
     func testGetRequestError() {
-        let testError = TestError.someError
-        testRequestError(with: testError,
-                       cache: createCacheServiceMock(value: Data(), cached: false),
-                       network: createNetworkMockError(testError),
+        testRequestError(cache: createCacheServiceMock(value: Data(), cached: false),
+                       network: createNetworkMockError(),
                        action: { $0.getRequest(with: "test") })
     }
     
     func testPostRequestError() {
-        let testError = TestError.someError
-        testRequestError(with: testError,
-                       cache: createCacheServiceMock(value: Data(), cached: false),
-                       network: createNetworkMockError(testError),
+        testRequestError(cache: createCacheServiceMock(value: Data(), cached: false),
+                       network: createNetworkMockError(),
                        action: { $0.postRequest(with: Network.PostParameters(url: "test", parameters: nil)) })
     }
     
@@ -117,7 +113,7 @@ class NetworkServiceTests: XCTestCase {
         ])
     }
     
-    private func testRequestError(with testError: Error, cache: CacheService, network: Network, action: (NetworkService) -> Observable<NetworkServiceResult>) {
+    private func testRequestError(cache: CacheService, network: Network, action: (NetworkService) -> Observable<NetworkServiceResult>) {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         let service = NetworkService(cache: cache, network: network)
@@ -128,7 +124,7 @@ class NetworkServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, .failure(testError)),
+            .next(200, .failure(TestError.someError)),
             .completed(200)
         ])
     }
@@ -169,11 +165,11 @@ class NetworkServiceTests: XCTestCase {
         return mock
     }
     
-    func createNetworkMockError(_ error: Error) -> MockNetwork {
+    func createNetworkMockError() -> MockNetwork {
         let mock = MockNetwork()
         stub(mock) { stub in
-            when(stub.getRequest(with: any())).thenReturn(Observable.just(.failure(error)))
-            when(stub.postRequest(with: any())).thenReturn(Observable.just(.failure(error)))
+            when(stub.getRequest(with: any())).thenReturn(Observable.just(.failure(TestError.someError)))
+            when(stub.postRequest(with: any())).thenReturn(Observable.just(.failure(TestError.someError)))
         }
         return mock
     }
