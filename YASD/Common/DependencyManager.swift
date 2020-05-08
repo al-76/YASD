@@ -194,4 +194,7 @@ func configureView(_ container: Container) {
     container.storyboardInitCompleted(BookmarksTableViewController.self) { container, view in
         view.model = container.resolve(BookmarksViewModel.self)
     }
+    container.storyboardInitCompleted(AboutViewController.self) { container, view in
+        view.markdown = container.resolve(Markdown.self)
+    }
 }

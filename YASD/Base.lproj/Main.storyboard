@@ -209,17 +209,35 @@
             </objects>
             <point key="canvasLocation" x="2577" y="1146"/>
         </scene>
-        <!--View Controller-->
+        <!--About View Controller-->
         <scene sceneID="W8h-cH-ReP">
             <objects>
-                <viewController id="ZrZ-Wq-4l9" sceneMemberID="viewController">
+                <viewController id="ZrZ-Wq-4l9" customClass="AboutViewController" customModule="YASD" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Z1-o5-6Sq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RI4-HZ-2Ua">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="RI4-HZ-2Ua" firstAttribute="leading" secondItem="RsT-Vt-jcG" secondAttribute="leading" id="3U1-Sw-Ua7"/>
+                            <constraint firstItem="RsT-Vt-jcG" firstAttribute="bottom" secondItem="RI4-HZ-2Ua" secondAttribute="bottom" id="5Z9-dl-ae5"/>
+                            <constraint firstItem="RsT-Vt-jcG" firstAttribute="trailing" secondItem="RI4-HZ-2Ua" secondAttribute="trailing" id="DWL-Ab-ohf"/>
+                            <constraint firstItem="RI4-HZ-2Ua" firstAttribute="top" secondItem="RsT-Vt-jcG" secondAttribute="top" id="bT9-up-HPF"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="RsT-Vt-jcG"/>
                     </view>
                     <navigationItem key="navigationItem" id="tIW-eh-J7K"/>
+                    <connections>
+                        <outlet property="textView" destination="RI4-HZ-2Ua" id="uhC-lg-zb2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9o-dW-RgP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

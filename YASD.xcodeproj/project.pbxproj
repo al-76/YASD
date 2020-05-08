@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17260B7E24660139002F730A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17260B7D24660138002F730A /* AboutViewController.swift */; };
 		176F223B244E1CC60058AAAE /* Cache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F36F4562342544D00B88649 /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		176F223C244E1CDC0058AAAE /* MarkdownKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FFF024622B2870800C1DC61 /* MarkdownKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		176F223D244E1CEB0058AAAE /* SwiftSoup.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FCB2DDE22A005180053B758 /* SwiftSoup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -176,6 +177,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		17260B7D24660138002F730A /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		17A9BC7422B5273B002F769B /* HtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlParser.swift; sourceTree = "<group>"; };
 		17A9BC7622B5284F002F769B /* Markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
 		17B9B23C240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
@@ -545,6 +547,7 @@
 				2F31739E22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift */,
 				2FDD05A623B2588C0018F223 /* BookmarksTableViewController.swift */,
 				2F2980C623B2660F004F7FA9 /* BookmarksTableViewCell.swift */,
+				17260B7D24660138002F730A /* AboutViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -817,6 +820,7 @@
 				17C1527A23B53B4600EACA94 /* WordsService.swift in Sources */,
 				2FF62C7F2289B4AA00B4946C /* WordsTableViewCell.swift in Sources */,
 				2F661B3A2272E16300C68A5F /* SettingsLanguageTableViewController.swift in Sources */,
+				17260B7E24660139002F730A /* AboutViewController.swift in Sources */,
 				2F90DD3D2355FA2300CE8560 /* LexinParserWords.swift in Sources */,
 				2FDCDBD7234F726C00E6F15F /* WordsSuggestionTableViewCell.swift in Sources */,
 				2FDB6404238EA7B700948A52 /* Suggestion.swift in Sources */,

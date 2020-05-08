@@ -39,7 +39,7 @@ class WordsTableViewController: UITableViewController {
     
     private func customizeView() {
         searchController = UISearchController(searchResultsController: searchResultsController)
-        searchController.searchBar.placeholder = NSLocalizedString("Type a word!", comment: "")
+        searchController.searchBar.placeholder = NSLocalizedString("searchBar", comment: "")
         if #available(iOS 13.0, *) {
             searchController.showsSearchResultsController = true
         }

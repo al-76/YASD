@@ -5,5 +5,23 @@
   Created by Vyacheslav Konopkin on 29/02/2020.
   Copyright © 2020 yac. All rights reserved.
 */
-"Type a word!" = "Skriv ett ord!";
-"Type a language!" = "Skriv ett språk!";
+"searchBar" = "Skriv ett ord!";
+"searchLanguage" = "Skriv ett språk!";
+"textAbout" = "# YASD - Yet Another Swedish Dictionary
+
+[YASD](https://github.com/al-76/YASD) 1.0.0 använder [Lexin](https://lexin.nada.kth.se/) och bibliotek:
+- [Swinject](https://github.com/Swinject/Swinject)
+- [SwinjectStoryboard](https://github.com/Swinject/SwinjectStoryboard)
+- [RxSwift](https://github.com/ReactiveX/RxSwift)
+- [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources)
+- [RMessage](https://github.com/donileo/RMessage)
+- [SwiftSoup](https://github.com/scinfu/SwiftSoup)
+- [Cuckoo](https://github.com/Brightify/Cuckoo)
+- [MarkdownKit](https://github.com/ivanbruel/MarkdownKit)
+- [Cache](https://github.com/hyperoslo/Cache)
+- [Carthage](https://github.com/Carthage/Carthage)
+
+## License
+MIT
+
+Du kan kontakta mig - Konopkin Vyacheslav robot.al76@gmail.com";

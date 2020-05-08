@@ -31,7 +31,7 @@ class BookmarksTableViewController: UITableViewController {
     
     private func customizeView() {
         searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = NSLocalizedString("Type a word!", comment: "")
+        searchController.searchBar.placeholder = NSLocalizedString("searchBar", comment: "")
         searchController.obscuresBackgroundDuringPresentation = false
         
         tableView.rowHeight = UITableView.automaticDimension
