@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -209,6 +209,22 @@
             </objects>
             <point key="canvasLocation" x="2577" y="1146"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="W8h-cH-ReP">
+            <objects>
+                <viewController id="ZrZ-Wq-4l9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Z1-o5-6Sq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="RsT-Vt-jcG"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tIW-eh-J7K"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g9o-dW-RgP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1648" y="1902"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -410,6 +426,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="NU2-35-sty" appends="YES" id="XbI-UK-o0B"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -428,6 +447,11 @@
                 <tapGestureRecognizer id="MJP-5E-NtR">
                     <connections>
                         <segue destination="8fB-EJ-puf" kind="show" id="Vxf-zL-Gc8"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="NU2-35-sty">
+                    <connections>
+                        <segue destination="ZrZ-Wq-4l9" kind="show" id="jEl-dv-kwY"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -454,12 +478,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="book.fill" catalog="system" width="64" height="50"/>
-        <image name="bookmark" catalog="system" width="56" height="64"/>
-        <image name="bookmark.fill" catalog="system" width="56" height="64"/>
+        <image name="book.fill" catalog="system" width="128" height="100"/>
+        <image name="bookmark" catalog="system" width="112" height="128"/>
+        <image name="bookmark.fill" catalog="system" width="112" height="128"/>
         <image name="gear" width="29" height="33"/>
-        <image name="goforward" catalog="system" width="60" height="64"/>
+        <image name="goforward" catalog="system" width="121" height="128"/>
         <image name="speaker.3.fill" width="34" height="27"/>
-        <image name="trash" catalog="system" width="60" height="64"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
     </resources>
 </document>

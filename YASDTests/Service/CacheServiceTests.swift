@@ -13,6 +13,10 @@ import RxTest
 import Cuckoo
 
 class CacheServiceTests: XCTestCase {
+    enum TestError: Error {
+        case someError
+    }
+        
     func testRunActionNotCached() {
         // Arrange
         let testData = Data()
@@ -20,12 +24,12 @@ class CacheServiceTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         
         // Act
-        let runnedAction = service.run({ Observable.just(testData) }, forKey: "test")
+        let runnedAction = service.run({ Observable.just(.success(testData)) }, forKey: "test")
         let res = scheduler.start { runnedAction }
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, testData),
+            .next(200, .success(testData)),
             .completed(200)
        ])
     }
@@ -37,12 +41,12 @@ class CacheServiceTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         
         // Act
-        let runnedAction = service.run({ Observable.just(Data()) }, forKey: "test")
+        let runnedAction = service.run({ Observable.just(.success(Data())) }, forKey: "test")
         let res = scheduler.start { runnedAction }
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, testData),
+            .next(200, .success(testData)),
             .completed(200)
        ])
     }
@@ -54,15 +58,32 @@ class CacheServiceTests: XCTestCase {
         let scheduler = TestScheduler(initialClock: 0)
         
         // Act
-        let runnedAction = service!.run({ Observable.just(testData) }, forKey: "test")
+        let runnedAction = service!.run({ Observable.just(.success(testData)) }, forKey: "test")
         service = nil
         let res = scheduler.start { runnedAction }
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, testData),
+            .next(200, .success(testData)),
             .completed(200)
        ])
+    }
+    
+    func testRunActionError() {
+        // Arrange
+        let testError = TestError.someError
+        let service = CacheService(cache: createMockDataCache(data: nil))
+        let scheduler = TestScheduler(initialClock: 0)
+        
+        // Act
+        let runnedAction = service.run({ Observable.just(.failure(testError)) }, forKey: "test")
+        let res = scheduler.start { runnedAction }
+        
+        // Assert
+        XCTAssertEqual(res.events, [
+            .next(200, .failure(testError)),
+            .completed(200)
+        ])
     }
     
     private func createMockDataCache(data: Data?) -> MockDataCache {

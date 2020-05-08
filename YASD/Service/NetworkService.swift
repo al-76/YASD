@@ -9,6 +9,8 @@
 import RxSwift
 import Foundation
 
+typealias NetworkServiceResult = Result<String>
+
 class NetworkService {
     private let cache: CacheService
     private let network: Network
@@ -18,17 +20,17 @@ class NetworkService {
         self.network = network
     }
     
-    func getRequest(with url: String) -> Observable<String> {
+    func getRequest(with url: String) -> Observable<NetworkServiceResult> {
         return cache.run({ [weak self] in
-            guard let self = self else { return Observable.just(Data()) }
+            guard let self = self else { return Observable.just(.success(Data())) }
             return self.network.getRequest(with: url)
             }, forKey: url).map { NetworkService.toString($0) }
     }
     
-    func postRequest(with parameters: Network.PostParameters) -> Observable<String> {
+    func postRequest(with parameters: Network.PostParameters) -> Observable<NetworkServiceResult> {
         let key = postRequestKey(parameters)
         return cache.run({ [weak self] in
-            guard let self = self else { return Observable.just(Data()) }
+            guard let self = self else { return Observable.just(.success(Data())) }
             return self.network.postRequest(with: parameters)
             }, forKey: key).map { NetworkService.toString($0) }
     }
@@ -41,7 +43,12 @@ class NetworkService {
         return res
     }
     
-    private static func toString(_ data: Data) -> String {
-        return String(data: data, encoding: .utf8) ?? ""
+    private static func toString(_ result: CacheServiceResult) -> NetworkServiceResult {
+        switch (result) {
+        case let .success(data):
+            return .success(String(data: data, encoding: .utf8) ?? "")
+        case let .failure(error):
+            return .failure(error)
+        }
     }
 }

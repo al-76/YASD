@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		176F223B244E1CC60058AAAE /* Cache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F36F4562342544D00B88649 /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		176F223C244E1CDC0058AAAE /* MarkdownKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FFF024622B2870800C1DC61 /* MarkdownKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		176F223D244E1CEB0058AAAE /* SwiftSoup.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FCB2DDE22A005180053B758 /* SwiftSoup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		17A9BC7522B5273B002F769B /* HtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7422B5273B002F769B /* HtmlParser.swift */; };
 		17A9BC7722B5284F002F769B /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7622B5284F002F769B /* Markdown.swift */; };
 		17B9B244240A84AA007FDC47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B9B242240A84AA007FDC47 /* Localizable.strings */; };
@@ -158,6 +161,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				176F223D244E1CEB0058AAAE /* SwiftSoup.framework in CopyFiles */,
+				176F223C244E1CDC0058AAAE /* MarkdownKit.framework in CopyFiles */,
+				176F223B244E1CC60058AAAE /* Cache.framework in CopyFiles */,
 				2F3EE262229D7F4E0083CDE9 /* RxBlocking.framework in CopyFiles */,
 				2F3EE25E229D79CC0083CDE9 /* RxRelay.framework in CopyFiles */,
 				2F3EE25D229D79BE0083CDE9 /* RxSwift.framework in CopyFiles */,
@@ -1068,8 +1074,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6894A8BA33;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1085,7 +1091,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ors.YASD;
 				PRODUCT_NAME = YASD;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "YASD Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1095,8 +1101,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6894A8BA33;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1112,7 +1118,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ors.YASD;
 				PRODUCT_NAME = YASD;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "YASD Development";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

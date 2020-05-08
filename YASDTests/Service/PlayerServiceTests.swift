@@ -56,8 +56,9 @@ class PlayerServiceTests: XCTestCase {
     
     func testPlaySoundPlayerError() {
         // Arrange
+        let testError = TestError.someError
         let scheduler = TestScheduler(initialClock: 0)
-        let service = PlayerService(player: createMockPlayerError(),
+        let service = PlayerService(player: createMockPlayerError(testError),
                                     cache: createMockCacheService(),
                                     network: createMockNetwork())
         
@@ -67,7 +68,26 @@ class PlayerServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-            .next(200, .failure(TestError.someError)),
+            .next(200, .failure(testError)),
+            .completed(200)
+           ])
+    }
+    
+    func testPlaySoundPlayerNetworkError() {
+        // Arrange
+        let testError = TestError.someError
+        let scheduler = TestScheduler(initialClock: 0)
+        let service = PlayerService(player: createMockPlayer(),
+                                    cache: createMockCacheService(),
+                                    network: createMockNetworkError(testError))
+        
+        // Act
+        let played = service.playSound(with: "test")
+        let res = scheduler.start { played }
+        
+        // Assert
+        XCTAssertEqual(res.events, [
+            .next(200, .failure(testError)),
             .completed(200)
            ])
     }
@@ -76,7 +96,7 @@ class PlayerServiceTests: XCTestCase {
         let mock = MockCacheService(cache: MockDataCache(name: "test"))
         stub(mock) { stub in
             when(stub.run(any(), forKey: any())).then { action, _ in
-                return action()
+                return action().flatMap { Observable.just($0) }
             }
         }
         return mock
@@ -85,7 +105,15 @@ class PlayerServiceTests: XCTestCase {
     private func createMockNetwork() -> MockNetwork {
         let mock = MockNetwork()
         stub(mock) { stub in
-            when(stub.getRequest(with: anyString())).thenReturn(Observable.just(Data()))
+            when(stub.getRequest(with: anyString())).thenReturn(Observable.just(.success(Data())))
+        }
+        return mock
+    }
+    
+    private func createMockNetworkError(_ error: Error) -> MockNetwork {
+        let mock = MockNetwork()
+        stub(mock) { stub in
+            when(stub.getRequest(with: anyString())).thenReturn(Observable.just(.failure(error)))
         }
         return mock
     }
@@ -98,10 +126,10 @@ class PlayerServiceTests: XCTestCase {
         return mock
     }
     
-    private func createMockPlayerError() -> MockPlayer {
+    private func createMockPlayerError(_ error: Error) -> MockPlayer {
         let mock = MockPlayer()
         stub(mock) { stub in
-            when(stub.play(with: any())).thenThrow(TestError.someError)
+            when(stub.play(with: any())).thenThrow(error)
         }
         return mock
     }
