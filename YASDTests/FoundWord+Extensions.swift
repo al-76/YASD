@@ -14,7 +14,8 @@ extension FoundWord {
     public init(_ word: String) {
         let word = FormattedWord(header: word,
                                  formatted: NSAttributedString(string: word),
-                                 soundUrl: nil)
+                                 soundUrl: nil,
+                                 definition: "")
         self.init(word: word, bookmarked: true)
     }
 }

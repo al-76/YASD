@@ -116,7 +116,10 @@ class WordsServiceTests: XCTestCase {
             when(stub.format(result: any())).then { result in
                 switch result {
                 case .success(let items):
-                    return .success(items.map { FormattedWord(header: $0.word, formatted: NSAttributedString(string: $0.word), soundUrl: nil) })
+                    return .success(items.map { FormattedWord(header: $0.word,
+                                                              formatted: NSAttributedString(string: $0.word),
+                                                              soundUrl: nil,
+                                                              definition: "") })
                 case .failure(let error):
                     return .failure(error)
                 }
