@@ -34,6 +34,8 @@ func configurePlatform(_ container: Container) {
     container.register(Player.self) { _ in Player() }
         .inObjectScope(.container)
     container.register(DataCache.self) { _, name in DataCache(name: name) }
+    container.register(Spotlight.self) { _ in Spotlight() }   
+        .inObjectScope(.container)
 }
 
 func configureApi(_ container: Container) {
@@ -171,7 +173,9 @@ func configureModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(BookmarksViewModel.self) { container in
-        BookmarksViewModel(bookmarks: container.resolve(StorageService<FormattedWord>.self)!, player: container.resolve(PlayerService.self)!)
+        BookmarksViewModel(bookmarks: container.resolve(StorageService<FormattedWord>.self)!,
+                           player: container.resolve(PlayerService.self)!,
+                           spotlight: container.resolve(Spotlight.self)!)
     }
     .inObjectScope(.container)
 }

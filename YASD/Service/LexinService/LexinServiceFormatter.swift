@@ -21,7 +21,9 @@ class LexinServiceFormatter {
         case .success(let items):
             return .success(items.map { FormattedWord(header: $0.word,
                                                       formatted: format(item: $0),
-                                                      soundUrl: getSoundUrl(item: $0)) })
+                                                      soundUrl: getSoundUrl(item: $0),
+                                                      definition: getDefinition(item: $0))
+            })
         case .failure(let error):
             return .failure(error)
         }
@@ -142,5 +144,14 @@ class LexinServiceFormatter {
             return lexeme.soundUrl
         }
         return nil
+    }
+    
+    private func getDefinition(item: LexinWord) -> String {
+        if let targetLang = item.targetLang {
+            return targetLang.translation ?? ""
+        } else if let lexeme = item.lexemes?.first {
+            return lexeme.meaning ?? ""
+        }
+        return ""
     }
 }

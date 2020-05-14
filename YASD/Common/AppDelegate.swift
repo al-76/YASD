@@ -23,6 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        let indexVC = 1
+        guard let tabBar = application.keyWindow?.rootViewController as? UITabBarController,
+            let navVC = tabBar.viewControllers?[indexVC] as? UINavigationController,
+            let bookmarksVC = navVC.viewControllers.first as? BookmarksTableViewController else {
+                return false
+        }
+        tabBar.selectedIndex = indexVC
+        restorationHandler([bookmarksVC])
+        return true
+    }
+    
     func createMainWindow(_ container: Container) -> UIWindow {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()

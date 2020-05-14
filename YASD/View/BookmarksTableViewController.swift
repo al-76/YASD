@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreSpotlight
 import RxSwift
 import RxCocoa
 import RxDataSources
@@ -18,6 +19,7 @@ class BookmarksTableViewController: UITableViewController {
     private let disposeBag = DisposeBag()
     private let playUrl = PublishRelay<String>()
     private let removeBookmark = PublishRelay<Int>()
+    private let restore = BehaviorRelay<String>(value: "")
     private var searchController: UISearchController!
     private let rmController = RMController()
     
@@ -27,6 +29,14 @@ class BookmarksTableViewController: UITableViewController {
         rmController.presentationViewController = self
         customizeView()
         bindToModel()
+    }
+    
+    override func restoreUserActivityState(_ activity: NSUserActivity) {
+        if activity.activityType != CSSearchableItemActionType {
+            return
+        }
+        guard let id = activity.userInfo? [CSSearchableItemActivityIdentifier] as? String else { return }
+        restore.accept(id)
     }
     
     private func customizeView() {
@@ -63,7 +73,8 @@ class BookmarksTableViewController: UITableViewController {
             .asDriver(onErrorJustReturn: "")
         let input = BookmarksViewModel.Input(search: searchWord,
                                              playUrl: playUrl.asDriver(onErrorJustReturn: ""),
-                                             removeBookmark: removeBookmark.asDriver(onErrorJustReturn: -1))
+                                             removeBookmark: removeBookmark.asDriver(onErrorJustReturn: -1),
+                                             restore: restore.asDriver(onErrorJustReturn: ""))
         let output = model.transform(from: input)
         disposeBag.insert(
             // bookmarks
@@ -76,6 +87,8 @@ class BookmarksTableViewController: UITableViewController {
             output.played.drive(onNext: { [weak self] result in
                 _ = result.handleResult(false, self?.handleError)
             }),
+            // search restored item
+            output.restored.drive(searchController.searchBar.rx.text),
             // deleted item
             tableView.rx.itemDeleted
                 .map { $0.row }
