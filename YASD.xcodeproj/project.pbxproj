@@ -20,6 +20,10 @@
 		17C1527D23B5498800EACA94 /* WordsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527C23B5498800EACA94 /* WordsServiceTests.swift */; };
 		17C1528023BF91A800EACA94 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */; };
 		17EB2810246DC87800EE8B1D /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17260B8124661338002F730A /* Spotlight.swift */; };
+		17EB2813246DCCB000EE8B1D /* BookmarksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2812246DCCB000EE8B1D /* BookmarksViewModelTests.swift */; };
+		17EB2815246DCEC700EE8B1D /* MockFactory+PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2814246DCEC700EE8B1D /* MockFactory+PlayerService.swift */; };
+		17EB2818246DD2A700EE8B1D /* MockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2817246DD2A700EE8B1D /* MockFactory.swift */; };
+		17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */; };
 		17F940052350F0AD00FBFD54 /* Swinject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */; };
 		17FC6BA0237FEF7E00279589 /* LexinApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */; };
 		17FC6BA1237FEF7E00279589 /* LexinApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */; };
@@ -190,6 +194,10 @@
 		17C1527923B53B4600EACA94 /* WordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsService.swift; sourceTree = "<group>"; };
 		17C1527C23B5498800EACA94 /* WordsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsServiceTests.swift; sourceTree = "<group>"; };
 		17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		17EB2812246DCCB000EE8B1D /* BookmarksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewModelTests.swift; sourceTree = "<group>"; };
+		17EB2814246DCEC700EE8B1D /* MockFactory+PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+PlayerService.swift"; sourceTree = "<group>"; };
+		17EB2817246DD2A700EE8B1D /* MockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFactory.swift; sourceTree = "<group>"; };
+		17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormattedWord+Extensions.swift"; sourceTree = "<group>"; };
 		17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swinject+Extensions.swift"; sourceTree = "<group>"; };
 		17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiProvider.swift; sourceTree = "<group>"; };
 		17FC6BA423870ED900279589 /* LexinApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiTests.swift; sourceTree = "<group>"; };
@@ -340,6 +348,15 @@
 			path = Contrib;
 			sourceTree = "<group>";
 		};
+		17EB2816246DCECC00EE8B1D /* MockFactory */ = {
+			isa = PBXGroup;
+			children = (
+				17EB2817246DD2A700EE8B1D /* MockFactory.swift */,
+				17EB2814246DCEC700EE8B1D /* MockFactory+PlayerService.swift */,
+			);
+			path = MockFactory;
+			sourceTree = "<group>";
+		};
 		17FC6BA2237FFBC400279589 /* LexinParser */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,6 +409,7 @@
 				2FF62C89228D61AF00B4946C /* WordsViewModelTests.swift */,
 				2F69AD0622F81775001942E6 /* SettingsViewModelTests.swift */,
 				2F69AD0822F838C5001942E6 /* SettingsLanguageViewModelTests.swift */,
+				17EB2812246DCCB000EE8B1D /* BookmarksViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -456,12 +474,14 @@
 		2F661B4B2272E16400C68A5F /* YASDTests */ = {
 			isa = PBXGroup;
 			children = (
+				17EB2816246DCECC00EE8B1D /* MockFactory */,
 				2F3EE25F229D7ADE0083CDE9 /* Service */,
 				2F3EE2542297EC730083CDE9 /* ViewModel */,
 				2FF62C9B228E98EF00B4946C /* GeneratedMocks.swift */,
 				2FE7682122BCEEBA00375292 /* LexinWord+Extensions.swift */,
 				2F876F1C23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift */,
 				2F70647723B503570095DE9C /* FoundWord+Extensions.swift */,
+				17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */,
 				2F717B7A23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift */,
 				2F661B4E2272E16400C68A5F /* Info.plist */,
 			);
@@ -785,7 +805,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PROJECT_DIR}/Carthage/Checkouts/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Model/FormattedWord.swift\" \\\n\"${INPUT_DIR}/Model/Suggestion.swift\" \\\n\"${INPUT_DIR}/Model/SettingsItem.swift\" \\\n\"${INPUT_DIR}/Model/ParametersStorage.swift\" \\\n\"${INPUT_DIR}/Model/Lexin/LexinWord.swift\" \\\n\"${INPUT_DIR}/ViewModel/WordsTableViewModel.swift\" \\\n\"${INPUT_DIR}/Service/LexinService/LexinService.swift\" \\\n\"${INPUT_DIR}/Service/LexinService/LexinServiceFormatter.swift\" \\\n\"${INPUT_DIR}/Service/LexinParser/LexinParserWords.swift\" \\\n\"${INPUT_DIR}/Service/LexinParser/LexinParserSuggestion.swift\" \\\n\"${INPUT_DIR}/Service/LexinApi/LexinApi.swift\" \\\n\"${INPUT_DIR}/Service/LexinApi/LexinApiProvider.swift\" \\\n\"${INPUT_DIR}/Service/PlayerService.swift\" \\\n\"${INPUT_DIR}/Service/CacheService.swift\" \\\n\"${INPUT_DIR}/Service/NetworkService.swift\" \\\n\"${INPUT_DIR}/Service/StorageService.swift\" \\\n\"${INPUT_DIR}/Service/WordsService.swift\" \\\n\"${INPUT_DIR}/Service/SettingsLanguageService.swift\" \\\n\"${INPUT_DIR}/Platform/Network.swift\" \\\n\"${INPUT_DIR}/Platform/HtmlParser.swift\" \\\n\"${INPUT_DIR}/Platform/Markdown.swift\" \\\n\"${INPUT_DIR}/Platform/Storage.swift\" \\\n\"${INPUT_DIR}/Platform/Player.swift\" \\\n\"${INPUT_DIR}/Platform/DataCache.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PROJECT_DIR}/Carthage/Checkouts/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Model/FormattedWord.swift\" \\\n\"${INPUT_DIR}/Model/Suggestion.swift\" \\\n\"${INPUT_DIR}/Model/SettingsItem.swift\" \\\n\"${INPUT_DIR}/Model/ParametersStorage.swift\" \\\n\"${INPUT_DIR}/Model/Lexin/LexinWord.swift\" \\\n\"${INPUT_DIR}/ViewModel/WordsTableViewModel.swift\" \\\n\"${INPUT_DIR}/Service/LexinService/LexinService.swift\" \\\n\"${INPUT_DIR}/Service/LexinService/LexinServiceFormatter.swift\" \\\n\"${INPUT_DIR}/Service/LexinParser/LexinParserWords.swift\" \\\n\"${INPUT_DIR}/Service/LexinParser/LexinParserSuggestion.swift\" \\\n\"${INPUT_DIR}/Service/LexinApi/LexinApi.swift\" \\\n\"${INPUT_DIR}/Service/LexinApi/LexinApiProvider.swift\" \\\n\"${INPUT_DIR}/Service/PlayerService.swift\" \\\n\"${INPUT_DIR}/Service/CacheService.swift\" \\\n\"${INPUT_DIR}/Service/NetworkService.swift\" \\\n\"${INPUT_DIR}/Service/StorageService.swift\" \\\n\"${INPUT_DIR}/Service/WordsService.swift\" \\\n\"${INPUT_DIR}/Service/SettingsLanguageService.swift\" \\\n\"${INPUT_DIR}/Platform/Network.swift\" \\\n\"${INPUT_DIR}/Platform/HtmlParser.swift\" \\\n\"${INPUT_DIR}/Platform/Markdown.swift\" \\\n\"${INPUT_DIR}/Platform/Storage.swift\" \\\n\"${INPUT_DIR}/Platform/Spotlight.swift\" \\\n\"${INPUT_DIR}/Platform/Player.swift\" \\\n\"${INPUT_DIR}/Platform/DataCache.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -866,10 +886,13 @@
 				2F5F8BAC2322879900EF6A85 /* ViewModel.swift in Sources */,
 				2FDB640B238EACBC00948A52 /* ParametersStorage.swift in Sources */,
 				2F18E2E4234381EA003F91FD /* CacheService.swift in Sources */,
+				17EB2818246DD2A700EE8B1D /* MockFactory.swift in Sources */,
+				17EB2815246DCEC700EE8B1D /* MockFactory+PlayerService.swift in Sources */,
 				2FA5040323CCC00D004DA580 /* ActivityIndicator.swift in Sources */,
 				2F7DA16D238C040900E91C71 /* NetworkServiceTests.swift in Sources */,
 				2F5F8BB3232287DA00EF6A85 /* Network.swift in Sources */,
 				2F5F8BB6232287DA00EF6A85 /* Storage.swift in Sources */,
+				17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */,
 				2FDB6402238EA5C400948A52 /* FormattedWord.swift in Sources */,
 				2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */,
 				2F5F8BB7232287DF00EF6A85 /* Result.swift in Sources */,
@@ -882,6 +905,7 @@
 				2F876F1D23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift in Sources */,
 				2F5F8BB12322879E00EF6A85 /* LexinServiceFormatter.swift in Sources */,
 				2F7DA16723882CB400E91C71 /* LexinParserSuggestionTests.swift in Sources */,
+				17EB2813246DCCB000EE8B1D /* BookmarksViewModelTests.swift in Sources */,
 				2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */,
 				2FE7682022BCC30E00375292 /* LexinServiceFormatterTests.swift in Sources */,
 				2F90DD3E2355FA3800CE8560 /* LexinParserWords.swift in Sources */,

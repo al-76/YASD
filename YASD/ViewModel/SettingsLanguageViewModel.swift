@@ -27,7 +27,6 @@ class SettingsLanguageViewModel: ViewModel {
     
     func transform(from input: Input) -> Output {
         let searched = input.search
-//            .startWith("")
             .flatMapLatest { [weak self] language -> Driver<SettingsLanguageItemResult> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.getSettings(with: language)

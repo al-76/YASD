@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  FormattedWord.swift
@@ -13,7 +13,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  LexinWord.swift
@@ -28,7 +28,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  ParametersStorage.swift
@@ -224,7 +224,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  Suggestion.swift
@@ -239,7 +239,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  DataCache.swift
@@ -377,7 +377,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2020-05-27 19:19:10 +0000
 
 
 //
@@ -696,7 +696,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  MarkdownParser.swift
@@ -803,7 +803,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  Network.swift
@@ -940,7 +940,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  Player.swift
@@ -1091,7 +1091,146 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Spotlight.swift at 2020-05-27 19:19:10 +0000
+
+//
+//  Spotlight.swift
+//  YASD
+//
+//  Created by Vyacheslav Konopkin on 09.05.2020.
+//  Copyright © 2020 yac. All rights reserved.
+//
+
+import Cuckoo
+@testable import YASD
+
+import CoreSpotlight
+import Foundation
+import MobileCoreServices
+import RxSwift
+
+
+ class MockSpotlight: Spotlight, Cuckoo.ClassMock {
+    
+     typealias MocksType = Spotlight
+    
+     typealias Stubbing = __StubbingProxy_Spotlight
+     typealias Verification = __VerificationProxy_Spotlight
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+
+    
+    private var __defaultImplStub: Spotlight?
+
+     func enableDefaultImplementation(_ stub: Spotlight) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+     override func index(data: [FormattedWord]) -> Observable<SpotlightResult> {
+        
+    return cuckoo_manager.call("index(data: [FormattedWord]) -> Observable<SpotlightResult>",
+            parameters: (data),
+            escapingParameters: (data),
+            superclassCall:
+                
+                super.index(data: data)
+                ,
+            defaultCall: __defaultImplStub!.index(data: data))
+        
+    }
+    
+    
+    
+     override func getTitle(from id: String) -> String {
+        
+    return cuckoo_manager.call("getTitle(from: String) -> String",
+            parameters: (id),
+            escapingParameters: (id),
+            superclassCall:
+                
+                super.getTitle(from: id)
+                ,
+            defaultCall: __defaultImplStub!.getTitle(from: id))
+        
+    }
+    
+
+	 struct __StubbingProxy_Spotlight: Cuckoo.StubbingProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	
+	     init(manager: Cuckoo.MockManager) {
+	        self.cuckoo_manager = manager
+	    }
+	    
+	    
+	    func index<M1: Cuckoo.Matchable>(data: M1) -> Cuckoo.ClassStubFunction<([FormattedWord]), Observable<SpotlightResult>> where M1.MatchedType == [FormattedWord] {
+	        let matchers: [Cuckoo.ParameterMatcher<([FormattedWord])>] = [wrap(matchable: data) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockSpotlight.self, method: "index(data: [FormattedWord]) -> Observable<SpotlightResult>", parameterMatchers: matchers))
+	    }
+	    
+	    func getTitle<M1: Cuckoo.Matchable>(from id: M1) -> Cuckoo.ClassStubFunction<(String), String> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: id) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockSpotlight.self, method: "getTitle(from: String) -> String", parameterMatchers: matchers))
+	    }
+	    
+	}
+
+	 struct __VerificationProxy_Spotlight: Cuckoo.VerificationProxy {
+	    private let cuckoo_manager: Cuckoo.MockManager
+	    private let callMatcher: Cuckoo.CallMatcher
+	    private let sourceLocation: Cuckoo.SourceLocation
+	
+	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+	        self.cuckoo_manager = manager
+	        self.callMatcher = callMatcher
+	        self.sourceLocation = sourceLocation
+	    }
+	
+	    
+	
+	    
+	    @discardableResult
+	    func index<M1: Cuckoo.Matchable>(data: M1) -> Cuckoo.__DoNotUse<([FormattedWord]), Observable<SpotlightResult>> where M1.MatchedType == [FormattedWord] {
+	        let matchers: [Cuckoo.ParameterMatcher<([FormattedWord])>] = [wrap(matchable: data) { $0 }]
+	        return cuckoo_manager.verify("index(data: [FormattedWord]) -> Observable<SpotlightResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func getTitle<M1: Cuckoo.Matchable>(from id: M1) -> Cuckoo.__DoNotUse<(String), String> where M1.MatchedType == String {
+	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: id) { $0 }]
+	        return cuckoo_manager.verify("getTitle(from: String) -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	}
+}
+
+ class SpotlightStub: Spotlight {
+    
+
+    
+
+    
+     override func index(data: [FormattedWord]) -> Observable<SpotlightResult>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<SpotlightResult>).self)
+    }
+    
+     override func getTitle(from id: String) -> String  {
+        return DefaultValueRegistry.defaultValue(for: (String).self)
+    }
+    
+}
+
+
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  Storage.swift
@@ -1227,7 +1366,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  CacheService.swift
@@ -1364,7 +1503,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApi.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  LexinApi.swift
@@ -1500,7 +1639,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinApi/LexinApiProvider.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  LexinApiProvider.swift
@@ -1606,7 +1745,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserSuggestion.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  LexinServiceProviderSuggestion.swift
@@ -1984,7 +2123,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinParser/LexinParserWords.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  LexinServiceProviderWords.swift
@@ -2483,7 +2622,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinService.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  LexinService.swift
@@ -2650,7 +2789,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/LexinService/LexinServiceFormatter.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  LexinService+Format.swift
@@ -2757,7 +2896,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  NetworkService.swift
@@ -2894,7 +3033,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  PlayerService.swift
@@ -3001,7 +3140,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/SettingsLanguageService.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/SettingsLanguageService.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  SettingsLanguageService.swift
@@ -3137,7 +3276,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/StorageService.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/StorageService.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  StorageService.swift
@@ -3364,7 +3503,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/WordsService.swift at 2020-05-14 18:47:58 +0000
+// MARK: - Mocks generated from file: YASD/Service/WordsService.swift at 2020-05-27 19:19:10 +0000
 
 //
 //  WordsService.swift

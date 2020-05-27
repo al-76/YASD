@@ -55,12 +55,15 @@ class BookmarksViewModel: ViewModel {
         let changedBookmarks = bookmarks.changed.asDriver(onErrorJustReturn: false)
             .filter { $0 }
             .map { _ in Void() }
-        let updated = Driver.merge(removed, changedBookmarks)
+        let updated = removed.withLatestFrom(changedBookmarks)
             .flatMap { [weak self] _ -> Driver<Bookmarks> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.getBookmarks(with: "")
         }
-        .flatMap { result in self.indexSpotlight(result) }
+        .flatMap { [weak self] result -> Driver<Bookmarks> in
+            guard let self = self else { return Driver.just(.success([])) }
+            return self.indexSpotlight(result)
+        }
         return Output(played: played,
                       bookmarks: Driver.merge(searched, updated),
                       restored: restored)
