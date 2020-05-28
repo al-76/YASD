@@ -33,6 +33,15 @@ extension Result {
             return defaultValue
         }
     }
+    
+    func flatMap<U>(_ transform: (T) -> Result<U>) -> Result<U> {
+        switch self {
+        case let .success(value):
+            return transform(value)
+        case let .failure(error):
+            return .failure(error)
+        }
+    }
 }
 
 extension Result {

@@ -30,12 +30,7 @@ class PlayerService {
         return cache.run(action, forKey: url)
             .map { [weak self] result in
                 guard let self = self else { return .success(false) }
-                switch (result) {
-                case let .success(data):
-                    return self.playAction(data)
-                case let .failure(error):
-                    return .failure(error)
-                }
+                return result.flatMap { self.playAction($0) }
         }
     }
     
