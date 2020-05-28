@@ -42,7 +42,7 @@ class SettingsLanguageViewModel: ViewModel {
             return self.getSettings(with: language)
         }
         
-        return Output(languages: Driver.merge(selected, searched).map { $0.handleResult([], nil) })
+        return Output(languages: Driver.merge(selected, searched).map { $0.getOrDefault([]) })
     }
     
     private func getSettings(with language: String) -> Driver<SettingsLanguageItemResult> {

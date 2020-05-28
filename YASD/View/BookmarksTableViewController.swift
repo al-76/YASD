@@ -79,13 +79,13 @@ class BookmarksTableViewController: UITableViewController {
         disposeBag.insert(
             // bookmarks
             output.bookmarks.map { [weak self] result -> [FormattedWord] in
-                return result.handleResult([], self?.handleError)
+                return result.onFailure { self?.handleError($0) }.getOrDefault([])
             }
             .map { bookmarks in [BookmarkItemSection(header: "bookmarks", items: bookmarks)] }
             .drive(tableView.rx.items(dataSource: dataSource)),
             // played
             output.played.drive(onNext: { [weak self] result in
-                _ = result.handleResult(false, self?.handleError)
+                result.onFailure { self?.handleError($0) }
             }),
             // search restored item
             output.restored.drive(searchController.searchBar.rx.text),

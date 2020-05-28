@@ -43,7 +43,7 @@ class WordsService {
             return Observable.from(res.map { bookmarks.contains($0) }).merge().toArray()
                 .map { bookmarked in
                     return zip(res, bookmarked)
-                        .map { FoundWord(word: $0, bookmarked: $1.handleResult(false, nil)) }
+                        .map { FoundWord(word: $0, bookmarked: $1.getOrDefault(false)) }
             }
             .map { .success($0) }
             .asObservable()

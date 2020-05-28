@@ -18,22 +18,35 @@ extension Result: Equatable where T: Equatable {
             return lhs == rhs
         case (.failure, .failure):
             return true
-        case (.success, .failure), (.failure, .success):
+        default:
             return false
         }
     }
 }
 
 extension Result {
-    func handleResult(_ defaultValue: T, _ onError: ((Error) -> ())?) -> T {
-        switch (self) {
+    func getOrDefault(_ defaultValue: T) -> T {
+        switch self {
         case let .success(value):
             return value
-        case let .failure(error):
-            if let callback = onError {
-                callback(error)
-            }
+        default:
             return defaultValue
         }
+    }
+}
+
+extension Result {
+    @discardableResult
+    func onSuccess(_ handler: (T) -> ()) -> Self {
+        guard case let .success(value) = self else { return self }
+        handler(value)
+        return self
+    }
+    
+    @discardableResult
+    func onFailure(_ handler: (Error) -> ()) -> Self {
+        guard case let .failure(error) = self else { return self }
+        handler(error)
+        return self
     }
 }
