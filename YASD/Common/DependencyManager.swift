@@ -34,6 +34,8 @@ func configurePlatform(_ container: Container) {
     container.register(Player.self) { _ in Player() }
         .inObjectScope(.container)
     container.register(DataCache.self) { _, name in DataCache(name: name) }
+    container.register(Spotlight.self) { _ in Spotlight() }   
+        .inObjectScope(.container)
 }
 
 func configureApi(_ container: Container) {
@@ -80,8 +82,8 @@ func configureService(_ container: Container) {
     .inObjectScope(.container)
     
     // Formatter
-    container.register(LexinServiceFormatter.self) { _ in
-        LexinServiceFormatter(markdown: container.resolve(Markdown.self)!)
+    container.register(LexinServiceFormatterImpl.self) { _ in
+        LexinServiceFormatterImpl(markdown: container.resolve(Markdown.self)!)
         
     }
     .inObjectScope(.container)
@@ -115,8 +117,8 @@ func configureService(_ container: Container) {
     .inObjectScope(.container)
     
     // Lexin Service
-    container.register(LexinService.self) { _ in
-        LexinService(parameters: container.resolve(ParametersStorage.self)!,
+    container.register(LexinServiceImpl.self) { _ in
+        LexinServiceImpl(parameters: container.resolve(ParametersStorage.self)!,
                      provider: container.resolve(LexinApiProvider.self)!)
     }
     .inObjectScope(.container)
@@ -133,8 +135,8 @@ func configureService(_ container: Container) {
     
     // Words Service
     container.register(WordsService.self) { _ in
-        WordsService(lexin: container.resolve(LexinService.self)!,
-                     formatter: container.resolve(LexinServiceFormatter.self)!,
+        WordsService(lexin: container.resolve(LexinServiceImpl.self)!,
+                     formatter: container.resolve(LexinServiceFormatterImpl.self)!,
                      bookmarks: container.resolve(StorageService<FormattedWord>.self)!)
     }
     .inObjectScope(.container)
@@ -148,7 +150,7 @@ func configureService(_ container: Container) {
 
 func configureModel(_ container: Container) {
     container.register(WordsSuggestionViewModel.self) { container in
-        WordsSuggestionViewModel(lexin: container.resolve(LexinService.self)!,
+        WordsSuggestionViewModel(lexin: container.resolve(LexinServiceImpl.self)!,
                                  history: container.resolve(StorageService<Suggestion>.self)!)
     }
     .inObjectScope(.container)
@@ -171,7 +173,9 @@ func configureModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(BookmarksViewModel.self) { container in
-        BookmarksViewModel(bookmarks: container.resolve(StorageService<FormattedWord>.self)!, player: container.resolve(PlayerService.self)!)
+        BookmarksViewModel(bookmarks: container.resolve(StorageService<FormattedWord>.self)!,
+                           player: container.resolve(PlayerService.self)!,
+                           spotlight: container.resolve(Spotlight.self)!)
     }
     .inObjectScope(.container)
 }
@@ -193,5 +197,8 @@ func configureView(_ container: Container) {
     }
     container.storyboardInitCompleted(BookmarksTableViewController.self) { container, view in
         view.model = container.resolve(BookmarksViewModel.self)
+    }
+    container.storyboardInitCompleted(AboutViewController.self) { container, view in
+        view.markdown = container.resolve(Markdown.self)
     }
 }

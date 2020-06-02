@@ -154,6 +154,8 @@ private extension String {
     func replaceNonAscii() -> String {
         return self.replacingOccurrences(of: "ä", with: "0344")
             .replacingOccurrences(of: "Ä", with: "0344")
+            .replacingOccurrences(of: "Ö", with: "0366")
+            .replacingOccurrences(of: "ö", with: "0366")
     }
 }
 

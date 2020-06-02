@@ -27,7 +27,6 @@ class SettingsLanguageViewModel: ViewModel {
     
     func transform(from input: Input) -> Output {
         let searched = input.search
-//            .startWith("")
             .flatMapLatest { [weak self] language -> Driver<SettingsLanguageItemResult> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.getSettings(with: language)
@@ -43,7 +42,7 @@ class SettingsLanguageViewModel: ViewModel {
             return self.getSettings(with: language)
         }
         
-        return Output(languages: Driver.merge(selected, searched).map { $0.handleResult([], nil) })
+        return Output(languages: Driver.merge(selected, searched).map { $0.getOrDefault([]) })
     }
     
     private func getSettings(with language: String) -> Driver<SettingsLanguageItemResult> {

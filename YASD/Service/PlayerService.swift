@@ -24,13 +24,13 @@ class PlayerService {
     
     func playSound(with url: String) -> Observable<PlayerServiceResult> {
         let action: CachableAction = { [weak self] in
-            guard let self = self else { return Observable.just(Data()) }
+            guard let self = self else { return Observable.just(.success(Data())) }
             return self.network.getRequest(with: url)
         }
         return cache.run(action, forKey: url)
-            .map { [weak self] data in
+            .map { [weak self] result in
                 guard let self = self else { return .success(false) }
-                return self.playAction(data)
+                return result.flatMap { self.playAction($0) }
         }
     }
     

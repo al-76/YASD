@@ -48,7 +48,7 @@ class LexinServiceTests: XCTestCase {
     }
 
     private func createLexinService(_ lexinApi: LexinApi) -> LexinService {
-        return LexinService(parameters: ParametersStorage(storage: createMockStorage(),
+        return LexinServiceImpl(parameters: ParametersStorage(storage: createMockStorage(),
                                                           language: Language(name: "test", code: "test")),
                             provider: createMockLexinApiProvider(lexinApi))
     }

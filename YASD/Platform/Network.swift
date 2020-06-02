@@ -9,20 +9,55 @@
 import RxSwift
 import Foundation
 
+typealias NetworkResult = Result<Data>
+
 class Network {
-    typealias PostParameters = (url: String, parameters: (String?, [String: String]?)?)
-    func postRequest(with parameters: PostParameters) -> Observable<Data> {
-        let request = createRequest(parameters.url, type: "POST", parameters: parameters.parameters)
-        return execute(request)
+    enum NetworkError: Error {
+        case noContext
+        case invalidUrl(url: String)
     }
     
-    func getRequest(with url: String) -> Observable<Data> {
-        let request = createRequest(url, type: "GET", parameters: nil)
-        return execute(request)
+    typealias Parameters = (String?, [String: String]?)?
+    typealias PostParameters = (url: String, parameters: Parameters)
+    private typealias URLRequestResult = Result<URLRequest>
+
+    
+    func postRequest(with parameters: PostParameters) -> Observable<NetworkResult> {
+        return createRequest(parameters.url, type: "POST", parameters: parameters.parameters)
+            .flatMap { [weak self] request -> Observable<NetworkResult> in
+                guard let self = self else { return Observable.just(.success(Data())) }
+                return self.execute(request)
+        }
     }
     
-    private func createRequest(_ url: String, type: String, parameters: (body: String?, headers: [String: String]?)?) -> URLRequest {
-        var request = URLRequest(url: URL(string: url)!)
+    func getRequest(with url: String) -> Observable<NetworkResult> {
+        return createRequest(url, type: "GET", parameters: nil)
+            .flatMap { [weak self] request -> Observable<NetworkResult>in
+                guard let self = self else { return Observable.just(.success(Data())) }
+                return self.execute(request)
+        }
+    }
+    
+    private func createRequest(_ stringUrl: String, type: String, parameters: Parameters) -> Observable<URLRequestResult> {
+        return Observable<URLRequestResult>.create { [weak self] observer in
+            if let self = self {
+                do {
+                    let request = try self.createRequestAction(stringUrl, type, parameters)
+                    observer.onNext(.success(request))
+                } catch let error {
+                    observer.onNext(.failure(error))
+                }
+            } else {
+                observer.onNext(.failure(NetworkError.noContext))
+            }
+            observer.onCompleted()
+            return Disposables.create()
+        }
+    }
+    
+    private func createRequestAction(_ stringUrl: String, _ type: String, _ parameters: Parameters) throws -> URLRequest {
+        guard let url = URL(string: stringUrl) else { throw NetworkError.invalidUrl(url: stringUrl) }
+        var request = URLRequest(url: url)
         request.httpMethod = type
         if let body = parameters?.0 {
             request.httpBody = body.data(using: .utf8)
@@ -35,10 +70,27 @@ class Network {
         return request
     }
     
-    private func execute(_ request: URLRequest) -> Observable<Data> {
-        return URLSession.shared.rx
-            .data(request: request)
-            .retry(3)
-            .share()
+    private func execute(_ result: URLRequestResult) -> Observable<NetworkResult> {
+        switch result {
+        case let .success(request):
+            return URLSession.shared.rx
+                .data(request: request)
+                .retry(3)
+                .share()
+                .map { .success($0) }
+        case let .failure(error):
+            return Observable.just(.failure(error))
+        }
+    }
+}
+
+extension Network.NetworkError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .noContext:
+            return NSLocalizedString("No context", comment: "")
+        case let .invalidUrl(url):
+            return NSLocalizedString("Invalid url: " + url, comment: "")
+        }
     }
 }

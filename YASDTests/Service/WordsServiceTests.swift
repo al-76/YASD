@@ -71,14 +71,14 @@ class WordsServiceTests: XCTestCase {
     }
 
     private func createBaseMockLexinService() -> MockLexinService {
-        let stubParameters = createParametersStorageStub()
-        let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
-                                             network: MockNetwork())
-        let mockApi = MockLexinApi(network: mockNetwork,
-                                   parserWords: MockLexinParserWords(),
-                                   parserSuggestions: MockLexinParserSuggestion())
-        let mockProvider = MockLexinApiProvider(defaultApi: mockApi, folketsApi: mockApi, swedishApi: mockApi)
-        return MockLexinService(parameters: stubParameters, provider: mockProvider)
+//        let stubParameters = createParametersStorageStub()
+//        let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
+//                                             network: MockNetwork())
+//        let mockApi = MockLexinApi(network: mockNetwork,
+//                                   parserWords: MockLexinParserWords(),
+//                                   parserSuggestions: MockLexinParserSuggestion())
+//        let mockProvider = MockLexinApiProvider(defaultApi: mockApi, folketsApi: mockApi, swedishApi: mockApi)
+        return MockLexinService()
     }
     
     private func createMockLexinService() -> MockLexinService {
@@ -111,12 +111,15 @@ class WordsServiceTests: XCTestCase {
     }
     
     private func createMockLexinServiceFormatter() -> MockLexinServiceFormatter {
-        let mock = MockLexinServiceFormatter(markdown: MockMarkdown())
+        let mock = MockLexinServiceFormatter()
         stub(mock) { stub in
             when(stub.format(result: any())).then { result in
                 switch result {
                 case .success(let items):
-                    return .success(items.map { FormattedWord(header: $0.word, formatted: NSAttributedString(string: $0.word), soundUrl: nil) })
+                    return .success(items.map { FormattedWord(header: $0.word,
+                                                              formatted: NSAttributedString(string: $0.word),
+                                                              soundUrl: nil,
+                                                              definition: "") })
                 case .failure(let error):
                     return .failure(error)
                 }

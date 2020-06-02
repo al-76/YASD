@@ -25,7 +25,7 @@ class SettingsLanguageTableViewController: UITableViewController {
     
     private func customizeView() {
         searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "Skriv ett språk!"
+        searchController.searchBar.placeholder = NSLocalizedString("searchLanguage", comment: "")
         searchController.obscuresBackgroundDuringPresentation = false
         
         navigationItem.searchController = searchController

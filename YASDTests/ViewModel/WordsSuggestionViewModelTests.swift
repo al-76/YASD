@@ -34,7 +34,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
                                                                  addHistory: Driver.never(),
                                                                  removeHistory: Driver.never()))
-            .suggestions.drive(result).disposed(by: disposeBag)
+            .suggestions.drive(result)
+            .disposed(by: disposeBag)
         
         // Act
         scheduler.start()
@@ -88,7 +89,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
                                                  history: TestStorageService(value: []))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.never(),
                                                                  addHistory: historyWords, removeHistory: Driver.never()))
-            .suggestions.drive(result).disposed(by: disposeBag)
+            .suggestions.drive(result)
+            .disposed(by: disposeBag)
         
         // Act
         scheduler.start()
@@ -112,7 +114,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.just(""),
                                                                  addHistory: Driver.never(),
                                                                  removeHistory: inputRemovedWords))
-            .suggestions.drive(result).disposed(by: disposeBag)
+            .suggestions.drive(result)
+            .disposed(by: disposeBag)
         
         // Act
         scheduler.start()
@@ -150,7 +153,8 @@ class WordsSuggestionViewModelTests: XCTestCase {
         let transform = viewModel?.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
                                                                                   addHistory: inputWords,
                                                                                   removeHistory: inputRemovedWords))
-        transform?.suggestions.drive(result).disposed(by: disposeBag)
+        transform?.suggestions.drive(result)
+            .disposed(by: disposeBag)
 
         // Act
         viewModel = nil
@@ -170,13 +174,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
     
     func createMockLexinService(whenError errorWord: String) -> MockLexinService {
         let stubParameters = createParametersStorageStub()
-        let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
-                                                     network: MockNetwork())
-        let mockApi = MockLexinApi(network: mockNetwork,
-                                   parserWords: MockLexinParserWords(),
-                                   parserSuggestions: MockLexinParserSuggestion())
-        let mockProvider = MockLexinApiProvider(defaultApi: mockApi, folketsApi: mockApi, swedishApi: mockApi)
-        let mock = MockLexinService(parameters: stubParameters, provider: mockProvider)
+        let mock = MockLexinService()
         stub(mock) { stub in
             when(stub.language()).thenReturn(stubParameters.language)
             when(stub.suggestion(any())).then { word in
@@ -212,19 +210,14 @@ class WordsSuggestionViewModelTests: XCTestCase {
     
     class TestStorageService : StorageService<Suggestion> {
         private var data = [Suggestion]()
-//        private let errorWord: String
         
         init(value: [Suggestion]) {
             self.data = value
-//            self.errorWord = errorWord
             super.init(id: "test", storage: StorageStub())
         }
         
         override func get(where filterFunc: @escaping (Suggestion) -> Bool) -> Observable<Result<[Suggestion]>> {
             return Observable.create { [weak self] observer in
-//                if word == self?.errorWord {
-//                    observer.onError(TestError.someError)
-//                } else
                 if let data = self?.data {
                     observer.onNext(SuggestionResult.success(data.filter(filterFunc)))
                 } else {

@@ -27,11 +27,15 @@ class LexinApi {
         let parameters = parserWords.getRequestParameters(word, with: language)
         return network.postRequest(with: parameters).map { [weak self] result in
             guard let self = self else { return .success([]) }
-            do {
-                return try .success(self.parserWords.parse(text: result))
-            } catch let error {
-                return .failure(error)
-            }
+            return result.flatMap { self.parseWords($0) }
+        }
+    }
+    
+    private func parseWords(_ text: String) -> LexinWordResult {
+        do {
+            return try .success(self.parserWords.parse(text: text))
+        } catch let error {
+            return .failure(error)
         }
     }
     
@@ -43,11 +47,15 @@ class LexinApi {
         let parameters = parserSuggestions.getRequestParameters(word, with: language)
         return network.postRequest(with: parameters).map { [weak self] result in
             guard let self = self else { return .success([]) }
-            do {
-                return try.success(self.parserSuggestions.parse(text: result))
-            } catch let error {
-                return .failure(error)
-            }
+            return result.flatMap { self.parseSuggestions($0) }
+        }
+    }
+    
+    private func parseSuggestions(_ text: String) -> SuggestionResult {
+        do {
+            return try .success(self.parserSuggestions.parse(text: text))
+        } catch let error {
+            return .failure(error)
         }
     }
 }

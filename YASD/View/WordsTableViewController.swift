@@ -39,7 +39,7 @@ class WordsTableViewController: UITableViewController {
     
     private func customizeView() {
         searchController = UISearchController(searchResultsController: searchResultsController)
-        searchController.searchBar.placeholder = "Skriv ett ord!"
+        searchController.searchBar.placeholder = NSLocalizedString("searchBar", comment: "")
         if #available(iOS 13.0, *) {
             searchController.showsSearchResultsController = true
         }
@@ -70,7 +70,7 @@ class WordsTableViewController: UITableViewController {
                 .bind(to: searchResultsController.search),
             // found words
             output.foundWords.map { [weak self] result -> [FoundWord] in
-                return result.handleResult([], self?.handleError)
+                return result.onFailure { self?.handleError($0) }.getOrDefault([])
             }
             .drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { [weak self] (_, result, cell) in
                 if let wordsCell = cell as? WordsTableViewCell {
@@ -82,7 +82,7 @@ class WordsTableViewController: UITableViewController {
             },
             // played, bookmarked
             Driver.merge(output.played, output.bookmarked).drive(onNext: { [weak self] result in
-                _ = result.handleResult(false, self?.handleError)
+                result.onFailure { self?.handleError($0) }
             }),
             // loading
             output.loading.drive(activityIndicator.rx.isAnimating)

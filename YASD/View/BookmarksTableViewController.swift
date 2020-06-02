@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreSpotlight
 import RxSwift
 import RxCocoa
 import RxDataSources
@@ -18,6 +19,7 @@ class BookmarksTableViewController: UITableViewController {
     private let disposeBag = DisposeBag()
     private let playUrl = PublishRelay<String>()
     private let removeBookmark = PublishRelay<Int>()
+    private let restore = BehaviorRelay<String>(value: "")
     private var searchController: UISearchController!
     private let rmController = RMController()
     
@@ -29,9 +31,17 @@ class BookmarksTableViewController: UITableViewController {
         bindToModel()
     }
     
+    override func restoreUserActivityState(_ activity: NSUserActivity) {
+        if activity.activityType != CSSearchableItemActionType {
+            return
+        }
+        guard let id = activity.userInfo? [CSSearchableItemActivityIdentifier] as? String else { return }
+        restore.accept(id)
+    }
+    
     private func customizeView() {
         searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "Skriv ett ord!"
+        searchController.searchBar.placeholder = NSLocalizedString("searchBar", comment: "")
         searchController.obscuresBackgroundDuringPresentation = false
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -63,19 +73,22 @@ class BookmarksTableViewController: UITableViewController {
             .asDriver(onErrorJustReturn: "")
         let input = BookmarksViewModel.Input(search: searchWord,
                                              playUrl: playUrl.asDriver(onErrorJustReturn: ""),
-                                             removeBookmark: removeBookmark.asDriver(onErrorJustReturn: -1))
+                                             removeBookmark: removeBookmark.asDriver(onErrorJustReturn: -1),
+                                             restore: restore.asDriver(onErrorJustReturn: ""))
         let output = model.transform(from: input)
         disposeBag.insert(
             // bookmarks
             output.bookmarks.map { [weak self] result -> [FormattedWord] in
-                return result.handleResult([], self?.handleError)
+                return result.onFailure { self?.handleError($0) }.getOrDefault([])
             }
             .map { bookmarks in [BookmarkItemSection(header: "bookmarks", items: bookmarks)] }
             .drive(tableView.rx.items(dataSource: dataSource)),
             // played
             output.played.drive(onNext: { [weak self] result in
-                _ = result.handleResult(false, self?.handleError)
+                result.onFailure { self?.handleError($0) }
             }),
+            // search restored item
+            output.restored.drive(searchController.searchBar.rx.text),
             // deleted item
             tableView.rx.itemDeleted
                 .map { $0.row }

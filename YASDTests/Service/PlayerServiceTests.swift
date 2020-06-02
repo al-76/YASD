@@ -72,11 +72,29 @@ class PlayerServiceTests: XCTestCase {
            ])
     }
     
+    func testPlaySoundPlayerNetworkError() {
+        // Arrange
+        let scheduler = TestScheduler(initialClock: 0)
+        let service = PlayerService(player: createMockPlayer(),
+                                    cache: createMockCacheService(),
+                                    network: createMockNetworkError())
+        
+        // Act
+        let played = service.playSound(with: "test")
+        let res = scheduler.start { played }
+        
+        // Assert
+        XCTAssertEqual(res.events, [
+            .next(200, .failure(TestError.someError)),
+            .completed(200)
+           ])
+    }
+    
     private func createMockCacheService() -> MockCacheService {
         let mock = MockCacheService(cache: MockDataCache(name: "test"))
         stub(mock) { stub in
             when(stub.run(any(), forKey: any())).then { action, _ in
-                return action()
+                return action().flatMap { Observable.just($0) }
             }
         }
         return mock
@@ -85,7 +103,15 @@ class PlayerServiceTests: XCTestCase {
     private func createMockNetwork() -> MockNetwork {
         let mock = MockNetwork()
         stub(mock) { stub in
-            when(stub.getRequest(with: anyString())).thenReturn(Observable.just(Data()))
+            when(stub.getRequest(with: anyString())).thenReturn(Observable.just(.success(Data())))
+        }
+        return mock
+    }
+    
+    private func createMockNetworkError() -> MockNetwork {
+        let mock = MockNetwork()
+        stub(mock) { stub in
+            when(stub.getRequest(with: anyString())).thenReturn(Observable.just(.failure(TestError.someError)))
         }
         return mock
     }

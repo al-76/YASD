@@ -51,7 +51,7 @@ class WordsSuggestionTableViewController: UITableViewController {
         disposeBag.insert(
             // suggestions
             output.suggestions.map { [weak self] result -> [SuggestionItem] in
-                return result.handleResult([], self?.handleError)
+                return result.onFailure { self?.handleError($0) }.getOrDefault([])
             }
             .map { suggestions in [SuggestionItemSection(header: "suggestions", items: suggestions)] }
             .drive(tableView.rx.items(dataSource: dataSource)),

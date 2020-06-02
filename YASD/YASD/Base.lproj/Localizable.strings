@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  YASD
+
+  Created by Vyacheslav Konopkin on 29/02/2020.
+  Copyright © 2020 yac. All rights reserved.
+*/
+"searchBar" = "Type a word!";
+"searchLanguage" = "Type a language!";
+"textAbout" = "# YASD - Yet Another Swedish Dictionary
+
+[YASD](https://github.com/al-76/YASD) 1.0.0 uses [Lexin](https://lexin.nada.kth.se/) and libraries:
+- [Swinject](https://github.com/Swinject/Swinject)
+- [SwinjectStoryboard](https://github.com/Swinject/SwinjectStoryboard)
+- [RxSwift](https://github.com/ReactiveX/RxSwift)
+- [RxDataSources](https://github.com/RxSwiftCommunity/RxDataSources)
+- [RMessage](https://github.com/donileo/RMessage)
+- [SwiftSoup](https://github.com/scinfu/SwiftSoup)
+- [Cuckoo](https://github.com/Brightify/Cuckoo)
+- [MarkdownKit](https://github.com/ivanbruel/MarkdownKit)
+- [Cache](https://github.com/hyperoslo/Cache)
+- [Carthage](https://github.com/Carthage/Carthage)
+
+## License
+MIT
+
+You can contact me - Konopkin Vyacheslav robot.al76@gmail.com";

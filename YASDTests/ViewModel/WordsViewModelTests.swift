@@ -33,7 +33,7 @@ class WordsViewModelTests: XCTestCase {
         let foundWords = scheduler.createObserver(FoundWordResult.self)
         let loading = scheduler.createObserver(Bool.self)
         let viewModel = WordsViewModel(words: createMockWordsService(whenError: errorWord),
-                                       player: createMockPlayerService(),
+                                       player: MockFactory.createMockPlayerService(),
                                        bookmarks: createBookmarksStub())
         let output = viewModel.transform(from: WordsViewModel.Input(search: inputWords,
                                                        playUrl: Driver.never(),
@@ -74,7 +74,7 @@ class WordsViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: "")
         let foundWords = scheduler.createObserver(FoundWordResult.self)
         var viewModel: WordsViewModel?  = WordsViewModel(words: createMockWordsService(whenError: "error_word"),
-                                                         player: createMockPlayerService(),
+                                                         player: MockFactory.createMockPlayerService(),
                                                          bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
         viewModel?.transform(from: WordsViewModel.Input(search: inputWords,
                                                         playUrl: Driver.never(),
@@ -104,7 +104,7 @@ class WordsViewModelTests: XCTestCase {
         let foundWords = scheduler.createObserver(FoundWordResult.self)
         let words = createMockWordsService(whenError: errorWord)
         let viewModel = WordsViewModel(words: words,
-                                       player: createMockPlayerService(),
+                                       player: MockFactory.createMockPlayerService(),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: inputWords,
                                                        playUrl: Driver.never(),
@@ -126,6 +126,7 @@ class WordsViewModelTests: XCTestCase {
     
     func testPlay() {
         // Arrange
+        let error = TestError.someError
         let errorUrl = "error"
         let scheduler = TestScheduler(initialClock: 0)
         let inputUrls = scheduler.createHotObservable([
@@ -136,7 +137,7 @@ class WordsViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: "")
         let played = scheduler.createObserver(PlayerServiceResult.self)
         let viewModel = WordsViewModel(words: createMockWordsService(whenError: ""),
-                                       player: createMockPlayerService(errorUrl: errorUrl),
+                                       player: MockFactory.createMockPlayerService(errorUrl: errorUrl, error: error),
                                        bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
         viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
                                                        playUrl: inputUrls,
@@ -152,7 +153,7 @@ class WordsViewModelTests: XCTestCase {
         XCTAssertEqual(played.events, [
             .next(150, .success(true)),
             .next(200, .success(true)),
-            .next(300, .failure(TestError.someError)),
+            .next(300, .failure(error)),
             .completed(400)
         ])
     }
@@ -167,7 +168,7 @@ class WordsViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: FormattedWord())
         let bookmarked = scheduler.createObserver(StorageServiceResult.self)
         let viewModel = WordsViewModel(words: createMockWordsService(whenError: ""),
-                                       player: createMockPlayerService(errorUrl: ""),
+                                       player: MockFactory.createMockPlayerService(),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
                                                        playUrl: Driver.never(),
@@ -196,7 +197,7 @@ class WordsViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: FormattedWord())
         let bookmarked = scheduler.createObserver(StorageServiceResult.self)
         let viewModel = WordsViewModel(words: createMockWordsService(whenError: ""),
-                                       player: createMockPlayerService(errorUrl: ""),
+                                       player: MockFactory.createMockPlayerService(),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
                                                        playUrl: Driver.never(),
@@ -217,15 +218,9 @@ class WordsViewModelTests: XCTestCase {
     
     private func createMockWordsService(whenError errorWord: String) -> MockWordsService {
         let stubParameters = createParametersStorageStub()
-        let networkStub = NetworkServiceStub(cache: CacheServiceStub(cache: DataCacheStub(name: "test")),
-                                             network: NetworkStub())
-        let stubApi = LexinApiStub(network: networkStub,
-                                   parserWords: LexinParserWordsStub(),
-                                   parserSuggestions: LexinParserSuggestionStub())
-        let stubLexin = LexinServiceStub(parameters: ParametersStorageStub(storage: StorageStub(), language: ParametersStorage.defaultLanguage),
-                                         provider: LexinApiProviderStub(defaultApi: stubApi, folketsApi: stubApi, swedishApi: stubApi))
+        let stubLexin = LexinServiceStub()
         let mock = MockWordsService(lexin: stubLexin,
-                                    formatter: LexinServiceFormatterStub(markdown: MarkdownStub()),
+                                    formatter: LexinServiceFormatterStub(),
                                     bookmarks: createBookmarksStub())
         stub(mock) { stub in
             when(stub.language()).thenReturn(stubParameters.language)
@@ -250,29 +245,6 @@ class WordsViewModelTests: XCTestCase {
         let stub = ParametersStorageStub(storage: StorageStub(),
                                          language: language)
         return stub
-    }
-    
-    func createMockPlayerService() -> MockPlayerService {
-        return createMockPlayerService(errorUrl: "")
-    }
-    
-    func createMockPlayerService(errorUrl: String) -> MockPlayerService {
-        let mock = MockPlayerService(player: MockPlayer(), cache: MockCacheService(cache: MockDataCache(name: "test")), network: MockNetwork())
-        stub(mock) { stub in
-            when(stub.playSound(with: anyString())).then { stringUrl in
-                return Observable<PlayerServiceResult>.create {
-                    observable in
-                    if stringUrl == errorUrl {
-                        observable.on(.error(TestError.someError))
-                    } else {
-                        observable.on(.next(.success(true)))
-                    }
-                    observable.onCompleted()
-                    return Disposables.create {}
-                }
-            }
-        }
-        return mock
     }
     
     private func createBookmarksStub() -> StorageServiceStub<FormattedWord> {

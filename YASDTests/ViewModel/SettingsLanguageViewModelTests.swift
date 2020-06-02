@@ -28,11 +28,12 @@ class SettingsLanguageViewModelTests: XCTestCase {
         let viewModel = SettingsLanguageViewModel(settings: createSettingsLanguageService(testLanguage))
         let output = viewModel.transform(from: SettingsLanguageViewModel.Input(search: Driver.just(""),
                                                                                select: inputLanguages))
-        output.languages.drive(res).disposed(by: disposeBag)
-//
-//        // Act
+        output.languages.drive(res)
+            .disposed(by: disposeBag)
+
+        // Act
         scheduler.start()
-//
+
         // Assert
         XCTAssertEqual(res.events, [
             .next(0, [ SettingsLanguageItem(selected: false, language: testLanguage) ]),
@@ -61,10 +62,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
             .next(150, [ SettingsLanguageItem(selected: false, language: testLanguage) ])
         ])
     }
-//
-//    private func getSelectedItem(from items: [SettingsItem]) -> SettingsItem? {
-//        return items.first(where: { $0.selected })
-//    }
+
     
     private func createParametersStorageStub(_ language: Language) -> ParametersStorageStub {
         DefaultValueRegistry.register(value: language, forType: Language.self)

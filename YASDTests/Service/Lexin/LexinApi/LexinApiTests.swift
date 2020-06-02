@@ -19,7 +19,8 @@ class LexinApiTests: XCTestCase {
     }
     
     override func setUp() {
-        DefaultValueRegistry.register(value: Observable.just("test"), forType: Observable<String>.self)
+        DefaultValueRegistry.register(value: Observable.just(.success("test")),
+                                      forType: Observable<NetworkServiceResult>.self)
     }
     
     func testSearch() {
@@ -59,6 +60,28 @@ class LexinApiTests: XCTestCase {
        ])
     }
     
+    func testSearchNetworkError() {
+        // Arrange
+        let testError = TestError.someError
+        DefaultValueRegistry.register(value: Observable.just(.failure(testError)),
+                                      forType: Observable<NetworkServiceResult>.self)
+        let testData = [LexinWord(word: "test_result")]
+        let api = LexinApi(network: createNetworkStub(),
+                           parserWords: createMockLexinParserWords(testData),
+                           parserSuggestions: LexinParserSuggestionStub())
+        let scheduler = TestScheduler(initialClock: 0)
+        
+        // Act
+        let found = api.search("test", with: "test_lang")
+        let res = scheduler.start { found }
+        
+        // Assert
+        XCTAssertEqual(res.events, [
+            .next(200, LexinWordResult.failure(testError)),
+            .completed(200)
+        ])
+    }
+    
     func testSearchEmpty() {
         // Arrange
         let api = LexinApi(network: createNetworkStub(),
@@ -94,7 +117,6 @@ class LexinApiTests: XCTestCase {
             .next(200, SuggestionResult.success(testData)),
             .completed(200)
        ])
-
     }
     
     func testSuggestionError() {
@@ -113,9 +135,30 @@ class LexinApiTests: XCTestCase {
             .next(200, SuggestionResult.failure(TestError.someError)),
             .completed(200)
        ])
-
     }
     
+    func testSuggestionNetworkError() {
+        // Arrange
+        let testError = TestError.someError
+        DefaultValueRegistry.register(value: Observable.just(.failure(testError)),
+                                      forType: Observable<NetworkServiceResult>.self)
+         let testData = ["test_suggestion"]
+         let api = LexinApi(network: createNetworkStub(),
+                            parserWords: LexinParserWordsStub(),
+                            parserSuggestions: createMockLexinParserSuggestion(testData))
+         let scheduler = TestScheduler(initialClock: 0)
+
+         // Act
+         let found = api.suggestion("test", with: "test_lang")
+         let res = scheduler.start { found }
+         
+         // Assert
+         XCTAssertEqual(res.events, [
+             .next(200, SuggestionResult.failure(testError)),
+             .completed(200)
+        ])
+    }
+
     func testSuggestionEmpty() {
         // Arrange
         let api = LexinApi(network: createNetworkStub(),

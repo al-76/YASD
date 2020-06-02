@@ -13,6 +13,10 @@ import RxTest
 import Cuckoo
 
 class NetworkServiceTests: XCTestCase {
+    enum TestError: Error {
+        case someError
+    }
+    
     func testGetRequestCached() {
         let str = "Test"
         let strData = str.data(using: String.Encoding.utf8)!
@@ -63,7 +67,19 @@ class NetworkServiceTests: XCTestCase {
         })
     }
     
-    private func testRequestsWithInvalidObject(with request: (NetworkService) -> Observable<String>) {
+    func testGetRequestError() {
+        testRequestError(cache: createCacheServiceMock(value: Data(), cached: false),
+                       network: createNetworkMockError(),
+                       action: { $0.getRequest(with: "test") })
+    }
+    
+    func testPostRequestError() {
+        testRequestError(cache: createCacheServiceMock(value: Data(), cached: false),
+                       network: createNetworkMockError(),
+                       action: { $0.postRequest(with: Network.PostParameters(url: "test", parameters: nil)) })
+    }
+    
+    private func testRequestsWithInvalidObject(with request: (NetworkService) -> Observable<NetworkServiceResult>) {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         var service: NetworkService? = NetworkService(cache: createCacheServiceNotCachedMock(value: "Test".data(using: String.Encoding.utf8)!),
@@ -76,12 +92,12 @@ class NetworkServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-                .next(200, ""),
-                .completed(200)
+            .next(200, .success("")),
+            .completed(200)
        ])
     }
     
-    private func testRequest(with testData: String, cache: CacheService, network: Network, action: (NetworkService) -> Observable<String>) {
+    private func testRequest(with testData: String, cache: CacheService, network: Network, action: (NetworkService) -> Observable<NetworkServiceResult>) {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
         let service = NetworkService(cache: cache, network: network)
@@ -92,9 +108,25 @@ class NetworkServiceTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(res.events, [
-              .next(200, testData),
-              .completed(200)
-             ])
+            .next(200, .success(testData)),
+            .completed(200)
+        ])
+    }
+    
+    private func testRequestError(cache: CacheService, network: Network, action: (NetworkService) -> Observable<NetworkServiceResult>) {
+        // Arrange
+        let scheduler = TestScheduler(initialClock: 0)
+        let service = NetworkService(cache: cache, network: network)
+        
+        // Act
+        let executed = action(service)
+        let res = scheduler.start { executed }
+        
+        // Assert
+        XCTAssertEqual(res.events, [
+            .next(200, .failure(TestError.someError)),
+            .completed(200)
+        ])
     }
         
     func createCacheServiceMock(value: Data, cached: Bool) -> MockCacheService {
@@ -104,7 +136,7 @@ class NetworkServiceTests: XCTestCase {
                 if !cached {
                     return action()
                 }
-                return Observable.just(value)
+                return Observable.just(.success(value))
             }
         }
         return mock
@@ -127,8 +159,17 @@ class NetworkServiceTests: XCTestCase {
     func createNetworkMock(_ value: Data) -> MockNetwork {
         let mock = MockNetwork()
         stub(mock) { stub in
-            when(stub.getRequest(with: any())).thenReturn(Observable.just(value))
-            when(stub.postRequest(with: any())).thenReturn(Observable.just(value))
+            when(stub.getRequest(with: any())).thenReturn(Observable.just(.success(value)))
+            when(stub.postRequest(with: any())).thenReturn(Observable.just(.success(value)))
+        }
+        return mock
+    }
+    
+    func createNetworkMockError() -> MockNetwork {
+        let mock = MockNetwork()
+        stub(mock) { stub in
+            when(stub.getRequest(with: any())).thenReturn(Observable.just(.failure(TestError.someError)))
+            when(stub.postRequest(with: any())).thenReturn(Observable.just(.failure(TestError.someError)))
         }
         return mock
     }
