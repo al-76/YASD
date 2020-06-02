@@ -174,13 +174,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
     
     func createMockLexinService(whenError errorWord: String) -> MockLexinService {
         let stubParameters = createParametersStorageStub()
-        let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
-                                                     network: MockNetwork())
-        let mockApi = MockLexinApi(network: mockNetwork,
-                                   parserWords: MockLexinParserWords(),
-                                   parserSuggestions: MockLexinParserSuggestion())
-        let mockProvider = MockLexinApiProvider(defaultApi: mockApi, folketsApi: mockApi, swedishApi: mockApi)
-        let mock = MockLexinService(parameters: stubParameters, provider: mockProvider)
+        let mock = MockLexinService()
         stub(mock) { stub in
             when(stub.language()).thenReturn(stubParameters.language)
             when(stub.suggestion(any())).then { word in

@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class LexinServiceFormatter {
+class LexinServiceFormatterImpl: LexinServiceFormatter {
     private let markdown: Markdown
     
     init(markdown: Markdown) {

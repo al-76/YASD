@@ -1,5 +1,5 @@
 //
-//  LexinService.swift
+//  LexinServiceImpl.swift
 //  YASD
 //
 //  Created by Vyacheslav Konopkin on 30/04/2019.
@@ -9,7 +9,7 @@
 import RxSwift
 import Foundation
 
-class LexinService {
+class LexinServiceImpl: LexinService {
     private let parameters: ParametersStorage
     private let provider: LexinApiProvider
 

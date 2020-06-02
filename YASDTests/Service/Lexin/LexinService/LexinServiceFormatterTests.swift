@@ -102,7 +102,7 @@ class LexinServiceFormatterTests: XCTestCase {
     
     private func testFormat(result: LexinWordResult, formattedResult: FormattedWordResult) {
         // Arrange
-        let formatter = LexinServiceFormatter(markdown: createMockMarkdown())
+        let formatter = LexinServiceFormatterImpl(markdown: createMockMarkdown())
         
         // Act
         let strings = formatter.format(result: result)
@@ -113,7 +113,7 @@ class LexinServiceFormatterTests: XCTestCase {
     
     func testFormatError() {
         // Arrange
-        let formatter = LexinServiceFormatter(markdown: createMockMarkdown())
+        let formatter = LexinServiceFormatterImpl(markdown: createMockMarkdown())
         let error = LexinWordResult.failure(TestError.someError)
         
         // Act

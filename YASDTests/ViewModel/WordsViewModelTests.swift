@@ -218,15 +218,9 @@ class WordsViewModelTests: XCTestCase {
     
     private func createMockWordsService(whenError errorWord: String) -> MockWordsService {
         let stubParameters = createParametersStorageStub()
-        let networkStub = NetworkServiceStub(cache: CacheServiceStub(cache: DataCacheStub(name: "test")),
-                                             network: NetworkStub())
-        let stubApi = LexinApiStub(network: networkStub,
-                                   parserWords: LexinParserWordsStub(),
-                                   parserSuggestions: LexinParserSuggestionStub())
-        let stubLexin = LexinServiceStub(parameters: ParametersStorageStub(storage: StorageStub(), language: ParametersStorage.defaultLanguage),
-                                         provider: LexinApiProviderStub(defaultApi: stubApi, folketsApi: stubApi, swedishApi: stubApi))
+        let stubLexin = LexinServiceStub()
         let mock = MockWordsService(lexin: stubLexin,
-                                    formatter: LexinServiceFormatterStub(markdown: MarkdownStub()),
+                                    formatter: LexinServiceFormatterStub(),
                                     bookmarks: createBookmarksStub())
         stub(mock) { stub in
             when(stub.language()).thenReturn(stubParameters.language)
