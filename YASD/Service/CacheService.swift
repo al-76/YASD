@@ -36,7 +36,7 @@ class CacheService {
         }
     }
     
-    func save(_ data: Data, forKey key: String) -> Observable<CacheServiceResult> {
+    private func save(_ data: Data, forKey key: String) -> Observable<CacheServiceResult> {
         return cache.save(data, forKey: key).map { .success($0) }
     }
 }
