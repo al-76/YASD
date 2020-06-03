@@ -33,7 +33,7 @@ class BookmarksViewModelTests: XCTestCase {
         let bookmarks = scheduler.createObserver(FormattedWordResult.self)
         let data = createBookmarksMock([FormattedWord("test2"), FormattedWord("test3")])
         let viewModel = BookmarksViewModel(bookmarks: data,
-                                           player: MockFactory.createMockPlayerService(),
+                                           player: MockFactory.createMockPlayerManager(),
                                            spotlight: MockSpotlight())
         let output = viewModel.transform(from: BookmarksViewModel.Input(search: inputWords,
                                                                         playUrl: Driver.never(),
@@ -65,7 +65,7 @@ class BookmarksViewModelTests: XCTestCase {
         let bookmarks = scheduler.createObserver(FormattedWordResult.self)
         let data = createBookmarksMock([FormattedWord("test2"), FormattedWord("test3")])
         let viewModel = BookmarksViewModel(bookmarks: data,
-                                           player: MockFactory.createMockPlayerService(),
+                                           player: MockFactory.createMockPlayerManager(),
                                            spotlight: createSpotlightMock())
         let output = viewModel.transform(from: BookmarksViewModel.Input(search: Driver.never(),
                                                                         playUrl: Driver.never(),
@@ -96,9 +96,9 @@ class BookmarksViewModelTests: XCTestCase {
             .next(300, errorUrl),
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
-        let played = scheduler.createObserver(PlayerServiceResult.self)
+        let played = scheduler.createObserver(PlayerManagerResult.self)
         let viewModel = BookmarksViewModel(bookmarks: createBookmarksMock([]),
-                                           player: MockFactory.createMockPlayerService(errorUrl: errorUrl, error: error),
+                                           player: MockFactory.createMockPlayerManager(errorUrl: errorUrl, error: error),
                                            spotlight: MockSpotlight())
         let output = viewModel.transform(from: BookmarksViewModel.Input(search: Driver.never(),
                                                                         playUrl: inputUrls,
@@ -130,7 +130,7 @@ class BookmarksViewModelTests: XCTestCase {
         let bookmarks = scheduler.createObserver(FormattedWordResult.self)
         let data = createBookmarksMock([FormattedWord("test2"), FormattedWord("test3")])
         let viewModel = BookmarksViewModel(bookmarks: data,
-                                           player: MockFactory.createMockPlayerService(),
+                                           player: MockFactory.createMockPlayerManager(),
                                            spotlight: createSpotlightMock())
         let output = viewModel.transform(from: BookmarksViewModel.Input(search: Driver.never(),
                                                                         playUrl: Driver.never(),
@@ -167,10 +167,10 @@ class BookmarksViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let bookmarks = scheduler.createObserver(FormattedWordResult.self)
-        let played = scheduler.createObserver(PlayerServiceResult.self)
+        let played = scheduler.createObserver(PlayerManagerResult.self)
         let data = createBookmarksMock([FormattedWord("test2"), FormattedWord("test3")])
         var viewModel: BookmarksViewModel? = BookmarksViewModel(bookmarks: data,
-                                           player: MockFactory.createMockPlayerService(),
+                                           player: MockFactory.createMockPlayerManager(),
                                            spotlight: MockSpotlight())
         let output = viewModel!.transform(from: BookmarksViewModel.Input(search: inputWords,
                                                             playUrl: inputUrls,

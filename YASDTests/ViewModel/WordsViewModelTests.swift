@@ -33,7 +33,7 @@ class WordsViewModelTests: XCTestCase {
         let foundWords = scheduler.createObserver(FoundWordResult.self)
         let loading = scheduler.createObserver(Bool.self)
         let viewModel = WordsViewModel(words: createMockWordsService(whenError: errorWord),
-                                       player: MockFactory.createMockPlayerService(),
+                                       player: MockFactory.createMockPlayerManager(),
                                        bookmarks: createBookmarksStub())
         let output = viewModel.transform(from: WordsViewModel.Input(search: inputWords,
                                                        playUrl: Driver.never(),
@@ -74,7 +74,7 @@ class WordsViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: "")
         let foundWords = scheduler.createObserver(FoundWordResult.self)
         var viewModel: WordsViewModel?  = WordsViewModel(words: createMockWordsService(whenError: "error_word"),
-                                                         player: MockFactory.createMockPlayerService(),
+                                                         player: MockFactory.createMockPlayerManager(),
                                                          bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
         viewModel?.transform(from: WordsViewModel.Input(search: inputWords,
                                                         playUrl: Driver.never(),
@@ -104,7 +104,7 @@ class WordsViewModelTests: XCTestCase {
         let foundWords = scheduler.createObserver(FoundWordResult.self)
         let words = createMockWordsService(whenError: errorWord)
         let viewModel = WordsViewModel(words: words,
-                                       player: MockFactory.createMockPlayerService(),
+                                       player: MockFactory.createMockPlayerManager(),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: inputWords,
                                                        playUrl: Driver.never(),
@@ -135,9 +135,9 @@ class WordsViewModelTests: XCTestCase {
             .next(300, errorUrl),
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
-        let played = scheduler.createObserver(PlayerServiceResult.self)
+        let played = scheduler.createObserver(PlayerManagerResult.self)
         let viewModel = WordsViewModel(words: createMockWordsService(whenError: ""),
-                                       player: MockFactory.createMockPlayerService(errorUrl: errorUrl, error: error),
+                                       player: MockFactory.createMockPlayerManager(errorUrl: errorUrl, error: error),
                                        bookmarks: StorageServiceStub<FormattedWord>(id: "test", storage: StorageStub()))
         viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
                                                        playUrl: inputUrls,
@@ -168,7 +168,7 @@ class WordsViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: FormattedWord())
         let bookmarked = scheduler.createObserver(StorageServiceResult.self)
         let viewModel = WordsViewModel(words: createMockWordsService(whenError: ""),
-                                       player: MockFactory.createMockPlayerService(),
+                                       player: MockFactory.createMockPlayerManager(),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
                                                        playUrl: Driver.never(),
@@ -197,7 +197,7 @@ class WordsViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: FormattedWord())
         let bookmarked = scheduler.createObserver(StorageServiceResult.self)
         let viewModel = WordsViewModel(words: createMockWordsService(whenError: ""),
-                                       player: MockFactory.createMockPlayerService(),
+                                       player: MockFactory.createMockPlayerManager(),
                                        bookmarks: createBookmarksStub())
         viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
                                                        playUrl: Driver.never(),

@@ -42,7 +42,6 @@
 		2F1E1E782344E6DB007C128B /* CacheServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */; };
 		2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
 		2F1E1E7F23463434007C128B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
-		2F266E8222AA8DBF0069D8B8 /* LexinServiceFormatterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatterImpl.swift */; };
 		2F2980C723B2660F004F7FA9 /* BookmarksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2980C623B2660F004F7FA9 /* BookmarksTableViewCell.swift */; };
 		2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2980C823B3866C004F7FA9 /* FoundWord.swift */; };
 		2F2EC4B422EB22FD00B1D4C7 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2EC4B322EB22FD00B1D4C7 /* SettingsTableViewController.swift */; };
@@ -66,8 +65,6 @@
 		2F5F8BAD2322879900EF6A85 /* WordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C80228AA89400B4946C /* WordsViewModel.swift */; };
 		2F5F8BAE2322879900EF6A85 /* SettingsLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F31739C22CCF84A008944EE /* SettingsLanguageViewModel.swift */; };
 		2F5F8BAF2322879900EF6A85 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2EC4B522EB259000B1D4C7 /* SettingsViewModel.swift */; };
-		2F5F8BB02322879E00EF6A85 /* LexinServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F97577822786F6F00B343B4 /* LexinServiceImpl.swift */; };
-		2F5F8BB12322879E00EF6A85 /* LexinServiceFormatterImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatterImpl.swift */; };
 		2F5F8BB3232287DA00EF6A85 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB2DE022A111540053B758 /* Network.swift */; };
 		2F5F8BB4232287DA00EF6A85 /* HtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7422B5273B002F769B /* HtmlParser.swift */; };
 		2F5F8BB6232287DA00EF6A85 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7321862313E4A000CC0822 /* Storage.swift */; };
@@ -100,9 +97,6 @@
 		2F90DD402355FC1B00CE8560 /* LexinParserSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */; };
 		2F97576A2277330500B343B4 /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9757692277330500B343B4 /* DependencyManager.swift */; };
 		2F9757762277474200B343B4 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F9757702277474200B343B4 /* RxSwift.framework */; };
-		2F97577922786F6F00B343B4 /* LexinServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F97577822786F6F00B343B4 /* LexinServiceImpl.swift */; };
-		2F9B8BB4232BB709000D6BC1 /* PlayerManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B8BB3232BB709000D6BC1 /* PlayerManagerImpl.swift */; };
-		2F9B8BB5233132BF000D6BC1 /* PlayerManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9B8BB3232BB709000D6BC1 /* PlayerManagerImpl.swift */; };
 		2F9B8BB62333C612000D6BC1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F8BBE2322A7DA00EF6A85 /* Player.swift */; };
 		2FA5040323CCC00D004DA580 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */; };
 		2FBCB84823A2949F0080238A /* SearchResultsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBCB84723A2949F0080238A /* SearchResultsTableView.swift */; };
@@ -214,7 +208,6 @@
 		2F18E2E223437097003F91FD /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceTests.swift; sourceTree = "<group>"; };
 		2F1E1E7D23463434007C128B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatterImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceFormatterImpl.swift; sourceTree = "<group>"; };
 		2F2980C623B2660F004F7FA9 /* BookmarksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewCell.swift; sourceTree = "<group>"; };
 		2F2980C823B3866C004F7FA9 /* FoundWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWord.swift; sourceTree = "<group>"; };
 		2F2EC4B322EB22FD00B1D4C7 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -263,8 +256,6 @@
 		2F97576E2277474200B343B4 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		2F97576F2277474200B343B4 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		2F9757702277474200B343B4 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
-		2F97577822786F6F00B343B4 /* LexinServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceImpl.swift; sourceTree = "<group>"; };
-		2F9B8BB3232BB709000D6BC1 /* PlayerManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerManagerImpl.swift; sourceTree = "<group>"; };
 		2FBCB84723A2949F0080238A /* SearchResultsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableView.swift; sourceTree = "<group>"; };
 		2FC07D0323AA605E00D4D328 /* HistoryServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryServiceTests.swift; sourceTree = "<group>"; };
 		2FCB2DDE22A005180053B758 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
@@ -416,9 +407,7 @@
 		2F1E1E7B23462D75007C128B /* LexinService */ = {
 			isa = PBXGroup;
 			children = (
-				2F97577822786F6F00B343B4 /* LexinServiceImpl.swift */,
 				176CC4ED2486AF900018444C /* LexinService.swift */,
-				2F266E8122AA8DBF0069D8B8 /* LexinServiceFormatterImpl.swift */,
 				176CC4F02486B3F40018444C /* LexinServiceFormatter.swift */,
 			);
 			path = LexinService;
@@ -622,7 +611,6 @@
 			isa = PBXGroup;
 			children = (
 				176CC4EB2486AEFD0018444C /* Lexin */,
-				2F9B8BB3232BB709000D6BC1 /* PlayerManagerImpl.swift */,
 				17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */,
 				2F18E2E223437097003F91FD /* CacheService.swift */,
 				2F1E1E7D23463434007C128B /* NetworkService.swift */,
@@ -858,7 +846,6 @@
 				2F97576A2277330500B343B4 /* DependencyManager.swift in Sources */,
 				2FF62C81228AA89400B4946C /* WordsViewModel.swift in Sources */,
 				2F393ACE233E255500F315FC /* DataCache.swift in Sources */,
-				2F266E8222AA8DBF0069D8B8 /* LexinServiceFormatterImpl.swift in Sources */,
 				2F5F8BBF2322A7DA00EF6A85 /* Player.swift in Sources */,
 				17A9BC7722B5284F002F769B /* Markdown.swift in Sources */,
 				2FDD05A123B0FBA90018F223 /* BookmarksViewModel.swift in Sources */,
@@ -881,11 +868,9 @@
 				17B6F9EF2487FC1200221DC0 /* PlayerManager.swift in Sources */,
 				2FDB6404238EA7B700948A52 /* Suggestion.swift in Sources */,
 				2FDB640D238EB42700948A52 /* LexinWord.swift in Sources */,
-				2F97577922786F6F00B343B4 /* LexinServiceImpl.swift in Sources */,
 				2F2EC4B422EB22FD00B1D4C7 /* SettingsTableViewController.swift in Sources */,
 				2FDCDBCF234F27DB00E6F15F /* WordsSuggestionTableViewController.swift in Sources */,
 				2F661B362272E16300C68A5F /* AppDelegate.swift in Sources */,
-				2F9B8BB4232BB709000D6BC1 /* PlayerManagerImpl.swift in Sources */,
 				2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */,
 				2FDB6407238EAC3D00948A52 /* SettingsLanguageItem.swift in Sources */,
 				2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */,
@@ -932,17 +917,14 @@
 				2F69AD0922F838C5001942E6 /* SettingsLanguageViewModelTests.swift in Sources */,
 				2F0D2B27237EA57B00F23F3B /* LexinApi.swift in Sources */,
 				2FF62C9C228E98EF00B4946C /* GeneratedMocks.swift in Sources */,
-				2F5F8BB02322879E00EF6A85 /* LexinServiceImpl.swift in Sources */,
 				2FDD05A523B10D0D0018F223 /* Bookmarks.swift in Sources */,
 				2F876F1D23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift in Sources */,
-				2F5F8BB12322879E00EF6A85 /* LexinServiceFormatterImpl.swift in Sources */,
 				2F7DA16723882CB400E91C71 /* LexinParserSuggestionTests.swift in Sources */,
 				17EB2813246DCCB000EE8B1D /* BookmarksViewModelTests.swift in Sources */,
 				2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */,
 				2FE7682022BCC30E00375292 /* LexinServiceFormatterTests.swift in Sources */,
 				2F90DD3E2355FA3800CE8560 /* LexinParserWords.swift in Sources */,
 				2F5F8BAD2322879900EF6A85 /* WordsViewModel.swift in Sources */,
-				2F9B8BB5233132BF000D6BC1 /* PlayerManagerImpl.swift in Sources */,
 				2F70647923B504350095DE9C /* FoundWord.swift in Sources */,
 				2F717B7D23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift in Sources */,
 				2FDB6408238EAC3D00948A52 /* SettingsLanguageItem.swift in Sources */,

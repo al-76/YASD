@@ -23,7 +23,7 @@ class WordsViewModel: ViewModel {
     
     struct Output {
         let foundWords: Driver<FoundWordResult>
-        let played: Driver<PlayerServiceResult>
+        let played: Driver<PlayerManagerResult>
         let bookmarked: Driver<StorageServiceResult>
         let loading: Driver<Bool>
     }
@@ -49,7 +49,7 @@ class WordsViewModel: ViewModel {
                 .asDriver { Driver.just(.failure($0)) }
         }
         let played = input.playUrl
-            .flatMapLatest { [weak self] url -> Driver<PlayerServiceResult> in
+            .flatMapLatest { [weak self] url -> Driver<PlayerManagerResult> in
                 guard let self = self else { return Driver.just(.success(false)) }
                 return self.player.playSound(with: url)
                     .asDriver { Driver.just(.failure($0)) }

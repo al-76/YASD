@@ -22,7 +22,7 @@ class BookmarksViewModel: ViewModel {
     }
     
     struct Output {
-        let played: Driver<PlayerServiceResult>
+        let played: Driver<PlayerManagerResult>
         let bookmarks: Driver<Bookmarks>
         let restored: Driver<String>
     }
@@ -42,7 +42,7 @@ class BookmarksViewModel: ViewModel {
             guard let self = self else { return Driver.just(.success([])) }
             return self.getBookmarks(with: word)
         }
-        let played = input.playUrl.flatMapLatest { [weak self] url -> Driver<PlayerServiceResult> in
+        let played = input.playUrl.flatMapLatest { [weak self] url -> Driver<PlayerManagerResult> in
             guard let self = self else { return Driver.just(.success(false)) }
             return self.player.playSound(with: url)
                 .asDriver { Driver.just(.failure($0)) }

@@ -1,5 +1,5 @@
 //
-//  MockPlayerServiceProvider.swift
+//  MockPlayerManagerProvider.swift
 //  YASDTests
 //
 //  Created by Vyacheslav Konopkin on 14.05.2020.
@@ -16,15 +16,15 @@ extension MockFactory {
         case error
     }
     
-    static func createMockPlayerService() -> MockPlayerManager {
-        return createMockPlayerService(errorUrl: "", error: SomeError.error)
+    static func createMockPlayerManager() -> MockPlayerManager {
+        return createMockPlayerManager(errorUrl: "", error: SomeError.error)
     }
     
-    static func createMockPlayerService(errorUrl: String, error: Error) -> MockPlayerManager {
+    static func createMockPlayerManager(errorUrl: String, error: Error) -> MockPlayerManager {
         let mock = MockPlayerManager()
         stub(mock) { stub in
             when(stub.playSound(with: anyString())).then { stringUrl in
-                return Observable<PlayerServiceResult>.create {
+                return Observable<PlayerManagerResult>.create {
                     observable in
                     if stringUrl == errorUrl {
                         observable.on(.error(error))
