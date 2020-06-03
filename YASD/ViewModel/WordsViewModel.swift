@@ -11,7 +11,7 @@ import RxCocoa
 
 class WordsViewModel: ViewModel {
     private let words: WordsService
-    private let player: PlayerService
+    private let player: PlayerManager
     private let bookmarks: StorageService<FormattedWord>
     
     struct Input {
@@ -28,7 +28,7 @@ class WordsViewModel: ViewModel {
         let loading: Driver<Bool>
     }
     
-    init(words: WordsService, player: PlayerService, bookmarks: StorageService<FormattedWord>) {
+    init(words: WordsService, player: PlayerManager, bookmarks: StorageService<FormattedWord>) {
         self.words = words
         self.player = player
         self.bookmarks = bookmarks

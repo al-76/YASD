@@ -102,8 +102,8 @@ func configureService(_ container: Container) {
     .inObjectScope(.container)
     
     // Player Service
-    container.register(PlayerService.self) { _ in
-        PlayerService(player: container.resolve(Player.self)!,
+    container.register(PlayerManagerImpl.self) { _ in
+        PlayerManagerImpl(player: container.resolve(Player.self)!,
                       cache: container.resolve(CacheService.self)!,
                       network: container.resolve(Network.self)!)
     }
@@ -157,7 +157,7 @@ func configureModel(_ container: Container) {
     
     container.register(WordsViewModel.self) { container in
         WordsViewModel(words: container.resolve(WordsService.self)!,
-                       player: container.resolve(PlayerService.self)!,
+                       player: container.resolve(PlayerManagerImpl.self)!,
                        bookmarks: container.resolve(StorageService<FormattedWord>.self)!)
     }
     .inObjectScope(.container)
@@ -174,7 +174,7 @@ func configureModel(_ container: Container) {
     
     container.register(BookmarksViewModel.self) { container in
         BookmarksViewModel(bookmarks: container.resolve(StorageService<FormattedWord>.self)!,
-                           player: container.resolve(PlayerService.self)!,
+                           player: container.resolve(PlayerManagerImpl.self)!,
                            spotlight: container.resolve(Spotlight.self)!)
     }
     .inObjectScope(.container)

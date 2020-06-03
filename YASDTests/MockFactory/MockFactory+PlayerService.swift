@@ -16,12 +16,12 @@ extension MockFactory {
         case error
     }
     
-    static func createMockPlayerService() -> MockPlayerService {
+    static func createMockPlayerService() -> MockPlayerManager {
         return createMockPlayerService(errorUrl: "", error: SomeError.error)
     }
     
-    static func createMockPlayerService(errorUrl: String, error: Error) -> MockPlayerService {
-        let mock = MockPlayerService(player: MockPlayer(), cache: MockCacheService(cache: MockDataCache(name: "test")), network: MockNetwork())
+    static func createMockPlayerService(errorUrl: String, error: Error) -> MockPlayerManager {
+        let mock = MockPlayerManager()
         stub(mock) { stub in
             when(stub.playSound(with: anyString())).then { stringUrl in
                 return Observable<PlayerServiceResult>.create {

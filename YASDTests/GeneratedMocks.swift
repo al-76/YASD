@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Model/FormattedWord.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  FormattedWord.swift
@@ -13,7 +13,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Model/Lexin/LexinWord.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  LexinWord.swift
@@ -28,7 +28,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Model/ParametersStorage.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  ParametersStorage.swift
@@ -224,7 +224,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Model/Suggestion.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  Suggestion.swift
@@ -239,7 +239,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  DataCache.swift
@@ -377,7 +377,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2020-06-03 15:47:50 +0000
 
 
 //
@@ -696,7 +696,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  MarkdownParser.swift
@@ -803,7 +803,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  Network.swift
@@ -940,7 +940,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  Player.swift
@@ -1091,7 +1091,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Spotlight.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Spotlight.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  Spotlight.swift
@@ -1230,7 +1230,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Storage.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  Storage.swift
@@ -1366,7 +1366,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/CacheService.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  CacheService.swift
@@ -1473,7 +1473,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinApi/LexinApi.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinApi/LexinApi.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  LexinApi.swift
@@ -1609,7 +1609,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinApi/LexinApiProvider.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinApi/LexinApiProvider.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  LexinApiProvider.swift
@@ -1715,7 +1715,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinParser/LexinParserSuggestion.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinParser/LexinParserSuggestion.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  LexinServiceProviderSuggestion.swift
@@ -2093,7 +2093,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinParser/LexinParserWords.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinParser/LexinParserWords.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  LexinServiceProviderWords.swift
@@ -2592,7 +2592,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinService/LexinService.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinService/LexinService.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  LexinService.swift
@@ -2759,7 +2759,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinService/LexinServiceFormatter.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/Lexin/LexinService/LexinServiceFormatter.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  LexinServiceFormatter.swift
@@ -2865,7 +2865,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/NetworkService.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  NetworkService.swift
@@ -3002,14 +3002,14 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/PlayerService.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/PlayerManager.swift at 2020-06-03 15:47:50 +0000
 
 //
-//  PlayerService.swift
+//  PlayerManagerI.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 13/09/2019.
-//  Copyright © 2019 yac. All rights reserved.
+//  Created by Vyacheslav Konopkin on 03.06.2020.
+//  Copyright © 2020 yac. All rights reserved.
 //
 
 import Cuckoo
@@ -3019,19 +3019,19 @@ import Foundation
 import RxSwift
 
 
- class MockPlayerService: PlayerService, Cuckoo.ClassMock {
+ class MockPlayerManager: PlayerManager, Cuckoo.ProtocolMock {
     
-     typealias MocksType = PlayerService
+     typealias MocksType = PlayerManager
     
-     typealias Stubbing = __StubbingProxy_PlayerService
-     typealias Verification = __VerificationProxy_PlayerService
+     typealias Stubbing = __StubbingProxy_PlayerManager
+     typealias Verification = __VerificationProxy_PlayerManager
 
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
 
     
-    private var __defaultImplStub: PlayerService?
+    private var __defaultImplStub: PlayerManager?
 
-     func enableDefaultImplementation(_ stub: PlayerService) {
+     func enableDefaultImplementation(_ stub: PlayerManager) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
@@ -3044,21 +3044,21 @@ import RxSwift
     
     
     
-     override func playSound(with url: String) -> Observable<PlayerServiceResult> {
+     func playSound(with url: String) -> Observable<PlayerServiceResult> {
         
     return cuckoo_manager.call("playSound(with: String) -> Observable<PlayerServiceResult>",
             parameters: (url),
             escapingParameters: (url),
             superclassCall:
                 
-                super.playSound(with: url)
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
             defaultCall: __defaultImplStub!.playSound(with: url))
         
     }
     
 
-	 struct __StubbingProxy_PlayerService: Cuckoo.StubbingProxy {
+	 struct __StubbingProxy_PlayerManager: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	
 	     init(manager: Cuckoo.MockManager) {
@@ -3066,14 +3066,14 @@ import RxSwift
 	    }
 	    
 	    
-	    func playSound<M1: Cuckoo.Matchable>(with url: M1) -> Cuckoo.ClassStubFunction<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
+	    func playSound<M1: Cuckoo.Matchable>(with url: M1) -> Cuckoo.ProtocolStubFunction<(String), Observable<PlayerServiceResult>> where M1.MatchedType == String {
 	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: url) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerService.self, method: "playSound(with: String) -> Observable<PlayerServiceResult>", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockPlayerManager.self, method: "playSound(with: String) -> Observable<PlayerServiceResult>", parameterMatchers: matchers))
 	    }
 	    
 	}
 
-	 struct __VerificationProxy_PlayerService: Cuckoo.VerificationProxy {
+	 struct __VerificationProxy_PlayerManager: Cuckoo.VerificationProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	    private let callMatcher: Cuckoo.CallMatcher
 	    private let sourceLocation: Cuckoo.SourceLocation
@@ -3096,20 +3096,20 @@ import RxSwift
 	}
 }
 
- class PlayerServiceStub: PlayerService {
+ class PlayerManagerStub: PlayerManager {
     
 
     
 
     
-     override func playSound(with url: String) -> Observable<PlayerServiceResult>  {
+     func playSound(with url: String) -> Observable<PlayerServiceResult>  {
         return DefaultValueRegistry.defaultValue(for: (Observable<PlayerServiceResult>).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/SettingsLanguageService.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/SettingsLanguageService.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  SettingsLanguageService.swift
@@ -3245,7 +3245,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/StorageService.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/StorageService.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  StorageService.swift
@@ -3472,7 +3472,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Service/WordsService.swift at 2020-06-02 17:40:05 +0000
+// MARK: - Mocks generated from file: YASD/Service/WordsService.swift at 2020-06-03 15:47:50 +0000
 
 //
 //  WordsService.swift

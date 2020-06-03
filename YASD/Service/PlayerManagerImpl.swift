@@ -11,7 +11,7 @@ import Foundation
 
 typealias PlayerServiceResult = Result<Bool>
 
-class PlayerService {
+class PlayerManagerImpl: PlayerManager {
     private let player: Player
     private let cache: CacheService
     private let network: Network

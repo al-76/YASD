@@ -1,5 +1,5 @@
 //
-//  PlayerServiceTests.swift
+//  PlayerManagerTests.swift
 //  YASDTests
 //
 //  Created by Vyacheslav Konopkin on 27/09/2019.
@@ -12,7 +12,7 @@ import RxSwift
 import RxTest
 import Cuckoo
 
-class PlayerServiceTests: XCTestCase {
+class PlayerManagerTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
@@ -20,7 +20,7 @@ class PlayerServiceTests: XCTestCase {
     func testPlaySound() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        let service = PlayerService(player: createMockPlayer(),
+        let service = PlayerManagerImpl(player: createMockPlayer(),
                                     cache: createMockCacheService(),
                                     network: createMockNetwork())
         
@@ -38,7 +38,7 @@ class PlayerServiceTests: XCTestCase {
     func testPlaySoundSelfNil() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        var service: PlayerService? = PlayerService(player: createMockPlayer(),
+        var service: PlayerManager? = PlayerManagerImpl(player: createMockPlayer(),
                                                     cache: createMockCacheService(),
                                                     network: createMockNetwork())
         
@@ -57,7 +57,7 @@ class PlayerServiceTests: XCTestCase {
     func testPlaySoundPlayerError() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        let service = PlayerService(player: createMockPlayerError(),
+        let service = PlayerManagerImpl(player: createMockPlayerError(),
                                     cache: createMockCacheService(),
                                     network: createMockNetwork())
         
@@ -75,7 +75,7 @@ class PlayerServiceTests: XCTestCase {
     func testPlaySoundPlayerNetworkError() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        let service = PlayerService(player: createMockPlayer(),
+        let service = PlayerManagerImpl(player: createMockPlayer(),
                                     cache: createMockCacheService(),
                                     network: createMockNetworkError())
         
