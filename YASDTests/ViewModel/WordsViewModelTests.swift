@@ -218,8 +218,7 @@ class WordsViewModelTests: XCTestCase {
     
     private func createMockWordsService(whenError errorWord: String) -> MockWordsService {
         let stubParameters = createParametersStorageStub()
-        let stubLexin = LexinServiceStub()
-        let mock = MockWordsService(lexin: stubLexin,
+        let mock = MockWordsService(lexin: LexinRepositoryStub(),
                                     formatter: LexinServiceFormatterStub(),
                                     bookmarks: createBookmarksStub())
         stub(mock) { stub in

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class WordsSuggestionViewModel: ViewModel {
-    private let lexin: LexinService
+    private let lexin: LexinRepository
     private let history: StorageService<Suggestion>
     
     struct Input {
@@ -23,7 +23,7 @@ class WordsSuggestionViewModel: ViewModel {
         let suggestions: Driver<SuggestionItemResult>
     }
     
-    init(lexin: LexinService, history: StorageService<Suggestion>) {
+    init(lexin: LexinRepository, history: StorageService<Suggestion>) {
         self.lexin = lexin
         self.history = history
     }

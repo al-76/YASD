@@ -29,7 +29,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(250, "test3")
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
-        let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: errorWord),
+        let viewModel = WordsSuggestionViewModel(lexin: createMockLexinRepository(whenError: errorWord),
                                                  history: TestStorageService(value: []))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
                                                                  addHistory: Driver.never(),
@@ -56,7 +56,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: "")
         let initialValue = ["test2", "test3_abc", "test3_cde", "some_words"]
         let result = scheduler.createObserver(SuggestionItemResult.self)
-        let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: ""),
+        let viewModel = WordsSuggestionViewModel(lexin: createMockLexinRepository(whenError: ""),
                                                  history: TestStorageService(value: initialValue))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
                                                                  addHistory: Driver.never(),
@@ -85,7 +85,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(250, "test3")
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
-        let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
+        let viewModel = WordsSuggestionViewModel(lexin: createMockLexinRepository(whenError: "error_word"),
                                                  history: TestStorageService(value: []))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.never(),
                                                                  addHistory: historyWords, removeHistory: Driver.never()))
@@ -109,7 +109,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(200, "test3")
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
-        let viewModel = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
+        let viewModel = WordsSuggestionViewModel(lexin: createMockLexinRepository(whenError: "error_word"),
                                                  history: TestStorageService(value: ["test2", "test3"]))
         viewModel.transform(from: WordsSuggestionViewModel.Input(search: Driver.just(""),
                                                                  addHistory: Driver.never(),
@@ -148,7 +148,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .completed(500)
         ]).asDriver(onErrorJustReturn: "")
         let result = scheduler.createObserver(SuggestionItemResult.self)
-        var viewModel: WordsSuggestionViewModel? = WordsSuggestionViewModel(lexin: createMockLexinService(whenError: "error_word"),
+        var viewModel: WordsSuggestionViewModel? = WordsSuggestionViewModel(lexin: createMockLexinRepository(whenError: "error_word"),
                                                                             history: TestStorageService(value: []))
         let transform = viewModel?.transform(from: WordsSuggestionViewModel.Input(search: inputWords,
                                                                                   addHistory: inputWords,
@@ -172,9 +172,9 @@ class WordsSuggestionViewModelTests: XCTestCase {
         ])
     }
     
-    func createMockLexinService(whenError errorWord: String) -> MockLexinService {
+    func createMockLexinRepository(whenError errorWord: String) -> MockLexinRepository {
         let stubParameters = createParametersStorageStub()
-        let mock = MockLexinService()
+        let mock = MockLexinRepository()
         stub(mock) { stub in
             when(stub.language()).thenReturn(stubParameters.language)
             when(stub.suggestion(any())).then { word in

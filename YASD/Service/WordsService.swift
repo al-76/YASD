@@ -9,11 +9,11 @@
 import RxSwift
 
 class WordsService {
-    private let lexin: LexinService
+    private let lexin: LexinRepository
     private let formatter: LexinServiceFormatter
     private let bookmarks: StorageService<FormattedWord>
     
-    init(lexin: LexinService, formatter: LexinServiceFormatter, bookmarks: StorageService<FormattedWord>) {
+    init(lexin: LexinRepository, formatter: LexinServiceFormatter, bookmarks: StorageService<FormattedWord>) {
         self.lexin = lexin
         self.formatter = formatter
         self.bookmarks = bookmarks

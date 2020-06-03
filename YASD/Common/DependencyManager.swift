@@ -116,9 +116,9 @@ func configureService(_ container: Container) {
     }
     .inObjectScope(.container)
     
-    // Lexin Service
-    container.register(LexinServiceImpl.self) { _ in
-        LexinServiceImpl(parameters: container.resolve(ParametersStorage.self)!,
+    // Lexin Repository
+    container.register(LexinRepositoryImpl.self) { _ in
+        LexinRepositoryImpl(parameters: container.resolve(ParametersStorage.self)!,
                      provider: container.resolve(LexinApiProvider.self)!)
     }
     .inObjectScope(.container)
@@ -135,7 +135,7 @@ func configureService(_ container: Container) {
     
     // Words Service
     container.register(WordsService.self) { _ in
-        WordsService(lexin: container.resolve(LexinServiceImpl.self)!,
+        WordsService(lexin: container.resolve(LexinRepositoryImpl.self)!,
                      formatter: container.resolve(LexinServiceFormatterImpl.self)!,
                      bookmarks: container.resolve(StorageService<FormattedWord>.self)!)
     }
@@ -150,7 +150,7 @@ func configureService(_ container: Container) {
 
 func configureModel(_ container: Container) {
     container.register(WordsSuggestionViewModel.self) { container in
-        WordsSuggestionViewModel(lexin: container.resolve(LexinServiceImpl.self)!,
+        WordsSuggestionViewModel(lexin: container.resolve(LexinRepositoryImpl.self)!,
                                  history: container.resolve(StorageService<Suggestion>.self)!)
     }
     .inObjectScope(.container)
