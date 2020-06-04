@@ -1,5 +1,5 @@
 //
-//  LexinRepository.swift
+//  LexinService.swift
 //  YASD
 //
 //  Created by Vyacheslav Konopkin on 02.06.2020.
@@ -9,13 +9,13 @@
 import RxSwift
 import Foundation
 
-protocol LexinRepository {
+protocol LexinService {
     func search(_ word: String) -> Observable<LexinWordResult>
     func suggestion(_ word: String) -> Observable<SuggestionResult>
     func language() -> BehaviorSubject<Language>
 }
 
-class LexinRepositoryImpl: LexinRepository {
+class LexinServiceImpl: LexinService {
     private let parameters: ParametersStorage
     private let provider: LexinApiProvider
 

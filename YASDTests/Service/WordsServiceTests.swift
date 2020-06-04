@@ -22,7 +22,7 @@ class WordsServiceTests: XCTestCase {
         // Arrange
         let testData = "test"
         let scheduler = TestScheduler(initialClock: 0)
-        let service = WordsService(lexin: createMockLexinRepository(),
+        let service = WordsService(lexin: createMockLexinService(),
                                    formatter: createMockLexinServiceFormatter(),
                                    bookmarks: createBookmarksStub())
         
@@ -40,7 +40,7 @@ class WordsServiceTests: XCTestCase {
     func testSearchError() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        let service = WordsService(lexin: createMockLexinRepositoryError(),
+        let service = WordsService(lexin: createMockLexinServiceError(),
                                    formatter: createMockLexinServiceFormatter(),
                                    bookmarks: createBookmarksStub())
         
@@ -58,7 +58,7 @@ class WordsServiceTests: XCTestCase {
     func testLanguage() {
         // Arrange
         let scheduler = TestScheduler(initialClock: 0)
-        let service = WordsService(lexin: createMockLexinRepository(),
+        let service = WordsService(lexin: createMockLexinService(),
                                    formatter: createMockLexinServiceFormatter(),
                                    bookmarks: createBookmarksStub())
         
@@ -69,9 +69,20 @@ class WordsServiceTests: XCTestCase {
         // Assert
         XCTAssertFalse(res.events.isEmpty)
     }
+
+    private func createBaseMockLexinService() -> MockLexinService {
+//        let stubParameters = createParametersStorageStub()
+//        let mockNetwork = MockNetworkService(cache: MockCacheService(cache: MockDataCache(name: "Test")),
+//                                             network: MockNetwork())
+//        let mockApi = MockLexinApi(network: mockNetwork,
+//                                   parserWords: MockLexinParserWords(),
+//                                   parserSuggestions: MockLexinParserSuggestion())
+//        let mockProvider = MockLexinApiProvider(defaultApi: mockApi, folketsApi: mockApi, swedishApi: mockApi)
+        return MockLexinService()
+    }
     
-    private func createMockLexinRepository() -> MockLexinRepository {
-        let mock = MockLexinRepository()
+    private func createMockLexinService() -> MockLexinService {
+        let mock = createBaseMockLexinService()
         stub(mock) { stub in
             when(stub.language()).thenReturn(BehaviorSubject(value: ParametersStorage.defaultLanguage))
             when(stub.search(any())).then { word in
@@ -85,8 +96,8 @@ class WordsServiceTests: XCTestCase {
         return mock
     }
     
-    private func createMockLexinRepositoryError() -> MockLexinRepository {
-        let mock = MockLexinRepository()
+    private func createMockLexinServiceError() -> MockLexinService {
+        let mock = createBaseMockLexinService()
         stub(mock) { stub in
             when(stub.search(any())).then { word in
                 return Observable<LexinWordResult>.create { observable in

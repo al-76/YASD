@@ -17,10 +17,10 @@ class LexinServiceTests: XCTestCase {
         // Arrange
         let testData = LexinWordResult.success([LexinWord(word: "test")])
         let scheduler = TestScheduler(initialClock: 0)
-        let lexin = createLexinRepository(createMockApiSearch(testData))
+        let service = createLexinService(createMockApiSearch(testData))
         
         // Act
-        let found = lexin.search("test")
+        let found = service.search("test")
         let res = scheduler.start { found }
         
         // Assert
@@ -34,10 +34,10 @@ class LexinServiceTests: XCTestCase {
         // Arrange
         let testData = SuggestionResult.success(["Test"])
         let scheduler = TestScheduler(initialClock: 0)
-        let lexin = createLexinRepository(createMockApiSuggestion(testData))
+        let service = createLexinService(createMockApiSuggestion(testData))
         
         // Act
-        let found = lexin.suggestion("test")
+        let found = service.suggestion("test")
         let res = scheduler.start { found }
         
         // Assert
@@ -47,8 +47,8 @@ class LexinServiceTests: XCTestCase {
            ])
     }
 
-    private func createLexinRepository(_ lexinApi: LexinApi) -> LexinRepository {
-        return LexinRepositoryImpl(parameters: ParametersStorage(storage: createMockStorage(),
+    private func createLexinService(_ lexinApi: LexinApi) -> LexinService {
+        return LexinServiceImpl(parameters: ParametersStorage(storage: createMockStorage(),
                                                           language: Language(name: "test", code: "test")),
                             provider: createMockLexinApiProvider(lexinApi))
     }
