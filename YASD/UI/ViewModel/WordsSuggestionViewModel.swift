@@ -10,8 +10,8 @@ import RxSwift
 import RxCocoa
 
 class WordsSuggestionViewModel: ViewModel {
-    private let lexin: LexinService
-    private let history: StorageService<Suggestion>
+    private let suggestions: SuggestionService
+    private let history: StorageRepository<Suggestion>
     
     struct Input {
         let search: Driver<String>
@@ -23,8 +23,8 @@ class WordsSuggestionViewModel: ViewModel {
         let suggestions: Driver<SuggestionItemResult>
     }
     
-    init(lexin: LexinService, history: StorageService<Suggestion>) {
-        self.lexin = lexin
+    init(suggestions: SuggestionService, history: StorageRepository<Suggestion>) {
+        self.suggestions = suggestions
         self.history = history
     }
     
@@ -51,7 +51,7 @@ class WordsSuggestionViewModel: ViewModel {
     }
     
     private func getSuggestionAndHistory(_ word: String) -> Driver<SuggestionItemResult> {
-        return Observable.combineLatest(lexin.suggestion(word),
+        return Observable.combineLatest(suggestions.search(word),
                                         history.get(where: { $0?.starts(with: word) ?? false }),
                                         resultSelector: { suggestion, history in
                                             let filtered = suggestion.filter(history).toItem(removable: false)

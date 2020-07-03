@@ -1,21 +1,15 @@
 //
-//  PlayerManagerI.swift
+//  DefaultPlayerManager.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 03.06.2020.
+//  Created by Vyacheslav Konopkin on 28.06.2020.
 //  Copyright © 2020 yac. All rights reserved.
 //
 
 import RxSwift
 import Foundation
 
-typealias PlayerManagerResult = Result<Bool>
-
-protocol PlayerManager {
-    func playSound(with url: String) -> Observable<PlayerManagerResult>
-}
-
-class PlayerManagerImpl: PlayerManager {
+class DefaultPlayerManager: PlayerManager {
     private let player: Player
     private let cache: CacheService
     private let network: Network

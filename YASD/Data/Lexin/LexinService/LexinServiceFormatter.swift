@@ -8,11 +8,7 @@
 
 import Foundation
 
-protocol LexinServiceFormatter {
-    func format(result: LexinWordResult) -> FormattedWordResult
-}
-
-class LexinServiceFormatterImpl: LexinServiceFormatter {
+class LexinServiceFormatter {
     private let markdown: Markdown
     
     init(markdown: Markdown) {

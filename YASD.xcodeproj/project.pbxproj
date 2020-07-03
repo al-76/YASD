@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17233CBE24A906840049D914 /* WordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17233CBD24A906840049D914 /* WordsService.swift */; };
+		17233CC124A919D40049D914 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17233CC024A919D40049D914 /* Mapper.swift */; };
+		17233CC324A935A80049D914 /* DefaultPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17233CC224A935A80049D914 /* DefaultPlayerManager.swift */; };
+		17233CCA24AFD7AC0049D914 /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17233CC924AFD7AB0049D914 /* DependencyManager.swift */; };
 		17260B7E24660139002F730A /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17260B7D24660138002F730A /* AboutViewController.swift */; };
 		17260B8224661338002F730A /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17260B8124661338002F730A /* Spotlight.swift */; };
-		176CC4EE2486AF900018444C /* LexinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC4ED2486AF900018444C /* LexinService.swift */; };
-		176CC4EF2486AF900018444C /* LexinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC4ED2486AF900018444C /* LexinService.swift */; };
+		176CC4EE2486AF900018444C /* SuggestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC4ED2486AF900018444C /* SuggestionService.swift */; };
+		176CC4EF2486AF900018444C /* SuggestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC4ED2486AF900018444C /* SuggestionService.swift */; };
 		176CC4F12486B3F40018444C /* LexinServiceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC4F02486B3F40018444C /* LexinServiceFormatter.swift */; };
 		176CC4F22486B3F40018444C /* LexinServiceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC4F02486B3F40018444C /* LexinServiceFormatter.swift */; };
 		176F223B244E1CC60058AAAE /* Cache.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F36F4562342544D00B88649 /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -20,9 +24,11 @@
 		17A9BC7722B5284F002F769B /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7622B5284F002F769B /* Markdown.swift */; };
 		17B6F9EF2487FC1200221DC0 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */; };
 		17B6F9F02487FC1200221DC0 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */; };
+		17B6F9F52489814800221DC0 /* LexinDictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */; };
+		17B6F9F62489820300221DC0 /* LexinDictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */; };
 		17B9B244240A84AA007FDC47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B9B242240A84AA007FDC47 /* Localizable.strings */; };
-		17C1527A23B53B4600EACA94 /* WordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* WordsService.swift */; };
-		17C1527B23B53B4600EACA94 /* WordsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* WordsService.swift */; };
+		17C1527A23B53B4600EACA94 /* LexinWordMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* LexinWordMapper.swift */; };
+		17C1527B23B53B4600EACA94 /* LexinWordMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* LexinWordMapper.swift */; };
 		17C1527D23B5498800EACA94 /* WordsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527C23B5498800EACA94 /* WordsServiceTests.swift */; };
 		17C1528023BF91A800EACA94 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */; };
 		17EB2810246DC87800EE8B1D /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17260B8124661338002F730A /* Spotlight.swift */; };
@@ -48,8 +54,8 @@
 		2F2EC4B622EB259000B1D4C7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2EC4B522EB259000B1D4C7 /* SettingsViewModel.swift */; };
 		2F31739D22CCF84A008944EE /* SettingsLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F31739C22CCF84A008944EE /* SettingsLanguageViewModel.swift */; };
 		2F31739F22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F31739E22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift */; };
-		2F3401D523912149005FBD39 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3401D423912149005FBD39 /* StorageService.swift */; };
-		2F3401D623912149005FBD39 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3401D423912149005FBD39 /* StorageService.swift */; };
+		2F3401D523912149005FBD39 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3401D423912149005FBD39 /* StorageRepository.swift */; };
+		2F3401D623912149005FBD39 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3401D423912149005FBD39 /* StorageRepository.swift */; };
 		2F36F4572342544D00B88649 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F36F4562342544D00B88649 /* Cache.framework */; };
 		2F393ACC233E118100F315FC /* PlayerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F393ACB233E118100F315FC /* PlayerManagerTests.swift */; };
 		2F393ACE233E255500F315FC /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F393ACD233E255500F315FC /* DataCache.swift */; };
@@ -95,7 +101,6 @@
 		2F90DD3D2355FA2300CE8560 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
 		2F90DD3E2355FA3800CE8560 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
 		2F90DD402355FC1B00CE8560 /* LexinParserSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */; };
-		2F97576A2277330500B343B4 /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9757692277330500B343B4 /* DependencyManager.swift */; };
 		2F9757762277474200B343B4 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F9757702277474200B343B4 /* RxSwift.framework */; };
 		2F9B8BB62333C612000D6BC1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F8BBE2322A7DA00EF6A85 /* Player.swift */; };
 		2FA5040323CCC00D004DA580 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */; };
@@ -183,18 +188,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		17233CBD24A906840049D914 /* WordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsService.swift; sourceTree = "<group>"; };
+		17233CC024A919D40049D914 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
+		17233CC224A935A80049D914 /* DefaultPlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPlayerManager.swift; sourceTree = "<group>"; };
+		17233CC924AFD7AB0049D914 /* DependencyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
 		17260B7D24660138002F730A /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		17260B8124661338002F730A /* Spotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
-		176CC4ED2486AF900018444C /* LexinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinService.swift; sourceTree = "<group>"; };
+		176CC4ED2486AF900018444C /* SuggestionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionService.swift; sourceTree = "<group>"; };
 		176CC4F02486B3F40018444C /* LexinServiceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceFormatter.swift; sourceTree = "<group>"; };
 		17A9BC7422B5273B002F769B /* HtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlParser.swift; sourceTree = "<group>"; };
 		17A9BC7622B5284F002F769B /* Markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
 		17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerManager.swift; sourceTree = "<group>"; };
+		17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinDictionaryService.swift; sourceTree = "<group>"; };
 		17B9B23C240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
 		17B9B23D240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17B9B243240A84AA007FDC47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = YASD/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B9B245240A84B0007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = YASD/sv.lproj/Localizable.strings; sourceTree = "<group>"; };
-		17C1527923B53B4600EACA94 /* WordsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsService.swift; sourceTree = "<group>"; };
+		17C1527923B53B4600EACA94 /* LexinWordMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinWordMapper.swift; sourceTree = "<group>"; };
 		17C1527C23B5498800EACA94 /* WordsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsServiceTests.swift; sourceTree = "<group>"; };
 		17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		17EB2812246DCCB000EE8B1D /* BookmarksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewModelTests.swift; sourceTree = "<group>"; };
@@ -214,7 +224,7 @@
 		2F2EC4B522EB259000B1D4C7 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		2F31739C22CCF84A008944EE /* SettingsLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewModel.swift; sourceTree = "<group>"; };
 		2F31739E22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageTableViewCell.swift; sourceTree = "<group>"; };
-		2F3401D423912149005FBD39 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		2F3401D423912149005FBD39 /* StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRepository.swift; sourceTree = "<group>"; };
 		2F36F4562342544D00B88649 /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = "<group>"; };
 		2F393ACB233E118100F315FC /* PlayerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerManagerTests.swift; sourceTree = "<group>"; };
 		2F393ACD233E255500F315FC /* DataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCache.swift; sourceTree = "<group>"; };
@@ -250,7 +260,6 @@
 		2F876F1C23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionItem+Extensions.swift"; sourceTree = "<group>"; };
 		2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserWords.swift; sourceTree = "<group>"; };
 		2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserSuggestion.swift; sourceTree = "<group>"; };
-		2F9757692277330500B343B4 /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
 		2F97576B2277474200B343B4 /* RxAtomic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAtomic.framework; path = Carthage/Build/iOS/RxAtomic.framework; sourceTree = "<group>"; };
 		2F97576C2277474200B343B4 /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
 		2F97576E2277474200B343B4 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
@@ -326,14 +335,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		176CC4EB2486AEFD0018444C /* Lexin */ = {
+		17233CBF24A919C80049D914 /* Mapper */ = {
 			isa = PBXGroup;
 			children = (
-				17FC6BA2237FFBC400279589 /* LexinParser */,
-				2F1E1E7B23462D75007C128B /* LexinService */,
-				2F0D2B21237E9B9E00F23F3B /* LexinApi */,
+				17233CC024A919D40049D914 /* Mapper.swift */,
 			);
-			path = Lexin;
+			path = Mapper;
 			sourceTree = "<group>";
 		};
 		176CC4EC2486AF180018444C /* Lexin */ = {
@@ -358,6 +365,15 @@
 				17260B8124661338002F730A /* Spotlight.swift */,
 			);
 			path = Platform;
+			sourceTree = "<group>";
+		};
+		17B6F9F324896EEB00221DC0 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2FF62C86228D4B0400B4946C /* ViewModel */,
+				2FF62C85228D4AFF00B4946C /* View */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		17C1527E23BF91A700EACA94 /* Contrib */ = {
@@ -407,7 +423,6 @@
 		2F1E1E7B23462D75007C128B /* LexinService */ = {
 			isa = PBXGroup;
 			children = (
-				176CC4ED2486AF900018444C /* LexinService.swift */,
 				176CC4F02486B3F40018444C /* LexinServiceFormatter.swift */,
 			);
 			path = LexinService;
@@ -475,10 +490,9 @@
 				17C1527E23BF91A700EACA94 /* Contrib */,
 				2FF62C88228D4B3900B4946C /* Common */,
 				17A9BC7322B5271D002F769B /* Platform */,
-				2FF62C87228D4B2B00B4946C /* Service */,
-				2F7DA16423857DCD00E91C71 /* Model */,
-				2FF62C85228D4AFF00B4946C /* View */,
-				2FF62C86228D4B0400B4946C /* ViewModel */,
+				2FF62C87228D4B2B00B4946C /* Domain */,
+				17B6F9F324896EEB00221DC0 /* UI */,
+				2F7DA16423857DCD00E91C71 /* Data */,
 				2FDCDBD3234F64A400E6F15F /* Utils */,
 				2F661B3B2272E16300C68A5F /* Main.storyboard */,
 				2F661B3E2272E16400C68A5F /* Assets.xcassets */,
@@ -524,18 +538,24 @@
 			path = LexinParser;
 			sourceTree = "<group>";
 		};
-		2F7DA16423857DCD00E91C71 /* Model */ = {
+		2F7DA16423857DCD00E91C71 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				17233CBF24A919C80049D914 /* Mapper */,
 				2FDB640F238EB42E00948A52 /* Lexin */,
+				2F3401D423912149005FBD39 /* StorageRepository.swift */,
+				17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */,
+				2F18E2E223437097003F91FD /* CacheService.swift */,
 				2FDB6400238EA5C400948A52 /* FormattedWord.swift */,
 				2FDB6403238EA7B700948A52 /* Suggestion.swift */,
 				2FDB6406238EAC3D00948A52 /* SettingsLanguageItem.swift */,
 				2FDB6409238EACBC00948A52 /* ParametersStorage.swift */,
 				2FDD05A323B10D0D0018F223 /* Bookmarks.swift */,
 				2F2980C823B3866C004F7FA9 /* FoundWord.swift */,
+				17233CC224A935A80049D914 /* DefaultPlayerManager.swift */,
+				2F1E1E7D23463434007C128B /* NetworkService.swift */,
 			);
-			path = Model;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		2F97575A22772FED00B343B4 /* Frameworks */ = {
@@ -563,7 +583,12 @@
 		2FDB640F238EB42E00948A52 /* Lexin */ = {
 			isa = PBXGroup;
 			children = (
+				17FC6BA2237FFBC400279589 /* LexinParser */,
+				2F1E1E7B23462D75007C128B /* LexinService */,
+				2F0D2B21237E9B9E00F23F3B /* LexinApi */,
+				17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */,
 				2FDB640C238EB42700948A52 /* LexinWord.swift */,
+				17C1527923B53B4600EACA94 /* LexinWordMapper.swift */,
 			);
 			path = Lexin;
 			sourceTree = "<group>";
@@ -607,25 +632,21 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		2FF62C87228D4B2B00B4946C /* Service */ = {
+		2FF62C87228D4B2B00B4946C /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				176CC4EB2486AEFD0018444C /* Lexin */,
-				17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */,
-				2F18E2E223437097003F91FD /* CacheService.swift */,
-				2F1E1E7D23463434007C128B /* NetworkService.swift */,
-				2F3401D423912149005FBD39 /* StorageService.swift */,
-				17C1527923B53B4600EACA94 /* WordsService.swift */,
+				176CC4ED2486AF900018444C /* SuggestionService.swift */,
 				2F717B7723B5F81A00ED2EA8 /* SettingsLanguageService.swift */,
+				17233CBD24A906840049D914 /* WordsService.swift */,
 			);
-			path = Service;
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		2FF62C88228D4B3900B4946C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				17233CC924AFD7AB0049D914 /* DependencyManager.swift */,
 				2F661B352272E16300C68A5F /* AppDelegate.swift */,
-				2F9757692277330500B343B4 /* DependencyManager.swift */,
 				2FDEFF5E2295494200A82F43 /* Result.swift */,
 				17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */,
 			);
@@ -821,7 +842,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PROJECT_DIR}/Carthage/Checkouts/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Model/FormattedWord.swift\" \\\n\"${INPUT_DIR}/Model/Suggestion.swift\" \\\n\"${INPUT_DIR}/Model/SettingsItem.swift\" \\\n\"${INPUT_DIR}/Model/ParametersStorage.swift\" \\\n\"${INPUT_DIR}/Model/Lexin/LexinWord.swift\" \\\n\"${INPUT_DIR}/ViewModel/WordsTableViewModel.swift\" \\\n\"${INPUT_DIR}/Service/Lexin/LexinService/LexinService.swift\" \\\n\"${INPUT_DIR}/Service/Lexin/LexinService/LexinServiceFormatter.swift\" \\\n\"${INPUT_DIR}/Service/Lexin/LexinParser/LexinParserWords.swift\" \\\n\"${INPUT_DIR}/Service/Lexin/LexinParser/LexinParserSuggestion.swift\" \\\n\"${INPUT_DIR}/Service/Lexin/LexinApi/LexinApi.swift\" \\\n\"${INPUT_DIR}/Service/Lexin/LexinApi/LexinApiProvider.swift\" \\\n\"${INPUT_DIR}/Service/PlayerManager.swift\" \\\n\"${INPUT_DIR}/Service/CacheService.swift\" \\\n\"${INPUT_DIR}/Service/NetworkService.swift\" \\\n\"${INPUT_DIR}/Service/StorageService.swift\" \\\n\"${INPUT_DIR}/Service/WordsService.swift\" \\\n\"${INPUT_DIR}/Service/SettingsLanguageService.swift\" \\\n\"${INPUT_DIR}/Platform/Network.swift\" \\\n\"${INPUT_DIR}/Platform/HtmlParser.swift\" \\\n\"${INPUT_DIR}/Platform/Markdown.swift\" \\\n\"${INPUT_DIR}/Platform/Storage.swift\" \\\n\"${INPUT_DIR}/Platform/Spotlight.swift\" \\\n\"${INPUT_DIR}/Platform/Player.swift\" \\\n\"${INPUT_DIR}/Platform/DataCache.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PROJECT_DIR}/Carthage/Checkouts/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Data/FormattedWord.swift\" \\\n\"${INPUT_DIR}/Data/Suggestion.swift\" \\\n\"${INPUT_DIR}/Data/SettingsItem.swift\" \\\n\"${INPUT_DIR}/Data/ParametersStorage.swift\" \\\n\"${INPUT_DIR}/Data/Lexin/LexinWord.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/DictionaryService.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinService/LexinService.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinService/LexinServiceFormatter.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinParser/LexinParserWords.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinParser/LexinParserSuggestion.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinApi/LexinApi.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinApi/LexinApiProvider.swift\" \\\n\"${INPUT_DIR}/Domain/PlayerManager.swift\" \\\n\"${INPUT_DIR}/Domain/CacheService.swift\" \\\n\"${INPUT_DIR}/Domain/NetworkService.swift\" \\\n\"${INPUT_DIR}/Domain/StorageService.swift\" \\\n\"${INPUT_DIR}/Domain/WordsService.swift\" \\\n\"${INPUT_DIR}/Domain/SettingsLanguageService.swift\" \\\n\"${INPUT_DIR}/Platform/Network.swift\" \\\n\"${INPUT_DIR}/Platform/HtmlParser.swift\" \\\n\"${INPUT_DIR}/Platform/Markdown.swift\" \\\n\"${INPUT_DIR}/Platform/Storage.swift\" \\\n\"${INPUT_DIR}/Platform/Spotlight.swift\" \\\n\"${INPUT_DIR}/Platform/Player.swift\" \\\n\"${INPUT_DIR}/Platform/DataCache.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -830,8 +851,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17233CCA24AFD7AC0049D914 /* DependencyManager.swift in Sources */,
 				17FC6BA0237FEF7E00279589 /* LexinApiProvider.swift in Sources */,
-				2F3401D523912149005FBD39 /* StorageService.swift in Sources */,
+				2F3401D523912149005FBD39 /* StorageRepository.swift in Sources */,
 				2F31739D22CCF84A008944EE /* SettingsLanguageViewModel.swift in Sources */,
 				2F0D2B26237EA57B00F23F3B /* LexinApi.swift in Sources */,
 				2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */,
@@ -843,7 +865,6 @@
 				2FDCDBD1234F31F800E6F15F /* WordsSuggestionViewModel.swift in Sources */,
 				2FDD05A423B10D0D0018F223 /* Bookmarks.swift in Sources */,
 				2FDEFF5F2295494200A82F43 /* Result.swift in Sources */,
-				2F97576A2277330500B343B4 /* DependencyManager.swift in Sources */,
 				2FF62C81228AA89400B4946C /* WordsViewModel.swift in Sources */,
 				2F393ACE233E255500F315FC /* DataCache.swift in Sources */,
 				2F5F8BBF2322A7DA00EF6A85 /* Player.swift in Sources */,
@@ -853,14 +874,16 @@
 				17C1528023BF91A800EACA94 /* ActivityIndicator.swift in Sources */,
 				17260B8224661338002F730A /* Spotlight.swift in Sources */,
 				2F2EC4B622EB259000B1D4C7 /* SettingsViewModel.swift in Sources */,
+				17233CC324A935A80049D914 /* DefaultPlayerManager.swift in Sources */,
 				2FDB640A238EACBC00948A52 /* ParametersStorage.swift in Sources */,
 				2FBCB84823A2949F0080238A /* SearchResultsTableView.swift in Sources */,
 				2F31739F22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift in Sources */,
 				2F90DD402355FC1B00CE8560 /* LexinParserSuggestion.swift in Sources */,
-				176CC4EE2486AF900018444C /* LexinService.swift in Sources */,
-				17C1527A23B53B4600EACA94 /* WordsService.swift in Sources */,
+				176CC4EE2486AF900018444C /* SuggestionService.swift in Sources */,
+				17C1527A23B53B4600EACA94 /* LexinWordMapper.swift in Sources */,
 				2FF62C7F2289B4AA00B4946C /* WordsTableViewCell.swift in Sources */,
 				2F661B3A2272E16300C68A5F /* SettingsLanguageTableViewController.swift in Sources */,
+				17233CBE24A906840049D914 /* WordsService.swift in Sources */,
 				17260B7E24660139002F730A /* AboutViewController.swift in Sources */,
 				176CC4F12486B3F40018444C /* LexinServiceFormatter.swift in Sources */,
 				2F90DD3D2355FA2300CE8560 /* LexinParserWords.swift in Sources */,
@@ -870,12 +893,14 @@
 				2FDB640D238EB42700948A52 /* LexinWord.swift in Sources */,
 				2F2EC4B422EB22FD00B1D4C7 /* SettingsTableViewController.swift in Sources */,
 				2FDCDBCF234F27DB00E6F15F /* WordsSuggestionTableViewController.swift in Sources */,
+				17233CC124A919D40049D914 /* Mapper.swift in Sources */,
 				2F661B362272E16300C68A5F /* AppDelegate.swift in Sources */,
 				2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */,
 				2FDB6407238EAC3D00948A52 /* SettingsLanguageItem.swift in Sources */,
 				2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */,
 				2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */,
 				17F940052350F0AD00FBFD54 /* Swinject+Extensions.swift in Sources */,
+				17B6F9F52489814800221DC0 /* LexinDictionaryService.swift in Sources */,
 				2FDCDBD5234F6A0800E6F15F /* UISearchBar+Rx.swift in Sources */,
 				2F661B382272E16300C68A5F /* WordsTableViewController.swift in Sources */,
 				2F7321872313E4A000CC0822 /* Storage.swift in Sources */,
@@ -912,6 +937,7 @@
 				17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */,
 				2FDB6402238EA5C400948A52 /* FormattedWord.swift in Sources */,
 				2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */,
+				17B6F9F62489820300221DC0 /* LexinDictionaryService.swift in Sources */,
 				2F5F8BB7232287DF00EF6A85 /* Result.swift in Sources */,
 				2FE7682222BCEEBA00375292 /* LexinWord+Extensions.swift in Sources */,
 				2F69AD0922F838C5001942E6 /* SettingsLanguageViewModelTests.swift in Sources */,
@@ -929,14 +955,14 @@
 				2F717B7D23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift in Sources */,
 				2FDB6408238EAC3D00948A52 /* SettingsLanguageItem.swift in Sources */,
 				2F393ACC233E118100F315FC /* PlayerManagerTests.swift in Sources */,
-				17C1527B23B53B4600EACA94 /* WordsService.swift in Sources */,
+				17C1527B23B53B4600EACA94 /* LexinWordMapper.swift in Sources */,
 				17EB2810246DC87800EE8B1D /* Spotlight.swift in Sources */,
 				2F717B7923B5F81A00ED2EA8 /* SettingsLanguageService.swift in Sources */,
-				176CC4EF2486AF900018444C /* LexinService.swift in Sources */,
+				176CC4EF2486AF900018444C /* SuggestionService.swift in Sources */,
 				17FC6BA523870ED900279589 /* LexinApiTests.swift in Sources */,
 				2F69AD0722F81775001942E6 /* SettingsViewModelTests.swift in Sources */,
 				2F70647823B503570095DE9C /* FoundWord+Extensions.swift in Sources */,
-				2F3401D623912149005FBD39 /* StorageService.swift in Sources */,
+				2F3401D623912149005FBD39 /* StorageRepository.swift in Sources */,
 				176CC4F22486B3F40018444C /* LexinServiceFormatter.swift in Sources */,
 				2F5F8BB9232289AA00EF6A85 /* Markdown.swift in Sources */,
 				2F5F8BAE2322879900EF6A85 /* SettingsLanguageViewModel.swift in Sources */,

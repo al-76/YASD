@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class BookmarksViewModel: ViewModel {
-    private let bookmarks: StorageService<FormattedWord>
+    private let bookmarks: StorageRepository<FormattedWord>
     private let player: PlayerManager
     private let spotlight: Spotlight
     
@@ -27,7 +27,7 @@ class BookmarksViewModel: ViewModel {
         let restored: Driver<String>
     }
     
-    init(bookmarks: StorageService<FormattedWord>, player: PlayerManager, spotlight: Spotlight) {
+    init(bookmarks: StorageRepository<FormattedWord>, player: PlayerManager, spotlight: Spotlight) {
         self.bookmarks = bookmarks
         self.player = player
         self.spotlight = spotlight
@@ -55,7 +55,7 @@ class BookmarksViewModel: ViewModel {
         let changedBookmarks = bookmarks.changed.asDriver(onErrorJustReturn: false)
             .filter { $0 }
             .map { _ in Void() }
-        let updated = removed.withLatestFrom(changedBookmarks)
+        let updated = Driver.merge(removed, changedBookmarks)
             .flatMap { [weak self] _ -> Driver<Bookmarks> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.getBookmarks(with: "")
@@ -91,7 +91,7 @@ class BookmarksViewModel: ViewModel {
     }
 }
 
-private extension StorageService where T == FormattedWord {
+private extension StorageRepository where T == FormattedWord {
     func get(with word: String) -> Observable<Result<[FormattedWord]>> {
         return get(where: { $0.header.lowercased().starts(with: word.lowercased()) })
     }

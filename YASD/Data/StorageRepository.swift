@@ -11,7 +11,7 @@ import RxSwift
 
 typealias StorageServiceResult = Result<Bool>
 
-class StorageService<T: Codable & Equatable> {
+class StorageRepository<T: Codable & Equatable> {
     let changed = PublishSubject<Bool>()
     
     private let id: String
