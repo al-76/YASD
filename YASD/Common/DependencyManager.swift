@@ -153,7 +153,7 @@ func configureService(_ container: Container) {
     
     // Language Settings Service
     container.register(SettingsLanguageService.self) { _ in
-        SettingsLanguageService(parameters: container.resolve(ParametersStorage.self)!)
+        DefaultSettingsLanguageService(parameters: container.resolve(ParametersStorage.self)!)
     }
     .inObjectScope(.container)
 }
@@ -178,7 +178,7 @@ func configureModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(SettingsLanguageViewModel.self) { container in
-        SettingsLanguageViewModel(settings: container.resolve(SettingsLanguageService.self)!)
+        SettingsLanguageViewModel(settings: container.resolve(DefaultSettingsLanguageService.self)!)
     }
     .inObjectScope(.container)
     

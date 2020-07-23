@@ -27,6 +27,7 @@
 		17B6F9F52489814800221DC0 /* LexinDictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */; };
 		17B6F9F62489820300221DC0 /* LexinDictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */; };
 		17B9B244240A84AA007FDC47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B9B242240A84AA007FDC47 /* Localizable.strings */; };
+		17BEB85324C99B72005B4C25 /* SettingsLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BEB85224C99B72005B4C25 /* SettingsLanguageService.swift */; };
 		17C1527A23B53B4600EACA94 /* LexinWordMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* LexinWordMapper.swift */; };
 		17C1527B23B53B4600EACA94 /* LexinWordMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* LexinWordMapper.swift */; };
 		17C1527D23B5498800EACA94 /* WordsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527C23B5498800EACA94 /* WordsServiceTests.swift */; };
@@ -88,8 +89,8 @@
 		2F69AD0922F838C5001942E6 /* SettingsLanguageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F69AD0822F838C5001942E6 /* SettingsLanguageViewModelTests.swift */; };
 		2F70647823B503570095DE9C /* FoundWord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70647723B503570095DE9C /* FoundWord+Extensions.swift */; };
 		2F70647923B504350095DE9C /* FoundWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2980C823B3866C004F7FA9 /* FoundWord.swift */; };
-		2F717B7823B5F81A00ED2EA8 /* SettingsLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F717B7723B5F81A00ED2EA8 /* SettingsLanguageService.swift */; };
-		2F717B7923B5F81A00ED2EA8 /* SettingsLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F717B7723B5F81A00ED2EA8 /* SettingsLanguageService.swift */; };
+		2F717B7823B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F717B7723B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift */; };
+		2F717B7923B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F717B7723B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift */; };
 		2F717B7B23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F717B7A23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift */; };
 		2F717B7D23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F717B7C23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift */; };
 		2F7321872313E4A000CC0822 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7321862313E4A000CC0822 /* Storage.swift */; };
@@ -204,6 +205,7 @@
 		17B9B23D240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17B9B243240A84AA007FDC47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = YASD/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B9B245240A84B0007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = YASD/sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		17BEB85224C99B72005B4C25 /* SettingsLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageService.swift; sourceTree = "<group>"; };
 		17C1527923B53B4600EACA94 /* LexinWordMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinWordMapper.swift; sourceTree = "<group>"; };
 		17C1527C23B5498800EACA94 /* WordsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsServiceTests.swift; sourceTree = "<group>"; };
 		17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -249,7 +251,7 @@
 		2F69AD0622F81775001942E6 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		2F69AD0822F838C5001942E6 /* SettingsLanguageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewModelTests.swift; sourceTree = "<group>"; };
 		2F70647723B503570095DE9C /* FoundWord+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoundWord+Extensions.swift"; sourceTree = "<group>"; };
-		2F717B7723B5F81A00ED2EA8 /* SettingsLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageService.swift; sourceTree = "<group>"; };
+		2F717B7723B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSettingsLanguageService.swift; sourceTree = "<group>"; };
 		2F717B7A23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsLanguageItem+Extensions.swift"; sourceTree = "<group>"; };
 		2F717B7C23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageServiceTests.swift; sourceTree = "<group>"; };
 		2F7321862313E4A000CC0822 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -553,6 +555,7 @@
 				2FDD05A323B10D0D0018F223 /* Bookmarks.swift */,
 				2F2980C823B3866C004F7FA9 /* FoundWord.swift */,
 				17233CC224A935A80049D914 /* DefaultPlayerManager.swift */,
+				2F717B7723B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift */,
 				2F1E1E7D23463434007C128B /* NetworkService.swift */,
 			);
 			path = Data;
@@ -636,7 +639,7 @@
 			isa = PBXGroup;
 			children = (
 				176CC4ED2486AF900018444C /* SuggestionService.swift */,
-				2F717B7723B5F81A00ED2EA8 /* SettingsLanguageService.swift */,
+				17BEB85224C99B72005B4C25 /* SettingsLanguageService.swift */,
 				17233CBD24A906840049D914 /* WordsService.swift */,
 			);
 			path = Domain;
@@ -870,7 +873,7 @@
 				2F5F8BBF2322A7DA00EF6A85 /* Player.swift in Sources */,
 				17A9BC7722B5284F002F769B /* Markdown.swift in Sources */,
 				2FDD05A123B0FBA90018F223 /* BookmarksViewModel.swift in Sources */,
-				2F717B7823B5F81A00ED2EA8 /* SettingsLanguageService.swift in Sources */,
+				2F717B7823B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift in Sources */,
 				17C1528023BF91A800EACA94 /* ActivityIndicator.swift in Sources */,
 				17260B8224661338002F730A /* Spotlight.swift in Sources */,
 				2F2EC4B622EB259000B1D4C7 /* SettingsViewModel.swift in Sources */,
@@ -891,6 +894,7 @@
 				17B6F9EF2487FC1200221DC0 /* PlayerManager.swift in Sources */,
 				2FDB6404238EA7B700948A52 /* Suggestion.swift in Sources */,
 				2FDB640D238EB42700948A52 /* LexinWord.swift in Sources */,
+				17BEB85324C99B72005B4C25 /* SettingsLanguageService.swift in Sources */,
 				2F2EC4B422EB22FD00B1D4C7 /* SettingsTableViewController.swift in Sources */,
 				2FDCDBCF234F27DB00E6F15F /* WordsSuggestionTableViewController.swift in Sources */,
 				17233CC124A919D40049D914 /* Mapper.swift in Sources */,
@@ -957,7 +961,7 @@
 				2F393ACC233E118100F315FC /* PlayerManagerTests.swift in Sources */,
 				17C1527B23B53B4600EACA94 /* LexinWordMapper.swift in Sources */,
 				17EB2810246DC87800EE8B1D /* Spotlight.swift in Sources */,
-				2F717B7923B5F81A00ED2EA8 /* SettingsLanguageService.swift in Sources */,
+				2F717B7923B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift in Sources */,
 				176CC4EF2486AF900018444C /* SuggestionService.swift in Sources */,
 				17FC6BA523870ED900279589 /* LexinApiTests.swift in Sources */,
 				2F69AD0722F81775001942E6 /* SettingsViewModelTests.swift in Sources */,
