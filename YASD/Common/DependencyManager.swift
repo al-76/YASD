@@ -178,7 +178,7 @@ func configureModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(SettingsLanguageViewModel.self) { container in
-        SettingsLanguageViewModel(settings: container.resolve(DefaultSettingsLanguageService.self)!)
+        SettingsLanguageViewModel(settings: container.resolve(SettingsLanguageService.self)!)
     }
     .inObjectScope(.container)
     

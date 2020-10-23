@@ -44,6 +44,8 @@ class WordsTableViewController: UITableViewController {
             searchController.showsSearchResultsController = true
         }
        
+        tableView.dataSource = nil
+        tableView.delegate = nil
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 70
         tableView.tableFooterView = UIView()

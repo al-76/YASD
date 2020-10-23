@@ -44,6 +44,8 @@ class BookmarksTableViewController: UITableViewController {
         searchController.searchBar.placeholder = NSLocalizedString("searchBar", comment: "")
         searchController.obscuresBackgroundDuringPresentation = false
         
+        tableView.dataSource = nil
+        tableView.delegate = nil
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 70
         tableView.tableFooterView = UIView()

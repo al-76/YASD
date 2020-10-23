@@ -32,6 +32,8 @@ class WordsSuggestionTableViewController: UITableViewController {
     private func customizeView() {
         clearsSelectionOnViewWillAppear = false
         
+        tableView.dataSource = nil
+        tableView.delegate = nil
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 70
         tableView.tableFooterView = UIView()

@@ -30,6 +30,9 @@ class SettingsLanguageTableViewController: UITableViewController {
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        tableView.dataSource = nil
+        tableView.delegate = nil
     }
     
     private func bindToModel() {

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -57,12 +57,9 @@
 		2F31739F22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F31739E22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift */; };
 		2F3401D523912149005FBD39 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3401D423912149005FBD39 /* StorageRepository.swift */; };
 		2F3401D623912149005FBD39 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3401D423912149005FBD39 /* StorageRepository.swift */; };
-		2F36F4572342544D00B88649 /* Cache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F36F4562342544D00B88649 /* Cache.framework */; };
 		2F393ACC233E118100F315FC /* PlayerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F393ACB233E118100F315FC /* PlayerManagerTests.swift */; };
 		2F393ACE233E255500F315FC /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F393ACD233E255500F315FC /* DataCache.swift */; };
 		2F393ACF233E255500F315FC /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F393ACD233E255500F315FC /* DataCache.swift */; };
-		2F3EE25A229D2EAC0083CDE9 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3EE258229D2EAC0083CDE9 /* Swinject.framework */; };
-		2F3EE25B229D2EAC0083CDE9 /* SwinjectStoryboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F3EE259229D2EAC0083CDE9 /* SwinjectStoryboard.framework */; };
 		2F3EE25C229D79AC0083CDE9 /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F97576F2277474200B343B4 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F3EE25D229D79BE0083CDE9 /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F9757702277474200B343B4 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2F3EE25E229D79CC0083CDE9 /* RxRelay.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FF62C91228DAAB400B4946C /* RxRelay.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -102,12 +99,10 @@
 		2F90DD3D2355FA2300CE8560 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
 		2F90DD3E2355FA3800CE8560 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
 		2F90DD402355FC1B00CE8560 /* LexinParserSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */; };
-		2F9757762277474200B343B4 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F9757702277474200B343B4 /* RxSwift.framework */; };
 		2F9B8BB62333C612000D6BC1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F8BBE2322A7DA00EF6A85 /* Player.swift */; };
 		2FA5040323CCC00D004DA580 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */; };
 		2FBCB84823A2949F0080238A /* SearchResultsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBCB84723A2949F0080238A /* SearchResultsTableView.swift */; };
 		2FC07D0423AA605E00D4D328 /* HistoryServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC07D0323AA605E00D4D328 /* HistoryServiceTests.swift */; };
-		2FCB2DDF22A005180053B758 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FCB2DDE22A005180053B758 /* SwiftSoup.framework */; };
 		2FCB2DE122A111540053B758 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB2DE022A111540053B758 /* Network.swift */; };
 		2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6400238EA5C400948A52 /* FormattedWord.swift */; };
 		2FDB6402238EA5C400948A52 /* FormattedWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6400238EA5C400948A52 /* FormattedWord.swift */; };
@@ -124,8 +119,6 @@
 		2FDCDBD2234F31F800E6F15F /* WordsSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCDBD0234F31F800E6F15F /* WordsSuggestionViewModel.swift */; };
 		2FDCDBD5234F6A0800E6F15F /* UISearchBar+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCDBD4234F6A0800E6F15F /* UISearchBar+Rx.swift */; };
 		2FDCDBD7234F726C00E6F15F /* WordsSuggestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCDBD6234F726C00E6F15F /* WordsSuggestionTableViewCell.swift */; };
-		2FDD059D23ACF7FA0018F223 /* RxDataSources.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDD059C23ACF7FA0018F223 /* RxDataSources.framework */; };
-		2FDD059F23AD15710018F223 /* Differentiator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDD059E23AD15710018F223 /* Differentiator.framework */; };
 		2FDD05A123B0FBA90018F223 /* BookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD05A023B0FBA90018F223 /* BookmarksViewModel.swift */; };
 		2FDD05A223B0FBA90018F223 /* BookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD05A023B0FBA90018F223 /* BookmarksViewModel.swift */; };
 		2FDD05A423B10D0D0018F223 /* Bookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD05A323B10D0D0018F223 /* Bookmarks.swift */; };
@@ -137,17 +130,15 @@
 		2FF62C7F2289B4AA00B4946C /* WordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C7E2289B4AA00B4946C /* WordsTableViewCell.swift */; };
 		2FF62C81228AA89400B4946C /* WordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C80228AA89400B4946C /* WordsViewModel.swift */; };
 		2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C89228D61AF00B4946C /* WordsViewModelTests.swift */; };
-		2FF62C93228DAAE600B4946C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F97576F2277474200B343B4 /* RxCocoa.framework */; };
 		2FF62C97228E8DB300B4946C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F9757702277474200B343B4 /* RxSwift.framework */; };
 		2FF62C98228E8DC900B4946C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F97576F2277474200B343B4 /* RxCocoa.framework */; };
-		2FF62C9A228E96EE00B4946C /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF62C91228DAAB400B4946C /* RxRelay.framework */; };
 		2FF62C9C228E98EF00B4946C /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C9B228E98EF00B4946C /* GeneratedMocks.swift */; };
 		2FF62C9D228EEC3100B4946C /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF62C8B228D6C0F00B4946C /* Cuckoo.framework */; };
 		2FF62CA1228EF26200B4946C /* RxTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2F97576E2277474200B343B4 /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62CBC229444BE00B4946C /* ViewModel.swift */; };
 		2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */; };
-		2FFF024722B2870800C1DC61 /* MarkdownKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FFF024622B2870800C1DC61 /* MarkdownKit.framework */; };
 		2FFF024F22BA525000C1DC61 /* Cuckoo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FF62C8B228D6C0F00B4946C /* Cuckoo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AA618A77F5AEC97CCE47BF92 /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D36EF556767FDE467A68C94 /* Pods_YASD.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,6 +207,7 @@
 		17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swinject+Extensions.swift"; sourceTree = "<group>"; };
 		17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiProvider.swift; sourceTree = "<group>"; };
 		17FC6BA423870ED900279589 /* LexinApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiTests.swift; sourceTree = "<group>"; };
+		19CA79A8830EE293BD161525 /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
 		2F0D2B25237EA57B00F23F3B /* LexinApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApi.swift; sourceTree = "<group>"; };
 		2F18E2E223437097003F91FD /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceTests.swift; sourceTree = "<group>"; };
@@ -297,6 +289,8 @@
 		2FF62CBC229444BE00B4946C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserWordsTests.swift; sourceTree = "<group>"; };
 		2FFF024622B2870800C1DC61 /* MarkdownKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarkdownKit.framework; path = Carthage/Build/iOS/MarkdownKit.framework; sourceTree = "<group>"; };
+		4D36EF556767FDE467A68C94 /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E98D245E47E50E985A3110F /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,16 +298,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FDD059F23AD15710018F223 /* Differentiator.framework in Frameworks */,
-				2F36F4572342544D00B88649 /* Cache.framework in Frameworks */,
-				2FFF024722B2870800C1DC61 /* MarkdownKit.framework in Frameworks */,
-				2FCB2DDF22A005180053B758 /* SwiftSoup.framework in Frameworks */,
-				2F3EE25A229D2EAC0083CDE9 /* Swinject.framework in Frameworks */,
-				2F3EE25B229D2EAC0083CDE9 /* SwinjectStoryboard.framework in Frameworks */,
-				2F9757762277474200B343B4 /* RxSwift.framework in Frameworks */,
-				2FF62C93228DAAE600B4946C /* RxCocoa.framework in Frameworks */,
-				2FF62C9A228E96EE00B4946C /* RxRelay.framework in Frameworks */,
-				2FDD059D23ACF7FA0018F223 /* RxDataSources.framework in Frameworks */,
+				AA618A77F5AEC97CCE47BF92 /* Pods_YASD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +458,7 @@
 				2F661B562272E16400C68A5F /* YASDUITests */,
 				2F661B332272E16300C68A5F /* Products */,
 				2F97575A22772FED00B343B4 /* Frameworks */,
+				F2119DFC71016D5B0441E10C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -579,6 +565,7 @@
 				2F97576F2277474200B343B4 /* RxCocoa.framework */,
 				2F9757702277474200B343B4 /* RxSwift.framework */,
 				2F97576E2277474200B343B4 /* RxTest.framework */,
+				4D36EF556767FDE467A68C94 /* Pods_YASD.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -656,6 +643,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		F2119DFC71016D5B0441E10C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7E98D245E47E50E985A3110F /* Pods-YASD.debug.xcconfig */,
+				19CA79A8830EE293BD161525 /* Pods-YASD.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -663,10 +659,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F661B5C2272E16400C68A5F /* Build configuration list for PBXNativeTarget "YASD" */;
 			buildPhases = (
+				3D6FFC7DDEF7906A2F80D215 /* [CP] Check Pods Manifest.lock */,
 				2F661B2E2272E16300C68A5F /* Sources */,
 				2F661B2F2272E16300C68A5F /* Frameworks */,
 				2F661B302272E16300C68A5F /* Resources */,
-				2F97575922772FB200B343B4 /* Carthage Copy */,
+				4282AB06D953FBB851A69344 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -787,48 +784,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2F97575922772FB200B343B4 /* Carthage Copy */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Swinject.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwinjectStoryboard.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/MarkdownKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Cache.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Differentiator.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RMessage.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/HexColors.framework",
-			);
-			name = "Carthage Copy";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRelay.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Swinject.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwinjectStoryboard.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftSoup.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MarkdownKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Cache.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxDataSources.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Differentiator.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RMessage.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/HexColors.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		2FF62C8E228D8E0800B4946C /* Generate Mock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -846,6 +801,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PROJECT_DIR}/Carthage/Checkouts/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Data/FormattedWord.swift\" \\\n\"${INPUT_DIR}/Data/Suggestion.swift\" \\\n\"${INPUT_DIR}/Data/SettingsItem.swift\" \\\n\"${INPUT_DIR}/Data/ParametersStorage.swift\" \\\n\"${INPUT_DIR}/Data/Lexin/LexinWord.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/DictionaryService.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinService/LexinService.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinService/LexinServiceFormatter.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinParser/LexinParserWords.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinParser/LexinParserSuggestion.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinApi/LexinApi.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinApi/LexinApiProvider.swift\" \\\n\"${INPUT_DIR}/Domain/PlayerManager.swift\" \\\n\"${INPUT_DIR}/Domain/CacheService.swift\" \\\n\"${INPUT_DIR}/Domain/NetworkService.swift\" \\\n\"${INPUT_DIR}/Domain/StorageService.swift\" \\\n\"${INPUT_DIR}/Domain/WordsService.swift\" \\\n\"${INPUT_DIR}/Domain/SettingsLanguageService.swift\" \\\n\"${INPUT_DIR}/Platform/Network.swift\" \\\n\"${INPUT_DIR}/Platform/HtmlParser.swift\" \\\n\"${INPUT_DIR}/Platform/Markdown.swift\" \\\n\"${INPUT_DIR}/Platform/Storage.swift\" \\\n\"${INPUT_DIR}/Platform/Spotlight.swift\" \\\n\"${INPUT_DIR}/Platform/Player.swift\" \\\n\"${INPUT_DIR}/Platform/DataCache.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
+		};
+		3D6FFC7DDEF7906A2F80D215 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YASD-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4282AB06D953FBB851A69344 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1084,7 +1078,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1140,7 +1134,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1152,22 +1146,17 @@
 		};
 		2F661B5D2272E16400C68A5F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E98D245E47E50E985A3110F /* Pods-YASD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6894A8BA33;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = YASD/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ors.YASD;
 				PRODUCT_NAME = YASD;
@@ -1179,22 +1168,17 @@
 		};
 		2F661B5E2272E16400C68A5F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 19CA79A8830EE293BD161525 /* Pods-YASD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6894A8BA33;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				HEADER_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = YASD/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ors.YASD;
 				PRODUCT_NAME = YASD;
