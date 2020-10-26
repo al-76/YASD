@@ -139,6 +139,7 @@
 		2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */; };
 		2FFF024F22BA525000C1DC61 /* Cuckoo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FF62C8B228D6C0F00B4946C /* Cuckoo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AA618A77F5AEC97CCE47BF92 /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D36EF556767FDE467A68C94 /* Pods_YASD.framework */; };
+		F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +292,7 @@
 		2FFF024622B2870800C1DC61 /* MarkdownKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarkdownKit.framework; path = Carthage/Build/iOS/MarkdownKit.framework; sourceTree = "<group>"; };
 		4D36EF556767FDE467A68C94 /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E98D245E47E50E985A3110F /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
+		F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalCacheService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -628,6 +630,7 @@
 				176CC4ED2486AF900018444C /* SuggestionService.swift */,
 				17BEB85224C99B72005B4C25 /* SettingsLanguageService.swift */,
 				17233CBD24A906840049D914 /* WordsService.swift */,
+				F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -891,6 +894,7 @@
 				17BEB85324C99B72005B4C25 /* SettingsLanguageService.swift in Sources */,
 				2F2EC4B422EB22FD00B1D4C7 /* SettingsTableViewController.swift in Sources */,
 				2FDCDBCF234F27DB00E6F15F /* WordsSuggestionTableViewController.swift in Sources */,
+				F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */,
 				17233CC124A919D40049D914 /* Mapper.swift in Sources */,
 				2F661B362272E16300C68A5F /* AppDelegate.swift in Sources */,
 				2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */,

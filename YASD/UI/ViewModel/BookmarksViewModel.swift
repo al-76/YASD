@@ -12,7 +12,7 @@ import RxCocoa
 class BookmarksViewModel: ViewModel {
     private let bookmarks: StorageRepository<FormattedWord>
     private let player: PlayerManager
-    private let spotlight: Spotlight
+    private let spotlight: ExternalCacheService
     
     struct Input {
         let search: Driver<String>
@@ -27,7 +27,7 @@ class BookmarksViewModel: ViewModel {
         let restored: Driver<String>
     }
     
-    init(bookmarks: StorageRepository<FormattedWord>, player: PlayerManager, spotlight: Spotlight) {
+    init(bookmarks: StorageRepository<FormattedWord>, player: PlayerManager, spotlight: ExternalCacheService) {
         self.bookmarks = bookmarks
         self.player = player
         self.spotlight = spotlight
