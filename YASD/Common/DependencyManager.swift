@@ -135,19 +135,23 @@ func configureService(_ container: Container) {
     .inObjectScope(.container)
     
     // Storage Service
-    container.register(StorageRepository<Suggestion>.self) { _ in
-        StorageRepository(id: "history", storage: container.resolve(Storage.self)!)
+    container.register(AnyStorageRepository<Suggestion>.self) { _ in
+        AnyStorageRepository(wrapped: DefaultStorageRepository<Suggestion>(id: "history", storage: container.resolve(Storage.self)!))
     }
     .inObjectScope(.container)
-    container.register(StorageRepository<FormattedWord>.self) { _ in
-        StorageRepository(id: "bookmarks", storage: container.resolve(Storage.self)!)
+    container.register(AnyStorageRepository<FormattedWord>.self) { _ in
+        AnyStorageRepository(wrapped: DefaultStorageRepository<FormattedWord>(id: "bookmarks", storage: container.resolve(Storage.self)!))
     }
     .inObjectScope(.container)
+    
+    container.register(AnyStorageRepository<Suggestion>.self) { _ in
+        AnyStorageRepository(wrapped: DefaultStorageRepository<Suggestion>(id: "history", storage: container.resolve(Storage.self)!))
+    }
     
     // Lexin Word Mapper
     container.register(LexinWordMapper.self) { _ in
         LexinWordMapper(formatter: container.resolve(LexinServiceFormatter.self)!,
-                     bookmarks: container.resolve(StorageRepository<FormattedWord>.self)!)
+                     bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
     }
     .inObjectScope(.container)
     
@@ -161,14 +165,14 @@ func configureService(_ container: Container) {
 func configureModel(_ container: Container) {
     container.register(WordsSuggestionViewModel.self) { container in
         WordsSuggestionViewModel(suggestions: container.resolve(SuggestionService.self)!,
-                                 history: container.resolve(StorageRepository<Suggestion>.self)!)
+                                 history: container.resolve(AnyStorageRepository<Suggestion>.self)!)
     }
     .inObjectScope(.container)
     
     container.register(WordsViewModel.self) { container in
         WordsViewModel(words: container.resolve(WordsService.self)!,
                        player: container.resolve(PlayerManager.self)!,
-                       bookmarks: container.resolve(StorageRepository<FormattedWord>.self)!)
+                       bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
     }
     .inObjectScope(.container)
     
@@ -183,7 +187,7 @@ func configureModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(BookmarksViewModel.self) { container in
-        BookmarksViewModel(bookmarks: container.resolve(StorageRepository<FormattedWord>.self)!,
+        BookmarksViewModel(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!,
                            player: container.resolve(PlayerManager.self)!,
                            spotlight: container.resolve(ExternalCacheService.self)!)
     }

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class BookmarksViewModel: ViewModel {
-    private let bookmarks: StorageRepository<FormattedWord>
+    private let bookmarks: AnyStorageRepository<FormattedWord>
     private let player: PlayerManager
     private let spotlight: ExternalCacheService
     
@@ -27,7 +27,7 @@ class BookmarksViewModel: ViewModel {
         let restored: Driver<String>
     }
     
-    init(bookmarks: StorageRepository<FormattedWord>, player: PlayerManager, spotlight: ExternalCacheService) {
+    init(bookmarks: AnyStorageRepository<FormattedWord>, player: PlayerManager, spotlight: ExternalCacheService) {
         self.bookmarks = bookmarks
         self.player = player
         self.spotlight = spotlight
@@ -52,7 +52,7 @@ class BookmarksViewModel: ViewModel {
             return self.removeBookmark(at: index)
         }
         .map { _ in Void() }
-        let changedBookmarks = bookmarks.changed.asDriver(onErrorJustReturn: false)
+        let changedBookmarks = bookmarks.getChangedSubject().asDriver(onErrorJustReturn: false)
             .filter { $0 }
             .map { _ in Void() }
         let updated = Driver.merge(removed, changedBookmarks)

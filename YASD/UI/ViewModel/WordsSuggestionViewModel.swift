@@ -11,7 +11,7 @@ import RxCocoa
 
 class WordsSuggestionViewModel: ViewModel {
     private let suggestions: SuggestionService
-    private let history: StorageRepository<Suggestion>
+    private let history: AnyStorageRepository<Suggestion>
     
     struct Input {
         let search: Driver<String>
@@ -23,7 +23,7 @@ class WordsSuggestionViewModel: ViewModel {
         let suggestions: Driver<SuggestionItemResult>
     }
     
-    init(suggestions: SuggestionService, history: StorageRepository<Suggestion>) {
+    init(suggestions: SuggestionService, history: AnyStorageRepository<Suggestion>) {
         self.suggestions = suggestions
         self.history = history
     }

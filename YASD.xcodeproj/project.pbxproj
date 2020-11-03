@@ -140,6 +140,7 @@
 		2FFF024F22BA525000C1DC61 /* Cuckoo.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2FF62C8B228D6C0F00B4946C /* Cuckoo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AA618A77F5AEC97CCE47BF92 /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D36EF556767FDE467A68C94 /* Pods_YASD.framework */; };
 		F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */; };
+		F6ED48B5255025A200E60E1B /* DefaultStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -293,6 +294,7 @@
 		4D36EF556767FDE467A68C94 /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E98D245E47E50E985A3110F /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
 		F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalCacheService.swift; sourceTree = "<group>"; };
+		F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorageRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -533,8 +535,6 @@
 			children = (
 				17233CBF24A919C80049D914 /* Mapper */,
 				2FDB640F238EB42E00948A52 /* Lexin */,
-				2F3401D423912149005FBD39 /* StorageRepository.swift */,
-				17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */,
 				2F18E2E223437097003F91FD /* CacheService.swift */,
 				2FDB6400238EA5C400948A52 /* FormattedWord.swift */,
 				2FDB6403238EA7B700948A52 /* Suggestion.swift */,
@@ -545,6 +545,7 @@
 				17233CC224A935A80049D914 /* DefaultPlayerManager.swift */,
 				2F717B7723B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift */,
 				2F1E1E7D23463434007C128B /* NetworkService.swift */,
+				F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -627,10 +628,11 @@
 		2FF62C87228D4B2B00B4946C /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				F6B8B54B2547048B00DBA9D3 /* Platform */,
+				F6B8B54A2547044E00DBA9D3 /* Data */,
 				176CC4ED2486AF900018444C /* SuggestionService.swift */,
 				17BEB85224C99B72005B4C25 /* SettingsLanguageService.swift */,
 				17233CBD24A906840049D914 /* WordsService.swift */,
-				F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -653,6 +655,23 @@
 				19CA79A8830EE293BD161525 /* Pods-YASD.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F6B8B54A2547044E00DBA9D3 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */,
+				2F3401D423912149005FBD39 /* StorageRepository.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		F6B8B54B2547048B00DBA9D3 /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */,
+			);
+			path = Platform;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -854,6 +873,7 @@
 				17233CCA24AFD7AC0049D914 /* DependencyManager.swift in Sources */,
 				17FC6BA0237FEF7E00279589 /* LexinApiProvider.swift in Sources */,
 				2F3401D523912149005FBD39 /* StorageRepository.swift in Sources */,
+				F6ED48B5255025A200E60E1B /* DefaultStorageRepository.swift in Sources */,
 				2F31739D22CCF84A008944EE /* SettingsLanguageViewModel.swift in Sources */,
 				2F0D2B26237EA57B00F23F3B /* LexinApi.swift in Sources */,
 				2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */,

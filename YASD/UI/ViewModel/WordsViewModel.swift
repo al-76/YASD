@@ -12,7 +12,7 @@ import RxCocoa
 class WordsViewModel: ViewModel {
     private let words: WordsService
     private let player: PlayerManager
-    private let bookmarks: StorageRepository<FormattedWord>
+    private let bookmarks: AnyStorageRepository<FormattedWord>
     
     struct Input {
         let search: Driver<String>
@@ -28,7 +28,7 @@ class WordsViewModel: ViewModel {
         let loading: Driver<Bool>
     }
     
-    init(words: WordsService, player: PlayerManager, bookmarks: StorageRepository<FormattedWord>) {
+    init(words: WordsService, player: PlayerManager, bookmarks: AnyStorageRepository<FormattedWord>) {
         self.words = words
         self.player = player
         self.bookmarks = bookmarks
@@ -39,7 +39,7 @@ class WordsViewModel: ViewModel {
         let changedLanguage = words.language()
             .asDriver(onErrorJustReturn: ParametersStorage.defaultLanguage)
             .withLatestFrom(input.search) { $1 }
-        let changedBookmarks = bookmarks.changed.asDriver(onErrorJustReturn: false)
+        let changedBookmarks = bookmarks.getChangedSubject().asDriver(onErrorJustReturn: false)
             .filter { $0 }
             .withLatestFrom(input.search) { $1 }
         let search = Driver.merge(input.search, changedLanguage, changedBookmarks)

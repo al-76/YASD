@@ -2,7 +2,7 @@
 //  ExternalCacheService.swift
 //  YASD
 //
-//  Created by Вячеслав Vyacheslav Konopkin on 26.10.2020.
+//  Created by Vyacheslav Konopkin on 26.10.2020.
 //  Copyright © 2020 yac. All rights reserved.
 //
 

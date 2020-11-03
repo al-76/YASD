@@ -13,9 +13,9 @@ class LexinWordMapper: Mapper {
     typealias Output = Observable<FoundWordResult>
     
     private let formatter: LexinServiceFormatter
-    private let bookmarks: StorageRepository<FormattedWord>
+    private let bookmarks: AnyStorageRepository<FormattedWord>
     
-    init(formatter: LexinServiceFormatter, bookmarks: StorageRepository<FormattedWord>) {
+    init(formatter: LexinServiceFormatter, bookmarks: AnyStorageRepository<FormattedWord>) {
         self.formatter = formatter
         self.bookmarks = bookmarks
     }

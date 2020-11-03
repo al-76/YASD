@@ -1,19 +1,16 @@
 //
-//  StorageService.swift
+//  DefaultStorageRepository.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 29.11.2019.
-//  Copyright © 2019 yac. All rights reserved.
+//  Created by Vyacheslav Konopkin on 02.11.2020.
+//  Copyright © 2020 yac. All rights reserved.
 //
 
 import Foundation
 import RxSwift
 
-typealias StorageServiceResult = Result<Bool>
-
-class StorageRepository<T: Codable & Equatable> {
-    let changed = PublishSubject<Bool>()
-    
+class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
+    private let changed = PublishSubject<Bool>()
     private let id: String
     private let storage: Storage
     
@@ -89,6 +86,10 @@ class StorageRepository<T: Codable & Equatable> {
             observer.onCompleted()
             return Disposables.create {}
         }
+    }
+    
+    func getChangedSubject() -> PublishSubject<Bool> {
+        return changed
     }
     
     private func saveData() throws {
