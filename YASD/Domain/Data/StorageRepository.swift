@@ -14,7 +14,7 @@ typealias StorageServiceResult = Result<Bool>
 protocol StorageRepository {
     associatedtype T
     
-    func get(where filterFunc: @escaping (T) -> Bool) -> Observable<Result<[T]>>
+    func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>>
     func add(_ word: T) -> Observable<StorageServiceResult>
     func remove(_ word: T) -> Observable<StorageServiceResult>
     func remove(at index: Int) -> Observable<StorageServiceResult>
@@ -40,7 +40,7 @@ class AnyStorageRepository<T: Codable & Equatable>: StorageRepository {
         getChangedSubjectObject = wrapped.getChangedSubject
     }
     
-    func get(where filterFunc: @escaping (T) -> Bool) -> Observable<Result<[T]>> {
+    func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>> {
         return getObject(filterFunc)
     }
     

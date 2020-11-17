@@ -59,8 +59,9 @@ class BookmarksViewModel: ViewModel {
             .flatMap { [weak self] _ -> Driver<Bookmarks> in
                 guard let self = self else { return Driver.just(.success([])) }
                 return self.getBookmarks(with: "")
-        }
-        .flatMap { [weak self] result -> Driver<Bookmarks> in
+            }
+            .distinctUntilChanged()
+            .flatMap { [weak self] result -> Driver<Bookmarks> in
             guard let self = self else { return Driver.just(.success([])) }
             return self.indexSpotlight(result)
         }

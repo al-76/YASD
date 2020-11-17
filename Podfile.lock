@@ -1,5 +1,8 @@
 PODS:
   - Cache (5.2.0)
+  - Cuckoo (1.4.1):
+    - Cuckoo/Swift (= 1.4.1)
+  - Cuckoo/Swift (1.4.1)
   - Differentiator (4.0.1)
   - HexColors (6.0.0)
   - MarkdownKit (1.6)
@@ -15,6 +18,8 @@ PODS:
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
+  - RxTest (5.1.1):
+    - RxSwift (~> 5)
   - SwiftSoup (2.3.2)
   - Swinject (2.6.0)
   - SwinjectStoryboard (2.2.0):
@@ -22,10 +27,12 @@ PODS:
 
 DEPENDENCIES:
   - Cache (= 5.2.0)
+  - Cuckoo
   - MarkdownKit
   - RMessage
   - RxDataSources
   - RxSwift
+  - RxTest
   - SwiftSoup
   - Swinject (= 2.6)
   - SwinjectStoryboard
@@ -33,6 +40,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Cache
+    - Cuckoo
     - Differentiator
     - HexColors
     - MarkdownKit
@@ -41,12 +49,14 @@ SPEC REPOS:
     - RxDataSources
     - RxRelay
     - RxSwift
+    - RxTest
     - SwiftSoup
     - Swinject
     - SwinjectStoryboard
 
 SPEC CHECKSUMS:
   Cache: 807c5d86d01a177f06ede9865add3aea269bbfd4
+  Cuckoo: 4625f7f54d9bb880123270e8969898d6c1d036b5
   Differentiator: 886080237d9f87f322641dedbc5be257061b0602
   HexColors: f8c66339541a74bb08905bfe7cd4f8cc85e9e173
   MarkdownKit: 6aa4aee263c7efae3de570cded0767f85c38fc78
@@ -55,10 +65,11 @@ SPEC CHECKSUMS:
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  RxTest: 711632d5644dffbeb62c936a521b5b008a1e1faa
   SwiftSoup: f97bc4e988c7729d6457f9642f974c617a6e2510
   Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
 
-PODFILE CHECKSUM: c099d66ec1da3af0aaf745e827d98845d1ee6817
+PODFILE CHECKSUM: 5508be9e2b816264caa045ff3fd67099a16ed977
 
 COCOAPODS: 1.10.0

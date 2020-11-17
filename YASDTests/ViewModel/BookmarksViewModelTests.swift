@@ -20,21 +20,44 @@ class BookmarksViewModelTests: XCTestCase {
     }
     
     let disposeBag = DisposeBag()
+    let scheduler = TestScheduler(initialClock: 0)
+    
+    // Inputs
+    let errorUrl = "error"
+    lazy var inputWords = scheduler.createHotObservable([
+        .next(200, "test2"),
+        .next(250, "test3"),
+        .next(300, "test"),
+        .completed(400)
+    ]).asDriver(onErrorJustReturn: "")
+    lazy var inputRestore = scheduler.createHotObservable([
+        .next(200, "test2"),
+        .next(250, "test3"),
+        .next(300, "test"),
+        .completed(400)
+    ]).asDriver(onErrorJustReturn: "")
+    lazy var inputUrls = scheduler.createHotObservable([
+        .next(150, "some_url"),
+        .next(200, "some_url_2"),
+        .next(300, errorUrl),
+        .completed(400)
+    ]).asDriver(onErrorJustReturn: "")
+    lazy var inputBookmarks = scheduler.createHotObservable([
+        .next(150, 0),
+        .next(200, 0),
+        .completed(400)
+    ]).asDriver(onErrorJustReturn: -1)
+    
+    // Outputs
+    lazy var bookmarks = scheduler.createObserver(FormattedWordResult.self)
+    lazy var played = scheduler.createObserver(PlayerManagerResult.self)
 
     func testSearch() {
         // Arrange
-        let scheduler = TestScheduler(initialClock: 0)
-        let inputWords = scheduler.createHotObservable([
-            .next(200, "test2"),
-            .next(250, "test3"),
-            .next(300, "test"),
-            .completed(400)
-        ]).asDriver(onErrorJustReturn: "")
-        let bookmarks = scheduler.createObserver(FormattedWordResult.self)
         let data = createBookmarksMock([FormattedWord("test2"), FormattedWord("test3")])
         let viewModel = BookmarksViewModel(bookmarks: data,
-                                           player: MockFactory.createMockPlayerManager(),
-                                           spotlight: MockSpotlight())
+                                           player: PlayerManagerStub(),
+                                           spotlight: ExternalCacheServiceStub())
         let output = viewModel.transform(from: BookmarksViewModel.Input(search: inputWords,
                                                                         playUrl: Driver.never(),
                                                                         removeBookmark: Driver.never(),
@@ -55,17 +78,9 @@ class BookmarksViewModelTests: XCTestCase {
     
     func testRestore() {
         // Arrange
-        let scheduler = TestScheduler(initialClock: 0)
-        let inputRestore = scheduler.createHotObservable([
-            .next(200, "test2"),
-            .next(250, "test3"),
-            .next(300, "test"),
-            .completed(400)
-        ]).asDriver(onErrorJustReturn: "")
-        let bookmarks = scheduler.createObserver(FormattedWordResult.self)
         let data = createBookmarksMock([FormattedWord("test2"), FormattedWord("test3")])
         let viewModel = BookmarksViewModel(bookmarks: data,
-                                           player: MockFactory.createMockPlayerManager(),
+                                           player: PlayerManagerStub(),
                                            spotlight: createSpotlightMock())
         let output = viewModel.transform(from: BookmarksViewModel.Input(search: Driver.never(),
                                                                         playUrl: Driver.never(),
@@ -84,32 +99,23 @@ class BookmarksViewModelTests: XCTestCase {
             .next(300, .success([FormattedWord("test2"), FormattedWord("test3")]))
         ])
     }
-    
+
     func testPlay() {
         // Arrange
         let error = TestError.someError
-        let errorUrl = "error"
-        let scheduler = TestScheduler(initialClock: 0)
-        let inputUrls = scheduler.createHotObservable([
-            .next(150, "some_url"),
-            .next(200, "some_url_2"),
-            .next(300, errorUrl),
-            .completed(400)
-        ]).asDriver(onErrorJustReturn: "")
-        let played = scheduler.createObserver(PlayerManagerResult.self)
         let viewModel = BookmarksViewModel(bookmarks: createBookmarksMock([]),
                                            player: MockFactory.createMockPlayerManager(errorUrl: errorUrl, error: error),
-                                           spotlight: MockSpotlight())
+                                           spotlight: ExternalCacheServiceStub())
         let output = viewModel.transform(from: BookmarksViewModel.Input(search: Driver.never(),
                                                                         playUrl: inputUrls,
                                                                         removeBookmark: Driver.never(),
                                                                         restore: Driver.never()))
         output.played.drive(played)
             .disposed(by: disposeBag)
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(played.events, [
             .next(150, .success(true)),
@@ -121,16 +127,9 @@ class BookmarksViewModelTests: XCTestCase {
     
     func testRemoveBookmarks() {
         // Arrange
-        let scheduler = TestScheduler(initialClock: 0)
-        let inputBookmarks = scheduler.createHotObservable([
-            .next(150, 0),
-            .next(200, 0),
-            .completed(400)
-        ]).asDriver(onErrorJustReturn: -1)
-        let bookmarks = scheduler.createObserver(FormattedWordResult.self)
         let data = createBookmarksMock([FormattedWord("test2"), FormattedWord("test3")])
         let viewModel = BookmarksViewModel(bookmarks: data,
-                                           player: MockFactory.createMockPlayerManager(),
+                                           player: PlayerManagerStub(),
                                            spotlight: createSpotlightMock())
         let output = viewModel.transform(from: BookmarksViewModel.Input(search: Driver.never(),
                                                                         playUrl: Driver.never(),
@@ -151,27 +150,10 @@ class BookmarksViewModelTests: XCTestCase {
     
     func testErrorNilViewModel() {
         // Arrange
-        let scheduler = TestScheduler(initialClock: 0)
-        let inputWords = scheduler.createHotObservable([
-            .next(200, "test2"),
-            .next(250, "test3"),
-            .completed(400)
-        ]).asDriver(onErrorJustReturn: "")
-        let inputBookmarks = scheduler.createHotObservable([
-            .next(150, 0),
-            .next(300, 0),
-            .completed(500)
-        ]).asDriver(onErrorJustReturn: -1)
-        let inputUrls = scheduler.createHotObservable([
-            .next(150, "some_url"),
-            .completed(400)
-        ]).asDriver(onErrorJustReturn: "")
-        let bookmarks = scheduler.createObserver(FormattedWordResult.self)
-        let played = scheduler.createObserver(PlayerManagerResult.self)
         let data = createBookmarksMock([FormattedWord("test2"), FormattedWord("test3")])
         var viewModel: BookmarksViewModel? = BookmarksViewModel(bookmarks: data,
                                            player: MockFactory.createMockPlayerManager(),
-                                           spotlight: MockSpotlight())
+                                           spotlight: createSpotlightMock())
         let output = viewModel!.transform(from: BookmarksViewModel.Input(search: inputWords,
                                                             playUrl: inputUrls,
                                                             removeBookmark: inputBookmarks,
@@ -187,34 +169,28 @@ class BookmarksViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(bookmarks.events, [
+            .next(150, .success([])),
             .next(200, .success([])),
             .next(200, .success([])),
             .next(250, .success([])),
             .next(250, .success([])),
-            .completed(500)
+            .next(300, .success([])),
+            .next(300, .success([]))
         ])
         XCTAssertEqual(played.events, [
             .next(150, .success(false)),
+            .next(200, .success(false)),
+            .next(300, .success(false)),
             .completed(400)
         ])
     }
     
-    private func createBookmarksMock(_ data: [FormattedWord]) -> StorageService<FormattedWord> {
-        return StorageService<FormattedWord>(id: "test", storage: createMockStorage(data: data))
+    private func createBookmarksMock(_ data: [FormattedWord]) -> AnyStorageRepository<FormattedWord> {
+        return AnyStorageRepository<FormattedWord>(wrapped: MockFactory.createMockStorageRepository(data: data));
     }
     
-    private func createMockStorage(data: [FormattedWord]) -> MockStorage {
-        let mock = MockStorage()
-        stub(mock) { stub in
-            when(stub.get(id: anyString(), defaultObject: any([FormattedWord].self)))
-                .then { id, defaultObject -> [FormattedWord] in return data }
-            when(stub.save(id: anyString(), object: any([FormattedWord].self))).thenDoNothing()
-        }
-        return mock
-    }
-    
-    private func createSpotlightMock() -> MockSpotlight {
-        let mock = MockSpotlight()
+    private func createSpotlightMock() -> ExternalCacheService {
+        let mock = MockExternalCacheService()
         stub(mock) { stub in
             when(stub.getTitle(from: anyString())).then { $0 }
             when(stub.index(data: any())).thenReturn(Observable.just(.success(())))
