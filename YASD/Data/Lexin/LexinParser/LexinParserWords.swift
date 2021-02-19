@@ -97,7 +97,7 @@ class LexinParserWordsDefault : LexinParserWords {
 
 class LexinParserWordsSwedish : LexinParserWordsDefault {
     override func parse(text: String) throws -> [LexinWord] {
-        return try htmlParser.parse(html: text.replacingOccurrences(of: "\\n", with: ""), query: "Lemma")
+        return try htmlParser.parse(html: text, query: "Lemma")
             .map { word ->LexinWord in
             let value = (try word.attribute("Value")).removeQuotes()
             let type = (try word.attribute("Type")).removeQuotes()
@@ -200,7 +200,7 @@ class LexinParserWordsFolkets : LexinParserWords {
     }
     
     func parse(text: String) throws -> [LexinWord] {
-        return try htmlParser.parse(html: text.replacingOccurrences(of: "\\", with: ""),
+        return try htmlParser.parse(html: text,
                                     query: "word")
             .map { word ->LexinWord in
             let value = (try word.attribute("value")).removeQuotes()
