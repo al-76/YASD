@@ -13,28 +13,36 @@ protocol LexinParserSuggestion {
     func parse(text: String) throws -> [Suggestion]
 }
 
+extension LexinParserSuggestion {
+    private func filter(_ value: String) -> Bool {
+        return !(value.contains("com.google.gwt") ||
+                    value.contains("java.util.ArrayList") ||
+                    value.contains("se.jojoman.lexin") ||
+                    value.contains("se.algoritmica.folkets") ||
+                    value.contains("<") ||
+                    value.contains("img/flag_") ||
+                    value.contains("grafik/flag_"))
+    }
+    
+    internal func parse(text: String) throws -> [Suggestion] {
+        let index = text.firstIndex(of: "\"") ?? text.startIndex
+        let res = text[index...]
+            .replacingOccurrences(of: "],0,7]", with: "")
+            .components(separatedBy: ",")
+            .filter { filter($0) }
+            .map { $0.replacingOccurrences(of: "\"", with: "")
+                .trimmingCharacters(in: .whitespacesAndNewlines) }
+            .uniques
+        return res
+    }
+}
+
 // Default Lexin
 class LexinParserSuggestionDefault : LexinParserSuggestion {
     private static let URL = "https://lexin.nada.kth.se/lexin/lexin/"
 
     func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters {
         return (url: getUrl(), parameters: getRequestparameters(word, language))
-    }
-    
-    func parse(text: String) throws -> [Suggestion] {
-        let index = text.firstIndex(of: "\"") ?? text.startIndex
-        let res = text[index...]
-            .replacingOccurrences(of: "],0,7]", with: "")
-            .components(separatedBy: ",")
-            .filter { !($0.contains("com.google.gwt") ||
-                            $0.contains("java.util.ArrayList") ||
-                            $0.contains("se.jojoman.lexin") ||
-                            $0.contains("<") ||
-                            $0.contains("img/flag_")) }
-            .map { $0.replacingOccurrences(of: "\"", with: "")
-                .trimmingCharacters(in: .whitespacesAndNewlines) }
-            .uniques
-        return res
     }
 
     private func getUrl() -> String {
@@ -55,20 +63,6 @@ class LexinParserSuggestionFolkets : LexinParserSuggestion {
 
     func getRequestParameters(_ word: String, with language: String) -> Network.PostParameters {
         return (url: getUrl(), parameters: getRequestparameters(word, language))
-    }
-    
-    func parse(text: String) throws -> [Suggestion] {
-        let index = text.firstIndex(of: "\"") ?? text.startIndex
-        let res = text[index...]
-            .replacingOccurrences(of: "],0,7]", with: "")
-            .components(separatedBy: ",")
-            .filter { !($0.contains("com.google.gwt") ||
-                $0.contains("java.util.ArrayList") ||
-                $0.contains("se.algoritmica.folkets") ||
-                $0.contains("<")) }
-            .map { $0.replacingOccurrences(of: "\"", with: "")
-                .trimmingCharacters(in: .whitespacesAndNewlines) }
-        return res
     }
     
     private func getUrl() -> String {
