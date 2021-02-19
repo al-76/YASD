@@ -27,9 +27,10 @@ class LexinParserSuggestionDefault : LexinParserSuggestion {
             .replacingOccurrences(of: "],0,7]", with: "")
             .components(separatedBy: ",")
             .filter { !($0.contains("com.google.gwt") ||
-                $0.contains("java.util.ArrayList") ||
-                $0.contains("se.jojoman.lexin") ||
-                $0.contains("<")) }
+                            $0.contains("java.util.ArrayList") ||
+                            $0.contains("se.jojoman.lexin") ||
+                            $0.contains("<") ||
+                            $0.contains("img/flag_")) }
             .map { $0.replacingOccurrences(of: "\"", with: "")
                 .trimmingCharacters(in: .whitespacesAndNewlines) }
             .uniques
