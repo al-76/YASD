@@ -12,7 +12,7 @@ import RxCocoa
 class BookmarksViewModel: ViewModel {
     private let bookmarks: AnyStorageRepository<FormattedWord>
     private let player: PlayerManager
-    private let spotlight: ExternalCacheService
+    private let spotlight: ExternalCacheService // TODO: It needs to move from domain, probably
     
     struct Input {
         let search: Driver<String>
