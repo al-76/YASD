@@ -115,22 +115,32 @@ func configureService(_ container: Container) {
     }
     .inObjectScope(.container)
     
-    // Lexin Dictionary Service
-    container.register(LexinDictionaryService.self) { _ in
-        LexinDictionaryService(parameters: container.resolve(ParametersStorage.self)!,
-                               provider: container.resolve(LexinApiProvider.self)!,
-                               mapper: container.resolve(LexinWordMapper.self)!)
+    // Dictionary Repository
+    container.register(AnyDictionaryRepository<SuggestionResult>.self) { _ in
+        AnyDictionaryRepository(wrapped: SuggestionDictionaryRepository(provider: container.resolve(LexinApiProvider.self)!))
+    }
+    container.register(AnyDictionaryRepository<FoundWordResult>.self) { _ in
+        AnyDictionaryRepository(wrapped: WordsDictionaryRepository(provider: container.resolve(LexinApiProvider.self)!,
+                                                                   mapper: container.resolve(LexinWordMapper.self)!))
+    }
+    
+    
+    // Dictionary Service
+    container.register(DictionaryService.self) { _ in
+        DictionaryService(parameters: container.resolve(ParametersStorage.self)!,
+                          suggestions: container.resolve(AnyDictionaryRepository<SuggestionResult>.self)!,
+                          words: container.resolve(AnyDictionaryRepository<FoundWordResult>.self)!)
     }
     
     // WordsService
     container.register(WordsService.self) { _ in
-        container.resolve(LexinDictionaryService.self)!
+        container.resolve(DictionaryService.self)!
     }
     .inObjectScope(.container)
     
     // SuggestionService
     container.register(SuggestionService.self) { _ in
-        container.resolve(LexinDictionaryService.self)!
+        container.resolve(DictionaryService.self)!
     }
     .inObjectScope(.container)
     
@@ -143,7 +153,6 @@ func configureService(_ container: Container) {
         AnyStorageRepository(wrapped: DefaultStorageRepository<FormattedWord>(id: "bookmarks", storage: container.resolve(Storage.self)!))
     }
     .inObjectScope(.container)
-    
     container.register(AnyStorageRepository<Suggestion>.self) { _ in
         AnyStorageRepository(wrapped: DefaultStorageRepository<Suggestion>(id: "history", storage: container.resolve(Storage.self)!))
     }
@@ -161,6 +170,7 @@ func configureService(_ container: Container) {
     }
     .inObjectScope(.container)
     
+    // About Text Repository
     container.register(AboutTextRepository.self) { _ in
         DefaultAboutTextRepository(markdown: container.resolve(Markdown.self)!)
     }

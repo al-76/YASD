@@ -19,7 +19,7 @@
 		17A9BC7522B5273B002F769B /* HtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7422B5273B002F769B /* HtmlParser.swift */; };
 		17A9BC7722B5284F002F769B /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7622B5284F002F769B /* Markdown.swift */; };
 		17B6F9EF2487FC1200221DC0 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */; };
-		17B6F9F52489814800221DC0 /* LexinDictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */; };
+		17B6F9F52489814800221DC0 /* DictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9F42489814800221DC0 /* DictionaryService.swift */; };
 		17B9B244240A84AA007FDC47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B9B242240A84AA007FDC47 /* Localizable.strings */; };
 		17BEB85324C99B72005B4C25 /* SettingsLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BEB85224C99B72005B4C25 /* SettingsLanguageService.swift */; };
 		17C1527A23B53B4600EACA94 /* LexinWordMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* LexinWordMapper.swift */; };
@@ -98,6 +98,9 @@
 		CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
 		CD2BDF7525E0EFDB00E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
 		CDF9597725E130A00059A1EB /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9597625E130A00059A1EB /* Language.swift */; };
+		CDF9597F25E139280059A1EB /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9597E25E139280059A1EB /* DictionaryRepository.swift */; };
+		CDF9598325E150210059A1EB /* SuggestionDictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */; };
+		CDF9598625E1503E0059A1EB /* WordsDictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9598525E1503E0059A1EB /* WordsDictionaryRepository.swift */; };
 		F624B553256414790025FB7A /* MockFactory+StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624B552256414790025FB7A /* MockFactory+StorageRepository.swift */; };
 		F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */; };
 		F6ED48B5255025A200E60E1B /* DefaultStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */; };
@@ -121,7 +124,7 @@
 		F6F788172562ABF700DEAFB1 /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6403238EA7B700948A52 /* Suggestion.swift */; };
 		F6F788182562ABF700DEAFB1 /* FoundWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2980C823B3866C004F7FA9 /* FoundWord.swift */; };
 		F6F7881A2562ABFE00DEAFB1 /* LexinWordMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* LexinWordMapper.swift */; };
-		F6F7881B2562ABFE00DEAFB1 /* LexinDictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */; };
+		F6F7881B2562ABFE00DEAFB1 /* DictionaryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9F42489814800221DC0 /* DictionaryService.swift */; };
 		F6F7881C2562ABFE00DEAFB1 /* LexinWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB640C238EB42700948A52 /* LexinWord.swift */; };
 		F6F7881E2562AC0700DEAFB1 /* LexinParserSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */; };
 		F6F7881F2562AC0700DEAFB1 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
@@ -178,7 +181,7 @@
 		17A9BC7422B5273B002F769B /* HtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlParser.swift; sourceTree = "<group>"; };
 		17A9BC7622B5284F002F769B /* Markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
 		17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerManager.swift; sourceTree = "<group>"; };
-		17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinDictionaryService.swift; sourceTree = "<group>"; };
+		17B6F9F42489814800221DC0 /* DictionaryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryService.swift; sourceTree = "<group>"; };
 		17B9B23C240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
 		17B9B23D240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17B9B243240A84AA007FDC47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = YASD/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -281,6 +284,9 @@
 		CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTextRepository.swift; sourceTree = "<group>"; };
 		CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAboutTextRepository.swift; sourceTree = "<group>"; };
 		CDF9597625E130A00059A1EB /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		CDF9597E25E139280059A1EB /* DictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRepository.swift; sourceTree = "<group>"; };
+		CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionDictionaryRepository.swift; sourceTree = "<group>"; };
+		CDF9598525E1503E0059A1EB /* WordsDictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsDictionaryRepository.swift; sourceTree = "<group>"; };
 		F624B552256414790025FB7A /* MockFactory+StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+StorageRepository.swift"; sourceTree = "<group>"; };
 		F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalCacheService.swift; sourceTree = "<group>"; };
 		F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorageRepository.swift; sourceTree = "<group>"; };
@@ -506,6 +512,7 @@
 			children = (
 				17233CBF24A919C80049D914 /* Mapper */,
 				2FDB640F238EB42E00948A52 /* Lexin */,
+				CDF9598825E152110059A1EB /* DictionaryRepository */,
 				2F18E2E223437097003F91FD /* CacheService.swift */,
 				CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */,
 				2FDB6400238EA5C400948A52 /* FormattedWord.swift */,
@@ -549,7 +556,6 @@
 				17FC6BA2237FFBC400279589 /* LexinParser */,
 				2F1E1E7B23462D75007C128B /* LexinService */,
 				2F0D2B21237E9B9E00F23F3B /* LexinApi */,
-				17B6F9F42489814800221DC0 /* LexinDictionaryService.swift */,
 				2FDB640C238EB42700948A52 /* LexinWord.swift */,
 				17C1527923B53B4600EACA94 /* LexinWordMapper.swift */,
 			);
@@ -631,11 +637,29 @@
 		CDF9597B25E1360D0059A1EB /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				CDF9597C25E136540059A1EB /* Implementation */,
 				176CC4ED2486AF900018444C /* SuggestionService.swift */,
 				17BEB85224C99B72005B4C25 /* SettingsLanguageService.swift */,
 				17233CBD24A906840049D914 /* WordsService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		CDF9597C25E136540059A1EB /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				17B6F9F42489814800221DC0 /* DictionaryService.swift */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		CDF9598825E152110059A1EB /* DictionaryRepository */ = {
+			isa = PBXGroup;
+			children = (
+				CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */,
+				CDF9598525E1503E0059A1EB /* WordsDictionaryRepository.swift */,
+			);
+			path = DictionaryRepository;
 			sourceTree = "<group>";
 		};
 		F2119DFC71016D5B0441E10C /* Pods */ = {
@@ -655,6 +679,7 @@
 				CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */,
 				17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */,
 				2F3401D423912149005FBD39 /* StorageRepository.swift */,
+				CDF9597E25E139280059A1EB /* DictionaryRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -880,11 +905,14 @@
 				F6ED48B5255025A200E60E1B /* DefaultStorageRepository.swift in Sources */,
 				2F31739D22CCF84A008944EE /* SettingsLanguageViewModel.swift in Sources */,
 				2F0D2B26237EA57B00F23F3B /* LexinApi.swift in Sources */,
+				CDF9598325E150210059A1EB /* SuggestionDictionaryRepository.swift in Sources */,
 				2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */,
 				2FDD05A723B2588C0018F223 /* BookmarksTableViewController.swift in Sources */,
+				CDF9598625E1503E0059A1EB /* WordsDictionaryRepository.swift in Sources */,
 				2FCB2DE122A111540053B758 /* Network.swift in Sources */,
 				17A9BC7522B5273B002F769B /* HtmlParser.swift in Sources */,
 				2F2980C723B2660F004F7FA9 /* BookmarksTableViewCell.swift in Sources */,
+				CDF9597F25E139280059A1EB /* DictionaryRepository.swift in Sources */,
 				2F18E2E323437097003F91FD /* CacheService.swift in Sources */,
 				2FDCDBD1234F31F800E6F15F /* WordsSuggestionViewModel.swift in Sources */,
 				2FDD05A423B10D0D0018F223 /* Bookmarks.swift in Sources */,
@@ -929,7 +957,7 @@
 				2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */,
 				2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */,
 				17F940052350F0AD00FBFD54 /* Swinject+Extensions.swift in Sources */,
-				17B6F9F52489814800221DC0 /* LexinDictionaryService.swift in Sources */,
+				17B6F9F52489814800221DC0 /* DictionaryService.swift in Sources */,
 				2FDCDBD5234F6A0800E6F15F /* UISearchBar+Rx.swift in Sources */,
 				2F661B382272E16300C68A5F /* WordsTableViewController.swift in Sources */,
 				2F7321872313E4A000CC0822 /* Storage.swift in Sources */,
@@ -1006,7 +1034,7 @@
 				F6F788102562ABF700DEAFB1 /* DefaultPlayerManager.swift in Sources */,
 				F6F788232562AC1300DEAFB1 /* LexinApi.swift in Sources */,
 				F6F788132562ABF700DEAFB1 /* NetworkService.swift in Sources */,
-				F6F7881B2562ABFE00DEAFB1 /* LexinDictionaryService.swift in Sources */,
+				F6F7881B2562ABFE00DEAFB1 /* DictionaryService.swift in Sources */,
 				F6F788242562AC1300DEAFB1 /* LexinApiProvider.swift in Sources */,
 				F6F788072562ABD100DEAFB1 /* SettingsViewModel.swift in Sources */,
 			);
