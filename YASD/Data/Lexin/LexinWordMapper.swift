@@ -28,24 +28,6 @@ class LexinWordMapper: Mapper {
         }
     }
     
-//    public func search(_ word: String) -> Observable<FoundWordResult> {
-//        return searchFormatted(word).flatMap { [weak self] words -> Observable<FoundWordResult> in
-//            guard let self = self else { return Observable.just(.success([])) }
-//            return self.checkBookmarked(words)
-//        }
-//    }
-    
-//    public func language() -> BehaviorSubject<Language> {
-//        return lexin.language()
-//    }
-    
-//    private func searchFormatted(_ word: String) -> Observable<FormattedWordResult> {
-//        return lexin.search(word)
-//            .map { [weak self] result in
-//                guard let self = self else { return .success([]) }
-//                return self.formatter.format(result: result) }
-//    }
-//
     private func checkBookmarked(_ words: FormattedWordResult) -> Observable<FoundWordResult> {
         switch words {
         case let .success(res):
