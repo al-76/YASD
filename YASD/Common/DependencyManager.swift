@@ -160,6 +160,11 @@ func configureService(_ container: Container) {
         DefaultSettingsLanguageService(parameters: container.resolve(ParametersStorage.self)!)
     }
     .inObjectScope(.container)
+    
+    container.register(AboutTextRepository.self) { _ in
+        DefaultAboutTextRepository(markdown: container.resolve(Markdown.self)!)
+    }
+    .inObjectScope(.container)
 }
 
 func configureModel(_ container: Container) {
@@ -213,6 +218,6 @@ func configureView(_ container: Container) {
         view.model = container.resolve(BookmarksViewModel.self)
     }
     container.storyboardInitCompleted(AboutViewController.self) { container, view in
-        view.markdown = container.resolve(Markdown.self)
+        view.aboutText = container.resolve(AboutTextRepository.self)
     }
 }

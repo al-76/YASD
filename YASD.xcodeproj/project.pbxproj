@@ -93,6 +93,10 @@
 		2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62CBC229444BE00B4946C /* ViewModel.swift */; };
 		2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */; };
 		4747C45C3960F9E94556A9B5 /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81F962772CCF09B574D8A043 /* Pods_YASD.framework */; };
+		CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
+		CD2BDF6F25E0EECE00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
+		CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
+		CD2BDF7525E0EFDB00E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
 		F624B553256414790025FB7A /* MockFactory+StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624B552256414790025FB7A /* MockFactory+StorageRepository.swift */; };
 		F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */; };
 		F6ED48B5255025A200E60E1B /* DefaultStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */; };
@@ -273,6 +277,8 @@
 		6F65125BA3211D4B4CCE1D81 /* Pods_YASDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F962772CCF09B574D8A043 /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7DD5EFBDB216DC66D3C3A25 /* Pods-YASDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.release.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.release.xcconfig"; sourceTree = "<group>"; };
+		CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTextRepository.swift; sourceTree = "<group>"; };
+		CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAboutTextRepository.swift; sourceTree = "<group>"; };
 		F624B552256414790025FB7A /* MockFactory+StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+StorageRepository.swift"; sourceTree = "<group>"; };
 		F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalCacheService.swift; sourceTree = "<group>"; };
 		F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorageRepository.swift; sourceTree = "<group>"; };
@@ -499,6 +505,7 @@
 				17233CBF24A919C80049D914 /* Mapper */,
 				2FDB640F238EB42E00948A52 /* Lexin */,
 				2F18E2E223437097003F91FD /* CacheService.swift */,
+				CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */,
 				2FDB6400238EA5C400948A52 /* FormattedWord.swift */,
 				2FDB6403238EA7B700948A52 /* Suggestion.swift */,
 				2FDB6406238EAC3D00948A52 /* SettingsLanguageItem.swift */,
@@ -626,6 +633,7 @@
 		F6B8B54A2547044E00DBA9D3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */,
 				17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */,
 				2F3401D423912149005FBD39 /* StorageRepository.swift */,
 			);
@@ -867,12 +875,14 @@
 				2F5F8BBF2322A7DA00EF6A85 /* Player.swift in Sources */,
 				17A9BC7722B5284F002F769B /* Markdown.swift in Sources */,
 				2FDD05A123B0FBA90018F223 /* BookmarksViewModel.swift in Sources */,
+				CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */,
 				2F717B7823B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift in Sources */,
 				17C1528023BF91A800EACA94 /* ActivityIndicator.swift in Sources */,
 				17260B8224661338002F730A /* Spotlight.swift in Sources */,
 				2F2EC4B622EB259000B1D4C7 /* SettingsViewModel.swift in Sources */,
 				17233CC324A935A80049D914 /* DefaultPlayerManager.swift in Sources */,
 				2FDB640A238EACBC00948A52 /* ParametersStorage.swift in Sources */,
+				CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */,
 				2FBCB84823A2949F0080238A /* SearchResultsTableView.swift in Sources */,
 				2F31739F22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift in Sources */,
 				2F90DD402355FC1B00CE8560 /* LexinParserSuggestion.swift in Sources */,
@@ -931,6 +941,7 @@
 				17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */,
 				2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */,
 				F6F788372562ACA700DEAFB1 /* Storage.swift in Sources */,
+				CD2BDF7525E0EFDB00E89EB1 /* DefaultAboutTextRepository.swift in Sources */,
 				2FE7682222BCEEBA00375292 /* LexinWord+Extensions.swift in Sources */,
 				F6F7880D2562ABEE00DEAFB1 /* PlayerManager.swift in Sources */,
 				F6F7883B2562ACA700DEAFB1 /* HtmlParser.swift in Sources */,
@@ -952,6 +963,7 @@
 				2FE7682022BCC30E00375292 /* LexinServiceFormatterTests.swift in Sources */,
 				F6F788212562AC0C00DEAFB1 /* LexinServiceFormatter.swift in Sources */,
 				2F717B7D23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift in Sources */,
+				CD2BDF6F25E0EECE00E89EB1 /* AboutTextRepository.swift in Sources */,
 				2F393ACC233E118100F315FC /* PlayerManagerTests.swift in Sources */,
 				F6F788172562ABF700DEAFB1 /* Suggestion.swift in Sources */,
 				17FC6BA523870ED900279589 /* LexinApiTests.swift in Sources */,

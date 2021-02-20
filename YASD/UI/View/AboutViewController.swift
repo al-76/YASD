@@ -9,13 +9,13 @@
 import UIKit
 
 class AboutViewController: UIViewController {
-    var markdown: Markdown!
+    var aboutText: AboutTextRepository!
     
     @IBOutlet weak var textView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textView.attributedText = markdown.parse(data: NSLocalizedString("textAbout", comment: ""))
+        textView.attributedText = aboutText.getText()
     }
 }
