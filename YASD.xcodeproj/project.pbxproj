@@ -598,12 +598,10 @@
 		2FF62C87228D4B2B00B4946C /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				CDF9597B25E1360D0059A1EB /* Service */,
 				CDF9597525E130660059A1EB /* Entity */,
 				F6B8B54B2547048B00DBA9D3 /* Platform */,
 				F6B8B54A2547044E00DBA9D3 /* Data */,
-				176CC4ED2486AF900018444C /* SuggestionService.swift */,
-				17BEB85224C99B72005B4C25 /* SettingsLanguageService.swift */,
-				17233CBD24A906840049D914 /* WordsService.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -628,6 +626,16 @@
 				2FDB6403238EA7B700948A52 /* Suggestion.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		CDF9597B25E1360D0059A1EB /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				176CC4ED2486AF900018444C /* SuggestionService.swift */,
+				17BEB85224C99B72005B4C25 /* SettingsLanguageService.swift */,
+				17233CBD24A906840049D914 /* WordsService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		F2119DFC71016D5B0441E10C /* Pods */ = {
