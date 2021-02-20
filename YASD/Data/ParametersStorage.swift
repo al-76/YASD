@@ -66,14 +66,3 @@ class ParametersStorage {
         return (try? language.value()) ?? ParametersStorage.defaultLanguage
     }
 }
-
-struct Language: Codable {
-    var name: String
-    var code: String
-}
-
-extension Language: Equatable {
-    static public func == (lhs: Language, rhs: Language) -> Bool {
-        return (lhs.name == rhs.name && lhs.code == rhs.code)
-    }
-}
