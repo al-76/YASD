@@ -156,7 +156,8 @@ func configureService(_ container: Container) {
     container.register(AnyStorageRepository<Suggestion>.self) { _ in
         AnyStorageRepository(wrapped: DefaultStorageRepository<Suggestion>(id: "history", storage: container.resolve(Storage.self)!))
     }
-    
+    .inObjectScope(.container)
+
     // Lexin Word Mapper
     container.register(LexinWordMapper.self) { _ in
         LexinWordMapper(formatter: container.resolve(LexinServiceFormatter.self)!,
