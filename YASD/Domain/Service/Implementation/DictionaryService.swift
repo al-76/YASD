@@ -10,11 +10,11 @@ import RxSwift
 import Foundation
 
 class DictionaryService: SuggestionService, WordsService {
-    private let parameters: ParametersStorage
+    private let parameters: LanguageStorage
     private let suggestions: AnyDictionaryRepository<SuggestionResult>
     private let words: AnyDictionaryRepository<FoundWordResult>
 
-    init(parameters: ParametersStorage,
+    init(parameters: LanguageStorage,
          suggestions: AnyDictionaryRepository<SuggestionResult>,
          words: AnyDictionaryRepository<FoundWordResult>) {
         self.parameters = parameters

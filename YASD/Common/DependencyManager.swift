@@ -88,9 +88,9 @@ func configureService(_ container: Container) {
     .inObjectScope(.container)
     
     // Parameters
-    container.register(ParametersStorage.self) { _ in
-        ParametersStorage(storage: container.resolve(Storage.self)!,
-                               language: ParametersStorage.defaultLanguage)
+    container.register(LanguageStorage.self) { _ in
+        LanguageStorage(storage: container.resolve(Storage.self)!,
+                               language: LanguageStorage.defaultLanguage)
     }
     .inObjectScope(.container)
     
@@ -127,7 +127,7 @@ func configureService(_ container: Container) {
     
     // Dictionary Service
     container.register(DictionaryService.self) { _ in
-        DictionaryService(parameters: container.resolve(ParametersStorage.self)!,
+        DictionaryService(parameters: container.resolve(LanguageStorage.self)!,
                           suggestions: container.resolve(AnyDictionaryRepository<SuggestionResult>.self)!,
                           words: container.resolve(AnyDictionaryRepository<FoundWordResult>.self)!)
     }
@@ -166,7 +166,7 @@ func configureService(_ container: Container) {
     
     // Language Settings Service
     container.register(SettingsLanguageService.self) { _ in
-        DefaultSettingsLanguageService(parameters: container.resolve(ParametersStorage.self)!)
+        DefaultSettingsLanguageService(parameters: container.resolve(LanguageStorage.self)!)
     }
     .inObjectScope(.container)
     
@@ -192,7 +192,7 @@ func configureModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(SettingsViewModel.self) { container in
-        SettingsViewModel(lexinParameters: container.resolve(ParametersStorage.self)!)
+        SettingsViewModel(lexinParameters: container.resolve(LanguageStorage.self)!)
     }
     .inObjectScope(.container)
     

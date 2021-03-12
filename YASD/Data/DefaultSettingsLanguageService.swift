@@ -9,12 +9,12 @@
 import RxSwift
 
 class DefaultSettingsLanguageService: SettingsLanguageService {
-    private let parameters: ParametersStorage
+    private let parameters: LanguageStorage
     private lazy var languageItems: [SettingsLanguageItem] = {
         DefaultSettingsLanguageService.createSettingsLanguageItems(parameters.getLanguage())
     }()
     
-    init(parameters: ParametersStorage) {
+    init(parameters: LanguageStorage) {
         self.parameters = parameters
     }
     
@@ -61,7 +61,7 @@ class DefaultSettingsLanguageService: SettingsLanguageService {
     }
     
     private static func createSettingsLanguageItems(_ language: Language) -> [SettingsLanguageItem] {
-        var res = ParametersStorage.supportedLanguages.map {
+        var res = LanguageStorage.supportedLanguages.map {
             SettingsLanguageItem(selected: false, language: $0)
         }
         if let selected = res.firstIndex(where: { $0.language == language  }) {

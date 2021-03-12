@@ -73,7 +73,7 @@
 		2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6400238EA5C400948A52 /* FormattedWord.swift */; };
 		2FDB6404238EA7B700948A52 /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6403238EA7B700948A52 /* Suggestion.swift */; };
 		2FDB6407238EAC3D00948A52 /* SettingsLanguageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6406238EAC3D00948A52 /* SettingsLanguageItem.swift */; };
-		2FDB640A238EACBC00948A52 /* ParametersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6409238EACBC00948A52 /* ParametersStorage.swift */; };
+		2FDB640A238EACBC00948A52 /* LanguageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6409238EACBC00948A52 /* LanguageStorage.swift */; };
 		2FDB640D238EB42700948A52 /* LexinWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB640C238EB42700948A52 /* LexinWord.swift */; };
 		2FDCDBCF234F27DB00E6F15F /* WordsSuggestionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCDBCE234F27DB00E6F15F /* WordsSuggestionTableViewController.swift */; };
 		2FDCDBD1234F31F800E6F15F /* WordsSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCDBD0234F31F800E6F15F /* WordsSuggestionViewModel.swift */; };
@@ -118,7 +118,7 @@
 		F6F788112562ABF700DEAFB1 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
 		F6F788122562ABF700DEAFB1 /* FormattedWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6400238EA5C400948A52 /* FormattedWord.swift */; };
 		F6F788132562ABF700DEAFB1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
-		F6F788142562ABF700DEAFB1 /* ParametersStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6409238EACBC00948A52 /* ParametersStorage.swift */; };
+		F6F788142562ABF700DEAFB1 /* LanguageStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6409238EACBC00948A52 /* LanguageStorage.swift */; };
 		F6F788152562ABF700DEAFB1 /* DefaultStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */; };
 		F6F788162562ABF700DEAFB1 /* SettingsLanguageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6406238EAC3D00948A52 /* SettingsLanguageItem.swift */; };
 		F6F788172562ABF700DEAFB1 /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6403238EA7B700948A52 /* Suggestion.swift */; };
@@ -253,7 +253,7 @@
 		2FDB6400238EA5C400948A52 /* FormattedWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedWord.swift; sourceTree = "<group>"; };
 		2FDB6403238EA7B700948A52 /* Suggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestion.swift; sourceTree = "<group>"; };
 		2FDB6406238EAC3D00948A52 /* SettingsLanguageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageItem.swift; sourceTree = "<group>"; };
-		2FDB6409238EACBC00948A52 /* ParametersStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersStorage.swift; sourceTree = "<group>"; };
+		2FDB6409238EACBC00948A52 /* LanguageStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageStorage.swift; sourceTree = "<group>"; };
 		2FDB640C238EB42700948A52 /* LexinWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinWord.swift; sourceTree = "<group>"; };
 		2FDCDBCE234F27DB00E6F15F /* WordsSuggestionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSuggestionTableViewController.swift; sourceTree = "<group>"; };
 		2FDCDBD0234F31F800E6F15F /* WordsSuggestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSuggestionViewModel.swift; sourceTree = "<group>"; };
@@ -516,7 +516,7 @@
 				2F18E2E223437097003F91FD /* CacheService.swift */,
 				CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */,
 				2FDB6400238EA5C400948A52 /* FormattedWord.swift */,
-				2FDB6409238EACBC00948A52 /* ParametersStorage.swift */,
+				2FDB6409238EACBC00948A52 /* LanguageStorage.swift */,
 				2FDD05A323B10D0D0018F223 /* Bookmarks.swift */,
 				17233CC224A935A80049D914 /* DefaultPlayerManager.swift */,
 				2F717B7723B5F81A00ED2EA8 /* DefaultSettingsLanguageService.swift */,
@@ -928,7 +928,7 @@
 				17260B8224661338002F730A /* Spotlight.swift in Sources */,
 				2F2EC4B622EB259000B1D4C7 /* SettingsViewModel.swift in Sources */,
 				17233CC324A935A80049D914 /* DefaultPlayerManager.swift in Sources */,
-				2FDB640A238EACBC00948A52 /* ParametersStorage.swift in Sources */,
+				2FDB640A238EACBC00948A52 /* LanguageStorage.swift in Sources */,
 				CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */,
 				2FBCB84823A2949F0080238A /* SearchResultsTableView.swift in Sources */,
 				2F31739F22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift in Sources */,
@@ -1028,7 +1028,7 @@
 				2F69AD0722F81775001942E6 /* SettingsViewModelTests.swift in Sources */,
 				F6F788182562ABF700DEAFB1 /* FoundWord.swift in Sources */,
 				F6F788302562AC7300DEAFB1 /* SettingsLanguageService.swift in Sources */,
-				F6F788142562ABF700DEAFB1 /* ParametersStorage.swift in Sources */,
+				F6F788142562ABF700DEAFB1 /* LanguageStorage.swift in Sources */,
 				2F70647823B503570095DE9C /* FoundWord+Extensions.swift in Sources */,
 				F6F7881C2562ABFE00DEAFB1 /* LexinWord.swift in Sources */,
 				F6F788102562ABF700DEAFB1 /* DefaultPlayerManager.swift in Sources */,

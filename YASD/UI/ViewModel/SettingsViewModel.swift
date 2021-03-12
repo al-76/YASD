@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class SettingsViewModel: ViewModel {
-    private let lexinParameters: ParametersStorage
+    private let lexinParameters: LanguageStorage
     
     struct Input {
     }
@@ -19,7 +19,7 @@ class SettingsViewModel: ViewModel {
         let selectedLanguage: Driver<String>
     }
 
-    init(lexinParameters: ParametersStorage) {
+    init(lexinParameters: LanguageStorage) {
         self.lexinParameters = lexinParameters
     }
     

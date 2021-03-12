@@ -19,7 +19,7 @@ class WordsDictionaryRepository: DictionaryRepository {
         self.mapper = mapper
     }
     
-    func search(_ word: String, _ parameters: ParametersStorage) -> Observable<FoundWordResult> {
+    func search(_ word: String, _ parameters: LanguageStorage) -> Observable<FoundWordResult> {
         return provider.getApi(by: parameters.getLanguage())
             .search(word, with: parameters.getLanguageString())
             .flatMap { [weak self] result -> Observable<FoundWordResult> in

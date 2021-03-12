@@ -37,7 +37,7 @@ class WordsViewModel: ViewModel {
     func transform(from input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         let changedLanguage = words.language()
-            .asDriver(onErrorJustReturn: ParametersStorage.defaultLanguage)
+            .asDriver(onErrorJustReturn: LanguageStorage.defaultLanguage)
             .withLatestFrom(input.search) { $1 }
         let changedBookmarks = bookmarks.getChangedSubject().asDriver(onErrorJustReturn: false)
             .filter { $0 }

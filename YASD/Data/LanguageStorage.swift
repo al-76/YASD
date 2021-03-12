@@ -8,7 +8,7 @@
 
 import RxSwift
 
-class ParametersStorage {
+class LanguageStorage {
     public static let supportedLanguages = [
         Language(name: "albanska", code: "alb"),
         Language(name: "amhariska", code: "amh"),
@@ -32,7 +32,7 @@ class ParametersStorage {
         Language(name: "tigrisnka", code: "tir"),
         Language(name: "turkiska", code: "tur")
    ]
-    public static let defaultLanguage = ParametersStorage.supportedLanguages[17]
+    public static let defaultLanguage = LanguageStorage.supportedLanguages[17]
     
     public let language: BehaviorSubject<Language>
     
@@ -63,6 +63,6 @@ class ParametersStorage {
     }
     
     func getLanguage() -> Language {
-        return (try? language.value()) ?? ParametersStorage.defaultLanguage
+        return (try? language.value()) ?? LanguageStorage.defaultLanguage
     }
 }
