@@ -14,7 +14,7 @@ import RxDataSources
 import RMessage
 
 class BookmarksTableViewController: UITableViewController {
-    var model: BookmarksViewModel!
+    var viewModel: BookmarksViewModel!
     
     private let disposeBag = DisposeBag()
     private let playUrl = PublishRelay<String>()
@@ -77,7 +77,7 @@ class BookmarksTableViewController: UITableViewController {
                                              playUrl: playUrl.asDriver(onErrorJustReturn: ""),
                                              removeBookmark: removeBookmark.asDriver(onErrorJustReturn: -1),
                                              restore: restore.asDriver(onErrorJustReturn: ""))
-        let output = model.transform(from: input)
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
             // bookmarks
             output.bookmarks.map { [weak self] result -> [FormattedWord] in

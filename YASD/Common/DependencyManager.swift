@@ -16,7 +16,8 @@ func createContainer() -> Container {
     configurePlatform(container)
     configureService(container)
     configureApi(container)
-    configureModel(container)
+    configureUseCase(container)
+    configureViewModel(container)
     configureView(container)
     
     return container
@@ -87,13 +88,6 @@ func configureService(_ container: Container) {
     }
     .inObjectScope(.container)
     
-    // Parameters
-    container.register(LanguageStorage.self) { _ in
-        LanguageStorage(storage: container.resolve(Storage.self)!,
-                               language: LanguageStorage.defaultLanguage)
-    }
-    .inObjectScope(.container)
-    
     // Cache Service
     container.register(CacheService.self) { _ in
         CacheService(cache: container.resolve(DataCache.self, argument: "CacheService")!)
@@ -119,28 +113,16 @@ func configureService(_ container: Container) {
     container.register(AnyDictionaryRepository<SuggestionResult>.self) { _ in
         AnyDictionaryRepository(wrapped: SuggestionDictionaryRepository(provider: container.resolve(LexinApiProvider.self)!))
     }
+    .inObjectScope(.container)
     container.register(AnyDictionaryRepository<FoundWordResult>.self) { _ in
         AnyDictionaryRepository(wrapped: WordsDictionaryRepository(provider: container.resolve(LexinApiProvider.self)!,
                                                                    mapper: container.resolve(LexinWordMapper.self)!))
     }
-    
-    
-    // Dictionary Service
-    container.register(DictionaryService.self) { _ in
-        DictionaryService(parameters: container.resolve(LanguageStorage.self)!,
-                          suggestions: container.resolve(AnyDictionaryRepository<SuggestionResult>.self)!,
-                          words: container.resolve(AnyDictionaryRepository<FoundWordResult>.self)!)
-    }
-    
-    // WordsService
-    container.register(WordsService.self) { _ in
-        container.resolve(DictionaryService.self)!
-    }
     .inObjectScope(.container)
     
-    // SuggestionService
-    container.register(SuggestionService.self) { _ in
-        container.resolve(DictionaryService.self)!
+    // Settings Repository
+    container.register(SettingsRepository.self) { _ in
+        DefaultSettingsRepository(storage: container.resolve(Storage.self)!)
     }
     .inObjectScope(.container)
     
@@ -165,12 +147,6 @@ func configureService(_ container: Container) {
     }
     .inObjectScope(.container)
     
-    // Language Settings Service
-    container.register(SettingsLanguageService.self) { _ in
-        DefaultSettingsLanguageService(parameters: container.resolve(LanguageStorage.self)!)
-    }
-    .inObjectScope(.container)
-    
     // About Text Repository
     container.register(AboutTextRepository.self) { _ in
         DefaultAboutTextRepository(markdown: container.resolve(Markdown.self)!)
@@ -178,34 +154,114 @@ func configureService(_ container: Container) {
     .inObjectScope(.container)
 }
 
-func configureModel(_ container: Container) {
+func configureUseCase(_ container: Container) {
+    // About
+    container.register(GetTextAboutUseCase.self) { container in
+        GetTextAboutUseCase(repository: container.resolve(AboutTextRepository.self)!)
+    }
+    .inObjectScope(.container)
+
+    // PlaySound
+    container.register(PlaySoundUseCase.self) { container in
+        PlaySoundUseCase(player: container.resolve(PlayerManager.self)!)
+    }
+    .inObjectScope(.container)
+
+    // Settings
+    container.register(GetLanguageSettingsUseCase.self) { container in
+        GetLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(GetLanguageListSettingsUseCase.self) { container in
+        GetLanguageListSettingsUseCase(repository: container.resolve(SettingsRepository.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(UpdateLanguageSettingsUseCase.self) { container in
+        UpdateLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!)
+    }
+    .inObjectScope(.container)
+
+    // Words
+    container.register(SearchWordUseCase.self) { container in
+        SearchWordUseCase(words: container.resolve(AnyDictionaryRepository<FoundWordResult>.self)!,
+                          settings: container.resolve(SettingsRepository.self)!,
+                          bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+    }
+    .inObjectScope(.container)
+
+    // Suggestions
+    container.register(AddSuggestionUseCase.self) { container in
+        AddSuggestionUseCase(suggestions: container.resolve(AnyDictionaryRepository<SuggestionResult>.self)!,
+                             settings: container.resolve(SettingsRepository.self)!,
+                             history: container.resolve(AnyStorageRepository<Suggestion>.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(GetSuggestionUseCase.self) { container in
+        GetSuggestionUseCase(suggestions: container.resolve(AnyDictionaryRepository<SuggestionResult>.self)!,
+                             settings: container.resolve(SettingsRepository.self)!,
+                             history: container.resolve(AnyStorageRepository<Suggestion>.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(RemoveSuggestionUseCase.self) { container in
+        RemoveSuggestionUseCase(history: container.resolve(AnyStorageRepository<Suggestion>.self)!)
+    }
+    .inObjectScope(.container)
+
+    // Bookmarks
+    container.register(SearchBookmarkUseCase.self) { container in
+        SearchBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(RestoreBookmarkUseCase.self) { container in
+        RestoreBookmarkUseCase(cache: container.resolve(ExternalCacheService.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(RemoveBookmarkByIndexUseCase.self) { container in
+        RemoveBookmarkByIndexUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(RemoveBookmarkUseCase.self) { container in
+        RemoveBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(ChangedBookmarkUseCase.self) { container in
+        ChangedBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!, cache: container.resolve(ExternalCacheService.self)!)
+    }
+    .inObjectScope(.container)
+    container.register(AddBookmarkUseCase.self) { container in
+        AddBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+    }
+    .inObjectScope(.container)
+}
+
+func configureViewModel(_ container: Container) {
     container.register(WordsSuggestionViewModel.self) { container in
-        WordsSuggestionViewModel(suggestions: container.resolve(SuggestionService.self)!,
-                                 history: container.resolve(AnyStorageRepository<Suggestion>.self)!)
+        WordsSuggestionViewModel(getSuggestion: container.resolve(GetSuggestionUseCase.self)!, addSuggestion: container.resolve(AddSuggestionUseCase.self)!, removeSuggestion: container.resolve(RemoveSuggestionUseCase.self)!)
     }
     .inObjectScope(.container)
     
     container.register(WordsViewModel.self) { container in
-        WordsViewModel(words: container.resolve(WordsService.self)!,
-                       player: container.resolve(PlayerManager.self)!,
-                       bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+        WordsViewModel(searchWord: container.resolve(SearchWordUseCase.self)!, addBookmark: container.resolve(AddBookmarkUseCase.self)!, playSound: container.resolve(PlaySoundUseCase.self)!, removeBookmark: container.resolve(RemoveBookmarkUseCase.self)!)
     }
     .inObjectScope(.container)
     
     container.register(SettingsViewModel.self) { container in
-        SettingsViewModel(lexinParameters: container.resolve(LanguageStorage.self)!)
+        SettingsViewModel(getLanguage: container.resolve(GetLanguageSettingsUseCase.self)!)
     }
     .inObjectScope(.container)
     
     container.register(SettingsLanguageViewModel.self) { container in
-        SettingsLanguageViewModel(settings: container.resolve(SettingsLanguageService.self)!)
+        SettingsLanguageViewModel(getLanguageList: container.resolve(GetLanguageListSettingsUseCase.self)!, updateLanguage: container.resolve(UpdateLanguageSettingsUseCase.self)!)
     }
     .inObjectScope(.container)
     
     container.register(BookmarksViewModel.self) { container in
-        BookmarksViewModel(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!,
-                           player: container.resolve(PlayerManager.self)!,
-                           spotlight: container.resolve(ExternalCacheService.self)!)
+        BookmarksViewModel(searchBookmark: container.resolve(SearchBookmarkUseCase.self)!, restoreBookmark: container.resolve(RestoreBookmarkUseCase.self)!, removeBookmark: container.resolve(RemoveBookmarkByIndexUseCase.self)!, changedBookmark: container.resolve(ChangedBookmarkUseCase.self)!, playSound: container.resolve(PlaySoundUseCase.self)!)
+    }
+    .inObjectScope(.container)
+    
+    container.register(AboutViewModel.self) { container in
+        AboutViewModel(getText: container.resolve(GetTextAboutUseCase.self)!)
     }
     .inObjectScope(.container)
 }
@@ -213,22 +269,22 @@ func configureModel(_ container: Container) {
 func configureView(_ container: Container) {
     container.registerForStoryboard(WordsSuggestionTableViewController.self,
                                     withIdentifier: "WordsSuggestionTableViewController") { container, view  in
-        view.model = container.resolve(WordsSuggestionViewModel.self)!
+        view.viewModel = container.resolve(WordsSuggestionViewModel.self)!
     }
     container.storyboardInitCompleted(WordsTableViewController.self) { container, view in
-        view.model = container.resolve(WordsViewModel.self)
-        view.searchResultsController = container.resolve(WordsSuggestionTableViewController.self)
+        view.viewModel = container.resolve(WordsViewModel.self)!
+        view.searchResultsController = container.resolve(WordsSuggestionTableViewController.self)!
     }
     container.storyboardInitCompleted(SettingsTableViewController.self) { container, view in
-        view.model = container.resolve(SettingsViewModel.self)
+        view.viewModel = container.resolve(SettingsViewModel.self)!
     }
     container.storyboardInitCompleted(SettingsLanguageTableViewController.self) { container, view in
-        view.model = container.resolve(SettingsLanguageViewModel.self)
+        view.viewModel = container.resolve(SettingsLanguageViewModel.self)!
     }
     container.storyboardInitCompleted(BookmarksTableViewController.self) { container, view in
-        view.model = container.resolve(BookmarksViewModel.self)
+        view.viewModel = container.resolve(BookmarksViewModel.self)!
     }
     container.storyboardInitCompleted(AboutViewController.self) { container, view in
-        view.aboutText = container.resolve(AboutTextRepository.self)
+        view.viewModel = container.resolve(AboutViewModel.self)!
     }
 }

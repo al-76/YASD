@@ -10,9 +10,10 @@ import RxSwift
 import RxCocoa
 
 class WordsViewModel: ViewModel {
-    private let words: WordsService
-    private let player: PlayerManager
-    private let bookmarks: AnyStorageRepository<FormattedWord>
+    private let searchWord: SearchWordUseCase
+    private let addBookmark: AddBookmarkUseCase
+    private let playSound: PlaySoundUseCase
+    private let removeBookmark: RemoveBookmarkUseCase
     
     struct Input {
         let search: Driver<String>
@@ -28,42 +29,38 @@ class WordsViewModel: ViewModel {
         let loading: Driver<Bool>
     }
     
-    init(words: WordsService, player: PlayerManager, bookmarks: AnyStorageRepository<FormattedWord>) {
-        self.words = words
-        self.player = player
-        self.bookmarks = bookmarks
+    init(searchWord: SearchWordUseCase,
+         addBookmark: AddBookmarkUseCase,
+         playSound: PlaySoundUseCase,
+         removeBookmark: RemoveBookmarkUseCase) {
+        self.searchWord = searchWord
+        self.addBookmark = addBookmark
+        self.playSound = playSound
+        self.removeBookmark = removeBookmark
     }
     
     func transform(from input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
-        let changedLanguage = words.language()
-            .asDriver(onErrorJustReturn: LanguageStorage.defaultLanguage)
-            .withLatestFrom(input.search) { $1 }
-        let changedBookmarks = bookmarks.getChangedSubject().asDriver(onErrorJustReturn: false)
-            .filter { $0 }
-            .withLatestFrom(input.search) { $1 }
-        let search = Driver.merge(input.search, changedLanguage, changedBookmarks)
-        let found = search.flatMapLatest { [weak self] word -> Driver<FoundWordResult> in
-            guard let self = self else { return Driver.just(.success([])) }
-            return self.words.search(word)
-                .trackActivity(activityIndicator)
+        let found = input.search.flatMapLatest { [weak self] word -> Driver<FoundWordResult> in
+            guard let self = self else { return .just(.success([])) }
+            return self.searchWord.execute(with: (word, activityIndicator))
                 .asDriver { Driver.just(.failure($0)) }
         }
         let played = input.playUrl
             .flatMapLatest { [weak self] url -> Driver<PlayerManagerResult> in
-                guard let self = self else { return Driver.just(.success(false)) }
-                return self.player.playSound(with: url)
-                    .asDriver { Driver.just(.failure($0)) }
+                guard let self = self else { return .just(.success(false)) }
+                return self.playSound.execute(with: url)
+                    .asDriver { .just(.failure($0)) }
         }
         let addedBookmark = input.addBookmark.flatMap { [weak self] word -> Driver<StorageServiceResult> in
             guard let self = self else { return Driver.just(.success(false)) }
-            return self.bookmarks.add(word)
-                .asDriver { Driver.just(.failure($0)) }
+            return self.addBookmark.execute(with: word)
+                .asDriver { .just(.failure($0)) }
         }
         let removedBookmark = input.removeBookmark.flatMap { [weak self] word -> Driver<StorageServiceResult> in
             guard let self = self else { return Driver.just(.success(false)) }
-            return self.bookmarks.remove(word)
-                .asDriver { Driver.just(.failure($0)) }
+            return self.removeBookmark.execute(with: word)
+                .asDriver { .just(.failure($0)) }
         }
         return Output(foundWords: found,
                       played: played,

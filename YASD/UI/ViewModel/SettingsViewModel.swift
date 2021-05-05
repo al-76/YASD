@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class SettingsViewModel: ViewModel {
-    private let lexinParameters: LanguageStorage
+    private let getLanguage: GetLanguageSettingsUseCase
     
     struct Input {
     }
@@ -19,12 +19,12 @@ class SettingsViewModel: ViewModel {
         let selectedLanguage: Driver<String>
     }
 
-    init(lexinParameters: LanguageStorage) {
-        self.lexinParameters = lexinParameters
+    init(getLanguage: GetLanguageSettingsUseCase) {
+        self.getLanguage = getLanguage
     }
     
     func transform(from input: Input) -> Output {
-        let languageUpdate = lexinParameters.language.map { $0.name }
-        return Output(selectedLanguage: languageUpdate.asDriver(onErrorJustReturn: ""))
+        return Output(selectedLanguage: getLanguage.execute(with: ())
+                        .asDriver(onErrorJustReturn: Language.defaultLanguage.name))
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class DefaultAboutTextRepository: AboutTextRepository {
     let markdown: Markdown
@@ -15,7 +16,16 @@ class DefaultAboutTextRepository: AboutTextRepository {
         self.markdown = markdown
     }
     
-    func getText() -> NSAttributedString {
-        return markdown.parse(data: NSLocalizedString("textAbout", comment: ""))
+    func getText() -> Observable<NSAttributedString> {
+        return Observable.create { [weak self] observer in
+            if let self = self {
+                observer.onNext(self.markdown
+                                    .parse(data: NSLocalizedString("textAbout", comment: "")))
+            } else {
+                observer.onNext(NSAttributedString())
+            }
+            observer.onCompleted()
+            return Disposables.create {}
+        }
     }
 }

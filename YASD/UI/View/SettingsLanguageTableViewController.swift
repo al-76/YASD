@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class SettingsLanguageTableViewController: UITableViewController {
-    var model: SettingsLanguageViewModel!
+    var viewModel: SettingsLanguageViewModel!
     
     private let disposeBag = DisposeBag()
     private var searchController: UISearchController!
@@ -50,7 +50,7 @@ class SettingsLanguageTableViewController: UITableViewController {
             .compactMap { $0 }
             .asDriver(onErrorJustReturn: "")
         let input = SettingsLanguageViewModel.Input(search: searchLanguage, select: language)
-        let output = model.transform(from: input)
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
             // deselected items
             tableView.rx.itemDeselected.asObservable().subscribe(onNext: { [weak self] in

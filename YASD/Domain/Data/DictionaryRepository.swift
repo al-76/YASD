@@ -11,18 +11,18 @@ import RxSwift
 protocol DictionaryRepository {
     associatedtype T
 
-    func search(_ word: String, _ parameters: LanguageStorage) -> Observable<T>
+    func search(_ word: String, _ language: Language) -> Observable<T>
 }
 
 class AnyDictionaryRepository<T>: DictionaryRepository {
-    private let searchObject: (String, LanguageStorage) -> Observable<T>
+    private let searchObject: (String, Language) -> Observable<T>
     
     init<TypeDictionaryRepository: DictionaryRepository>(wrapped: TypeDictionaryRepository)
     where TypeDictionaryRepository.T == T {
         searchObject = wrapped.search
     }
     
-    func search(_ word: String, _ parameters: LanguageStorage) -> Observable<T> {
-        return searchObject(word, parameters)
+    func search(_ word: String, _ language: Language) -> Observable<T> {
+        return searchObject(word, language)
     }
 }

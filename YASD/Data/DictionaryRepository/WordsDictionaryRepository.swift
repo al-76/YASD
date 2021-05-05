@@ -19,9 +19,9 @@ class WordsDictionaryRepository: DictionaryRepository {
         self.mapper = mapper
     }
     
-    func search(_ word: String, _ parameters: LanguageStorage) -> Observable<FoundWordResult> {
-        return provider.getApi(by: parameters.getLanguage())
-            .search(word, with: parameters.getLanguageString())
+    func search(_ word: String, _ language: Language) -> Observable<FoundWordResult> {
+        return provider.getApi(by: language)
+            .search(word, with: language.getString())
             .flatMap { [weak self] result -> Observable<FoundWordResult> in
                 guard let self = self else { return Observable.just(.success([])) }
                 return self.mapper.map(input: result) }

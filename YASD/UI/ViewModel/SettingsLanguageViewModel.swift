@@ -10,7 +10,8 @@ import RxSwift
 import RxCocoa
 
 class SettingsLanguageViewModel: ViewModel {
-    private let settings: SettingsLanguageService
+    private let getLanguageList: GetLanguageListSettingsUseCase
+    private let updateLanguage: UpdateLanguageSettingsUseCase
     
     struct Input {
         let search: Driver<String>
@@ -21,31 +22,36 @@ class SettingsLanguageViewModel: ViewModel {
         let languages: Driver<[SettingsLanguageItem]>
     }
     
-    init(settings: SettingsLanguageService) {
-        self.settings = settings
+    init(getLanguageList: GetLanguageListSettingsUseCase,
+         updateLanguage: UpdateLanguageSettingsUseCase) {
+        self.getLanguageList = getLanguageList
+        self.updateLanguage = updateLanguage
     }
     
     func transform(from input: Input) -> Output {
         let searched = input.search
             .flatMapLatest { [weak self] language -> Driver<SettingsLanguageItemResult> in
-                guard let self = self else { return Driver.just(.success([])) }
+                guard let self = self else { return .just(.success([])) }
                 return self.getSettings(with: language)
         }
         let selected = input.select
-            .flatMapLatest { [weak self] language -> Driver<SettingsLanguageResult> in
-                guard let self = self else { return Driver.just(.success(false)) }
-                return self.settings.update(with: language).asDriver { Driver.just(.failure($0)) }
+            .flatMapLatest { [weak self] language -> Driver<Void> in
+                guard let self = self else { return .just(()) }
+                return self.updateLanguage.execute(with: language)
+                    .asDriver { _ in .just(()) }
         }
         .withLatestFrom(input.search) { ($0, $1) }
         .flatMap { [weak self] _, language -> Driver<SettingsLanguageItemResult> in
-            guard let self = self else { return Driver.just(.success([])) }
+            guard let self = self else { return .just(.success([])) }
             return self.getSettings(with: language)
         }
         
-        return Output(languages: Driver.merge(selected, searched).map { $0.getOrDefault([]) })
+        return Output(languages: Driver.merge(selected, searched)
+                        .map { $0.getOrDefault([]) })
     }
     
     private func getSettings(with language: String) -> Driver<SettingsLanguageItemResult> {
-        return settings.get(with: language).asDriver { Driver.just(.failure($0)) }
+        return getLanguageList.execute(with: language)
+            .asDriver { .just(.failure($0)) }
     }
 }

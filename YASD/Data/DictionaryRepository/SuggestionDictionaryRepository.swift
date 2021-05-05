@@ -17,9 +17,9 @@ class SuggestionDictionaryRepository: DictionaryRepository {
         self.provider = provider
     }
     
-    func search(_ word: String, _ parameters: LanguageStorage) -> Observable<SuggestionResult> {
-        return provider.getApi(by: parameters.getLanguage())
-            .suggestion(word, with: parameters.getLanguageString())
+    func search(_ word: String, _ language: Language) -> Observable<SuggestionResult> {
+        return provider.getApi(by: language)
+            .suggestion(word, with: language.getString())
     }
 }
 

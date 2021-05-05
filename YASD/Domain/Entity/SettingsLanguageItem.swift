@@ -13,3 +13,6 @@ struct SettingsLanguageItem {
     let language: Language
 }
 typealias SettingsLanguageItemResult = Result<[SettingsLanguageItem]>
+
+extension SettingsLanguageItem: Codable {}
+extension SettingsLanguageItem: Equatable {}

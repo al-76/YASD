@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 class SettingsTableViewController: UITableViewController {
-    var model: SettingsViewModel!
+    var viewModel: SettingsViewModel!
     let disposeBag = DisposeBag()
     @IBOutlet weak var languageLabel: UILabel!
     
@@ -22,7 +22,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     private func bindToModel() {
-        model.transform(from: SettingsViewModel.Input())
+        viewModel.transform(from: SettingsViewModel.Input())
             .selectedLanguage
             .drive(languageLabel.rx.text)
             .disposed(by: disposeBag)

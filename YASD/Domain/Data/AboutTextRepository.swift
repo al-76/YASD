@@ -6,8 +6,8 @@
 //  Copyright © 2021 yac. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
 protocol AboutTextRepository {
-    func getText() -> NSAttributedString
+    func getText() -> Observable<NSAttributedString>
 }

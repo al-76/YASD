@@ -13,7 +13,7 @@ import RxDataSources
 import RMessage
 
 class WordsSuggestionTableViewController: UITableViewController {
-    var model: WordsSuggestionViewModel!
+    var viewModel: WordsSuggestionViewModel!
     let disposeBag = DisposeBag()
     let search = PublishRelay<String>()
     let addHistory = PublishRelay<String>()
@@ -49,7 +49,7 @@ class WordsSuggestionTableViewController: UITableViewController {
             .Input(search: search.asDriver(onErrorJustReturn: ""),
                    addHistory: addHistory.asDriver(onErrorJustReturn: ""),
                    removeHistory: tableView.rx.itemDeleted.map { suggestion($0) }.asDriver(onErrorJustReturn: ""))
-        let output = model.transform(from: input)
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
             // suggestions
             output.suggestions.map { [weak self] result -> [SuggestionItem] in

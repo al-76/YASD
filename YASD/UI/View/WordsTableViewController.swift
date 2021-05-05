@@ -12,7 +12,7 @@ import RxCocoa
 import RMessage
 
 class WordsTableViewController: UITableViewController {
-    var model: WordsViewModel!
+    var viewModel: WordsViewModel!
     var searchResultsController: WordsSuggestionTableViewController!
     
     private var searchController: UISearchController!
@@ -64,7 +64,7 @@ class WordsTableViewController: UITableViewController {
                                          playUrl: playUrl.asDriver(onErrorJustReturn: ""),
                                          addBookmark: addBookmark.asDriver(onErrorJustReturn: FormattedWord()),
                                          removeBookmark: removeBookmark.asDriver(onErrorJustReturn: FormattedWord()))
-        let output = model.transform(from: input)
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
             // search
             searchController.searchBar.rx.text.distinctUntilChanged()
