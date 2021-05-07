@@ -2,7 +2,10 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '11.0'
 
-def common_pods
+use_frameworks!
+
+target 'YASD' do
+  
   pod 'Swinject', '2.6'
   pod 'SwinjectStoryboard'
   pod 'RxSwift'
@@ -11,21 +14,12 @@ def common_pods
   pod 'SwiftSoup'
   pod 'MarkdownKit'
   pod 'Cache', '5.2.0'
-end
-
-target 'YASD' do
-  use_frameworks!
   
-  common_pods
-end
-
-target 'YASDTests' do
-  use_frameworks!
-  
-  pod 'Cuckoo'
-  pod 'RxTest'
-  
-  common_pods
+  target 'YASDTests' do
+    inherit! :search_paths
+    pod 'RxTest'
+    pod 'Cuckoo'
+  end
 end
 
 post_install do |installer|

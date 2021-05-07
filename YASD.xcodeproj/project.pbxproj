@@ -81,35 +81,10 @@
 		2FF62C7F2289B4AA00B4946C /* WordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C7E2289B4AA00B4946C /* WordsTableViewCell.swift */; };
 		2FF62C81228AA89400B4946C /* WordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C80228AA89400B4946C /* WordsViewModel.swift */; };
 		2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C89228D61AF00B4946C /* WordsViewModelTests.swift */; };
-		2FF62C9C228E98EF00B4946C /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C9B228E98EF00B4946C /* GeneratedMocks.swift */; };
-		2FF62C9D228EEC3100B4946C /* Cuckoo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FF62C8B228D6C0F00B4946C /* Cuckoo.framework */; };
 		2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62CBC229444BE00B4946C /* ViewModel.swift */; };
 		2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */; };
-		5C6DD17A93BA9A73ABB01864 /* Pods_YASDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 868C22321485EA95A08034D1 /* Pods_YASDTests.framework */; };
 		6F171E322643FB9D00C37B28 /* AboutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F171E312643FB9D00C37B28 /* AboutViewModelTests.swift */; };
-		6F171E352644108D00C37B28 /* RemoveBookmarkByIndexUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE70523262AF0920015CD07 /* RemoveBookmarkByIndexUseCase.swift */; };
-		6F171E362644108D00C37B28 /* RemoveBookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE7053C2631FCE90015CD07 /* RemoveBookmarkUseCase.swift */; };
-		6F171E372644108D00C37B28 /* StorageRepository+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE7051D262AEF610015CD07 /* StorageRepository+Extensions.swift */; };
-		6F171E382644108D00C37B28 /* SearchBookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE70519262AEE640015CD07 /* SearchBookmarkUseCase.swift */; };
-		6F171E392644108D00C37B28 /* RestoreBookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE70520262AEFC20015CD07 /* RestoreBookmarkUseCase.swift */; };
-		6F171E3A2644108D00C37B28 /* ChangedBookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE70526262AF35F0015CD07 /* ChangedBookmarkUseCase.swift */; };
-		6F171E3B2644108D00C37B28 /* AddBookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE705382631F73F0015CD07 /* AddBookmarkUseCase.swift */; };
-		6F171E3C2644109100C37B28 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE70516262AEDAD0015CD07 /* UseCase.swift */; };
-		6F171E3D264410D300C37B28 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9597625E130A00059A1EB /* Language.swift */; };
-		6F171E3F2644110600C37B28 /* PlaySoundUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE70529262AF5AE0015CD07 /* PlaySoundUseCase.swift */; };
-		6F171E402644110C00C37B28 /* UpdateLanguageSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCBE2632D0F5003552BB /* UpdateLanguageSettingsUseCase.swift */; };
-		6F171E412644110C00C37B28 /* GetLanguageSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCB72632CCD0003552BB /* GetLanguageSettingsUseCase.swift */; };
-		6F171E422644110C00C37B28 /* GetLanguageListSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCBB2632D0C0003552BB /* GetLanguageListSettingsUseCase.swift */; };
-		6F171E432644111000C37B28 /* SearchWordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE705302631F5920015CD07 /* SearchWordUseCase.swift */; };
-		6F171E442644111700C37B28 /* SuggestionResult+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9551D42631C3D8007AD633 /* SuggestionResult+Extensions.swift */; };
-		6F171E452644111700C37B28 /* AddSuggestionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9551D02631C2AE007AD633 /* AddSuggestionUseCase.swift */; };
-		6F171E462644111700C37B28 /* GetSuggestionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9551E02631CAE0007AD633 /* GetSuggestionUseCase.swift */; };
-		6F171E472644111700C37B28 /* RemoveSuggestionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9551DD2631CA34007AD633 /* RemoveSuggestionUseCase.swift */; };
-		6F171E482644111700C37B28 /* AnyStorageRepository+Suggestion+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9551DA2631C7D8007AD633 /* AnyStorageRepository+Suggestion+Extensions.swift */; };
-		6F171E492644111700C37B28 /* SuggestionItemResult+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9551D72631C412007AD633 /* SuggestionItemResult+Extensions.swift */; };
-		6F171E4A2644113700C37B28 /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9597E25E139280059A1EB /* DictionaryRepository.swift */; };
-		6F171E4B2644113700C37B28 /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB54E92629D4360063483D /* SettingsRepository.swift */; };
-		6F171E4C26441DF500C37B28 /* GetTextAboutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCC52632D7E1003552BB /* GetTextAboutUseCase.swift */; };
+		6F171E5626455E2000C37B28 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F171E5526455E2000C37B28 /* GeneratedMocks.swift */; };
 		6F86CCB82632CCD0003552BB /* GetLanguageSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCB72632CCD0003552BB /* GetLanguageSettingsUseCase.swift */; };
 		6F86CCBC2632D0C0003552BB /* GetLanguageListSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCBB2632D0C0003552BB /* GetLanguageListSettingsUseCase.swift */; };
 		6F86CCBF2632D0F5003552BB /* UpdateLanguageSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCBE2632D0F5003552BB /* UpdateLanguageSettingsUseCase.swift */; };
@@ -123,11 +98,9 @@
 		6F9551E12631CAE0007AD633 /* GetSuggestionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9551E02631CAE0007AD633 /* GetSuggestionUseCase.swift */; };
 		6FFB54EA2629D4360063483D /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB54E92629D4360063483D /* SettingsRepository.swift */; };
 		6FFB54ED2629D6BD0063483D /* DefaultSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB54EC2629D6BD0063483D /* DefaultSettingsRepository.swift */; };
-		C575451BF1FA2F9A33879606 /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4558CE00B37B5F83C6BB9055 /* Pods_YASD.framework */; };
+		83A3CC6E4D9D30F3F04033CA /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE92A6CB8379AC5724330A1E /* Pods_YASD.framework */; };
 		CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
-		CD2BDF6F25E0EECE00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
 		CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
-		CD2BDF7525E0EFDB00E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
 		CDE70517262AEDAD0015CD07 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE70516262AEDAD0015CD07 /* UseCase.swift */; };
 		CDE7051A262AEE640015CD07 /* SearchBookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE70519262AEE640015CD07 /* SearchBookmarkUseCase.swift */; };
 		CDE7051E262AEF610015CD07 /* StorageRepository+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE7051D262AEF610015CD07 /* StorageRepository+Extensions.swift */; };
@@ -142,44 +115,10 @@
 		CDF9597F25E139280059A1EB /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9597E25E139280059A1EB /* DictionaryRepository.swift */; };
 		CDF9598325E150210059A1EB /* SuggestionDictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */; };
 		CDF9598625E1503E0059A1EB /* WordsDictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9598525E1503E0059A1EB /* WordsDictionaryRepository.swift */; };
+		F4677CCE7FA9BEDC1A098F98 /* Pods_YASDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F2381FA2412C7609046EB27 /* Pods_YASDTests.framework */; };
 		F624B553256414790025FB7A /* MockFactory+StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F624B552256414790025FB7A /* MockFactory+StorageRepository.swift */; };
 		F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */; };
 		F6ED48B5255025A200E60E1B /* DefaultStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */; };
-		F6F788052562ABD100DEAFB1 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62CBC229444BE00B4946C /* ViewModel.swift */; };
-		F6F788062562ABD100DEAFB1 /* WordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C80228AA89400B4946C /* WordsViewModel.swift */; };
-		F6F788072562ABD100DEAFB1 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2EC4B522EB259000B1D4C7 /* SettingsViewModel.swift */; };
-		F6F788082562ABD100DEAFB1 /* WordsSuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDCDBD0234F31F800E6F15F /* WordsSuggestionViewModel.swift */; };
-		F6F788092562ABD100DEAFB1 /* BookmarksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD05A023B0FBA90018F223 /* BookmarksViewModel.swift */; };
-		F6F7880A2562ABD100DEAFB1 /* SettingsLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F31739C22CCF84A008944EE /* SettingsLanguageViewModel.swift */; };
-		F6F7880C2562ABEE00DEAFB1 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3401D423912149005FBD39 /* StorageRepository.swift */; };
-		F6F7880D2562ABEE00DEAFB1 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */; };
-		F6F7880F2562ABF700DEAFB1 /* Bookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD05A323B10D0D0018F223 /* Bookmarks.swift */; };
-		F6F788102562ABF700DEAFB1 /* DefaultPlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17233CC224A935A80049D914 /* DefaultPlayerManager.swift */; };
-		F6F788112562ABF700DEAFB1 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
-		F6F788122562ABF700DEAFB1 /* FormattedWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6400238EA5C400948A52 /* FormattedWord.swift */; };
-		F6F788132562ABF700DEAFB1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
-		F6F788152562ABF700DEAFB1 /* DefaultStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */; };
-		F6F788162562ABF700DEAFB1 /* SettingsLanguageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6406238EAC3D00948A52 /* SettingsLanguageItem.swift */; };
-		F6F788172562ABF700DEAFB1 /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6403238EA7B700948A52 /* Suggestion.swift */; };
-		F6F788182562ABF700DEAFB1 /* FoundWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2980C823B3866C004F7FA9 /* FoundWord.swift */; };
-		F6F7881A2562ABFE00DEAFB1 /* LexinWordMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* LexinWordMapper.swift */; };
-		F6F7881C2562ABFE00DEAFB1 /* LexinWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB640C238EB42700948A52 /* LexinWord.swift */; };
-		F6F7881E2562AC0700DEAFB1 /* LexinParserSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */; };
-		F6F7881F2562AC0700DEAFB1 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
-		F6F788212562AC0C00DEAFB1 /* LexinServiceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CC4F02486B3F40018444C /* LexinServiceFormatter.swift */; };
-		F6F788232562AC1300DEAFB1 /* LexinApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D2B25237EA57B00F23F3B /* LexinApi.swift */; };
-		F6F788242562AC1300DEAFB1 /* LexinApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */; };
-		F6F788262562AC1800DEAFB1 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17233CC024A919D40049D914 /* Mapper.swift */; };
-		F6F788292562AC3800DEAFB1 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDEFF5E2295494200A82F43 /* Result.swift */; };
-		F6F7882E2562AC6D00DEAFB1 /* ExternalCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */; };
-		F6F788332562AC8A00DEAFB1 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */; };
-		F6F788352562ACA700DEAFB1 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F8BBE2322A7DA00EF6A85 /* Player.swift */; };
-		F6F788362562ACA700DEAFB1 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17260B8124661338002F730A /* Spotlight.swift */; };
-		F6F788372562ACA700DEAFB1 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7321862313E4A000CC0822 /* Storage.swift */; };
-		F6F788382562ACA700DEAFB1 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB2DE022A111540053B758 /* Network.swift */; };
-		F6F788392562ACA700DEAFB1 /* Markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7622B5284F002F769B /* Markdown.swift */; };
-		F6F7883A2562ACA700DEAFB1 /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F393ACD233E255500F315FC /* DataCache.swift */; };
-		F6F7883B2562ACA700DEAFB1 /* HtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A9BC7422B5273B002F769B /* HtmlParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +167,7 @@
 		17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swinject+Extensions.swift"; sourceTree = "<group>"; };
 		17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiProvider.swift; sourceTree = "<group>"; };
 		17FC6BA423870ED900279589 /* LexinApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiTests.swift; sourceTree = "<group>"; };
+		23B68C83CC0C0945604EA2C8 /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
 		2F0D2B25237EA57B00F23F3B /* LexinApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApi.swift; sourceTree = "<group>"; };
 		2F18E2E223437097003F91FD /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceTests.swift; sourceTree = "<group>"; };
@@ -300,13 +240,15 @@
 		2FF62C89228D61AF00B4946C /* WordsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsViewModelTests.swift; sourceTree = "<group>"; };
 		2FF62C8B228D6C0F00B4946C /* Cuckoo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cuckoo.framework; path = Carthage/Build/iOS/Cuckoo.framework; sourceTree = "<group>"; };
 		2FF62C91228DAAB400B4946C /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
-		2FF62C9B228E98EF00B4946C /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		2FF62CBC229444BE00B4946C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserWordsTests.swift; sourceTree = "<group>"; };
 		2FFF024622B2870800C1DC61 /* MarkdownKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarkdownKit.framework; path = Carthage/Build/iOS/MarkdownKit.framework; sourceTree = "<group>"; };
-		4558CE00B37B5F83C6BB9055 /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		394D8CEB803C9A4BD3EAA1F5 /* Pods-YASDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.release.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.release.xcconfig"; sourceTree = "<group>"; };
+		60845C4689025A91E4ECF00D /* Pods-YASDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.debug.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6F171E312643FB9D00C37B28 /* AboutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModelTests.swift; sourceTree = "<group>"; };
 		6F171E332643FF4000C37B28 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6F171E5526455E2000C37B28 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
+		6F2381FA2412C7609046EB27 /* Pods_YASDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F86CCB72632CCD0003552BB /* GetLanguageSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLanguageSettingsUseCase.swift; sourceTree = "<group>"; };
 		6F86CCBB2632D0C0003552BB /* GetLanguageListSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLanguageListSettingsUseCase.swift; sourceTree = "<group>"; };
 		6F86CCBE2632D0F5003552BB /* UpdateLanguageSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLanguageSettingsUseCase.swift; sourceTree = "<group>"; };
@@ -320,11 +262,7 @@
 		6F9551E02631CAE0007AD633 /* GetSuggestionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSuggestionUseCase.swift; sourceTree = "<group>"; };
 		6FFB54E92629D4360063483D /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
 		6FFB54EC2629D6BD0063483D /* DefaultSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSettingsRepository.swift; sourceTree = "<group>"; };
-		86321561717252C16AB173FE /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
-		868C22321485EA95A08034D1 /* Pods_YASDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1469B06C791672FCD4B44A4 /* Pods-YASDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.debug.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C2F9827EB3357FB0D40BD002 /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
-		C44567C3CC1703682EED698A /* Pods-YASDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.release.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.release.xcconfig"; sourceTree = "<group>"; };
+		A9608AB13FB564E82B65EE2B /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
 		CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTextRepository.swift; sourceTree = "<group>"; };
 		CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAboutTextRepository.swift; sourceTree = "<group>"; };
 		CDE70516262AEDAD0015CD07 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
@@ -341,6 +279,7 @@
 		CDF9597E25E139280059A1EB /* DictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRepository.swift; sourceTree = "<group>"; };
 		CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionDictionaryRepository.swift; sourceTree = "<group>"; };
 		CDF9598525E1503E0059A1EB /* WordsDictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsDictionaryRepository.swift; sourceTree = "<group>"; };
+		EE92A6CB8379AC5724330A1E /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F624B552256414790025FB7A /* MockFactory+StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+StorageRepository.swift"; sourceTree = "<group>"; };
 		F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalCacheService.swift; sourceTree = "<group>"; };
 		F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorageRepository.swift; sourceTree = "<group>"; };
@@ -351,7 +290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C575451BF1FA2F9A33879606 /* Pods_YASD.framework in Frameworks */,
+				83A3CC6E4D9D30F3F04033CA /* Pods_YASD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,8 +298,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FF62C9D228EEC3100B4946C /* Cuckoo.framework in Frameworks */,
-				5C6DD17A93BA9A73ABB01864 /* Pods_YASDTests.framework in Frameworks */,
+				F4677CCE7FA9BEDC1A098F98 /* Pods_YASDTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,10 +477,10 @@
 		2F661B4B2272E16400C68A5F /* YASDTests */ = {
 			isa = PBXGroup;
 			children = (
+				6F171E5526455E2000C37B28 /* GeneratedMocks.swift */,
 				17EB2816246DCECC00EE8B1D /* MockFactory */,
 				2F3EE25F229D7ADE0083CDE9 /* Service */,
 				2F3EE2542297EC730083CDE9 /* ViewModel */,
-				2FF62C9B228E98EF00B4946C /* GeneratedMocks.swift */,
 				2FE7682122BCEEBA00375292 /* LexinWord+Extensions.swift */,
 				2F876F1C23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift */,
 				2F70647723B503570095DE9C /* FoundWord+Extensions.swift */,
@@ -599,8 +537,8 @@
 				2F97576F2277474200B343B4 /* RxCocoa.framework */,
 				2F9757702277474200B343B4 /* RxSwift.framework */,
 				2F97576E2277474200B343B4 /* RxTest.framework */,
-				4558CE00B37B5F83C6BB9055 /* Pods_YASD.framework */,
-				868C22321485EA95A08034D1 /* Pods_YASDTests.framework */,
+				EE92A6CB8379AC5724330A1E /* Pods_YASD.framework */,
+				6F2381FA2412C7609046EB27 /* Pods_YASDTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -777,10 +715,10 @@
 		F2119DFC71016D5B0441E10C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C2F9827EB3357FB0D40BD002 /* Pods-YASD.debug.xcconfig */,
-				86321561717252C16AB173FE /* Pods-YASD.release.xcconfig */,
-				A1469B06C791672FCD4B44A4 /* Pods-YASDTests.debug.xcconfig */,
-				C44567C3CC1703682EED698A /* Pods-YASDTests.release.xcconfig */,
+				23B68C83CC0C0945604EA2C8 /* Pods-YASD.debug.xcconfig */,
+				A9608AB13FB564E82B65EE2B /* Pods-YASD.release.xcconfig */,
+				60845C4689025A91E4ECF00D /* Pods-YASDTests.debug.xcconfig */,
+				394D8CEB803C9A4BD3EAA1F5 /* Pods-YASDTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -812,11 +750,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F661B5C2272E16400C68A5F /* Build configuration list for PBXNativeTarget "YASD" */;
 			buildPhases = (
-				407A66BD6182893862FE9C00 /* [CP] Check Pods Manifest.lock */,
+				11CFB0C2F277DB543C9BDF4D /* [CP] Check Pods Manifest.lock */,
 				2F661B2E2272E16300C68A5F /* Sources */,
 				2F661B2F2272E16300C68A5F /* Frameworks */,
 				2F661B302272E16300C68A5F /* Resources */,
-				075D73E5F9D775237E7DA791 /* [CP] Embed Pods Frameworks */,
+				C5D3EEE9F7BF5D72C5568324 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -831,13 +769,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F661B5F2272E16400C68A5F /* Build configuration list for PBXNativeTarget "YASDTests" */;
 			buildPhases = (
-				36DDEC35E8370CBEBEB2249E /* [CP] Check Pods Manifest.lock */,
-				2FF62C8E228D8E0800B4946C /* Generate Mock */,
+				1AF51695EDDC7298FDFD6212 /* [CP] Check Pods Manifest.lock */,
+				6F171E5426455CBB00C37B28 /* ShellScript */,
 				2F661B442272E16400C68A5F /* Sources */,
 				2F661B452272E16400C68A5F /* Frameworks */,
 				2F661B462272E16400C68A5F /* Resources */,
 				2FF62C9E228EF13D00B4946C /* CopyFiles */,
-				962FD8F3AB63BE07C2C98D86 /* [CP] Embed Pods Frameworks */,
+				26513C325243B9762C381412 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -864,6 +802,7 @@
 					};
 					2F661B472272E16400C68A5F = {
 						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 2F661B312272E16300C68A5F;
 					};
 				};
 			};
@@ -909,64 +848,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		075D73E5F9D775237E7DA791 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2FF62C8E228D8E0800B4946C /* Generate Mock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Generate Mock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Data/FormattedWord.swift\" \\\n\"${INPUT_DIR}/Data/ParametersStorage.swift\" \\\n\"${INPUT_DIR}/Data/SettingsItem.swift\" \\\n\"${INPUT_DIR}/Data/Suggestion.swift\" \\\n\"${INPUT_DIR}/Data/Lexin/LexinWord.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/DictionaryService.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinService/LexinService.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinService/LexinServiceFormatter.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinParser/LexinParserWords.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinParser/LexinParserSuggestion.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinApi/LexinApi.swift\" \\\n\"${INPUT_DIR}/Domain/Lexin/LexinApi/LexinApiProvider.swift\" \\\n\"${INPUT_DIR}/Domain/Data/PlayerManager.swift\" \\\n\"${INPUT_DIR}/Domain/Data/AboutTextRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Platform/ExternalCacheService.swift\" \\\n\"${INPUT_DIR}/Domain/CacheService.swift\" \\\n\"${INPUT_DIR}/Domain/NetworkService.swift\" \\\n\"${INPUT_DIR}/Domain/StorageService.swift\" \\\n\"${INPUT_DIR}/Domain/WordsService.swift\" \\\n\"${INPUT_DIR}/Domain/SettingsLanguageService.swift\" \\\n\"${INPUT_DIR}/Domain/UseCase/About/GetTextAboutUseCase.swift\" \\\n\"${INPUT_DIR}/Platform/Network.swift\" \\\n\"${INPUT_DIR}/Platform/HtmlParser.swift\" \\\n\"${INPUT_DIR}/Platform/Markdown.swift\" \\\n\"${INPUT_DIR}/Platform/Player.swift\" \\\n\"${INPUT_DIR}/Platform/DataCache.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
-		};
-		36DDEC35E8370CBEBEB2249E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-YASDTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		407A66BD6182893862FE9C00 /* [CP] Check Pods Manifest.lock */ = {
+		11CFB0C2F277DB543C9BDF4D /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -988,7 +870,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		962FD8F3AB63BE07C2C98D86 /* [CP] Embed Pods Frameworks */ = {
+		1AF51695EDDC7298FDFD6212 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YASDTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		26513C325243B9762C381412 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1003,6 +907,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASDTests/Pods-YASDTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F171E5426455CBB00C37B28 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Domain/UseCase/UseCase.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
+		};
+		C5D3EEE9F7BF5D72C5568324 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1098,93 +1036,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F171E472644111700C37B28 /* RemoveSuggestionUseCase.swift in Sources */,
-				F6F788292562AC3800DEAFB1 /* Result.swift in Sources */,
 				2F7DA1692388303600E91C71 /* LexinApiProviderTests.swift in Sources */,
-				F6F7880F2562ABF700DEAFB1 /* Bookmarks.swift in Sources */,
 				2F717B7B23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift in Sources */,
 				2F1E1E782344E6DB007C128B /* CacheServiceTests.swift in Sources */,
-				F6F788382562ACA700DEAFB1 /* Network.swift in Sources */,
 				2F3EE261229D7B7B0083CDE9 /* LexinServiceTests.swift in Sources */,
-				6F171E4B2644113700C37B28 /* SettingsRepository.swift in Sources */,
 				17C1527D23B5498800EACA94 /* WordsServiceTests.swift in Sources */,
-				F6F788082562ABD100DEAFB1 /* WordsSuggestionViewModel.swift in Sources */,
 				2F7DA16B2388395700E91C71 /* WordsSuggestionViewModelTests.swift in Sources */,
-				F6F7880C2562ABEE00DEAFB1 /* StorageRepository.swift in Sources */,
-				F6F788052562ABD100DEAFB1 /* ViewModel.swift in Sources */,
 				2FC07D0423AA605E00D4D328 /* HistoryServiceTests.swift in Sources */,
 				17EB2818246DD2A700EE8B1D /* MockFactory.swift in Sources */,
 				6F171E322643FB9D00C37B28 /* AboutViewModelTests.swift in Sources */,
-				F6F788062562ABD100DEAFB1 /* WordsViewModel.swift in Sources */,
 				17EB2815246DCEC700EE8B1D /* MockFactory+PlayerService.swift in Sources */,
 				2F7DA16D238C040900E91C71 /* NetworkServiceTests.swift in Sources */,
-				F6F7881A2562ABFE00DEAFB1 /* LexinWordMapper.swift in Sources */,
-				6F171E492644111700C37B28 /* SuggestionItemResult+Extensions.swift in Sources */,
 				17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */,
 				2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */,
-				F6F788372562ACA700DEAFB1 /* Storage.swift in Sources */,
-				CD2BDF7525E0EFDB00E89EB1 /* DefaultAboutTextRepository.swift in Sources */,
+				6F171E5626455E2000C37B28 /* GeneratedMocks.swift in Sources */,
 				2FE7682222BCEEBA00375292 /* LexinWord+Extensions.swift in Sources */,
-				F6F7880D2562ABEE00DEAFB1 /* PlayerManager.swift in Sources */,
-				6F171E372644108D00C37B28 /* StorageRepository+Extensions.swift in Sources */,
-				6F171E3B2644108D00C37B28 /* AddBookmarkUseCase.swift in Sources */,
-				F6F7883B2562ACA700DEAFB1 /* HtmlParser.swift in Sources */,
 				2F69AD0922F838C5001942E6 /* SettingsLanguageViewModelTests.swift in Sources */,
-				F6F788152562ABF700DEAFB1 /* DefaultStorageRepository.swift in Sources */,
-				F6F7883A2562ACA700DEAFB1 /* DataCache.swift in Sources */,
-				2FF62C9C228E98EF00B4946C /* GeneratedMocks.swift in Sources */,
-				6F171E382644108D00C37B28 /* SearchBookmarkUseCase.swift in Sources */,
-				6F171E4A2644113700C37B28 /* DictionaryRepository.swift in Sources */,
-				6F171E3C2644109100C37B28 /* UseCase.swift in Sources */,
-				F6F7882E2562AC6D00DEAFB1 /* ExternalCacheService.swift in Sources */,
-				6F171E402644110C00C37B28 /* UpdateLanguageSettingsUseCase.swift in Sources */,
 				2F876F1D23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift in Sources */,
-				F6F788262562AC1800DEAFB1 /* Mapper.swift in Sources */,
-				6F171E3D264410D300C37B28 /* Language.swift in Sources */,
-				F6F788352562ACA700DEAFB1 /* Player.swift in Sources */,
-				6F171E462644111700C37B28 /* GetSuggestionUseCase.swift in Sources */,
-				F6F788332562AC8A00DEAFB1 /* ActivityIndicator.swift in Sources */,
-				6F171E392644108D00C37B28 /* RestoreBookmarkUseCase.swift in Sources */,
 				2F7DA16723882CB400E91C71 /* LexinParserSuggestionTests.swift in Sources */,
 				17EB2813246DCCB000EE8B1D /* BookmarksViewModelTests.swift in Sources */,
 				2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */,
-				F6F7881E2562AC0700DEAFB1 /* LexinParserSuggestion.swift in Sources */,
 				2FE7682022BCC30E00375292 /* LexinServiceFormatterTests.swift in Sources */,
-				F6F788212562AC0C00DEAFB1 /* LexinServiceFormatter.swift in Sources */,
 				2F717B7D23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift in Sources */,
-				CD2BDF6F25E0EECE00E89EB1 /* AboutTextRepository.swift in Sources */,
-				6F171E412644110C00C37B28 /* GetLanguageSettingsUseCase.swift in Sources */,
 				2F393ACC233E118100F315FC /* PlayerManagerTests.swift in Sources */,
-				F6F788172562ABF700DEAFB1 /* Suggestion.swift in Sources */,
-				6F171E3A2644108D00C37B28 /* ChangedBookmarkUseCase.swift in Sources */,
 				17FC6BA523870ED900279589 /* LexinApiTests.swift in Sources */,
-				F6F788392562ACA700DEAFB1 /* Markdown.swift in Sources */,
-				6F171E362644108D00C37B28 /* RemoveBookmarkUseCase.swift in Sources */,
-				F6F788122562ABF700DEAFB1 /* FormattedWord.swift in Sources */,
-				F6F788092562ABD100DEAFB1 /* BookmarksViewModel.swift in Sources */,
 				F624B553256414790025FB7A /* MockFactory+StorageRepository.swift in Sources */,
-				F6F788112562ABF700DEAFB1 /* CacheService.swift in Sources */,
-				F6F7880A2562ABD100DEAFB1 /* SettingsLanguageViewModel.swift in Sources */,
-				6F171E432644111000C37B28 /* SearchWordUseCase.swift in Sources */,
-				F6F788162562ABF700DEAFB1 /* SettingsLanguageItem.swift in Sources */,
-				6F171E4C26441DF500C37B28 /* GetTextAboutUseCase.swift in Sources */,
-				6F171E422644110C00C37B28 /* GetLanguageListSettingsUseCase.swift in Sources */,
-				6F171E352644108D00C37B28 /* RemoveBookmarkByIndexUseCase.swift in Sources */,
-				6F171E452644111700C37B28 /* AddSuggestionUseCase.swift in Sources */,
-				F6F7881F2562AC0700DEAFB1 /* LexinParserWords.swift in Sources */,
-				F6F788362562ACA700DEAFB1 /* Spotlight.swift in Sources */,
-				6F171E3F2644110600C37B28 /* PlaySoundUseCase.swift in Sources */,
 				2F69AD0722F81775001942E6 /* SettingsViewModelTests.swift in Sources */,
-				6F171E482644111700C37B28 /* AnyStorageRepository+Suggestion+Extensions.swift in Sources */,
-				F6F788182562ABF700DEAFB1 /* FoundWord.swift in Sources */,
 				2F70647823B503570095DE9C /* FoundWord+Extensions.swift in Sources */,
-				F6F7881C2562ABFE00DEAFB1 /* LexinWord.swift in Sources */,
-				6F171E442644111700C37B28 /* SuggestionResult+Extensions.swift in Sources */,
-				F6F788102562ABF700DEAFB1 /* DefaultPlayerManager.swift in Sources */,
-				F6F788232562AC1300DEAFB1 /* LexinApi.swift in Sources */,
-				F6F788132562ABF700DEAFB1 /* NetworkService.swift in Sources */,
-				F6F788242562AC1300DEAFB1 /* LexinApiProvider.swift in Sources */,
-				F6F788072562ABD100DEAFB1 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1349,7 +1227,7 @@
 		};
 		2F661B5D2272E16400C68A5F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C2F9827EB3357FB0D40BD002 /* Pods-YASD.debug.xcconfig */;
+			baseConfigurationReference = 23B68C83CC0C0945604EA2C8 /* Pods-YASD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1371,7 +1249,7 @@
 		};
 		2F661B5E2272E16400C68A5F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86321561717252C16AB173FE /* Pods-YASD.release.xcconfig */;
+			baseConfigurationReference = A9608AB13FB564E82B65EE2B /* Pods-YASD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1393,9 +1271,10 @@
 		};
 		2F661B602272E16400C68A5F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A1469B06C791672FCD4B44A4 /* Pods-YASDTests.debug.xcconfig */;
+			baseConfigurationReference = 60845C4689025A91E4ECF00D /* Pods-YASDTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5S3B7XJFC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1405,14 +1284,16 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YASD.app/YASD";
 			};
 			name = Debug;
 		};
 		2F661B612272E16400C68A5F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C44567C3CC1703682EED698A /* Pods-YASDTests.release.xcconfig */;
+			baseConfigurationReference = 394D8CEB803C9A4BD3EAA1F5 /* Pods-YASDTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R5S3B7XJFC;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
@@ -1422,6 +1303,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YASD.app/YASD";
 			};
 			name = Release;
 		};
