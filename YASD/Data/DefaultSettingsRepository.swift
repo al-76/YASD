@@ -2,7 +2,7 @@
 //  DefaultSettingsRepository.swift
 //  YASD
 //
-//  Created by Jobbare on 16.04.2021.
+//  Created by Vyacheslav Konopkin on 16.04.2021.
 //  Copyright © 2021 yac. All rights reserved.
 //
 

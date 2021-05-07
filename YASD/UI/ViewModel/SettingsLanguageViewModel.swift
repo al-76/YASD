@@ -10,8 +10,8 @@ import RxSwift
 import RxCocoa
 
 class SettingsLanguageViewModel: ViewModel {
-    private let getLanguageList: GetLanguageListSettingsUseCase
-    private let updateLanguage: UpdateLanguageSettingsUseCase
+    private let getLanguageList: AnyUseCase<String, SettingsLanguageItemResult>
+    private let updateLanguage: AnyUseCase<String, Void>
     
     struct Input {
         let search: Driver<String>
@@ -22,8 +22,8 @@ class SettingsLanguageViewModel: ViewModel {
         let languages: Driver<[SettingsLanguageItem]>
     }
     
-    init(getLanguageList: GetLanguageListSettingsUseCase,
-         updateLanguage: UpdateLanguageSettingsUseCase) {
+    init(getLanguageList: AnyUseCase<String, SettingsLanguageItemResult>,
+         updateLanguage: AnyUseCase<String, Void>) {
         self.getLanguageList = getLanguageList
         self.updateLanguage = updateLanguage
     }

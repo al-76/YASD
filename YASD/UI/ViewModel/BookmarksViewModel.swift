@@ -10,11 +10,11 @@ import RxSwift
 import RxCocoa
 
 class BookmarksViewModel: ViewModel {
-    private let searchBookmark: SearchBookmarkUseCase
-    private let restoreBookmark: RestoreBookmarkUseCase
-    private let removeBookmark: RemoveBookmarkByIndexUseCase
-    private let changedBookmark: ChangedBookmarkUseCase
-    private let playSound: PlaySoundUseCase
+    private let searchBookmark: AnyUseCase<String, Bookmarks>
+    private let restoreBookmark: AnyUseCase<String, String>
+    private let removeBookmark: AnyUseCase<Int, StorageServiceResult>
+    private let changedBookmark: AnyUseCase<Void, Bookmarks>
+    private let playSound: AnyUseCase<String, PlayerManagerResult>
     
     struct Input {
         let search: Driver<String>
@@ -29,11 +29,11 @@ class BookmarksViewModel: ViewModel {
         let restored: Driver<String>
     }
     
-    init(searchBookmark: SearchBookmarkUseCase,
-         restoreBookmark: RestoreBookmarkUseCase,
-         removeBookmark: RemoveBookmarkByIndexUseCase,
-         changedBookmark: ChangedBookmarkUseCase,
-         playSound: PlaySoundUseCase) {
+    init(searchBookmark: AnyUseCase<String, Bookmarks>,
+         restoreBookmark: AnyUseCase<String, String>,
+         removeBookmark: AnyUseCase<Int, StorageServiceResult>,
+         changedBookmark: AnyUseCase<Void, Bookmarks>,
+         playSound: AnyUseCase<String, PlayerManagerResult>) {
         self.searchBookmark = searchBookmark
         self.restoreBookmark = restoreBookmark
         self.removeBookmark = removeBookmark

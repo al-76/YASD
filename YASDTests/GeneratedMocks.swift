@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: YASD/Data/FormattedWord.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Data/FormattedWord.swift at 2021-05-06 13:29:37 +0000
 
 //
 //  FormattedWord.swift
@@ -13,7 +13,7 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Data/Lexin/LexinWord.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Data/Lexin/LexinWord.swift at 2021-05-06 13:29:37 +0000
 
 //
 //  LexinWord.swift
@@ -28,14 +28,14 @@ import Cuckoo
 
 import Foundation
 
-// MARK: - Mocks generated from file: YASD/Data/ParametersStorage.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Domain/Data/AboutTextRepository.swift at 2021-05-06 13:29:37 +0000
 
 //
-//  ParametersStorage.swift
+//  AboutTextRepository.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 27.11.2019.
-//  Copyright © 2019 yac. All rights reserved.
+//  Created by Vyacheslav Konopkin on 20.02.2021.
+//  Copyright © 2021 yac. All rights reserved.
 //
 
 import Cuckoo
@@ -44,19 +44,19 @@ import Cuckoo
 import RxSwift
 
 
- class MockParametersStorage: ParametersStorage, Cuckoo.ClassMock {
+ class MockAboutTextRepository: AboutTextRepository, Cuckoo.ProtocolMock {
     
-     typealias MocksType = ParametersStorage
+     typealias MocksType = AboutTextRepository
     
-     typealias Stubbing = __StubbingProxy_ParametersStorage
-     typealias Verification = __VerificationProxy_ParametersStorage
+     typealias Stubbing = __StubbingProxy_AboutTextRepository
+     typealias Verification = __VerificationProxy_AboutTextRepository
 
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
 
     
-    private var __defaultImplStub: ParametersStorage?
+    private var __defaultImplStub: AboutTextRepository?
 
-     func enableDefaultImplementation(_ stub: ParametersStorage) {
+     func enableDefaultImplementation(_ stub: AboutTextRepository) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
@@ -69,66 +69,21 @@ import RxSwift
     
     
     
-     override func getLanguageString() -> String {
+     func getText() -> Observable<NSAttributedString> {
         
-    return cuckoo_manager.call("getLanguageString() -> String",
+    return cuckoo_manager.call("getText() -> Observable<NSAttributedString>",
             parameters: (),
             escapingParameters: (),
             superclassCall:
                 
-                super.getLanguageString()
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
                 ,
-            defaultCall: __defaultImplStub!.getLanguageString())
-        
-    }
-    
-    
-    
-     override func getLanguageCode() -> String {
-        
-    return cuckoo_manager.call("getLanguageCode() -> String",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                super.getLanguageCode()
-                ,
-            defaultCall: __defaultImplStub!.getLanguageCode())
-        
-    }
-    
-    
-    
-     override func setLanguage(_ language: Language)  {
-        
-    return cuckoo_manager.call("setLanguage(_: Language)",
-            parameters: (language),
-            escapingParameters: (language),
-            superclassCall:
-                
-                super.setLanguage(language)
-                ,
-            defaultCall: __defaultImplStub!.setLanguage(language))
-        
-    }
-    
-    
-    
-     override func getLanguage() -> Language {
-        
-    return cuckoo_manager.call("getLanguage() -> Language",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                super.getLanguage()
-                ,
-            defaultCall: __defaultImplStub!.getLanguage())
+            defaultCall: __defaultImplStub!.getText())
         
     }
     
 
-	 struct __StubbingProxy_ParametersStorage: Cuckoo.StubbingProxy {
+	 struct __StubbingProxy_AboutTextRepository: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	
 	     init(manager: Cuckoo.MockManager) {
@@ -136,29 +91,14 @@ import RxSwift
 	    }
 	    
 	    
-	    func getLanguageString() -> Cuckoo.ClassStubFunction<(), String> {
+	    func getText() -> Cuckoo.ProtocolStubFunction<(), Observable<NSAttributedString>> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockParametersStorage.self, method: "getLanguageString() -> String", parameterMatchers: matchers))
-	    }
-	    
-	    func getLanguageCode() -> Cuckoo.ClassStubFunction<(), String> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockParametersStorage.self, method: "getLanguageCode() -> String", parameterMatchers: matchers))
-	    }
-	    
-	    func setLanguage<M1: Cuckoo.Matchable>(_ language: M1) -> Cuckoo.ClassStubNoReturnFunction<(Language)> where M1.MatchedType == Language {
-	        let matchers: [Cuckoo.ParameterMatcher<(Language)>] = [wrap(matchable: language) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockParametersStorage.self, method: "setLanguage(_: Language)", parameterMatchers: matchers))
-	    }
-	    
-	    func getLanguage() -> Cuckoo.ClassStubFunction<(), Language> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockParametersStorage.self, method: "getLanguage() -> Language", parameterMatchers: matchers))
+	        return .init(stub: cuckoo_manager.createStub(for: MockAboutTextRepository.self, method: "getText() -> Observable<NSAttributedString>", parameterMatchers: matchers))
 	    }
 	    
 	}
 
-	 struct __VerificationProxy_ParametersStorage: Cuckoo.VerificationProxy {
+	 struct __VerificationProxy_AboutTextRepository: Cuckoo.VerificationProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	    private let callMatcher: Cuckoo.CallMatcher
 	    private let sourceLocation: Cuckoo.SourceLocation
@@ -173,73 +113,28 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func getLanguageString() -> Cuckoo.__DoNotUse<(), String> {
+	    func getText() -> Cuckoo.__DoNotUse<(), Observable<NSAttributedString>> {
 	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("getLanguageString() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func getLanguageCode() -> Cuckoo.__DoNotUse<(), String> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("getLanguageCode() -> String", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func setLanguage<M1: Cuckoo.Matchable>(_ language: M1) -> Cuckoo.__DoNotUse<(Language), Void> where M1.MatchedType == Language {
-	        let matchers: [Cuckoo.ParameterMatcher<(Language)>] = [wrap(matchable: language) { $0 }]
-	        return cuckoo_manager.verify("setLanguage(_: Language)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func getLanguage() -> Cuckoo.__DoNotUse<(), Language> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("getLanguage() -> Language", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	        return cuckoo_manager.verify("getText() -> Observable<NSAttributedString>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
 }
 
- class ParametersStorageStub: ParametersStorage {
+ class AboutTextRepositoryStub: AboutTextRepository {
     
 
     
 
     
-     override func getLanguageString() -> String  {
-        return DefaultValueRegistry.defaultValue(for: (String).self)
-    }
-    
-     override func getLanguageCode() -> String  {
-        return DefaultValueRegistry.defaultValue(for: (String).self)
-    }
-    
-     override func setLanguage(_ language: Language)   {
-        return DefaultValueRegistry.defaultValue(for: (Void).self)
-    }
-    
-     override func getLanguage() -> Language  {
-        return DefaultValueRegistry.defaultValue(for: (Language).self)
+     func getText() -> Observable<NSAttributedString>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<NSAttributedString>).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Data/Suggestion.swift at 2020-11-17 15:33:30 +0000
-
-//
-//  Suggestion.swift
-//  YASD
-//
-//  Created by Vyacheslav Konopkin on 27.11.2019.
-//  Copyright © 2019 yac. All rights reserved.
-//
-
-import Cuckoo
-@testable import YASD
-
-import Foundation
-
-// MARK: - Mocks generated from file: YASD/Domain/Data/PlayerManager.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Domain/Data/PlayerManager.swift at 2021-05-06 13:29:37 +0000
 
 //
 //  PlayerManagerI.swift
@@ -346,7 +241,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Domain/Platform/ExternalCacheService.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Domain/Platform/ExternalCacheService.swift at 2021-05-06 13:29:37 +0000
 
 //
 //  ExternalCacheService.swift
@@ -483,14 +378,14 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Domain/SettingsLanguageService.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Domain/UseCase/About/GetTextAboutUseCase.swift at 2021-05-06 13:29:37 +0000
 
 //
-//  SettingsLanguageService.swift
+//  GetTextAboutUseCase.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 23.07.2020.
-//  Copyright © 2020 yac. All rights reserved.
+//  Created by Vyacheslav Konopkin on 23.04.2021.
+//  Copyright © 2021 yac. All rights reserved.
 //
 
 import Cuckoo
@@ -500,19 +395,19 @@ import Foundation
 import RxSwift
 
 
- class MockSettingsLanguageService: SettingsLanguageService, Cuckoo.ProtocolMock {
+ class MockGetTextAboutUseCase: GetTextAboutUseCase, Cuckoo.ClassMock {
     
-     typealias MocksType = SettingsLanguageService
+     typealias MocksType = GetTextAboutUseCase
     
-     typealias Stubbing = __StubbingProxy_SettingsLanguageService
-     typealias Verification = __VerificationProxy_SettingsLanguageService
+     typealias Stubbing = __StubbingProxy_GetTextAboutUseCase
+     typealias Verification = __VerificationProxy_GetTextAboutUseCase
 
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: true)
 
     
-    private var __defaultImplStub: SettingsLanguageService?
+    private var __defaultImplStub: GetTextAboutUseCase?
 
-     func enableDefaultImplementation(_ stub: SettingsLanguageService) {
+     func enableDefaultImplementation(_ stub: GetTextAboutUseCase) {
         __defaultImplStub = stub
         cuckoo_manager.enableDefaultStubImplementation()
     }
@@ -525,36 +420,21 @@ import RxSwift
     
     
     
-     func update(with language: String) -> Observable<SettingsLanguageResult> {
+     override func execute(with input: Void) -> Observable<NSAttributedString> {
         
-    return cuckoo_manager.call("update(with: String) -> Observable<SettingsLanguageResult>",
-            parameters: (language),
-            escapingParameters: (language),
+    return cuckoo_manager.call("execute(with: Void) -> Observable<NSAttributedString>",
+            parameters: (input),
+            escapingParameters: (input),
             superclassCall:
                 
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                super.execute(with: input)
                 ,
-            defaultCall: __defaultImplStub!.update(with: language))
-        
-    }
-    
-    
-    
-     func get(with language: String) -> Observable<SettingsLanguageItemResult> {
-        
-    return cuckoo_manager.call("get(with: String) -> Observable<SettingsLanguageItemResult>",
-            parameters: (language),
-            escapingParameters: (language),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.get(with: language))
+            defaultCall: __defaultImplStub!.execute(with: input))
         
     }
     
 
-	 struct __StubbingProxy_SettingsLanguageService: Cuckoo.StubbingProxy {
+	 struct __StubbingProxy_GetTextAboutUseCase: Cuckoo.StubbingProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	
 	     init(manager: Cuckoo.MockManager) {
@@ -562,19 +442,14 @@ import RxSwift
 	    }
 	    
 	    
-	    func update<M1: Cuckoo.Matchable>(with language: M1) -> Cuckoo.ProtocolStubFunction<(String), Observable<SettingsLanguageResult>> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: language) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockSettingsLanguageService.self, method: "update(with: String) -> Observable<SettingsLanguageResult>", parameterMatchers: matchers))
-	    }
-	    
-	    func get<M1: Cuckoo.Matchable>(with language: M1) -> Cuckoo.ProtocolStubFunction<(String), Observable<SettingsLanguageItemResult>> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: language) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockSettingsLanguageService.self, method: "get(with: String) -> Observable<SettingsLanguageItemResult>", parameterMatchers: matchers))
+	    func execute<M1: Cuckoo.Matchable>(with input: M1) -> Cuckoo.ClassStubFunction<(Void), Observable<NSAttributedString>> where M1.MatchedType == Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(Void)>] = [wrap(matchable: input) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockGetTextAboutUseCase.self, method: "execute(with: Void) -> Observable<NSAttributedString>", parameterMatchers: matchers))
 	    }
 	    
 	}
 
-	 struct __VerificationProxy_SettingsLanguageService: Cuckoo.VerificationProxy {
+	 struct __VerificationProxy_GetTextAboutUseCase: Cuckoo.VerificationProxy {
 	    private let cuckoo_manager: Cuckoo.MockManager
 	    private let callMatcher: Cuckoo.CallMatcher
 	    private let sourceLocation: Cuckoo.SourceLocation
@@ -589,175 +464,28 @@ import RxSwift
 	
 	    
 	    @discardableResult
-	    func update<M1: Cuckoo.Matchable>(with language: M1) -> Cuckoo.__DoNotUse<(String), Observable<SettingsLanguageResult>> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: language) { $0 }]
-	        return cuckoo_manager.verify("update(with: String) -> Observable<SettingsLanguageResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func get<M1: Cuckoo.Matchable>(with language: M1) -> Cuckoo.__DoNotUse<(String), Observable<SettingsLanguageItemResult>> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: language) { $0 }]
-	        return cuckoo_manager.verify("get(with: String) -> Observable<SettingsLanguageItemResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func execute<M1: Cuckoo.Matchable>(with input: M1) -> Cuckoo.__DoNotUse<(Void), Observable<NSAttributedString>> where M1.MatchedType == Void {
+	        let matchers: [Cuckoo.ParameterMatcher<(Void)>] = [wrap(matchable: input) { $0 }]
+	        return cuckoo_manager.verify("execute(with: Void) -> Observable<NSAttributedString>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
 }
 
- class SettingsLanguageServiceStub: SettingsLanguageService {
+ class GetTextAboutUseCaseStub: GetTextAboutUseCase {
     
 
     
 
     
-     func update(with language: String) -> Observable<SettingsLanguageResult>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<SettingsLanguageResult>).self)
-    }
-    
-     func get(with language: String) -> Observable<SettingsLanguageItemResult>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<SettingsLanguageItemResult>).self)
+     override func execute(with input: Void) -> Observable<NSAttributedString>  {
+        return DefaultValueRegistry.defaultValue(for: (Observable<NSAttributedString>).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: YASD/Domain/WordsService.swift at 2020-11-17 15:33:30 +0000
-
-//
-//  WordService.swift
-//  YASD
-//
-//  Created by Vyacheslav Konopkin on 28.06.2020.
-//  Copyright © 2020 yac. All rights reserved.
-//
-
-import Cuckoo
-@testable import YASD
-
-import Foundation
-import RxSwift
-
-
- class MockWordsService: WordsService, Cuckoo.ProtocolMock {
-    
-     typealias MocksType = WordsService
-    
-     typealias Stubbing = __StubbingProxy_WordsService
-     typealias Verification = __VerificationProxy_WordsService
-
-     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
-
-    
-    private var __defaultImplStub: WordsService?
-
-     func enableDefaultImplementation(_ stub: WordsService) {
-        __defaultImplStub = stub
-        cuckoo_manager.enableDefaultStubImplementation()
-    }
-    
-
-    
-
-    
-
-    
-    
-    
-     func search(_ word: String) -> Observable<FoundWordResult> {
-        
-    return cuckoo_manager.call("search(_: String) -> Observable<FoundWordResult>",
-            parameters: (word),
-            escapingParameters: (word),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.search(word))
-        
-    }
-    
-    
-    
-     func language() -> BehaviorSubject<Language> {
-        
-    return cuckoo_manager.call("language() -> BehaviorSubject<Language>",
-            parameters: (),
-            escapingParameters: (),
-            superclassCall:
-                
-                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
-                ,
-            defaultCall: __defaultImplStub!.language())
-        
-    }
-    
-
-	 struct __StubbingProxy_WordsService: Cuckoo.StubbingProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	
-	     init(manager: Cuckoo.MockManager) {
-	        self.cuckoo_manager = manager
-	    }
-	    
-	    
-	    func search<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.ProtocolStubFunction<(String), Observable<FoundWordResult>> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: word) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockWordsService.self, method: "search(_: String) -> Observable<FoundWordResult>", parameterMatchers: matchers))
-	    }
-	    
-	    func language() -> Cuckoo.ProtocolStubFunction<(), BehaviorSubject<Language>> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return .init(stub: cuckoo_manager.createStub(for: MockWordsService.self, method: "language() -> BehaviorSubject<Language>", parameterMatchers: matchers))
-	    }
-	    
-	}
-
-	 struct __VerificationProxy_WordsService: Cuckoo.VerificationProxy {
-	    private let cuckoo_manager: Cuckoo.MockManager
-	    private let callMatcher: Cuckoo.CallMatcher
-	    private let sourceLocation: Cuckoo.SourceLocation
-	
-	     init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
-	        self.cuckoo_manager = manager
-	        self.callMatcher = callMatcher
-	        self.sourceLocation = sourceLocation
-	    }
-	
-	    
-	
-	    
-	    @discardableResult
-	    func search<M1: Cuckoo.Matchable>(_ word: M1) -> Cuckoo.__DoNotUse<(String), Observable<FoundWordResult>> where M1.MatchedType == String {
-	        let matchers: [Cuckoo.ParameterMatcher<(String)>] = [wrap(matchable: word) { $0 }]
-	        return cuckoo_manager.verify("search(_: String) -> Observable<FoundWordResult>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	    @discardableResult
-	    func language() -> Cuckoo.__DoNotUse<(), BehaviorSubject<Language>> {
-	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
-	        return cuckoo_manager.verify("language() -> BehaviorSubject<Language>", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
-	    }
-	    
-	}
-}
-
- class WordsServiceStub: WordsService {
-    
-
-    
-
-    
-     func search(_ word: String) -> Observable<FoundWordResult>  {
-        return DefaultValueRegistry.defaultValue(for: (Observable<FoundWordResult>).self)
-    }
-    
-     func language() -> BehaviorSubject<Language>  {
-        return DefaultValueRegistry.defaultValue(for: (BehaviorSubject<Language>).self)
-    }
-    
-}
-
-
-// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Platform/DataCache.swift at 2021-05-06 13:29:37 +0000
 
 //
 //  DataCache.swift
@@ -895,7 +623,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Platform/HtmlParser.swift at 2021-05-06 13:29:37 +0000
 
 
 //
@@ -1214,7 +942,7 @@ import SwiftSoup
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Markdown.swift at 2021-05-06 13:29:37 +0000
 
 //
 //  MarkdownParser.swift
@@ -1321,7 +1049,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Network.swift at 2021-05-06 13:29:37 +0000
 
 //
 //  Network.swift
@@ -1458,7 +1186,7 @@ import RxSwift
 }
 
 
-// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2020-11-17 15:33:30 +0000
+// MARK: - Mocks generated from file: YASD/Platform/Player.swift at 2021-05-06 13:29:37 +0000
 
 //
 //  Player.swift

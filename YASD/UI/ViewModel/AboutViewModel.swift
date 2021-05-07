@@ -17,9 +17,9 @@ class AboutViewModel: ViewModel {
         let text: Driver<NSAttributedString>
     }
     
-    private let getText: GetTextAboutUseCase
+    private let getText: AnyUseCase<Void, NSAttributedString>
     
-    init(getText: GetTextAboutUseCase) {
+    init(getText: AnyUseCase<Void, NSAttributedString>) {
         self.getText = getText
     }
     

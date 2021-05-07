@@ -156,112 +156,122 @@ func configureService(_ container: Container) {
 
 func configureUseCase(_ container: Container) {
     // About
-    container.register(GetTextAboutUseCase.self) { container in
-        GetTextAboutUseCase(repository: container.resolve(AboutTextRepository.self)!)
+    container.register(AnyUseCase<Void, NSAttributedString>.self, name: "GetTextAboutUseCase") { container in
+        AnyUseCase<Void, NSAttributedString>(wrapped: GetTextAboutUseCase(repository: container.resolve(AboutTextRepository.self)!))
     }
     .inObjectScope(.container)
 
     // PlaySound
-    container.register(PlaySoundUseCase.self) { container in
-        PlaySoundUseCase(player: container.resolve(PlayerManager.self)!)
+    container.register(AnyUseCase<String, PlayerManagerResult>.self, name: "PlaySoundUseCase") { container in
+        AnyUseCase<String, PlayerManagerResult>(wrapped: PlaySoundUseCase(player: container.resolve(PlayerManager.self)!))
     }
     .inObjectScope(.container)
 
     // Settings
-    container.register(GetLanguageSettingsUseCase.self) { container in
-        GetLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!)
+    container.register(AnyUseCase<Void, String>.self, name: "GetLanguageSettingsUseCase") { container in
+        AnyUseCase<Void, String>(wrapped: GetLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
     }
     .inObjectScope(.container)
-    container.register(GetLanguageListSettingsUseCase.self) { container in
-        GetLanguageListSettingsUseCase(repository: container.resolve(SettingsRepository.self)!)
+    container.register(AnyUseCase<String, SettingsLanguageItemResult>.self, name: "GetLanguageListSettingsUseCase") { container in
+        AnyUseCase<String, SettingsLanguageItemResult>(wrapped: GetLanguageListSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
     }
     .inObjectScope(.container)
-    container.register(UpdateLanguageSettingsUseCase.self) { container in
-        UpdateLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!)
+    container.register(AnyUseCase<String, Void>.self, name: "UpdateLanguageSettingsUseCase") { container in
+        AnyUseCase<String, Void>(wrapped: UpdateLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
     }
     .inObjectScope(.container)
 
     // Words
-    container.register(SearchWordUseCase.self) { container in
-        SearchWordUseCase(words: container.resolve(AnyDictionaryRepository<FoundWordResult>.self)!,
+    container.register(AnyUseCase<SearchWordUseCase.Input, FoundWordResult>.self, name: "SearchWordUseCase") { container in
+        AnyUseCase<SearchWordUseCase.Input, FoundWordResult>(wrapped: SearchWordUseCase(words: container.resolve(AnyDictionaryRepository<FoundWordResult>.self)!,
                           settings: container.resolve(SettingsRepository.self)!,
-                          bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+                          bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!))
     }
     .inObjectScope(.container)
 
     // Suggestions
-    container.register(AddSuggestionUseCase.self) { container in
-        AddSuggestionUseCase(suggestions: container.resolve(AnyDictionaryRepository<SuggestionResult>.self)!,
+    container.register(AnyUseCase<String, SuggestionItemResult>.self, name: "AddSuggestionUseCase") { container in
+        AnyUseCase<String, SuggestionItemResult>(wrapped: AddSuggestionUseCase(suggestions: container.resolve(AnyDictionaryRepository<SuggestionResult>.self)!,
                              settings: container.resolve(SettingsRepository.self)!,
-                             history: container.resolve(AnyStorageRepository<Suggestion>.self)!)
+                             history: container.resolve(AnyStorageRepository<Suggestion>.self)!))
     }
     .inObjectScope(.container)
-    container.register(GetSuggestionUseCase.self) { container in
-        GetSuggestionUseCase(suggestions: container.resolve(AnyDictionaryRepository<SuggestionResult>.self)!,
+    container.register(AnyUseCase<String, SuggestionItemResult>.self, name: "GetSuggestionUseCase") { container in
+        AnyUseCase<String, SuggestionItemResult>(wrapped: GetSuggestionUseCase(suggestions: container.resolve(AnyDictionaryRepository<SuggestionResult>.self)!,
                              settings: container.resolve(SettingsRepository.self)!,
-                             history: container.resolve(AnyStorageRepository<Suggestion>.self)!)
+                             history: container.resolve(AnyStorageRepository<Suggestion>.self)!))
     }
     .inObjectScope(.container)
-    container.register(RemoveSuggestionUseCase.self) { container in
-        RemoveSuggestionUseCase(history: container.resolve(AnyStorageRepository<Suggestion>.self)!)
+    container.register(AnyUseCase<String, StorageServiceResult>.self, name: "RemoveSuggestionUseCase") { container in
+        AnyUseCase<String, StorageServiceResult>(wrapped: RemoveSuggestionUseCase(history: container.resolve(AnyStorageRepository<Suggestion>.self)!))
     }
     .inObjectScope(.container)
 
     // Bookmarks
-    container.register(SearchBookmarkUseCase.self) { container in
-        SearchBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+    container.register(AnyUseCase<String, Bookmarks>.self, name: "SearchBookmarkUseCase") { container in
+        AnyUseCase<String, Bookmarks>(wrapped: SearchBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!))
     }
     .inObjectScope(.container)
-    container.register(RestoreBookmarkUseCase.self) { container in
-        RestoreBookmarkUseCase(cache: container.resolve(ExternalCacheService.self)!)
+    container.register(AnyUseCase<String, String>.self, name: "RestoreBookmarkUseCase") { container in
+        AnyUseCase<String, String>(wrapped: RestoreBookmarkUseCase(cache: container.resolve(ExternalCacheService.self)!))
     }
     .inObjectScope(.container)
-    container.register(RemoveBookmarkByIndexUseCase.self) { container in
-        RemoveBookmarkByIndexUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+    container.register(AnyUseCase<Int, StorageServiceResult>.self, name: "RemoveBookmarkByIndexUseCase") { container in
+        AnyUseCase<Int, StorageServiceResult>(wrapped: RemoveBookmarkByIndexUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!))
     }
     .inObjectScope(.container)
-    container.register(RemoveBookmarkUseCase.self) { container in
-        RemoveBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+    container.register(AnyUseCase<FormattedWord, StorageServiceResult>.self, name: "RemoveBookmarkUseCase") { container in
+        AnyUseCase<FormattedWord, StorageServiceResult>(wrapped: RemoveBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!))
     }
     .inObjectScope(.container)
-    container.register(ChangedBookmarkUseCase.self) { container in
-        ChangedBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!, cache: container.resolve(ExternalCacheService.self)!)
+    container.register(AnyUseCase<Void, Bookmarks>.self, name: "ChangedBookmarkUseCase") { container in
+        AnyUseCase<Void, Bookmarks>(wrapped: ChangedBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!, cache: container.resolve(ExternalCacheService.self)!))
     }
     .inObjectScope(.container)
-    container.register(AddBookmarkUseCase.self) { container in
-        AddBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!)
+    container.register(AnyUseCase<FormattedWord, StorageServiceResult>.self, name: "AddBookmarkUseCase") { container in
+        AnyUseCase<FormattedWord, StorageServiceResult>(wrapped: AddBookmarkUseCase(bookmarks: container.resolve(AnyStorageRepository<FormattedWord>.self)!))
     }
     .inObjectScope(.container)
 }
 
 func configureViewModel(_ container: Container) {
     container.register(WordsSuggestionViewModel.self) { container in
-        WordsSuggestionViewModel(getSuggestion: container.resolve(GetSuggestionUseCase.self)!, addSuggestion: container.resolve(AddSuggestionUseCase.self)!, removeSuggestion: container.resolve(RemoveSuggestionUseCase.self)!)
+        WordsSuggestionViewModel(getSuggestion: container.resolve(AnyUseCase<String, SuggestionItemResult>.self, name: "GetSuggestionUseCase")!,
+                                 addSuggestion: container.resolve(AnyUseCase<String, SuggestionItemResult>.self, name: "AddSuggestionUseCase")!,
+                                 removeSuggestion: container.resolve(AnyUseCase<String, StorageServiceResult>.self, name: "RemoveSuggestionUseCase")!)
     }
     .inObjectScope(.container)
     
     container.register(WordsViewModel.self) { container in
-        WordsViewModel(searchWord: container.resolve(SearchWordUseCase.self)!, addBookmark: container.resolve(AddBookmarkUseCase.self)!, playSound: container.resolve(PlaySoundUseCase.self)!, removeBookmark: container.resolve(RemoveBookmarkUseCase.self)!)
+        WordsViewModel(searchWord: container.resolve(AnyUseCase<SearchWordUseCase.Input, FoundWordResult>.self, name: "SearchWordUseCase")!,
+                       addBookmark: container.resolve(AnyUseCase<FormattedWord, StorageServiceResult>.self, name: "AddBookmarkUseCase")!,
+                       playSound: container.resolve(AnyUseCase<String, PlayerManagerResult>.self, name: "PlaySoundUseCase")!,
+                       removeBookmark: container.resolve(AnyUseCase<FormattedWord, StorageServiceResult>.self, name: "RemoveBookmarkUseCase")!)
     }
     .inObjectScope(.container)
     
     container.register(SettingsViewModel.self) { container in
-        SettingsViewModel(getLanguage: container.resolve(GetLanguageSettingsUseCase.self)!)
+        SettingsViewModel(getLanguage: container.resolve(AnyUseCase<Void, String>.self, name: "GetLanguageSettingsUseCase")!)
     }
     .inObjectScope(.container)
     
     container.register(SettingsLanguageViewModel.self) { container in
-        SettingsLanguageViewModel(getLanguageList: container.resolve(GetLanguageListSettingsUseCase.self)!, updateLanguage: container.resolve(UpdateLanguageSettingsUseCase.self)!)
+        SettingsLanguageViewModel(getLanguageList: container.resolve(AnyUseCase<String, SettingsLanguageItemResult>.self, name: "GetLanguageSettingsUseCase")!,
+                                  updateLanguage: container.resolve(AnyUseCase<String, Void>.self, name: "UpdateLanguageSettingsUseCase")!)
     }
     .inObjectScope(.container)
     
     container.register(BookmarksViewModel.self) { container in
-        BookmarksViewModel(searchBookmark: container.resolve(SearchBookmarkUseCase.self)!, restoreBookmark: container.resolve(RestoreBookmarkUseCase.self)!, removeBookmark: container.resolve(RemoveBookmarkByIndexUseCase.self)!, changedBookmark: container.resolve(ChangedBookmarkUseCase.self)!, playSound: container.resolve(PlaySoundUseCase.self)!)
+        BookmarksViewModel(searchBookmark: container.resolve(AnyUseCase<String, Bookmarks>.self, name: "SearchBookmarkUseCase")!,
+                           restoreBookmark: container.resolve(AnyUseCase<String, String>.self, name: "RestoreBookmarkUseCase")!,
+                           removeBookmark: container.resolve(AnyUseCase<Int, StorageServiceResult>.self, name: "RemoveBookmarkByIndexUseCase")!,
+                           changedBookmark: container.resolve(AnyUseCase<Void, Bookmarks>.self, name: "ChangedBookmarkUseCase")!,
+                           playSound: container.resolve(AnyUseCase<String, PlayerManagerResult>.self, name: "PlaySoundUseCase")!)
     }
     .inObjectScope(.container)
     
     container.register(AboutViewModel.self) { container in
-        AboutViewModel(getText: container.resolve(GetTextAboutUseCase.self)!)
+        AboutViewModel(getText: container.resolve(AnyUseCase<Void, NSAttributedString>.self, name: "GetTextAboutUseCase")!)
     }
     .inObjectScope(.container)
 }

@@ -10,10 +10,10 @@ import RxSwift
 import RxCocoa
 
 class WordsViewModel: ViewModel {
-    private let searchWord: SearchWordUseCase
-    private let addBookmark: AddBookmarkUseCase
-    private let playSound: PlaySoundUseCase
-    private let removeBookmark: RemoveBookmarkUseCase
+    private let searchWord: AnyUseCase<SearchWordUseCase.Input, FoundWordResult>
+    private let addBookmark: AnyUseCase<FormattedWord, StorageServiceResult>
+    private let playSound: AnyUseCase<String, PlayerManagerResult>
+    private let removeBookmark: AnyUseCase<FormattedWord, StorageServiceResult>
     
     struct Input {
         let search: Driver<String>
@@ -29,10 +29,10 @@ class WordsViewModel: ViewModel {
         let loading: Driver<Bool>
     }
     
-    init(searchWord: SearchWordUseCase,
-         addBookmark: AddBookmarkUseCase,
-         playSound: PlaySoundUseCase,
-         removeBookmark: RemoveBookmarkUseCase) {
+    init(searchWord: AnyUseCase<SearchWordUseCase.Input, FoundWordResult>,
+         addBookmark: AnyUseCase<FormattedWord, StorageServiceResult>,
+         playSound: AnyUseCase<String, PlayerManagerResult>,
+         removeBookmark: AnyUseCase<FormattedWord, StorageServiceResult>) {
         self.searchWord = searchWord
         self.addBookmark = addBookmark
         self.playSound = playSound

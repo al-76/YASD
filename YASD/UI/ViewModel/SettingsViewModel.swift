@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class SettingsViewModel: ViewModel {
-    private let getLanguage: GetLanguageSettingsUseCase
+    private let getLanguage: AnyUseCase<Void, String>
     
     struct Input {
     }
@@ -19,7 +19,7 @@ class SettingsViewModel: ViewModel {
         let selectedLanguage: Driver<String>
     }
 
-    init(getLanguage: GetLanguageSettingsUseCase) {
+    init(getLanguage: AnyUseCase<Void, String>) {
         self.getLanguage = getLanguage
     }
     

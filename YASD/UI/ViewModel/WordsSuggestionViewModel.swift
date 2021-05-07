@@ -10,9 +10,9 @@ import RxSwift
 import RxCocoa
 
 class WordsSuggestionViewModel: ViewModel {
-    private let getSuggestion: GetSuggestionUseCase
-    private let addSuggestion: AddSuggestionUseCase
-    private let removeSuggestion: RemoveSuggestionUseCase
+    private let getSuggestion: AnyUseCase<String, SuggestionItemResult>
+    private let addSuggestion: AnyUseCase<String, SuggestionItemResult>
+    private let removeSuggestion: AnyUseCase<String, StorageServiceResult>
     
     struct Input {
         let search: Driver<String>
@@ -24,9 +24,9 @@ class WordsSuggestionViewModel: ViewModel {
         let suggestions: Driver<SuggestionItemResult>
     }
     
-    init(getSuggestion: GetSuggestionUseCase,
-         addSuggestion: AddSuggestionUseCase,
-         removeSuggestion: RemoveSuggestionUseCase) {
+    init(getSuggestion: AnyUseCase<String, SuggestionItemResult>,
+         addSuggestion: AnyUseCase<String, SuggestionItemResult>,
+         removeSuggestion: AnyUseCase<String, StorageServiceResult>) {
         self.getSuggestion = getSuggestion
         self.addSuggestion = addSuggestion
         self.removeSuggestion = removeSuggestion
