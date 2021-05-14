@@ -18,7 +18,9 @@ class BookmarksViewModelTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
-
+    
+    static let errorIndex = 3000
+    
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
 
@@ -31,6 +33,7 @@ class BookmarksViewModelTests: XCTestCase {
                                            changedBookmark: createMockChangedBookmarkNever(),
                                            playSound: createUseCaseStub())
         let inputWords = scheduler.createHotObservable([
+            .next(150, "error"),
             .next(200, testString),
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
@@ -48,6 +51,7 @@ class BookmarksViewModelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(outputBookmarks.events, [
+            .next(150, .failure(TestError.someError)),
             .next(200, .success([FormattedWord(testString)]))
         ])
     }
@@ -56,6 +60,7 @@ class BookmarksViewModelTests: XCTestCase {
         // Arrange
         let testString = "test"
         let inputRestore = scheduler.createHotObservable([
+            .next(150, "error"),
             .next(200, testString),
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
@@ -81,10 +86,12 @@ class BookmarksViewModelTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(outputRestore.events, [
+            .next(150, ""),
             .next(200, testString),
             .completed(400)
         ])
         XCTAssertEqual(outputBookmarks.events, [
+            .next(150, .success([FormattedWord()])),
             .next(200, .success([FormattedWord(testString)]))
         ])
     }
@@ -93,7 +100,7 @@ class BookmarksViewModelTests: XCTestCase {
         // Arrange
         let testData = [FormattedWord("test")]
         let outputBookmarks = scheduler.createObserver(Bookmarks.self)
-        let viewModel = BookmarksViewModel(searchBookmark: createMockSearchBookmark(),
+        let viewModel = BookmarksViewModel(searchBookmark: createUseCaseStub(),
                                            restoreBookmark: createMockRestoreBookmark(),
                                            removeBookmark: createUseCaseStub(),
                                            changedBookmark: createMockChangedBookmark(testData),
@@ -116,11 +123,81 @@ class BookmarksViewModelTests: XCTestCase {
             .next(0, .success(testData))
         ])
     }
+    
+    func testRemove() {
+        // Arrange
+        let testData = [FormattedWord("test")]
+        let inputRemove = scheduler.createHotObservable([
+            .next(100, -1),
+            .next(150, BookmarksViewModelTests.errorIndex),
+            .next(200, 20),
+            .completed(400)
+        ]).asDriver(onErrorJustReturn: -1)
+        let outputBookmarks = scheduler.createObserver(Bookmarks.self)
+        let viewModel = BookmarksViewModel(searchBookmark: createUseCaseStub(),
+                                           restoreBookmark: createMockRestoreBookmark(),
+                                           removeBookmark: createRemoveBookmarkUseCaseMock(),
+                                           changedBookmark: createMockChangedBookmark(testData),
+                                           playSound: createUseCaseStub())
+        let output = viewModel.transform(from: BookmarksViewModel
+                                            .Input(search: Driver.never(),
+                                                   playUrl: Driver.never(),
+                                                   removeBookmark: inputRemove,
+                                                   restore: Driver.never()))
+        disposeBag.insert(
+            output.bookmarks.drive(outputBookmarks)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        
+        // Assert
+        XCTAssertEqual(outputBookmarks.events, [
+            .next(0, .success(testData))
+        ])
+    }
+    
+    func testPlay() {
+        // Arrange
+        let inputPlay = scheduler.createHotObservable([
+            .next(150, "error"),
+            .next(200, "test"),
+            .completed(400)
+        ]).asDriver(onErrorJustReturn: "")
+        let outputPlayed = scheduler.createObserver(PlayerManagerResult.self)
+        let viewModel = BookmarksViewModel(searchBookmark: createUseCaseStub(),
+                                           restoreBookmark: createMockRestoreBookmark(),
+                                           removeBookmark: createUseCaseStub(),
+                                           changedBookmark: createMockChangedBookmarkNever(),
+                                           playSound: createPlaySoundUseCaseMock())
+        let output = viewModel.transform(from: BookmarksViewModel
+                                            .Input(search: Driver.never(),
+                                                   playUrl: inputPlay,
+                                                   removeBookmark: Driver.never(),
+                                                   restore: Driver.never()))
+        disposeBag.insert(
+            output.played.drive(outputPlayed)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputPlayed.events, [
+            .next(150, .failure(TestError.someError)),
+            .next(200, .success(true)),
+            .completed(400)
+        ])
+    }
         
     private func createMockSearchBookmark() -> MockAnyUseCase<String, Bookmarks> {
         let mockSearchBookmark = MockAnyUseCase(wrapped: MockUseCase<String, Bookmarks>())
         stub(mockSearchBookmark) { stub in
             when(stub.execute(with: anyString())).then { data in
+                if (data == "error") {
+                    return Observable.error(TestError.someError)
+                }
                 return Observable.just(.success([FormattedWord(data)]))
             }
         }
@@ -130,7 +207,7 @@ class BookmarksViewModelTests: XCTestCase {
     private func createMockChangedBookmarkNever() -> MockAnyUseCase<Void, Bookmarks> {
         let mockChangedBookmark = MockAnyUseCase(wrapped: MockUseCase<Void, Bookmarks>())
         stub(mockChangedBookmark) { stub in
-            when(stub.execute(with: any())).then { data in
+            when(stub.execute(with: any())).then { _ in
                 return Observable.never()
             }
         }
@@ -140,7 +217,7 @@ class BookmarksViewModelTests: XCTestCase {
     private func createMockChangedBookmark(_ bookmarks: [FormattedWord]) -> MockAnyUseCase<Void, Bookmarks> {
         let mockChangedBookmark = MockAnyUseCase(wrapped: MockUseCase<Void, Bookmarks>())
         stub(mockChangedBookmark) { stub in
-            when(stub.execute(with: any())).then { data in
+            when(stub.execute(with: any())).then { _ in
                 return Observable.just(.success(bookmarks))
             }
         }
@@ -151,6 +228,9 @@ class BookmarksViewModelTests: XCTestCase {
         let mockRestoreBookmark = MockAnyUseCase(wrapped: MockUseCase<String, String>())
         stub(mockRestoreBookmark) { stub in
             when(stub.execute(with: any())).then { data in
+                if (data == "error") {
+                    return Observable.error(TestError.someError)
+                }
                 return Observable.just(data)
             }
         }
@@ -159,5 +239,31 @@ class BookmarksViewModelTests: XCTestCase {
     
     private func createUseCaseStub<Input, Output>() -> AnyUseCaseStub<Input, Output> {
         return AnyUseCaseStub<Input, Output>(wrapped: UseCaseStub())
+    }
+    
+    private func createRemoveBookmarkUseCaseMock() -> MockAnyUseCase<Int, StorageServiceResult> {
+        let mockRemoveBookmark = MockAnyUseCase(wrapped: MockUseCase<Int, StorageServiceResult>())
+        stub(mockRemoveBookmark) { stub in
+            when(stub.execute(with: any())).then { index in
+                if (index == BookmarksViewModelTests.errorIndex) {
+                    return Observable.error(TestError.someError)
+                }
+                return Observable.just(.success(true))
+            }
+        }
+        return mockRemoveBookmark
+    }
+    
+    private func createPlaySoundUseCaseMock() -> MockAnyUseCase<String, PlayerManagerResult> {
+        let mockPlaySound = MockAnyUseCase(wrapped: MockUseCase<String, PlayerManagerResult>())
+        stub(mockPlaySound) { stub in
+            when(stub.execute(with: any())).then { url in
+                if (url == "error") {
+                    return Observable.error(TestError.someError)
+                }
+                return Observable.just(.success(true))
+            }
+        }
+        return mockPlaySound
     }
 }

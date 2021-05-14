@@ -67,14 +67,10 @@ class AboutViewModelTests: XCTestCase {
         let mockGetText = MockAnyUseCase(wrapped: MockUseCase<Void, NSAttributedString>())
         stub(mockGetText) { stub in
             when(stub.execute(with: any())).then { _ in
-                return Observable<NSAttributedString>.create { observable in
-                    if value.string == "error" {
-                        observable.on(.error(TestError.someError))
-                    } else {
-                        observable.on(.next(value))
-                    }
-                    observable.onCompleted()
-                    return Disposables.create()
+                if value.string == "error" {
+                    return .error(TestError.someError)
+                } else {
+                    return .just(value)
                 }
             }
         }
