@@ -25,12 +25,10 @@ class BookmarksViewModelTests: XCTestCase {
     func testSearch() {
         // Arrange
         let testString = "test"
-        let mockSearchBookmark = createMockSearchBookmark()
-        let mockChangedBookmark = createMockChangedBookmarkNever()
-        let viewModel = BookmarksViewModel(searchBookmark: mockSearchBookmark,
+        let viewModel = BookmarksViewModel(searchBookmark: createMockSearchBookmark(),
                                            restoreBookmark: createUseCaseStub(),
                                            removeBookmark: createUseCaseStub(),
-                                           changedBookmark: mockChangedBookmark,
+                                           changedBookmark: createMockChangedBookmarkNever(),
                                            playSound: createUseCaseStub())
         let inputWords = scheduler.createHotObservable([
             .next(200, testString),
@@ -57,19 +55,16 @@ class BookmarksViewModelTests: XCTestCase {
     func testRestore() {
         // Arrange
         let testString = "test"
-        let mockSearchBookmark = createMockSearchBookmark()
-        let mockChangedBookmark = createMockChangedBookmarkNever()
-        let mockRestoreBookmark = createMockRestoreBookmark()
         let inputRestore = scheduler.createHotObservable([
             .next(200, testString),
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let outputRestore = scheduler.createObserver(String.self)
         let outputBookmarks = scheduler.createObserver(Bookmarks.self)
-        let viewModel = BookmarksViewModel(searchBookmark: mockSearchBookmark,
-                                           restoreBookmark: mockRestoreBookmark,
+        let viewModel = BookmarksViewModel(searchBookmark: createMockSearchBookmark(),
+                                           restoreBookmark: createMockRestoreBookmark(),
                                            removeBookmark: createUseCaseStub(),
-                                           changedBookmark: mockChangedBookmark,
+                                           changedBookmark: createMockChangedBookmarkNever(),
                                            playSound: createUseCaseStub())
         let output = viewModel.transform(from: BookmarksViewModel
                                             .Input(search: Driver.never(),
@@ -94,6 +89,34 @@ class BookmarksViewModelTests: XCTestCase {
         ])
     }
     
+    func testChange() {
+        // Arrange
+        let testData = [FormattedWord("test")]
+        let outputBookmarks = scheduler.createObserver(Bookmarks.self)
+        let viewModel = BookmarksViewModel(searchBookmark: createMockSearchBookmark(),
+                                           restoreBookmark: createMockRestoreBookmark(),
+                                           removeBookmark: createUseCaseStub(),
+                                           changedBookmark: createMockChangedBookmark(testData),
+                                           playSound: createUseCaseStub())
+        let output = viewModel.transform(from: BookmarksViewModel
+                                            .Input(search: Driver.never(),
+                                                   playUrl: Driver.never(),
+                                                   removeBookmark: Driver.never(),
+                                                   restore: Driver.never()))
+        disposeBag.insert(
+            output.bookmarks.drive(outputBookmarks)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        
+        // Assert
+        XCTAssertEqual(outputBookmarks.events, [
+            .next(0, .success(testData))
+        ])
+    }
+        
     private func createMockSearchBookmark() -> MockAnyUseCase<String, Bookmarks> {
         let mockSearchBookmark = MockAnyUseCase(wrapped: MockUseCase<String, Bookmarks>())
         stub(mockSearchBookmark) { stub in
@@ -109,6 +132,16 @@ class BookmarksViewModelTests: XCTestCase {
         stub(mockChangedBookmark) { stub in
             when(stub.execute(with: any())).then { data in
                 return Observable.never()
+            }
+        }
+        return mockChangedBookmark
+    }
+    
+    private func createMockChangedBookmark(_ bookmarks: [FormattedWord]) -> MockAnyUseCase<Void, Bookmarks> {
+        let mockChangedBookmark = MockAnyUseCase(wrapped: MockUseCase<Void, Bookmarks>())
+        stub(mockChangedBookmark) { stub in
+            when(stub.execute(with: any())).then { data in
+                return Observable.just(.success(bookmarks))
             }
         }
         return mockChangedBookmark
