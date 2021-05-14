@@ -28,10 +28,10 @@ class BookmarksViewModelTests: XCTestCase {
         // Arrange
         let testString = "test"
         let viewModel = BookmarksViewModel(searchBookmark: createMockSearchBookmark(),
-                                           restoreBookmark: createUseCaseStub(),
-                                           removeBookmark: createUseCaseStub(),
+                                           restoreBookmark: MockFactory.createUseCaseStub(),
+                                           removeBookmark: MockFactory.createUseCaseStub(),
                                            changedBookmark: createMockChangedBookmarkNever(),
-                                           playSound: createUseCaseStub())
+                                           playSound: MockFactory.createUseCaseStub())
         let inputWords = scheduler.createHotObservable([
             .next(150, "error"),
             .next(200, testString),
@@ -68,9 +68,9 @@ class BookmarksViewModelTests: XCTestCase {
         let outputBookmarks = scheduler.createObserver(Bookmarks.self)
         let viewModel = BookmarksViewModel(searchBookmark: createMockSearchBookmark(),
                                            restoreBookmark: createMockRestoreBookmark(),
-                                           removeBookmark: createUseCaseStub(),
+                                           removeBookmark: MockFactory.createUseCaseStub(),
                                            changedBookmark: createMockChangedBookmarkNever(),
-                                           playSound: createUseCaseStub())
+                                           playSound: MockFactory.createUseCaseStub())
         let output = viewModel.transform(from: BookmarksViewModel
                                             .Input(search: Driver.never(),
                                                    playUrl: Driver.never(),
@@ -100,11 +100,11 @@ class BookmarksViewModelTests: XCTestCase {
         // Arrange
         let testData = [FormattedWord("test")]
         let outputBookmarks = scheduler.createObserver(Bookmarks.self)
-        let viewModel = BookmarksViewModel(searchBookmark: createUseCaseStub(),
+        let viewModel = BookmarksViewModel(searchBookmark: MockFactory.createUseCaseStub(),
                                            restoreBookmark: createMockRestoreBookmark(),
-                                           removeBookmark: createUseCaseStub(),
+                                           removeBookmark: MockFactory.createUseCaseStub(),
                                            changedBookmark: createMockChangedBookmark(testData),
-                                           playSound: createUseCaseStub())
+                                           playSound: MockFactory.createUseCaseStub())
         let output = viewModel.transform(from: BookmarksViewModel
                                             .Input(search: Driver.never(),
                                                    playUrl: Driver.never(),
@@ -134,11 +134,11 @@ class BookmarksViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: -1)
         let outputBookmarks = scheduler.createObserver(Bookmarks.self)
-        let viewModel = BookmarksViewModel(searchBookmark: createUseCaseStub(),
+        let viewModel = BookmarksViewModel(searchBookmark: MockFactory.createUseCaseStub(),
                                            restoreBookmark: createMockRestoreBookmark(),
                                            removeBookmark: createRemoveBookmarkUseCaseMock(),
                                            changedBookmark: createMockChangedBookmark(testData),
-                                           playSound: createUseCaseStub())
+                                           playSound: MockFactory.createUseCaseStub())
         let output = viewModel.transform(from: BookmarksViewModel
                                             .Input(search: Driver.never(),
                                                    playUrl: Driver.never(),
@@ -166,9 +166,9 @@ class BookmarksViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let outputPlayed = scheduler.createObserver(PlayerManagerResult.self)
-        let viewModel = BookmarksViewModel(searchBookmark: createUseCaseStub(),
+        let viewModel = BookmarksViewModel(searchBookmark: MockFactory.createUseCaseStub(),
                                            restoreBookmark: createMockRestoreBookmark(),
-                                           removeBookmark: createUseCaseStub(),
+                                           removeBookmark: MockFactory.createUseCaseStub(),
                                            changedBookmark: createMockChangedBookmarkNever(),
                                            playSound: createPlaySoundUseCaseMock())
         let output = viewModel.transform(from: BookmarksViewModel
@@ -236,11 +236,7 @@ class BookmarksViewModelTests: XCTestCase {
         }
         return mockRestoreBookmark
     }
-    
-    private func createUseCaseStub<Input, Output>() -> AnyUseCaseStub<Input, Output> {
-        return AnyUseCaseStub<Input, Output>(wrapped: UseCaseStub())
-    }
-    
+
     private func createRemoveBookmarkUseCaseMock() -> MockAnyUseCase<Int, StorageServiceResult> {
         let mockRemoveBookmark = MockAnyUseCase(wrapped: MockUseCase<Int, StorageServiceResult>())
         stub(mockRemoveBookmark) { stub in
