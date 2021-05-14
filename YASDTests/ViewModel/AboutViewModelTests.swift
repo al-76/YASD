@@ -28,14 +28,11 @@ class AboutViewModelTests: XCTestCase {
     func testGetText() {
         // Arrange
         let testString = NSAttributedString(string: "test")
-        let viewModel = AboutViewModel(getText: CreateMockGetTextAboutUseCase(value: testString))
-        let output = viewModel.transform(from: AboutViewModel.Input())
-        output.text.drive(outputText)
-            .disposed(by: disposeBag)
+        let outputText = createGetTextObserver(testString)
         
         // Act
         scheduler.start()
-        
+                
         // Assert
         XCTAssertEqual(outputText.events, [
             .next(0, testString),
@@ -45,15 +42,11 @@ class AboutViewModelTests: XCTestCase {
     
     func testGetTextError() {
         // Arrange
-        let testString = NSAttributedString(string: "error")
-        let viewModel = AboutViewModel(getText: CreateMockGetTextAboutUseCase(value: testString))
-        let output = viewModel.transform(from: AboutViewModel.Input())
-        output.text.drive(outputText)
-            .disposed(by: disposeBag)
+        let outputText = createGetTextObserver(NSAttributedString(string: "error"))
         
         // Act
         scheduler.start()
-        
+                
         // Assert
         XCTAssertEqual(outputText.events, [
             .next(0, NSAttributedString()),
@@ -61,7 +54,16 @@ class AboutViewModelTests: XCTestCase {
         ])
     }
     
-    func CreateMockGetTextAboutUseCase(value: NSAttributedString) -> MockAnyUseCase<Void, NSAttributedString> {
+    private func createGetTextObserver(_ testString: NSAttributedString) -> TestableObserver<NSAttributedString> {
+        let outputText = scheduler.createObserver(NSAttributedString.self)
+        let viewModel = AboutViewModel(getText: createMockGetTextAboutUseCase(value: testString))
+        let output = viewModel.transform(from: AboutViewModel.Input())
+        output.text.drive(outputText)
+            .disposed(by: disposeBag)
+        return outputText
+    }
+    
+    private func createMockGetTextAboutUseCase(value: NSAttributedString) -> MockAnyUseCase<Void, NSAttributedString> {
         let mockGetText = MockAnyUseCase(wrapped: MockUseCase<Void, NSAttributedString>())
         stub(mockGetText) { stub in
             when(stub.execute(with: any())).then { _ in
