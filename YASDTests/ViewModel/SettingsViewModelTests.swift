@@ -1,52 +1,77 @@
-////
-////  SettingsViewModel.swift
-////  YASDTests
-////
-////  Created by Vyacheslav Konopkin on 05/08/2019.
-////  Copyright © 2019 yac. All rights reserved.
-////
 //
-//@testable import YASD
+//  SettingsViewModel.swift
+//  YASDTests
 //
-//import XCTest
-//import RxSwift
-//import RxTest
-//import Cuckoo
+//  Created by Vyacheslav Konopkin on 05/08/2019.
+//  Copyright © 2019 yac. All rights reserved.
 //
-//class SettingsViewModelTests: XCTestCase {
-//    let disposeBag = DisposeBag()
-//    
-//    func testSelectLanguage() {
-//        // Arrange
-//        let testValues = [
-//            Language(name: "initTestLanguage", code: "initTestCode"),
-//            Language(name: "testLanguage", code: "testCode"),
-//        ]
-//        let scheduler = TestScheduler(initialClock: 0)
-//        let inputLanguages = scheduler.createHotObservable([
-//            .next(150, testValues[1])
-//        ])
-//        let outputSelectedLanguages = scheduler.createObserver(String.self)
-//        let parameters = createParametersStorageStub(language: testValues[0])
-//        inputLanguages.bind(to: parameters.language).disposed(by: disposeBag)
-//        let viewModel = SettingsViewModel(lexinParameters: parameters)
-//        let output = viewModel.transform(from: SettingsViewModel.Input())
-//        output.selectedLanguage.drive(outputSelectedLanguages).disposed(by: disposeBag)
-//        
-//        // Act
-//        scheduler.start()
-//        
-//        // Assert
-//        XCTAssertEqual(outputSelectedLanguages.events, [
-//            .next(0, testValues[0].name),
-//            .next(150, testValues[1].name)
-//        ])
-//    }
-//    
-//    private func createParametersStorageStub(language: Language) -> ParametersStorageStub {
-//        DefaultValueRegistry.register(value: language, forType: Language.self)
-//        let stub = ParametersStorageStub(storage: StorageStub(),
-//                                         language: language)
-//        return stub
-//    }
-//}
+
+@testable import YASD
+
+import XCTest
+import RxSwift
+import RxCocoa
+import RxTest
+import Cuckoo
+
+class SettingsViewModelTests: XCTestCase {
+    enum TestError: Error {
+        case someError
+    }
+    
+    let disposeBag = DisposeBag()
+    let scheduler = TestScheduler(initialClock: 0)
+
+    func testGetLanguage() {
+        // Arrange
+        let testLanguage = "test"
+        let outputLanguage = createGetLanguageObserver(testLanguage)
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputLanguage.events, [
+            .next(0, testLanguage),
+            .completed(0)
+        ])
+    }
+    
+    func testGetLanguageError() {
+        // Arrange
+        let outputLanguage = createGetLanguageObserver("error")
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputLanguage.events, [
+            .next(0, Language.defaultLanguage.name),
+            .completed(0)
+        ])
+    }
+    
+    private func createGetLanguageObserver(_ testLanguage: String) -> TestableObserver<String> {
+        let viewModel = SettingsViewModel(getLanguage: createMockGetLanguage(testLanguage))
+        let outputLanguage = scheduler.createObserver(String.self)
+        let output = viewModel.transform(from: SettingsViewModel.Input())
+        disposeBag.insert(
+            output.selectedLanguage.drive(outputLanguage)
+        )
+        return outputLanguage
+    }
+    
+    private func createMockGetLanguage(_ language: String) -> MockAnyUseCase<Void, String> {
+        let mock = MockAnyUseCase(wrapped: MockUseCase<Void, String>())
+        stub(mock) { stub in
+            when(stub.execute(with: any())).then { _ in
+                if language == "error" {
+                    return Observable.error(TestError.someError)
+                }
+                return Observable.just(language)
+            }
+        }
+        return mock
+    }
+}
+

@@ -64,8 +64,8 @@ class AboutViewModelTests: XCTestCase {
     }
     
     private func createMockGetTextAboutUseCase(value: NSAttributedString) -> MockAnyUseCase<Void, NSAttributedString> {
-        let mockGetText = MockAnyUseCase(wrapped: MockUseCase<Void, NSAttributedString>())
-        stub(mockGetText) { stub in
+        let mock = MockAnyUseCase(wrapped: MockUseCase<Void, NSAttributedString>())
+        stub(mock) { stub in
             when(stub.execute(with: any())).then { _ in
                 if value.string == "error" {
                     return .error(TestError.someError)
@@ -74,6 +74,6 @@ class AboutViewModelTests: XCTestCase {
                 }
             }
         }
-        return mockGetText
+        return mock
     }
 }

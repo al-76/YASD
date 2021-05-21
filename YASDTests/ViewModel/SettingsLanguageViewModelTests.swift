@@ -22,55 +22,69 @@ class SettingsLanguageViewModelTests: XCTestCase {
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
 
-    func testGetLanguage() {
+    func testSearchAndSelectLanguage() {
         // Arrange
-        let testLanguage = "test"
-        let outputLanguage = createGetLanguageObserver(testLanguage)
-        
-        // Act
-        scheduler.start()
-        
-        // Assert
-        XCTAssertEqual(outputLanguage.events, [
-            .next(0, testLanguage),
-            .completed(0)
-        ])
-    }
-    
-    func testGetLanguageError() {
-        // Arrange
-        let outputLanguage = createGetLanguageObserver("error")
-        
-        // Act
-        scheduler.start()
-        
-        // Assert
-        XCTAssertEqual(outputLanguage.events, [
-            .next(0, Language.defaultLanguage.name),
-            .completed(0)
-        ])
-    }
-    
-    private func createGetLanguageObserver(_ testLanguage: String) -> TestableObserver<String> {
-        let viewModel = SettingsViewModel(getLanguage: createMockGetLanguage(testLanguage))
-        let outputLanguage = scheduler.createObserver(String.self)
-        let output = viewModel.transform(from: SettingsViewModel.Input())
+        let testValue = "test"
+        let expectedValue = [SettingsLanguageItem(selected: false, language: Language(name: testValue, code: testValue))]
+        let inputSearch = scheduler.createHotObservable([
+            .next(150, "error"),
+            .next(160, "rx_error"),
+            .next(200, testValue),
+            .completed(400)
+        ]).asDriver(onErrorJustReturn: "")
+        let inputSelect = scheduler.createHotObservable([
+            .next(450, "error"),
+            .next(500, testValue),
+            .completed(600)
+        ]).asDriver(onErrorJustReturn: "")
+        let outputLanguageList = scheduler.createObserver([SettingsLanguageItem].self)
+        let viewModel = SettingsLanguageViewModel(getLanguageList: createMockGetLanguageListUseCase(), updateLanguage: createMockUpdateLanguageUseCase())
+        let output = viewModel.transform(from: SettingsLanguageViewModel.Input(search: inputSearch, select: inputSelect))
         disposeBag.insert(
-            output.selectedLanguage.drive(outputLanguage)
+            output.languages.drive(outputLanguageList)
         )
-        return outputLanguage
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputLanguageList.events, [
+            .next(150, []),
+            .next(160, []),
+            .next(200, expectedValue),
+            .next(450, expectedValue),
+            .next(500, expectedValue),
+            .completed(600)
+        ])
     }
     
-    private func createMockGetLanguage(_ language: String) -> MockAnyUseCase<Void, String> {
-        let mockGetLanguage = MockAnyUseCase(wrapped: MockUseCase<Void, String>())
-        stub(mockGetLanguage) { stub in
-            when(stub.execute(with: any())).then { _ in
-                if language == "error" {
-                    return Observable.error(TestError.someError)
+    private func createMockGetLanguageListUseCase() -> MockAnyUseCase<String, SettingsLanguageItemResult> {
+        let mock = MockAnyUseCase(wrapped: MockUseCase<String, SettingsLanguageItemResult>())
+        stub(mock) { stub in
+            when(stub.execute(with: any())).then { value in
+                if value == "rx_error" {
+                    return .error(TestError.someError)
+                } else if value == "error" {
+                    return .just(.failure(TestError.someError))
+                } else {
+                    return .just(.success([SettingsLanguageItem(selected: false, language: Language(name: value, code: value))]))
                 }
-                return Observable.just(language)
             }
         }
-        return mockGetLanguage
+        return mock
+    }
+    
+    private func createMockUpdateLanguageUseCase() -> MockAnyUseCase<String, Void> {
+        let mock = MockAnyUseCase(wrapped: MockUseCase<String, Void>())
+        stub(mock) { stub in
+            when(stub.execute(with: any())).then { value in
+                if value == "error" {
+                    return .error(TestError.someError)
+                } else {
+                    return .just(())
+                }
+            }
+        }
+        return mock
     }
 }
