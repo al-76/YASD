@@ -117,7 +117,6 @@ class BookmarksViewModelTests: XCTestCase {
         // Act
         scheduler.start()
         
-        
         // Assert
         XCTAssertEqual(outputBookmarks.events, [
             .next(0, .success(testData))
@@ -150,7 +149,6 @@ class BookmarksViewModelTests: XCTestCase {
         
         // Act
         scheduler.start()
-        
         
         // Assert
         XCTAssertEqual(outputBookmarks.events, [
