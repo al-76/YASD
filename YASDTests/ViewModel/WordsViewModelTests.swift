@@ -53,6 +53,37 @@ class WordsViewModelTests: XCTestCase {
         ])
     }
     
+    func testPlaySound() {
+        // Arrange
+        let inputUrl = scheduler.createHotObservable([
+            .next(150, "error"),
+            .next(160, "rx_error"),
+            .next(200, "test")
+        ]).asDriver(onErrorJustReturn: "")
+        let outputPlayed = scheduler.createObserver(PlayerManagerResult.self)
+        let viewModel = WordsViewModel(searchWord: MockFactory.createUseCaseStub(),
+                                       addBookmark: MockFactory.createUseCaseStub(),
+                                       playSound: createMockPlaySoundUseCase(),
+                                       removeBookmark: MockFactory.createUseCaseStub())
+        let output = viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
+                                                                    playUrl: inputUrl,
+                                                                    addBookmark: Driver.never(),
+                                                                    removeBookmark: Driver.never()))
+        disposeBag.insert(
+            output.played.drive(outputPlayed)
+        )
+        
+        // Act
+        scheduler.start()
+
+        // Assert
+        XCTAssertEqual(outputPlayed.events, [
+            .next(150, .failure(TestError.someError)),
+            .next(160, .failure(TestError.someError)),
+            .next(200, .success(true))
+        ])
+    }
+    
     private func createMockSearchWordUseCase() -> MockAnyUseCase<SearchWordUseCase.Input, FoundWordResult> {
         let mock = MockAnyUseCase(wrapped: MockUseCase<SearchWordUseCase.Input, FoundWordResult>())
         stub(mock) { stub in
@@ -63,6 +94,22 @@ class WordsViewModelTests: XCTestCase {
                     return .just(.failure(TestError.someError))
                 } else {
                     return .just(.success([FoundWord(value.word)]))
+                }
+            }
+        }
+        return mock
+    }
+    
+    private func createMockPlaySoundUseCase() -> MockAnyUseCase<String, PlayerManagerResult> {
+        let mock = MockAnyUseCase(wrapped: MockUseCase<String, PlayerManagerResult>())
+        stub(mock) { stub in
+            when(stub.execute(with: any())).then { value in
+                if value == "error" {
+                    return .error(TestError.someError)
+                } else if value == "rx_error" {
+                    return .just(.failure(TestError.someError))
+                } else {
+                    return .just(.success(true))
                 }
             }
         }
