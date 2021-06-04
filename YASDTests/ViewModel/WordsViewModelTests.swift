@@ -53,6 +53,37 @@ class WordsViewModelTests: XCTestCase {
         ])
     }
     
+    func testAddBookmark() {
+        // Arrange
+        let inputBookmarks = scheduler.createHotObservable([
+            .next(150, FormattedWord("error")),
+            .next(160, FormattedWord("rx_error")),
+            .next(200, FormattedWord("test"))
+        ]).asDriver(onErrorJustReturn: FormattedWord(""))
+        let outputAddedBookmarks = scheduler.createObserver(StorageServiceResult.self)
+        let viewModel = WordsViewModel(searchWord: MockFactory.createUseCaseStub(),
+                                       addBookmark: createMockAddBookmarkUseCase(),
+                                       playSound: MockFactory.createUseCaseStub(),
+                                       removeBookmark: MockFactory.createUseCaseStub())
+        let output = viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
+                                                                    playUrl: Driver.never(),
+                                                                    addBookmark: inputBookmarks,
+                                                                    removeBookmark: Driver.never()))
+        disposeBag.insert(
+            output.bookmarked.drive(outputAddedBookmarks)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputAddedBookmarks.events, [
+            .next(150, .failure(TestError.someError)),
+            .next(160, .failure(TestError.someError)),
+            .next(200, .success(true))
+        ])
+    }
+    
     func testPlaySound() {
         // Arrange
         let inputUrl = scheduler.createHotObservable([
@@ -94,6 +125,22 @@ class WordsViewModelTests: XCTestCase {
                     return .just(.failure(TestError.someError))
                 } else {
                     return .just(.success([FoundWord(value.word)]))
+                }
+            }
+        }
+        return mock
+    }
+    
+    private func createMockAddBookmarkUseCase() -> MockAnyUseCase<FormattedWord, StorageServiceResult> {
+        let mock = MockAnyUseCase(wrapped: MockUseCase<FormattedWord, StorageServiceResult>())
+        stub(mock) { stub in
+            when(stub.execute(with: any())).then { value in
+                if value.header == "error" {
+                    return .error(TestError.someError)
+                } else if value.header == "rx_error" {
+                    return .just(.failure(TestError.someError))
+                } else {
+                    return .just(.success(true))
                 }
             }
         }
