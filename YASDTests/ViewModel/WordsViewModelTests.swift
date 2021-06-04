@@ -60,9 +60,9 @@ class WordsViewModelTests: XCTestCase {
             .next(160, FormattedWord("rx_error")),
             .next(200, FormattedWord("test"))
         ]).asDriver(onErrorJustReturn: FormattedWord(""))
-        let outputAddedBookmarks = scheduler.createObserver(StorageServiceResult.self)
+        let outputBookmarks = scheduler.createObserver(StorageServiceResult.self)
         let viewModel = WordsViewModel(searchWord: MockFactory.createUseCaseStub(),
-                                       addBookmark: createMockAddBookmarkUseCase(),
+                                       addBookmark: createMockBookmarkUseCase(),
                                        playSound: MockFactory.createUseCaseStub(),
                                        removeBookmark: MockFactory.createUseCaseStub())
         let output = viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
@@ -70,14 +70,14 @@ class WordsViewModelTests: XCTestCase {
                                                                     addBookmark: inputBookmarks,
                                                                     removeBookmark: Driver.never()))
         disposeBag.insert(
-            output.bookmarked.drive(outputAddedBookmarks)
+            output.bookmarked.drive(outputBookmarks)
         )
         
         // Act
         scheduler.start()
         
         // Assert
-        XCTAssertEqual(outputAddedBookmarks.events, [
+        XCTAssertEqual(outputBookmarks.events, [
             .next(150, .failure(TestError.someError)),
             .next(160, .failure(TestError.someError)),
             .next(200, .success(true))
@@ -115,6 +115,37 @@ class WordsViewModelTests: XCTestCase {
         ])
     }
     
+    func testRemoveBookmark() {
+        // Arrange
+        let inputBookmarks = scheduler.createHotObservable([
+            .next(150, FormattedWord("error")),
+            .next(160, FormattedWord("rx_error")),
+            .next(200, FormattedWord("test"))
+        ]).asDriver(onErrorJustReturn: FormattedWord(""))
+        let outputBookmarks = scheduler.createObserver(StorageServiceResult.self)
+        let viewModel = WordsViewModel(searchWord: MockFactory.createUseCaseStub(),
+                                       addBookmark: MockFactory.createUseCaseStub(),
+                                       playSound: MockFactory.createUseCaseStub(),
+                                       removeBookmark: createMockBookmarkUseCase())
+        let output = viewModel.transform(from: WordsViewModel.Input(search: Driver.never(),
+                                                                    playUrl: Driver.never(),
+                                                                    addBookmark: Driver.never(),
+                                                                    removeBookmark: inputBookmarks))
+        disposeBag.insert(
+            output.bookmarked.drive(outputBookmarks)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputBookmarks.events, [
+            .next(150, .failure(TestError.someError)),
+            .next(160, .failure(TestError.someError)),
+            .next(200, .success(true))
+        ])
+    }
+    
     private func createMockSearchWordUseCase() -> MockAnyUseCase<SearchWordUseCase.Input, FoundWordResult> {
         let mock = MockAnyUseCase(wrapped: MockUseCase<SearchWordUseCase.Input, FoundWordResult>())
         stub(mock) { stub in
@@ -131,7 +162,7 @@ class WordsViewModelTests: XCTestCase {
         return mock
     }
     
-    private func createMockAddBookmarkUseCase() -> MockAnyUseCase<FormattedWord, StorageServiceResult> {
+    private func createMockBookmarkUseCase() -> MockAnyUseCase<FormattedWord, StorageServiceResult> {
         let mock = MockAnyUseCase(wrapped: MockUseCase<FormattedWord, StorageServiceResult>())
         stub(mock) { stub in
             when(stub.execute(with: any())).then { value in
