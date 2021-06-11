@@ -147,50 +147,32 @@ class WordsViewModelTests: XCTestCase {
     }
     
     private func createMockSearchWordUseCase() -> MockAnyUseCase<SearchWordUseCase.Input, FoundWordResult> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<SearchWordUseCase.Input, FoundWordResult>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { value in
-                if value.word == "error" {
-                    return .error(TestError.someError)
-                } else if value.word == "rx_error" {
-                    return .just(.failure(TestError.someError))
-                } else {
-                    return .just(.success([FoundWord(value.word)]))
-                }
-            }
+        return MockFactory.createMockUseCase { value in
+            value.word == "error" ? TestError.someError : nil
+        } onRxError: { value in
+            value.word == "rx_error" ? .failure(TestError.someError) : nil
+        } onSuccess: { value in
+            .success([FoundWord(value.word)])
         }
-        return mock
     }
     
     private func createMockBookmarkUseCase() -> MockAnyUseCase<FormattedWord, StorageServiceResult> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<FormattedWord, StorageServiceResult>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { value in
-                if value.header == "error" {
-                    return .error(TestError.someError)
-                } else if value.header == "rx_error" {
-                    return .just(.failure(TestError.someError))
-                } else {
-                    return .just(.success(true))
-                }
-            }
+        return MockFactory.createMockUseCase { value in
+            value.header == "error" ? TestError.someError : nil
+        } onRxError: { value in
+            value.header == "rx_error" ? .failure(TestError.someError) : nil
+        } onSuccess: { value in
+            .success(true)
         }
-        return mock
     }
     
     private func createMockPlaySoundUseCase() -> MockAnyUseCase<String, PlayerManagerResult> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<String, PlayerManagerResult>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { value in
-                if value == "error" {
-                    return .error(TestError.someError)
-                } else if value == "rx_error" {
-                    return .just(.failure(TestError.someError))
-                } else {
-                    return .just(.success(true))
-                }
-            }
+        return MockFactory.createMockUseCase { value in
+            value == "error" ? TestError.someError : nil
+        } onRxError: { value in
+            value == "rx_error" ? .failure(TestError.someError) : nil
+        } onSuccess: { value in
+            .success(true)
         }
-        return mock
     }
 }

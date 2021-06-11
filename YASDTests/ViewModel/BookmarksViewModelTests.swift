@@ -190,16 +190,13 @@ class BookmarksViewModelTests: XCTestCase {
     }
         
     private func createMockSearchBookmark() -> MockAnyUseCase<String, Bookmarks> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<String, Bookmarks>())
-        stub(mock) { stub in
-            when(stub.execute(with: anyString())).then { data in
-                if (data == "error") {
-                    return Observable.error(TestError.someError)
-                }
-                return Observable.just(.success([FormattedWord(data)]))
-            }
+        return MockFactory.createMockUseCase { value in
+            value == "error" ? TestError.someError : nil
+        } onRxError: { _ in
+            nil
+        } onSuccess: { value in
+            .success([FormattedWord(value)])
         }
-        return mock
     }
     
     private func createMockChangedBookmarkNever() -> MockAnyUseCase<Void, Bookmarks> {
@@ -213,51 +210,42 @@ class BookmarksViewModelTests: XCTestCase {
     }
     
     private func createMockChangedBookmark(_ bookmarks: [FormattedWord]) -> MockAnyUseCase<Void, Bookmarks> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<Void, Bookmarks>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { _ in
-                return Observable.just(.success(bookmarks))
-            }
+        return MockFactory.createMockUseCase { _ in
+            nil
+        } onRxError: { _ in
+            nil
+        } onSuccess: { _ in
+            .success(bookmarks)
         }
-        return mock
     }
     
     private func createMockRestoreBookmark() -> MockAnyUseCase<String, String> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<String, String>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { data in
-                if (data == "error") {
-                    return Observable.error(TestError.someError)
-                }
-                return Observable.just(data)
-            }
+        return MockFactory.createMockUseCase { value in
+            value == "error" ? TestError.someError : nil
+        } onRxError: { value in
+            nil
+        } onSuccess: { value in
+            value
         }
-        return mock
     }
 
     private func createRemoveBookmarkUseCaseMock() -> MockAnyUseCase<Int, StorageServiceResult> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<Int, StorageServiceResult>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { index in
-                if (index == BookmarksViewModelTests.errorIndex) {
-                    return Observable.error(TestError.someError)
-                }
-                return Observable.just(.success(true))
-            }
+        return MockFactory.createMockUseCase { value in
+            value == BookmarksViewModelTests.errorIndex ? TestError.someError : nil
+        } onRxError: { value in
+            nil
+        } onSuccess: { value in
+            .success(true)
         }
-        return mock
     }
     
     private func createPlaySoundUseCaseMock() -> MockAnyUseCase<String, PlayerManagerResult> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<String, PlayerManagerResult>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { url in
-                if (url == "error") {
-                    return Observable.error(TestError.someError)
-                }
-                return Observable.just(.success(true))
-            }
+        return MockFactory.createMockUseCase { value in
+            value == "error" ? TestError.someError : nil
+        } onRxError: { value in
+            nil
+        } onSuccess: { value in
+            .success(true)
         }
-        return mock
     }
 }

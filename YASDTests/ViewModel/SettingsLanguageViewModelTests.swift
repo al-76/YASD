@@ -59,32 +59,22 @@ class SettingsLanguageViewModelTests: XCTestCase {
     }
     
     private func createMockGetLanguageListUseCase() -> MockAnyUseCase<String, SettingsLanguageItemResult> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<String, SettingsLanguageItemResult>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { value in
-                if value == "rx_error" {
-                    return .error(TestError.someError)
-                } else if value == "error" {
-                    return .just(.failure(TestError.someError))
-                } else {
-                    return .just(.success([SettingsLanguageItem(selected: false, language: Language(name: value, code: value))]))
-                }
-            }
+        return MockFactory.createMockUseCase { value in
+            value == "error" ? TestError.someError : nil
+        } onRxError: { value in
+            value == "rx_error" ? .failure(TestError.someError) : nil
+        } onSuccess: { value in
+            .success([SettingsLanguageItem(selected: false, language: Language(name: value, code: value))])
         }
-        return mock
     }
     
     private func createMockUpdateLanguageUseCase() -> MockAnyUseCase<String, Void> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<String, Void>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { value in
-                if value == "error" {
-                    return .error(TestError.someError)
-                } else {
-                    return .just(())
-                }
-            }
+        return MockFactory.createMockUseCase { value in
+            value == "error" ? TestError.someError : nil
+        } onRxError: { value in
+            nil
+        } onSuccess: { value in
+            ()
         }
-        return mock
     }
 }

@@ -62,16 +62,13 @@ class SettingsViewModelTests: XCTestCase {
     }
     
     private func createMockGetLanguage(_ language: String) -> MockAnyUseCase<Void, String> {
-        let mock = MockAnyUseCase(wrapped: MockUseCase<Void, String>())
-        stub(mock) { stub in
-            when(stub.execute(with: any())).then { _ in
-                if language == "error" {
-                    return Observable.error(TestError.someError)
-                }
-                return Observable.just(language)
-            }
+        return MockFactory.createMockUseCase { _ in
+            language == "error" ? TestError.someError : nil
+        } onRxError: { _ in
+            nil
+        } onSuccess: { _ in
+            language
         }
-        return mock
     }
 }
 
