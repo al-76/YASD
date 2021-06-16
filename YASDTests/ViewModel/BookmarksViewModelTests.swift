@@ -38,11 +38,11 @@ class BookmarksViewModelTests: XCTestCase {
             .completed(400)
         ]).asDriver(onErrorJustReturn: "")
         let outputBookmarks = scheduler.createObserver(FormattedWordResult.self)
-        let output = viewModel.transform(from: BookmarksViewModel
-                                            .Input(search: inputWords,
-                                                   playUrl: Driver.never(),
-                                                   removeBookmark: Driver.never(),
-                                                   restore: Driver.never()))
+        let input = BookmarksViewModel.Input(search: inputWords,
+                                             playUrl: Driver.never(),
+                                             removeBookmark: Driver.never(),
+                                             restore: Driver.never())
+        let output = viewModel.transform(from: input)
         output.bookmarks.drive(outputBookmarks)
             .disposed(by: disposeBag)
 
@@ -71,11 +71,11 @@ class BookmarksViewModelTests: XCTestCase {
                                            removeBookmark: MockFactory.createUseCaseStub(),
                                            changedBookmark: createMockChangedBookmarkNever(),
                                            playSound: MockFactory.createUseCaseStub())
-        let output = viewModel.transform(from: BookmarksViewModel
-                                            .Input(search: Driver.never(),
-                                                   playUrl: Driver.never(),
-                                                   removeBookmark: Driver.never(),
-                                                   restore: inputRestore))
+        let input = BookmarksViewModel.Input(search: Driver.never(),
+                                             playUrl: Driver.never(),
+                                             removeBookmark: Driver.never(),
+                                             restore: inputRestore)
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.restored.drive(outputRestore),
             output.bookmarks.drive(outputBookmarks)
@@ -105,11 +105,11 @@ class BookmarksViewModelTests: XCTestCase {
                                            removeBookmark: MockFactory.createUseCaseStub(),
                                            changedBookmark: createMockChangedBookmark(testData),
                                            playSound: MockFactory.createUseCaseStub())
-        let output = viewModel.transform(from: BookmarksViewModel
-                                            .Input(search: Driver.never(),
-                                                   playUrl: Driver.never(),
-                                                   removeBookmark: Driver.never(),
-                                                   restore: Driver.never()))
+        let input = BookmarksViewModel.Input(search: Driver.never(),
+                                             playUrl: Driver.never(),
+                                             removeBookmark: Driver.never(),
+                                             restore: Driver.never())
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.bookmarks.drive(outputBookmarks)
         )
@@ -138,11 +138,11 @@ class BookmarksViewModelTests: XCTestCase {
                                            removeBookmark: createRemoveBookmarkUseCaseMock(),
                                            changedBookmark: createMockChangedBookmark(testData),
                                            playSound: MockFactory.createUseCaseStub())
-        let output = viewModel.transform(from: BookmarksViewModel
-                                            .Input(search: Driver.never(),
-                                                   playUrl: Driver.never(),
-                                                   removeBookmark: inputRemove,
-                                                   restore: Driver.never()))
+        let input = BookmarksViewModel.Input(search: Driver.never(),
+                                             playUrl: Driver.never(),
+                                             removeBookmark: inputRemove,
+                                             restore: Driver.never())
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.bookmarks.drive(outputBookmarks)
         )
@@ -169,11 +169,11 @@ class BookmarksViewModelTests: XCTestCase {
                                            removeBookmark: MockFactory.createUseCaseStub(),
                                            changedBookmark: createMockChangedBookmarkNever(),
                                            playSound: createPlaySoundUseCaseMock())
-        let output = viewModel.transform(from: BookmarksViewModel
-                                            .Input(search: Driver.never(),
-                                                   playUrl: inputPlay,
-                                                   removeBookmark: Driver.never(),
-                                                   restore: Driver.never()))
+        let input = BookmarksViewModel.Input(search: Driver.never(),
+                                             playUrl: inputPlay,
+                                             removeBookmark: Driver.never(),
+                                             restore: Driver.never())
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.played.drive(outputPlayed)
         )

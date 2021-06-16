@@ -39,7 +39,9 @@ class SettingsLanguageViewModelTests: XCTestCase {
         ]).asDriver(onErrorJustReturn: "")
         let outputLanguageList = scheduler.createObserver([SettingsLanguageItem].self)
         let viewModel = SettingsLanguageViewModel(getLanguageList: createMockGetLanguageListUseCase(), updateLanguage: createMockUpdateLanguageUseCase())
-        let output = viewModel.transform(from: SettingsLanguageViewModel.Input(search: inputSearch, select: inputSelect))
+        let input = SettingsLanguageViewModel.Input(search: inputSearch,
+                                                    select: inputSelect)
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.languages.drive(outputLanguageList)
         )
