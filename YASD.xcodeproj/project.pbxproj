@@ -99,6 +99,7 @@
 		6F9551E12631CAE0007AD633 /* GetSuggestionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9551E02631CAE0007AD633 /* GetSuggestionUseCase.swift */; };
 		6FB41A0C267B750B004C8FE4 /* GetTextAboutUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB41A0B267B750B004C8FE4 /* GetTextAboutUseCaseTests.swift */; };
 		6FB41A10267B8EE5004C8FE4 /* PlaySoundUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB41A0F267B8EE5004C8FE4 /* PlaySoundUseCaseTests.swift */; };
+		6FB41A13267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB41A12267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift */; };
 		6FF5FCEC264ED2E60069449F /* MockFactory+UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5FCEB264ED2E60069449F /* MockFactory+UseCase.swift */; };
 		6FFB54EA2629D4360063483D /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB54E92629D4360063483D /* SettingsRepository.swift */; };
 		6FFB54ED2629D6BD0063483D /* DefaultSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB54EC2629D6BD0063483D /* DefaultSettingsRepository.swift */; };
@@ -263,6 +264,7 @@
 		6F9551E02631CAE0007AD633 /* GetSuggestionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSuggestionUseCase.swift; sourceTree = "<group>"; };
 		6FB41A0B267B750B004C8FE4 /* GetTextAboutUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTextAboutUseCaseTests.swift; sourceTree = "<group>"; };
 		6FB41A0F267B8EE5004C8FE4 /* PlaySoundUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundUseCaseTests.swift; sourceTree = "<group>"; };
+		6FB41A12267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLanguageSettingsUseCaseTests.swift; sourceTree = "<group>"; };
 		6FF5FCEB264ED2E60069449F /* MockFactory+UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+UseCase.swift"; sourceTree = "<group>"; };
 		6FFB54E92629D4360063483D /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
 		6FFB54EC2629D6BD0063483D /* DefaultSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSettingsRepository.swift; sourceTree = "<group>"; };
@@ -667,6 +669,7 @@
 		6FB41A08267B73BD004C8FE4 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				6FB41A11267B9744004C8FE4 /* Settings */,
 				6FB41A0D267B8E6A004C8FE4 /* About */,
 				6FB41A0E267B8EB5004C8FE4 /* PlaySound */,
 			);
@@ -703,6 +706,14 @@
 				6FB41A0F267B8EE5004C8FE4 /* PlaySoundUseCaseTests.swift */,
 			);
 			path = PlaySound;
+			sourceTree = "<group>";
+		};
+		6FB41A11267B9744004C8FE4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				6FB41A12267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		6FFB54E42629CE640063483D /* UseCase */ = {
@@ -1087,6 +1098,7 @@
 			files = (
 				2F7DA1692388303600E91C71 /* LexinApiProviderTests.swift in Sources */,
 				2F717B7B23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift in Sources */,
+				6FB41A13267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift in Sources */,
 				2F1E1E782344E6DB007C128B /* CacheServiceTests.swift in Sources */,
 				2F3EE261229D7B7B0083CDE9 /* LexinServiceTests.swift in Sources */,
 				17C1527D23B5498800EACA94 /* WordsServiceTests.swift in Sources */,
