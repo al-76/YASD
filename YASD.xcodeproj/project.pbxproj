@@ -673,8 +673,8 @@
 		6FB41A08267B73BD004C8FE4 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				6FB41A11267B9744004C8FE4 /* Settings */,
 				6FB41A0D267B8E6A004C8FE4 /* About */,
+				6FB41A11267B9744004C8FE4 /* Settings */,
 				6FB41A0E267B8EB5004C8FE4 /* PlaySound */,
 			);
 			path = UseCase;
