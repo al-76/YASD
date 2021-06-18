@@ -11,7 +11,7 @@ import RxSwift
 
 class UpdateLanguageSettingsUseCase: UseCase {
     typealias Input = String
-    typealias Output = Void
+    typealias Output = Bool
     
     private let repository: SettingsRepository
     
@@ -19,7 +19,7 @@ class UpdateLanguageSettingsUseCase: UseCase {
         self.repository = repository
     }
     
-    func execute(with input: String) -> Observable<Void> {
-        return repository.setLanguage(input)
+    func execute(with input: String) -> Observable<Bool> {
+        return repository.setLanguage(input).map { true }
     }
 }

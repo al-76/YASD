@@ -176,8 +176,8 @@ func configureUseCase(_ container: Container) {
         AnyUseCase<String, SettingsLanguageItemResult>(wrapped: GetLanguageListSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
     }
     .inObjectScope(.container)
-    container.register(AnyUseCase<String, Void>.self, name: "UpdateLanguageSettingsUseCase") { container in
-        AnyUseCase<String, Void>(wrapped: UpdateLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
+    container.register(AnyUseCase<String, Bool>.self, name: "UpdateLanguageSettingsUseCase") { container in
+        AnyUseCase<String, Bool>(wrapped: UpdateLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
     }
     .inObjectScope(.container)
 
