@@ -24,6 +24,6 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
-## Carthage
-Carthage/Build
-Carthage/Checkouts
+# CocoaPods
+Pods
+YASDTests/GeneratedMocks.swift

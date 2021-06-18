@@ -11,10 +11,8 @@ import CoreSpotlight
 import MobileCoreServices
 import RxSwift
 
-typealias SpotlightResult = Result<Void>
-
-class Spotlight {
-    func index(data: [FormattedWord]) -> Observable<SpotlightResult> {
+class Spotlight: ExternalCacheService {
+    func index(data: [FormattedWord]) -> Observable<ExternalCacheServiceResult> {
         return Observable.create { observer in
             var items = [CSSearchableItem]()
             

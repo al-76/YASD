@@ -6,6 +6,7 @@
 //  Copyright © 2020 yac. All rights reserved.
 //
 
+@testable import YASD
 import Foundation
 
 extension FormattedWord {

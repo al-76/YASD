@@ -1,9 +1,0 @@
-github "Swinject/Swinject" == 2.6.2
-github "Swinject/SwinjectStoryboard"
-github "ReactiveX/RxSwift"
-github "RxSwiftCommunity/RxDataSources" ~> 4.0
-github "donileo/RMessage"
-github "scinfu/SwiftSoup"
-github "Brightify/Cuckoo" == 1.1.1
-github "ivanbruel/MarkdownKit"
-github "hyperoslo/Cache"
