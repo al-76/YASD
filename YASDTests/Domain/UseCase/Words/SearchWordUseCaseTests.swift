@@ -34,7 +34,7 @@ class SearchWordUseCaseTests: XCTestCase {
         let changedLanguage = PublishSubject<Language>()
         let changedBookmarks = PublishSubject<Bool>()
         let useCase = SearchWordUseCase(words: createMockDictionaryRepository(),
-                                        settings: createMockSettingsRepository(changedLanguage),
+                                        settings: MockFactory.createMockSettingsRepository(changedLanguage),
                                         bookmarks: createStorageRepository(testValue, changedBookmarks))
         let res = useCase.execute(with: ("", ActivityIndicator()))
         disposeBag.insert(
@@ -55,19 +55,10 @@ class SearchWordUseCaseTests: XCTestCase {
         ])
     }
     
-    func createMockDictionaryRepository() -> MockAnyDictionaryRepository<FoundWordResult> {
+    private func createMockDictionaryRepository() -> MockAnyDictionaryRepository<FoundWordResult> {
         let mock = MockAnyDictionaryRepository<FoundWordResult>(wrapped: MockDictionaryRepository())
         stub(mock) { stub in
             when(stub.search(any(), any())).then { _ in .just(.success([FoundWord("test")])) }
-        }
-        return mock
-    }
-    
-    func createMockSettingsRepository(_ publishSubject: PublishSubject<Language>) -> MockSettingsRepository {
-        let mock = MockSettingsRepository()
-        stub(mock) { stub in
-            when(stub.getLanguage()).then { _ in .just(Language(name: "test", code: "test")) }
-            when(stub.getLanguageBehaviour()).then { _ in publishSubject }
         }
         return mock
     }
