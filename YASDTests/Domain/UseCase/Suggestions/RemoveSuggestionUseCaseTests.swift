@@ -1,8 +1,8 @@
 //
-//  AddSuggestionUseCaseTests.swift
+//  RemoveSuggestionUseCaseTests.swift
 //  YASDTests
 //
-//  Created by Vyacheslav Konopkin on 23.06.2021.
+//  Created by Jobbare on 24.06.2021.
 //  Copyright © 2021 yac. All rights reserved.
 //
 
@@ -14,21 +14,19 @@ import RxCocoa
 import RxTest
 import Cuckoo
 
-class AddSuggestionUseCaseTests: XCTestCase {
+class RemoveSuggestionUseCaseTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
     
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testExecute() {
         // Arrange
         let testValue = "test"
-        let outputItems = scheduler.createObserver(SuggestionItemResult.self)
-        let useCase = AddSuggestionUseCase(suggestions: MockFactory.createMockDictionaryRepository(),
-                                           settings: MockFactory.createMockSettingsRepository(PublishSubject<Language>()),
-                                           history: MockFactory.createSuggestionStorageRepository(testValue))
+        let outputItems = scheduler.createObserver(StorageServiceResult.self)
+        let useCase = RemoveSuggestionUseCase(history: MockFactory.createSuggestionStorageRepository(testValue))
         let res = useCase.execute(with: "")
         disposeBag.insert(
             res.bind(to: outputItems)
@@ -39,9 +37,10 @@ class AddSuggestionUseCaseTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(outputItems.events, [
-            .next(0, .success([SuggestionItem(suggestion: testValue, removable: true)])),
+            .next(0, .success(true)),
             .completed(0)
         ])
     }
 }
+
 
