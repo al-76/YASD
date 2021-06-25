@@ -15,10 +15,6 @@ import RxTest
 import Cuckoo
 
 class GetSuggestionUseCaseTests: XCTestCase {
-    enum TestError: Error {
-        case someError
-    }
-    
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
 

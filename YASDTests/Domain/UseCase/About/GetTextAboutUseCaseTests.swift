@@ -15,10 +15,6 @@ import RxTest
 import Cuckoo
 
 class GetTextAboutUseCaseTests: XCTestCase {
-    enum TestError: Error {
-        case someError
-    }
-    
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
     

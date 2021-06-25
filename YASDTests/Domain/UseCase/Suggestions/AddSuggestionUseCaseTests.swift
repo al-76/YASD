@@ -14,11 +14,7 @@ import RxCocoa
 import RxTest
 import Cuckoo
 
-class AddSuggestionUseCaseTests: XCTestCase {
-    enum TestError: Error {
-        case someError
-    }
-    
+class AddSuggestionUseCaseTests: XCTestCase {    
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
     

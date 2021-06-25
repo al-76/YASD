@@ -13,7 +13,7 @@ import Cuckoo
 
 extension MockFactory {
     // FIXME: Cuckoo doesn't support @escaping protocols methods
-    class FakeStorageRepository : StorageRepository {
+    class SuggestionFakeStorageRepository : StorageRepository {
         typealias T = Suggestion
         
         private let testValue: T
@@ -42,7 +42,40 @@ extension MockFactory {
         }
     }
     
+    class FormattedWordStorageRepository : StorageRepository {
+        typealias T = FormattedWord
+        
+        private let testValue: T
+        
+        init(testValue: String) {
+            self.testValue = FormattedWord(testValue)
+        }
+        
+        func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>> {
+            return .just(.success([testValue]))
+        }
+        func add(_ word: T) -> Observable<StorageServiceResult> {
+            return .just(.success(true))
+        }
+        func remove(_ word: T) -> Observable<StorageServiceResult> {
+            return .just(.success(true))
+        }
+        func remove(at index: Int) -> Observable<StorageServiceResult> {
+            .just(.success(true))
+        }
+        func contains(_ word: T) -> Observable<StorageServiceResult> {
+            .just(.success(true))
+        }
+        func getChangedSubject() -> PublishSubject<Bool> {
+            return PublishSubject<Bool>()
+        }
+    }
+    
     static func createSuggestionStorageRepository(_ value: String) -> AnyStorageRepository<Suggestion> {
-        return AnyStorageRepository<Suggestion>(wrapped: FakeStorageRepository(testValue: value))
+        return AnyStorageRepository<Suggestion>(wrapped: SuggestionFakeStorageRepository(testValue: value))
+    }
+    
+    static func createFormattedWordStorageRepository(_ value: String) -> AnyStorageRepository<FormattedWord> {
+        return AnyStorageRepository<FormattedWord>(wrapped: FormattedWordStorageRepository(testValue: value))
     }
 }
