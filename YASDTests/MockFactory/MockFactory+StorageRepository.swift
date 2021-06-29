@@ -13,7 +13,7 @@ import Cuckoo
 
 extension MockFactory {
     // FIXME: Cuckoo doesn't support @escaping protocols methods
-    class SuggestionFakeStorageRepository : StorageRepository {
+    private class SuggestionFakeStorageRepository : StorageRepository {
         typealias T = Suggestion
         
         private let testValue: T
@@ -42,7 +42,7 @@ extension MockFactory {
         }
     }
     
-    class FormattedWordStorageRepository : StorageRepository {
+    private class FormattedWordStorageRepository : StorageRepository {
         typealias T = FormattedWord
         
         private let testValue: T

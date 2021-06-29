@@ -22,7 +22,7 @@ class RestoreBookmarksUseCaseTests: XCTestCase {
         // Arrange
         let testValue = "test"
         let outputResult = scheduler.createObserver(String.self)
-        let useCase = RestoreBookmarkUseCase(cache: createMockExternalCacheService(testValue))
+        let useCase = RestoreBookmarkUseCase(cache: MockFactory.createMockExternalCacheService(testValue))
         let res = useCase.execute(with: "")
         res.bind(to: outputResult)
             .disposed(by: disposeBag)
@@ -35,15 +35,5 @@ class RestoreBookmarksUseCaseTests: XCTestCase {
             .next(0, testValue),
             .completed(0)
         ])
-    }
-    
-    private func createMockExternalCacheService(_ testValue: String) -> MockExternalCacheService {
-        let mock = MockExternalCacheService()
-        stub(mock) { stub in
-            when(stub.getTitle(from: any())).then { _ in
-                return testValue
-            }
-        }
-        return mock
     }
 }
