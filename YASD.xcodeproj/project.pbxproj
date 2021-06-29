@@ -85,6 +85,7 @@
 		2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62CBC229444BE00B4946C /* ViewModel.swift */; };
 		2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */; };
 		6F08F5C1268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08F5C0268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift */; };
+		6F08F5C3268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08F5C2268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift */; };
 		6F171E322643FB9D00C37B28 /* AboutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F171E312643FB9D00C37B28 /* AboutViewModelTests.swift */; };
 		6F171E5626455E2000C37B28 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F171E5526455E2000C37B28 /* GeneratedMocks.swift */; };
 		6F86CCB82632CCD0003552BB /* GetLanguageSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCB72632CCD0003552BB /* GetLanguageSettingsUseCase.swift */; };
@@ -260,6 +261,7 @@
 		37DD0D8F71AA8C26A7A33EBE /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
 		6A894120B1CC0FF86AB919BD /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
 		6F08F5C0268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBookmarkByIndexUseCaseTests.swift; sourceTree = "<group>"; };
+		6F08F5C2268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBookmarkUseCaseTests.swift; sourceTree = "<group>"; };
 		6F171E312643FB9D00C37B28 /* AboutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModelTests.swift; sourceTree = "<group>"; };
 		6F171E332643FF4000C37B28 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6F171E5526455E2000C37B28 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
@@ -696,6 +698,7 @@
 				6FAABDD32685F8BD009F6931 /* SearchBookmarksUseCaseTests.swift */,
 				CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */,
 				6F08F5C0268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift */,
+				6F08F5C2268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift */,
 			);
 			path = Bookmarks;
 			sourceTree = "<group>";
@@ -1168,6 +1171,7 @@
 				17EB2815246DCEC700EE8B1D /* MockFactory+PlayerService.swift in Sources */,
 				6FF5FCEC264ED2E60069449F /* MockFactory+UseCase.swift in Sources */,
 				6FB41A0C267B750B004C8FE4 /* GetTextAboutUseCaseTests.swift in Sources */,
+				6F08F5C3268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift in Sources */,
 				2F7DA16D238C040900E91C71 /* NetworkServiceTests.swift in Sources */,
 				17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */,
 				2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */,
