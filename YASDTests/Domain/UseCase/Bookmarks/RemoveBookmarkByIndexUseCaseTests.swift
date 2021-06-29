@@ -21,7 +21,7 @@ class RemoveBookmarkByIndexUseCaseTests: XCTestCase {
     func testExecute() {
         // Arrange
         let outputItems = scheduler.createObserver(StorageServiceResult.self)
-        let useCase = RemoveBookmarkByIndexUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository("test"))
+        let useCase = RemoveBookmarkByIndexUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository("test", PublishSubject<Bool>()))
         let res = useCase.execute(with: 0)
         disposeBag.insert(
             res.bind(to: outputItems)

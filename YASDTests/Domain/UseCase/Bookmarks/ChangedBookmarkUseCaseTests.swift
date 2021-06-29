@@ -22,10 +22,15 @@ class ChangedBookmarkUseCaseTests: XCTestCase {
         // Arrange
         let testValue = "test"
         let outputItems = scheduler.createObserver(Bookmarks.self)
-        let useCase = ChangedBookmarkUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository(testValue),
+        let inputChangedBookmarks = scheduler.createHotObservable([
+            .next(160, true)
+        ])
+        let changedBookmarks = PublishSubject<Bool>()
+        let useCase = ChangedBookmarkUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository(testValue, changedBookmarks),
                                              cache: MockFactory.createMockExternalCacheService("test"))
         let res = useCase.execute(with: ())
         disposeBag.insert(
+            inputChangedBookmarks.bind(to: changedBookmarks),
             res.bind(to: outputItems)
         )
         
@@ -34,8 +39,7 @@ class ChangedBookmarkUseCaseTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(outputItems.events, [
-            .next(0, .success([FormattedWord(testValue)])),
-            .completed(0)
+            .next(160, .success([FormattedWord(testValue)]))
         ])
     }
 }

@@ -18,6 +18,7 @@ extension MockFactory {
             when(stub.getTitle(from: any())).then { _ in
                 return testValue
             }
+            when(stub.index(data: any())).thenReturn(.just(.success(())))
         }
         return mock
     }

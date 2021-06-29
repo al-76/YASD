@@ -22,7 +22,7 @@ class SearchBookmarksUseCaseTests: XCTestCase {
         // Arrange
         let testValue = "test"
         let outputItems = scheduler.createObserver(Bookmarks.self)
-        let useCase = SearchBookmarkUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository(testValue))
+        let useCase = SearchBookmarkUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository(testValue, PublishSubject<Bool>()))
         let res = useCase.execute(with: "")
         disposeBag.insert(
             res.bind(to: outputItems)

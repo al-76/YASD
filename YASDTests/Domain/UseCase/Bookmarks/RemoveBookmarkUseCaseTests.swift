@@ -21,7 +21,7 @@ class RemoveBookmarkUseCaseTests: XCTestCase {
     func testExecute() {
         // Arrange
         let outputItems = scheduler.createObserver(StorageServiceResult.self)
-        let useCase = RemoveBookmarkUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository("test"))
+        let useCase = RemoveBookmarkUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository("test", PublishSubject<Bool>()))
         let res = useCase.execute(with: FormattedWord("test"))
         disposeBag.insert(
             res.bind(to: outputItems)

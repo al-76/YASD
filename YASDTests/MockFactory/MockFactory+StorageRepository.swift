@@ -46,9 +46,11 @@ extension MockFactory {
         typealias T = FormattedWord
         
         private let testValue: T
+        private let publishSubject: PublishSubject<Bool>
         
-        init(testValue: String) {
+        init(testValue: String, publishSubject: PublishSubject<Bool>) {
             self.testValue = FormattedWord(testValue)
+            self.publishSubject = publishSubject
         }
         
         func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>> {
@@ -67,7 +69,7 @@ extension MockFactory {
             .just(.success(true))
         }
         func getChangedSubject() -> PublishSubject<Bool> {
-            return PublishSubject<Bool>()
+            return publishSubject
         }
     }
     
@@ -75,7 +77,7 @@ extension MockFactory {
         return AnyStorageRepository<Suggestion>(wrapped: SuggestionFakeStorageRepository(testValue: value))
     }
     
-    static func createFormattedWordStorageRepository(_ value: String) -> AnyStorageRepository<FormattedWord> {
-        return AnyStorageRepository<FormattedWord>(wrapped: FormattedWordStorageRepository(testValue: value))
+    static func createFormattedWordStorageRepository(_ value: String, _ publishSubject: PublishSubject<Bool>) -> AnyStorageRepository<FormattedWord> {
+        return AnyStorageRepository<FormattedWord>(wrapped: FormattedWordStorageRepository(testValue: value, publishSubject: publishSubject))
     }
 }
