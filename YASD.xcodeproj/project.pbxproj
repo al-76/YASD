@@ -18,19 +18,15 @@
 		17B6F9EF2487FC1200221DC0 /* PlayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */; };
 		17B9B244240A84AA007FDC47 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 17B9B242240A84AA007FDC47 /* Localizable.strings */; };
 		17C1527A23B53B4600EACA94 /* LexinWordMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527923B53B4600EACA94 /* LexinWordMapper.swift */; };
-		17C1527D23B5498800EACA94 /* WordsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527C23B5498800EACA94 /* WordsServiceTests.swift */; };
 		17C1528023BF91A800EACA94 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */; };
 		17EB2813246DCCB000EE8B1D /* BookmarksViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2812246DCCB000EE8B1D /* BookmarksViewModelTests.swift */; };
-		17EB2815246DCEC700EE8B1D /* MockFactory+PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2814246DCEC700EE8B1D /* MockFactory+PlayerService.swift */; };
 		17EB2818246DD2A700EE8B1D /* MockFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2817246DD2A700EE8B1D /* MockFactory.swift */; };
 		17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */; };
 		17F940052350F0AD00FBFD54 /* Swinject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */; };
 		17FC6BA0237FEF7E00279589 /* LexinApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */; };
-		17FC6BA523870ED900279589 /* LexinApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6BA423870ED900279589 /* LexinApiTests.swift */; };
 		240EA43C384B74CADEA84CC6 /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DA3535CF1C3F64FD15F29DC /* Pods_YASD.framework */; };
 		2F0D2B26237EA57B00F23F3B /* LexinApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D2B25237EA57B00F23F3B /* LexinApi.swift */; };
 		2F18E2E323437097003F91FD /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
-		2F1E1E782344E6DB007C128B /* CacheServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */; };
 		2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
 		2F2980C723B2660F004F7FA9 /* BookmarksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2980C623B2660F004F7FA9 /* BookmarksTableViewCell.swift */; };
 		2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2980C823B3866C004F7FA9 /* FoundWord.swift */; };
@@ -39,9 +35,7 @@
 		2F31739D22CCF84A008944EE /* SettingsLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F31739C22CCF84A008944EE /* SettingsLanguageViewModel.swift */; };
 		2F31739F22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F31739E22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift */; };
 		2F3401D523912149005FBD39 /* StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3401D423912149005FBD39 /* StorageRepository.swift */; };
-		2F393ACC233E118100F315FC /* PlayerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F393ACB233E118100F315FC /* PlayerManagerTests.swift */; };
 		2F393ACE233E255500F315FC /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F393ACD233E255500F315FC /* DataCache.swift */; };
-		2F3EE261229D7B7B0083CDE9 /* LexinServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3EE260229D7B7B0083CDE9 /* LexinServiceTests.swift */; };
 		2F5F8BBF2322A7DA00EF6A85 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5F8BBE2322A7DA00EF6A85 /* Player.swift */; };
 		2F661B362272E16300C68A5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F661B352272E16300C68A5F /* AppDelegate.swift */; };
 		2F661B382272E16300C68A5F /* WordsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F661B372272E16300C68A5F /* WordsTableViewController.swift */; };
@@ -52,18 +46,12 @@
 		2F69AD0722F81775001942E6 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F69AD0622F81775001942E6 /* SettingsViewModelTests.swift */; };
 		2F69AD0922F838C5001942E6 /* SettingsLanguageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F69AD0822F838C5001942E6 /* SettingsLanguageViewModelTests.swift */; };
 		2F70647823B503570095DE9C /* FoundWord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70647723B503570095DE9C /* FoundWord+Extensions.swift */; };
-		2F717B7B23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F717B7A23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift */; };
-		2F717B7D23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F717B7C23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift */; };
 		2F7321872313E4A000CC0822 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7321862313E4A000CC0822 /* Storage.swift */; };
-		2F7DA16723882CB400E91C71 /* LexinParserSuggestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7DA16623882CB400E91C71 /* LexinParserSuggestionTests.swift */; };
-		2F7DA1692388303600E91C71 /* LexinApiProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7DA1682388303600E91C71 /* LexinApiProviderTests.swift */; };
 		2F7DA16B2388395700E91C71 /* WordsSuggestionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7DA16A2388395700E91C71 /* WordsSuggestionViewModelTests.swift */; };
-		2F7DA16D238C040900E91C71 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7DA16C238C040900E91C71 /* NetworkServiceTests.swift */; };
 		2F876F1D23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F876F1C23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift */; };
 		2F90DD3D2355FA2300CE8560 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
 		2F90DD402355FC1B00CE8560 /* LexinParserSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */; };
 		2FBCB84823A2949F0080238A /* SearchResultsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBCB84723A2949F0080238A /* SearchResultsTableView.swift */; };
-		2FC07D0423AA605E00D4D328 /* HistoryServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC07D0323AA605E00D4D328 /* HistoryServiceTests.swift */; };
 		2FCB2DE122A111540053B758 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB2DE022A111540053B758 /* Network.swift */; };
 		2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6400238EA5C400948A52 /* FormattedWord.swift */; };
 		2FDB6404238EA7B700948A52 /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6403238EA7B700948A52 /* Suggestion.swift */; };
@@ -77,13 +65,11 @@
 		2FDD05A423B10D0D0018F223 /* Bookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD05A323B10D0D0018F223 /* Bookmarks.swift */; };
 		2FDD05A723B2588C0018F223 /* BookmarksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDD05A623B2588C0018F223 /* BookmarksTableViewController.swift */; };
 		2FDEFF5F2295494200A82F43 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDEFF5E2295494200A82F43 /* Result.swift */; };
-		2FE7682022BCC30E00375292 /* LexinServiceFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7681F22BCC30E00375292 /* LexinServiceFormatterTests.swift */; };
 		2FE7682222BCEEBA00375292 /* LexinWord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE7682122BCEEBA00375292 /* LexinWord+Extensions.swift */; };
 		2FF62C7F2289B4AA00B4946C /* WordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C7E2289B4AA00B4946C /* WordsTableViewCell.swift */; };
 		2FF62C81228AA89400B4946C /* WordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C80228AA89400B4946C /* WordsViewModel.swift */; };
 		2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C89228D61AF00B4946C /* WordsViewModelTests.swift */; };
 		2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62CBC229444BE00B4946C /* ViewModel.swift */; };
-		2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */; };
 		6F08F5C1268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08F5C0268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift */; };
 		6F08F5C3268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08F5C2268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift */; };
 		6F08F5C5268B2817005D18D7 /* ChangedBookmarkUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08F5C4268B2817005D18D7 /* ChangedBookmarkUseCaseTests.swift */; };
@@ -177,18 +163,14 @@
 		17B9B243240A84AA007FDC47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = YASD/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B9B245240A84B0007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = YASD/sv.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17C1527923B53B4600EACA94 /* LexinWordMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinWordMapper.swift; sourceTree = "<group>"; };
-		17C1527C23B5498800EACA94 /* WordsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsServiceTests.swift; sourceTree = "<group>"; };
 		17C1527F23BF91A700EACA94 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		17EB2812246DCCB000EE8B1D /* BookmarksViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewModelTests.swift; sourceTree = "<group>"; };
-		17EB2814246DCEC700EE8B1D /* MockFactory+PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+PlayerService.swift"; sourceTree = "<group>"; };
 		17EB2817246DD2A700EE8B1D /* MockFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFactory.swift; sourceTree = "<group>"; };
 		17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormattedWord+Extensions.swift"; sourceTree = "<group>"; };
 		17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swinject+Extensions.swift"; sourceTree = "<group>"; };
 		17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiProvider.swift; sourceTree = "<group>"; };
-		17FC6BA423870ED900279589 /* LexinApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiTests.swift; sourceTree = "<group>"; };
 		2F0D2B25237EA57B00F23F3B /* LexinApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApi.swift; sourceTree = "<group>"; };
 		2F18E2E223437097003F91FD /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
-		2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceTests.swift; sourceTree = "<group>"; };
 		2F1E1E7D23463434007C128B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2F2980C623B2660F004F7FA9 /* BookmarksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewCell.swift; sourceTree = "<group>"; };
 		2F2980C823B3866C004F7FA9 /* FoundWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWord.swift; sourceTree = "<group>"; };
@@ -198,12 +180,10 @@
 		2F31739E22CE3DB8008944EE /* SettingsLanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageTableViewCell.swift; sourceTree = "<group>"; };
 		2F3401D423912149005FBD39 /* StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageRepository.swift; sourceTree = "<group>"; };
 		2F36F4562342544D00B88649 /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/iOS/Cache.framework; sourceTree = "<group>"; };
-		2F393ACB233E118100F315FC /* PlayerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerManagerTests.swift; sourceTree = "<group>"; };
 		2F393ACD233E255500F315FC /* DataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCache.swift; sourceTree = "<group>"; };
 		2F3C080B234245470091CD97 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
 		2F3EE258229D2EAC0083CDE9 /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
 		2F3EE259229D2EAC0083CDE9 /* SwinjectStoryboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwinjectStoryboard.framework; path = Carthage/Build/iOS/SwinjectStoryboard.framework; sourceTree = "<group>"; };
-		2F3EE260229D7B7B0083CDE9 /* LexinServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceTests.swift; sourceTree = "<group>"; };
 		2F5F8BBE2322A7DA00EF6A85 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		2F661B322272E16300C68A5F /* YASD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YASD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F661B352272E16300C68A5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -218,13 +198,8 @@
 		2F69AD0622F81775001942E6 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		2F69AD0822F838C5001942E6 /* SettingsLanguageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageViewModelTests.swift; sourceTree = "<group>"; };
 		2F70647723B503570095DE9C /* FoundWord+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoundWord+Extensions.swift"; sourceTree = "<group>"; };
-		2F717B7A23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsLanguageItem+Extensions.swift"; sourceTree = "<group>"; };
-		2F717B7C23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageServiceTests.swift; sourceTree = "<group>"; };
 		2F7321862313E4A000CC0822 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		2F7DA16623882CB400E91C71 /* LexinParserSuggestionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserSuggestionTests.swift; sourceTree = "<group>"; };
-		2F7DA1682388303600E91C71 /* LexinApiProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiProviderTests.swift; sourceTree = "<group>"; };
 		2F7DA16A2388395700E91C71 /* WordsSuggestionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSuggestionViewModelTests.swift; sourceTree = "<group>"; };
-		2F7DA16C238C040900E91C71 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
 		2F876F1C23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionItem+Extensions.swift"; sourceTree = "<group>"; };
 		2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserWords.swift; sourceTree = "<group>"; };
 		2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserSuggestion.swift; sourceTree = "<group>"; };
@@ -234,7 +209,6 @@
 		2F97576F2277474200B343B4 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		2F9757702277474200B343B4 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		2FBCB84723A2949F0080238A /* SearchResultsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableView.swift; sourceTree = "<group>"; };
-		2FC07D0323AA605E00D4D328 /* HistoryServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryServiceTests.swift; sourceTree = "<group>"; };
 		2FCB2DDE22A005180053B758 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		2FCB2DE022A111540053B758 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2FDB6400238EA5C400948A52 /* FormattedWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedWord.swift; sourceTree = "<group>"; };
@@ -251,7 +225,6 @@
 		2FDD05A323B10D0D0018F223 /* Bookmarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmarks.swift; sourceTree = "<group>"; };
 		2FDD05A623B2588C0018F223 /* BookmarksTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewController.swift; sourceTree = "<group>"; };
 		2FDEFF5E2295494200A82F43 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		2FE7681F22BCC30E00375292 /* LexinServiceFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinServiceFormatterTests.swift; sourceTree = "<group>"; };
 		2FE7682122BCEEBA00375292 /* LexinWord+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LexinWord+Extensions.swift"; sourceTree = "<group>"; };
 		2FF62C7E2289B4AA00B4946C /* WordsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewCell.swift; sourceTree = "<group>"; };
 		2FF62C80228AA89400B4946C /* WordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsViewModel.swift; sourceTree = "<group>"; };
@@ -259,7 +232,6 @@
 		2FF62C8B228D6C0F00B4946C /* Cuckoo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cuckoo.framework; path = Carthage/Build/iOS/Cuckoo.framework; sourceTree = "<group>"; };
 		2FF62C91228DAAB400B4946C /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		2FF62CBC229444BE00B4946C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserWordsTests.swift; sourceTree = "<group>"; };
 		2FFF024622B2870800C1DC61 /* MarkdownKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarkdownKit.framework; path = Carthage/Build/iOS/MarkdownKit.framework; sourceTree = "<group>"; };
 		37DD0D8F71AA8C26A7A33EBE /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
 		6A894120B1CC0FF86AB919BD /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
@@ -351,16 +323,6 @@
 			path = Mapper;
 			sourceTree = "<group>";
 		};
-		176CC4EC2486AF180018444C /* Lexin */ = {
-			isa = PBXGroup;
-			children = (
-				2F7DA1612382DDBB00E91C71 /* LexinParser */,
-				2F1E1E7C23462D87007C128B /* LexinService */,
-				17FC6BA623870EE000279589 /* LexinApi */,
-			);
-			path = Lexin;
-			sourceTree = "<group>";
-		};
 		17A9BC7322B5271D002F769B /* Platform */ = {
 			isa = PBXGroup;
 			children = (
@@ -397,7 +359,6 @@
 			children = (
 				17EB2817246DD2A700EE8B1D /* MockFactory.swift */,
 				6FF5FCEB264ED2E60069449F /* MockFactory+UseCase.swift */,
-				17EB2814246DCEC700EE8B1D /* MockFactory+PlayerService.swift */,
 				6FAAD8B926837CF800D6E1FE /* MockFactory+SettingsRepository.swift */,
 				6FFF3B402684C6540023EF94 /* MockFactory+StorageRepository.swift */,
 				6FFF3B422684C9090023EF94 /* MockFactory+DictionaryRepository.swift */,
@@ -413,15 +374,6 @@
 				2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */,
 			);
 			path = LexinParser;
-			sourceTree = "<group>";
-		};
-		17FC6BA623870EE000279589 /* LexinApi */ = {
-			isa = PBXGroup;
-			children = (
-				17FC6BA423870ED900279589 /* LexinApiTests.swift */,
-				2F7DA1682388303600E91C71 /* LexinApiProviderTests.swift */,
-			);
-			path = LexinApi;
 			sourceTree = "<group>";
 		};
 		2F0D2B21237E9B9E00F23F3B /* LexinApi */ = {
@@ -441,15 +393,6 @@
 			path = LexinService;
 			sourceTree = "<group>";
 		};
-		2F1E1E7C23462D87007C128B /* LexinService */ = {
-			isa = PBXGroup;
-			children = (
-				2F3EE260229D7B7B0083CDE9 /* LexinServiceTests.swift */,
-				2FE7681F22BCC30E00375292 /* LexinServiceFormatterTests.swift */,
-			);
-			path = LexinService;
-			sourceTree = "<group>";
-		};
 		2F3EE2542297EC730083CDE9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,20 +404,6 @@
 				6F171E312643FB9D00C37B28 /* AboutViewModelTests.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		2F3EE25F229D7ADE0083CDE9 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				176CC4EC2486AF180018444C /* Lexin */,
-				2F393ACB233E118100F315FC /* PlayerManagerTests.swift */,
-				2F1E1E772344E6DB007C128B /* CacheServiceTests.swift */,
-				2F7DA16C238C040900E91C71 /* NetworkServiceTests.swift */,
-				2FC07D0323AA605E00D4D328 /* HistoryServiceTests.swift */,
-				17C1527C23B5498800EACA94 /* WordsServiceTests.swift */,
-				2F717B7C23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift */,
-			);
-			path = Service;
 			sourceTree = "<group>";
 		};
 		2F661B292272E16300C68A5F = {
@@ -523,24 +452,13 @@
 				6FB41A09267B7457004C8FE4 /* UI */,
 				6F171E5526455E2000C37B28 /* GeneratedMocks.swift */,
 				17EB2816246DCECC00EE8B1D /* MockFactory */,
-				2F3EE25F229D7ADE0083CDE9 /* Service */,
 				2FE7682122BCEEBA00375292 /* LexinWord+Extensions.swift */,
 				2F876F1C23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift */,
 				2F70647723B503570095DE9C /* FoundWord+Extensions.swift */,
 				17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */,
-				2F717B7A23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift */,
 				2F661B4E2272E16400C68A5F /* Info.plist */,
 			);
 			path = YASDTests;
-			sourceTree = "<group>";
-		};
-		2F7DA1612382DDBB00E91C71 /* LexinParser */ = {
-			isa = PBXGroup;
-			children = (
-				2FFA8D30230E82DE006A0368 /* LexinParserWordsTests.swift */,
-				2F7DA16623882CB400E91C71 /* LexinParserSuggestionTests.swift */,
-			);
-			path = LexinParser;
 			sourceTree = "<group>";
 		};
 		2F7DA16423857DCD00E91C71 /* Data */ = {
@@ -1165,26 +1083,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F7DA1692388303600E91C71 /* LexinApiProviderTests.swift in Sources */,
-				2F717B7B23B6453F00ED2EA8 /* SettingsLanguageItem+Extensions.swift in Sources */,
 				6FB41A13267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift in Sources */,
-				2F1E1E782344E6DB007C128B /* CacheServiceTests.swift in Sources */,
-				2F3EE261229D7B7B0083CDE9 /* LexinServiceTests.swift in Sources */,
-				17C1527D23B5498800EACA94 /* WordsServiceTests.swift in Sources */,
 				6FB41A10267B8EE5004C8FE4 /* PlaySoundUseCaseTests.swift in Sources */,
 				2F7DA16B2388395700E91C71 /* WordsSuggestionViewModelTests.swift in Sources */,
-				2FC07D0423AA605E00D4D328 /* HistoryServiceTests.swift in Sources */,
 				17EB2818246DD2A700EE8B1D /* MockFactory.swift in Sources */,
 				6F171E322643FB9D00C37B28 /* AboutViewModelTests.swift in Sources */,
 				6FB41A18267CAD1D004C8FE4 /* UpdateLanguageSettingsUseCaseTests.swift in Sources */,
 				6F08F5C7268B2919005D18D7 /* MockFactory+ExternalCacheService.swift in Sources */,
-				17EB2815246DCEC700EE8B1D /* MockFactory+PlayerService.swift in Sources */,
 				6FF5FCEC264ED2E60069449F /* MockFactory+UseCase.swift in Sources */,
 				6FB41A0C267B750B004C8FE4 /* GetTextAboutUseCaseTests.swift in Sources */,
 				6F08F5C3268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift in Sources */,
-				2F7DA16D238C040900E91C71 /* NetworkServiceTests.swift in Sources */,
 				17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */,
-				2FFA8D31230E82DE006A0368 /* LexinParserWordsTests.swift in Sources */,
 				6FFF3B412684C6540023EF94 /* MockFactory+StorageRepository.swift in Sources */,
 				6FFF3B452684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift in Sources */,
 				6FB41A15267B9D67004C8FE4 /* GetLanguageListSettingsUseCaseTests.swift in Sources */,
@@ -1195,20 +1104,15 @@
 				2F69AD0922F838C5001942E6 /* SettingsLanguageViewModelTests.swift in Sources */,
 				6F08F5C1268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift in Sources */,
 				2F876F1D23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift in Sources */,
-				2F7DA16723882CB400E91C71 /* LexinParserSuggestionTests.swift in Sources */,
 				17EB2813246DCCB000EE8B1D /* BookmarksViewModelTests.swift in Sources */,
 				2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */,
 				6FAABDD42685F8BD009F6931 /* SearchBookmarksUseCaseTests.swift in Sources */,
-				2FE7682022BCC30E00375292 /* LexinServiceFormatterTests.swift in Sources */,
-				2F717B7D23B6475B00ED2EA8 /* SettingsLanguageServiceTests.swift in Sources */,
 				6FAAD8BA26837CF800D6E1FE /* MockFactory+SettingsRepository.swift in Sources */,
 				6FFF3B3F2684AD3A0023EF94 /* GetSuggestionUseCaseTests.swift in Sources */,
 				6FFF3B432684C9090023EF94 /* MockFactory+DictionaryRepository.swift in Sources */,
 				6F08F5C9268B3A4D005D18D7 /* AddBookmarkUseCaseTests.swift in Sources */,
 				6FAAD8B82683729600D6E1FE /* AddSuggestionUseCaseTests.swift in Sources */,
-				2F393ACC233E118100F315FC /* PlayerManagerTests.swift in Sources */,
 				CD50CDF926862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift in Sources */,
-				17FC6BA523870ED900279589 /* LexinApiTests.swift in Sources */,
 				2F69AD0722F81775001942E6 /* SettingsViewModelTests.swift in Sources */,
 				2F70647823B503570095DE9C /* FoundWord+Extensions.swift in Sources */,
 			);
