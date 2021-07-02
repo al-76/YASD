@@ -54,7 +54,6 @@ class BookmarksViewModel: ViewModel {
                 .asDriver { .just(.failure($0)) }
         }
         let changed = changedBookmark.execute(with: ())
-            .distinct()
             .asDriver { .just(.failure($0)) }
         let removed = input.removeBookmark.filter { $0 >= 0 }.flatMap { [weak self] index -> Driver<StorageServiceResult> in
             guard let self = self else { return .just(.success(false)) }

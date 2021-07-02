@@ -9,7 +9,6 @@ target 'YASD' do
   pod 'Swinject', '2.6'
   pod 'SwinjectStoryboard'
   pod 'RxSwift'
-  pod 'RxSwiftExt'
   pod 'RxDataSources'
   pod 'RMessage'
   pod 'SwiftSoup'

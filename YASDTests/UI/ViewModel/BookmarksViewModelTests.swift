@@ -152,7 +152,9 @@ class BookmarksViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(outputBookmarks.events, [
-            .next(0, .success(testData))
+            .next(0, .success(testData)),
+            .next(150, .success(testData)),
+            .next(200, .success(testData))
         ])
     }
     
