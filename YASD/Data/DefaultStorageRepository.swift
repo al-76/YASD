@@ -40,7 +40,7 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
         return Observable.create { [weak self] observer in
             do {
                 if self?.data.firstIndex(where: { $0 == word }) == nil { // yes yes, I know about ordered set
-                    self?.data.insert(word, at: 0)
+                    self?.data.append(word)
                     try self?.saveData()
                 }
                 observer.onNext(.success(true))

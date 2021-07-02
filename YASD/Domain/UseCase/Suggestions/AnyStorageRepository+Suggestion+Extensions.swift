@@ -16,7 +16,7 @@ extension AnyStorageRepository where T == Suggestion {
                                         get(where: { $0?.starts(with: word) ?? false }),
                                         resultSelector: { suggestion, history in
                                             let filtered = suggestion.filter(history).toItem(removable: false)
-                                            let merged = filtered.merge(history.toItem(removable: true))
+                                            let merged = filtered.merge(history.reversed().toItem(removable: true))
                                             return merged
         })
     }

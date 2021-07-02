@@ -17,4 +17,13 @@ extension SuggestionResult {
             return SuggestionItemResult.failure(error)
         }
     }
+    
+    func reversed() -> SuggestionResult {
+        switch(self) {
+        case let .success(result):
+            return .success(result.reversed())
+        default:
+            return self
+        }
+    }
 }
