@@ -23,7 +23,13 @@ class WordsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        if #available(iOS 13, *) {
+            // nothing
+        } else {
+            // XXX: there's weird bug with assets - bookmark loads as bookmark.fill
+            buttonBookmark.setImage(UIImage(named: "fill_bookmark"), for: UIControl.State.selected)
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
