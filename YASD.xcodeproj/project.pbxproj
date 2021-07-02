@@ -24,9 +24,8 @@
 		17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */; };
 		17F940052350F0AD00FBFD54 /* Swinject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */; };
 		17FC6BA0237FEF7E00279589 /* LexinApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */; };
-		240EA43C384B74CADEA84CC6 /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DA3535CF1C3F64FD15F29DC /* Pods_YASD.framework */; };
 		2F0D2B26237EA57B00F23F3B /* LexinApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D2B25237EA57B00F23F3B /* LexinApi.swift */; };
-		2F18E2E323437097003F91FD /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* CacheService.swift */; };
+		2F18E2E323437097003F91FD /* DefaultCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* DefaultCacheService.swift */; };
 		2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
 		2F2980C723B2660F004F7FA9 /* BookmarksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2980C623B2660F004F7FA9 /* BookmarksTableViewCell.swift */; };
 		2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2980C823B3866C004F7FA9 /* FoundWord.swift */; };
@@ -91,6 +90,7 @@
 		6FAABDD42685F8BD009F6931 /* SearchBookmarksUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAABDD32685F8BD009F6931 /* SearchBookmarksUseCaseTests.swift */; };
 		6FAAD8B82683729600D6E1FE /* AddSuggestionUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAD8B72683729600D6E1FE /* AddSuggestionUseCaseTests.swift */; };
 		6FAAD8BA26837CF800D6E1FE /* MockFactory+SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAD8B926837CF800D6E1FE /* MockFactory+SettingsRepository.swift */; };
+		6FB2832A268F446600E6187D /* MockFactory+CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB28329268F446600E6187D /* MockFactory+CacheService.swift */; };
 		6FB41A0C267B750B004C8FE4 /* GetTextAboutUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB41A0B267B750B004C8FE4 /* GetTextAboutUseCaseTests.swift */; };
 		6FB41A10267B8EE5004C8FE4 /* PlaySoundUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB41A0F267B8EE5004C8FE4 /* PlaySoundUseCaseTests.swift */; };
 		6FB41A13267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB41A12267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift */; };
@@ -100,11 +100,19 @@
 		6FF5FCEC264ED2E60069449F /* MockFactory+UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5FCEB264ED2E60069449F /* MockFactory+UseCase.swift */; };
 		6FFB54EA2629D4360063483D /* SettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB54E92629D4360063483D /* SettingsRepository.swift */; };
 		6FFB54ED2629D6BD0063483D /* DefaultSettingsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFB54EC2629D6BD0063483D /* DefaultSettingsRepository.swift */; };
+		6FFDBE27268D100200D6BF69 /* GetHistorySizeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDBE26268D100200D6BF69 /* GetHistorySizeUseCase.swift */; };
+		6FFDBE29268D101500D6BF69 /* GetCacheSizeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDBE28268D101500D6BF69 /* GetCacheSizeUseCase.swift */; };
+		6FFDBE2B268D102900D6BF69 /* ClearHistoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDBE2A268D102900D6BF69 /* ClearHistoryUseCase.swift */; };
+		6FFDBE2D268D103A00D6BF69 /* ClearCacheUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDBE2C268D103A00D6BF69 /* ClearCacheUseCase.swift */; };
+		6FFDBE31268DC6C000D6BF69 /* GetHistorySizeUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDBE30268DC6C000D6BF69 /* GetHistorySizeUseCaseTests.swift */; };
+		6FFDBE33268DC75200D6BF69 /* GetCacheSizeUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDBE32268DC75200D6BF69 /* GetCacheSizeUseCaseTests.swift */; };
+		6FFDBE35268DC78B00D6BF69 /* ClearHistoryUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDBE34268DC78B00D6BF69 /* ClearHistoryUseCaseTests.swift */; };
+		6FFDBE37268DC96000D6BF69 /* ClearCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDBE36268DC96000D6BF69 /* ClearCacheUseCaseTests.swift */; };
+		6FFDBE3A268E0D9400D6BF69 /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFDBE39268E0D9400D6BF69 /* CacheService.swift */; };
 		6FFF3B3F2684AD3A0023EF94 /* GetSuggestionUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B3E2684AD3A0023EF94 /* GetSuggestionUseCaseTests.swift */; };
 		6FFF3B412684C6540023EF94 /* MockFactory+StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B402684C6540023EF94 /* MockFactory+StorageRepository.swift */; };
 		6FFF3B432684C9090023EF94 /* MockFactory+DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B422684C9090023EF94 /* MockFactory+DictionaryRepository.swift */; };
 		6FFF3B452684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B442684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift */; };
-		BCEEF50043E112312EBC7C1D /* Pods_YASDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E7B2AC211BFAEF13ABA5C8 /* Pods_YASDTests.framework */; };
 		CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
 		CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
 		CD50CDF926862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */; };
@@ -122,8 +130,10 @@
 		CDF9597F25E139280059A1EB /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9597E25E139280059A1EB /* DictionaryRepository.swift */; };
 		CDF9598325E150210059A1EB /* SuggestionDictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */; };
 		CDF9598625E1503E0059A1EB /* WordsDictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9598525E1503E0059A1EB /* WordsDictionaryRepository.swift */; };
+		DFEEE35E29F5ECCF09B852A1 /* Pods_YASDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0C0FDF77DEF814DE8D952E /* Pods_YASDTests.framework */; };
 		F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */; };
 		F6ED48B5255025A200E60E1B /* DefaultStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */; };
+		FE31AE10EDC86D6C240D41DF /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5478ABEF2BF7C7432297DEA /* Pods_YASD.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,7 +168,6 @@
 		17A9BC7422B5273B002F769B /* HtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlParser.swift; sourceTree = "<group>"; };
 		17A9BC7622B5284F002F769B /* Markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Markdown.swift; sourceTree = "<group>"; };
 		17B6F9EE2487FC1200221DC0 /* PlayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerManager.swift; sourceTree = "<group>"; };
-		17B9B23C240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
 		17B9B23D240A789D007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		17B9B243240A84AA007FDC47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = YASD/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		17B9B245240A84B0007FDC47 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = YASD/sv.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -169,8 +178,9 @@
 		17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormattedWord+Extensions.swift"; sourceTree = "<group>"; };
 		17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swinject+Extensions.swift"; sourceTree = "<group>"; };
 		17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiProvider.swift; sourceTree = "<group>"; };
+		2E0C0FDF77DEF814DE8D952E /* Pods_YASDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0D2B25237EA57B00F23F3B /* LexinApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApi.swift; sourceTree = "<group>"; };
-		2F18E2E223437097003F91FD /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
+		2F18E2E223437097003F91FD /* DefaultCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCacheService.swift; sourceTree = "<group>"; };
 		2F1E1E7D23463434007C128B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		2F2980C623B2660F004F7FA9 /* BookmarksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTableViewCell.swift; sourceTree = "<group>"; };
 		2F2980C823B3866C004F7FA9 /* FoundWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundWord.swift; sourceTree = "<group>"; };
@@ -233,8 +243,8 @@
 		2FF62C91228DAAB400B4946C /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		2FF62CBC229444BE00B4946C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2FFF024622B2870800C1DC61 /* MarkdownKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarkdownKit.framework; path = Carthage/Build/iOS/MarkdownKit.framework; sourceTree = "<group>"; };
-		37DD0D8F71AA8C26A7A33EBE /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
-		6A894120B1CC0FF86AB919BD /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
+		31086C1015C9B5599FAB57AF /* Pods-YASDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.debug.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3488C9EB99D81AD31FED8EC0 /* Pods-YASDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.release.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.release.xcconfig"; sourceTree = "<group>"; };
 		6F08F5C0268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBookmarkByIndexUseCaseTests.swift; sourceTree = "<group>"; };
 		6F08F5C2268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBookmarkUseCaseTests.swift; sourceTree = "<group>"; };
 		6F08F5C4268B2817005D18D7 /* ChangedBookmarkUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangedBookmarkUseCaseTests.swift; sourceTree = "<group>"; };
@@ -257,6 +267,7 @@
 		6FAABDD32685F8BD009F6931 /* SearchBookmarksUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookmarksUseCaseTests.swift; sourceTree = "<group>"; };
 		6FAAD8B72683729600D6E1FE /* AddSuggestionUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSuggestionUseCaseTests.swift; sourceTree = "<group>"; };
 		6FAAD8B926837CF800D6E1FE /* MockFactory+SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+SettingsRepository.swift"; sourceTree = "<group>"; };
+		6FB28329268F446600E6187D /* MockFactory+CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+CacheService.swift"; sourceTree = "<group>"; };
 		6FB41A0B267B750B004C8FE4 /* GetTextAboutUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTextAboutUseCaseTests.swift; sourceTree = "<group>"; };
 		6FB41A0F267B8EE5004C8FE4 /* PlaySoundUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySoundUseCaseTests.swift; sourceTree = "<group>"; };
 		6FB41A12267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLanguageSettingsUseCaseTests.swift; sourceTree = "<group>"; };
@@ -266,14 +277,23 @@
 		6FF5FCEB264ED2E60069449F /* MockFactory+UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+UseCase.swift"; sourceTree = "<group>"; };
 		6FFB54E92629D4360063483D /* SettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRepository.swift; sourceTree = "<group>"; };
 		6FFB54EC2629D6BD0063483D /* DefaultSettingsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSettingsRepository.swift; sourceTree = "<group>"; };
+		6FFDBE26268D100200D6BF69 /* GetHistorySizeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHistorySizeUseCase.swift; sourceTree = "<group>"; };
+		6FFDBE28268D101500D6BF69 /* GetCacheSizeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCacheSizeUseCase.swift; sourceTree = "<group>"; };
+		6FFDBE2A268D102900D6BF69 /* ClearHistoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearHistoryUseCase.swift; sourceTree = "<group>"; };
+		6FFDBE2C268D103A00D6BF69 /* ClearCacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCacheUseCase.swift; sourceTree = "<group>"; };
+		6FFDBE2F268DAF9500D6BF69 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/Main.strings; sourceTree = "<group>"; };
+		6FFDBE30268DC6C000D6BF69 /* GetHistorySizeUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHistorySizeUseCaseTests.swift; sourceTree = "<group>"; };
+		6FFDBE32268DC75200D6BF69 /* GetCacheSizeUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCacheSizeUseCaseTests.swift; sourceTree = "<group>"; };
+		6FFDBE34268DC78B00D6BF69 /* ClearHistoryUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearHistoryUseCaseTests.swift; sourceTree = "<group>"; };
+		6FFDBE36268DC96000D6BF69 /* ClearCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearCacheUseCaseTests.swift; sourceTree = "<group>"; };
+		6FFDBE39268E0D9400D6BF69 /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		6FFF3B3E2684AD3A0023EF94 /* GetSuggestionUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSuggestionUseCaseTests.swift; sourceTree = "<group>"; };
 		6FFF3B402684C6540023EF94 /* MockFactory+StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+StorageRepository.swift"; sourceTree = "<group>"; };
 		6FFF3B422684C9090023EF94 /* MockFactory+DictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+DictionaryRepository.swift"; sourceTree = "<group>"; };
 		6FFF3B442684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveSuggestionUseCaseTests.swift; sourceTree = "<group>"; };
-		8039E34BF77722BF3F81EBA7 /* Pods-YASDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.debug.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8C2B21CA5635626F71D7F074 /* Pods-YASDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.release.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.release.xcconfig"; sourceTree = "<group>"; };
-		8DA3535CF1C3F64FD15F29DC /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		92E7B2AC211BFAEF13ABA5C8 /* Pods_YASDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		885F7C7B825324469E8E4CF0 /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
+		A39F68F096DE88505B4EC216 /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
+		A5478ABEF2BF7C7432297DEA /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTextRepository.swift; sourceTree = "<group>"; };
 		CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAboutTextRepository.swift; sourceTree = "<group>"; };
 		CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreBookmarksUseCaseTests.swift; sourceTree = "<group>"; };
@@ -300,7 +320,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				240EA43C384B74CADEA84CC6 /* Pods_YASD.framework in Frameworks */,
+				FE31AE10EDC86D6C240D41DF /* Pods_YASD.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +328,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCEEF50043E112312EBC7C1D /* Pods_YASDTests.framework in Frameworks */,
+				DFEEE35E29F5ECCF09B852A1 /* Pods_YASDTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +383,7 @@
 				6FFF3B402684C6540023EF94 /* MockFactory+StorageRepository.swift */,
 				6FFF3B422684C9090023EF94 /* MockFactory+DictionaryRepository.swift */,
 				6F08F5C6268B2919005D18D7 /* MockFactory+ExternalCacheService.swift */,
+				6FB28329268F446600E6187D /* MockFactory+CacheService.swift */,
 			);
 			path = MockFactory;
 			sourceTree = "<group>";
@@ -467,7 +488,7 @@
 				17233CBF24A919C80049D914 /* Mapper */,
 				2FDB640F238EB42E00948A52 /* Lexin */,
 				CDF9598825E152110059A1EB /* DictionaryRepository */,
-				2F18E2E223437097003F91FD /* CacheService.swift */,
+				2F18E2E223437097003F91FD /* DefaultCacheService.swift */,
 				CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */,
 				2FDB6400238EA5C400948A52 /* FormattedWord.swift */,
 				2FDD05A323B10D0D0018F223 /* Bookmarks.swift */,
@@ -498,8 +519,8 @@
 				2F97576F2277474200B343B4 /* RxCocoa.framework */,
 				2F9757702277474200B343B4 /* RxSwift.framework */,
 				2F97576E2277474200B343B4 /* RxTest.framework */,
-				8DA3535CF1C3F64FD15F29DC /* Pods_YASD.framework */,
-				92E7B2AC211BFAEF13ABA5C8 /* Pods_YASDTests.framework */,
+				A5478ABEF2BF7C7432297DEA /* Pods_YASD.framework */,
+				2E0C0FDF77DEF814DE8D952E /* Pods_YASDTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -584,6 +605,10 @@
 				6F86CCB72632CCD0003552BB /* GetLanguageSettingsUseCase.swift */,
 				6F86CCBB2632D0C0003552BB /* GetLanguageListSettingsUseCase.swift */,
 				6F86CCBE2632D0F5003552BB /* UpdateLanguageSettingsUseCase.swift */,
+				6FFDBE26268D100200D6BF69 /* GetHistorySizeUseCase.swift */,
+				6FFDBE28268D101500D6BF69 /* GetCacheSizeUseCase.swift */,
+				6FFDBE2A268D102900D6BF69 /* ClearHistoryUseCase.swift */,
+				6FFDBE2C268D103A00D6BF69 /* ClearCacheUseCase.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -691,6 +716,10 @@
 				6FB41A12267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift */,
 				6FB41A14267B9D67004C8FE4 /* GetLanguageListSettingsUseCaseTests.swift */,
 				6FB41A17267CAD1D004C8FE4 /* UpdateLanguageSettingsUseCaseTests.swift */,
+				6FFDBE30268DC6C000D6BF69 /* GetHistorySizeUseCaseTests.swift */,
+				6FFDBE32268DC75200D6BF69 /* GetCacheSizeUseCaseTests.swift */,
+				6FFDBE34268DC78B00D6BF69 /* ClearHistoryUseCaseTests.swift */,
+				6FFDBE36268DC96000D6BF69 /* ClearCacheUseCaseTests.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -762,10 +791,10 @@
 		F2119DFC71016D5B0441E10C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				37DD0D8F71AA8C26A7A33EBE /* Pods-YASD.debug.xcconfig */,
-				6A894120B1CC0FF86AB919BD /* Pods-YASD.release.xcconfig */,
-				8039E34BF77722BF3F81EBA7 /* Pods-YASDTests.debug.xcconfig */,
-				8C2B21CA5635626F71D7F074 /* Pods-YASDTests.release.xcconfig */,
+				885F7C7B825324469E8E4CF0 /* Pods-YASD.debug.xcconfig */,
+				A39F68F096DE88505B4EC216 /* Pods-YASD.release.xcconfig */,
+				31086C1015C9B5599FAB57AF /* Pods-YASDTests.debug.xcconfig */,
+				3488C9EB99D81AD31FED8EC0 /* Pods-YASDTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -778,6 +807,7 @@
 				2F3401D423912149005FBD39 /* StorageRepository.swift */,
 				CDF9597E25E139280059A1EB /* DictionaryRepository.swift */,
 				6FFB54E92629D4360063483D /* SettingsRepository.swift */,
+				6FFDBE39268E0D9400D6BF69 /* CacheService.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -797,11 +827,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F661B5C2272E16400C68A5F /* Build configuration list for PBXNativeTarget "YASD" */;
 			buildPhases = (
-				7935E29459A1C75F617792DC /* [CP] Check Pods Manifest.lock */,
+				9253B90A9DB6EBA203E965A5 /* [CP] Check Pods Manifest.lock */,
 				2F661B2E2272E16300C68A5F /* Sources */,
 				2F661B2F2272E16300C68A5F /* Frameworks */,
 				2F661B302272E16300C68A5F /* Resources */,
-				8163A7FBC86C5F839DD443A6 /* [CP] Embed Pods Frameworks */,
+				425CD6A5BAF50F33E89CF2E3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -816,13 +846,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F661B5F2272E16400C68A5F /* Build configuration list for PBXNativeTarget "YASDTests" */;
 			buildPhases = (
-				562E3AA6C659AAB57CAB39EC /* [CP] Check Pods Manifest.lock */,
+				DC736F7D585CA30A3C6C34A6 /* [CP] Check Pods Manifest.lock */,
 				6F171E5426455CBB00C37B28 /* ShellScript */,
 				2F661B442272E16400C68A5F /* Sources */,
 				2F661B452272E16400C68A5F /* Frameworks */,
 				2F661B462272E16400C68A5F /* Resources */,
 				2FF62C9E228EF13D00B4946C /* CopyFiles */,
-				E9754DCC7B5A684FA3185F9D /* [CP] Embed Pods Frameworks */,
+				AD152357CE5288EB10799784 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -895,26 +925,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		562E3AA6C659AAB57CAB39EC /* [CP] Check Pods Manifest.lock */ = {
+		425CD6A5BAF50F33E89CF2E3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-YASDTests-checkManifestLockResult.txt",
+				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6F171E5426455CBB00C37B28 /* ShellScript */ = {
@@ -932,9 +957,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Domain/UseCase/UseCase.swift\" \\\n\"${INPUT_DIR}/Domain/Data/AboutTextRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/DictionaryRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/PlayerManager.swift\" \\\n\"${INPUT_DIR}/Domain/Data/SettingsRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Platform/ExternalCacheService.swift\"\n\n\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Domain/UseCase/UseCase.swift\" \\\n\"${INPUT_DIR}/Domain/Data/AboutTextRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/DictionaryRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/PlayerManager.swift\" \\\n\"${INPUT_DIR}/Domain/Data/SettingsRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/CacheService.swift\" \\\n\"${INPUT_DIR}/Domain/Platform/ExternalCacheService.swift\"\n\n\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
 		};
-		7935E29459A1C75F617792DC /* [CP] Check Pods Manifest.lock */ = {
+		9253B90A9DB6EBA203E965A5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -956,24 +981,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8163A7FBC86C5F839DD443A6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E9754DCC7B5A684FA3185F9D /* [CP] Embed Pods Frameworks */ = {
+		AD152357CE5288EB10799784 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -988,6 +996,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASDTests/Pods-YASDTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC736F7D585CA30A3C6C34A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YASDTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1018,7 +1048,7 @@
 				17A9BC7522B5273B002F769B /* HtmlParser.swift in Sources */,
 				2F2980C723B2660F004F7FA9 /* BookmarksTableViewCell.swift in Sources */,
 				CDF9597F25E139280059A1EB /* DictionaryRepository.swift in Sources */,
-				2F18E2E323437097003F91FD /* CacheService.swift in Sources */,
+				2F18E2E323437097003F91FD /* DefaultCacheService.swift in Sources */,
 				2FDCDBD1234F31F800E6F15F /* WordsSuggestionViewModel.swift in Sources */,
 				6F86CCBF2632D0F5003552BB /* UpdateLanguageSettingsUseCase.swift in Sources */,
 				2FDD05A423B10D0D0018F223 /* Bookmarks.swift in Sources */,
@@ -1044,6 +1074,7 @@
 				CDE705392631F73F0015CD07 /* AddBookmarkUseCase.swift in Sources */,
 				CDE7051E262AEF610015CD07 /* StorageRepository+Extensions.swift in Sources */,
 				6F86CCBC2632D0C0003552BB /* GetLanguageListSettingsUseCase.swift in Sources */,
+				6FFDBE2D268D103A00D6BF69 /* ClearCacheUseCase.swift in Sources */,
 				17C1527A23B53B4600EACA94 /* LexinWordMapper.swift in Sources */,
 				2FF62C7F2289B4AA00B4946C /* WordsTableViewCell.swift in Sources */,
 				2F661B3A2272E16300C68A5F /* SettingsLanguageTableViewController.swift in Sources */,
@@ -1057,12 +1088,15 @@
 				2FDB640D238EB42700948A52 /* LexinWord.swift in Sources */,
 				2F2EC4B422EB22FD00B1D4C7 /* SettingsTableViewController.swift in Sources */,
 				2FDCDBCF234F27DB00E6F15F /* WordsSuggestionTableViewController.swift in Sources */,
+				6FFDBE2B268D102900D6BF69 /* ClearHistoryUseCase.swift in Sources */,
+				6FFDBE27268D100200D6BF69 /* GetHistorySizeUseCase.swift in Sources */,
 				F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */,
 				17233CC124A919D40049D914 /* Mapper.swift in Sources */,
 				CDF9597725E130A00059A1EB /* Language.swift in Sources */,
 				2F661B362272E16300C68A5F /* AppDelegate.swift in Sources */,
 				2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */,
 				2FDB6407238EAC3D00948A52 /* SettingsLanguageItem.swift in Sources */,
+				6FFDBE29268D101500D6BF69 /* GetCacheSizeUseCase.swift in Sources */,
 				2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */,
 				CDE70521262AEFC20015CD07 /* RestoreBookmarkUseCase.swift in Sources */,
 				CDE7051A262AEE640015CD07 /* SearchBookmarkUseCase.swift in Sources */,
@@ -1075,6 +1109,7 @@
 				CDE705312631F5920015CD07 /* SearchWordUseCase.swift in Sources */,
 				6F86CCC62632D7E1003552BB /* GetTextAboutUseCase.swift in Sources */,
 				2F661B382272E16300C68A5F /* WordsTableViewController.swift in Sources */,
+				6FFDBE3A268E0D9400D6BF69 /* CacheService.swift in Sources */,
 				2F7321872313E4A000CC0822 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1084,9 +1119,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FB41A13267B97B8004C8FE4 /* GetLanguageSettingsUseCaseTests.swift in Sources */,
+				6FB2832A268F446600E6187D /* MockFactory+CacheService.swift in Sources */,
 				6FB41A10267B8EE5004C8FE4 /* PlaySoundUseCaseTests.swift in Sources */,
+				6FFDBE33268DC75200D6BF69 /* GetCacheSizeUseCaseTests.swift in Sources */,
 				2F7DA16B2388395700E91C71 /* WordsSuggestionViewModelTests.swift in Sources */,
+				6FFDBE31268DC6C000D6BF69 /* GetHistorySizeUseCaseTests.swift in Sources */,
 				17EB2818246DD2A700EE8B1D /* MockFactory.swift in Sources */,
+				6FFDBE37268DC96000D6BF69 /* ClearCacheUseCaseTests.swift in Sources */,
 				6F171E322643FB9D00C37B28 /* AboutViewModelTests.swift in Sources */,
 				6FB41A18267CAD1D004C8FE4 /* UpdateLanguageSettingsUseCaseTests.swift in Sources */,
 				6F08F5C7268B2919005D18D7 /* MockFactory+ExternalCacheService.swift in Sources */,
@@ -1096,6 +1135,7 @@
 				17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */,
 				6FFF3B412684C6540023EF94 /* MockFactory+StorageRepository.swift in Sources */,
 				6FFF3B452684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift in Sources */,
+				6FFDBE35268DC78B00D6BF69 /* ClearHistoryUseCaseTests.swift in Sources */,
 				6FB41A15267B9D67004C8FE4 /* GetLanguageListSettingsUseCaseTests.swift in Sources */,
 				6FB41A1B267CC81D004C8FE4 /* SearchWordUseCaseTests.swift in Sources */,
 				6F171E5626455E2000C37B28 /* GeneratedMocks.swift in Sources */,
@@ -1142,7 +1182,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2F661B3C2272E16300C68A5F /* Base */,
-				17B9B23C240A789D007FDC47 /* sv */,
+				6FFDBE2F268DAF9500D6BF69 /* sv */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1279,7 +1319,7 @@
 		};
 		2F661B5D2272E16400C68A5F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37DD0D8F71AA8C26A7A33EBE /* Pods-YASD.debug.xcconfig */;
+			baseConfigurationReference = 885F7C7B825324469E8E4CF0 /* Pods-YASD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1301,7 +1341,7 @@
 		};
 		2F661B5E2272E16400C68A5F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A894120B1CC0FF86AB919BD /* Pods-YASD.release.xcconfig */;
+			baseConfigurationReference = A39F68F096DE88505B4EC216 /* Pods-YASD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1323,7 +1363,7 @@
 		};
 		2F661B602272E16400C68A5F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8039E34BF77722BF3F81EBA7 /* Pods-YASDTests.debug.xcconfig */;
+			baseConfigurationReference = 31086C1015C9B5599FAB57AF /* Pods-YASDTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1342,7 +1382,7 @@
 		};
 		2F661B612272E16400C68A5F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C2B21CA5635626F71D7F074 /* Pods-YASDTests.release.xcconfig */;
+			baseConfigurationReference = 3488C9EB99D81AD31FED8EC0 /* Pods-YASDTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";

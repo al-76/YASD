@@ -70,13 +70,13 @@ class SettingsLanguageViewModelTests: XCTestCase {
         }
     }
     
-    private func createMockUpdateLanguageUseCase() -> MockAnyUseCase<String, Void> {
+    private func createMockUpdateLanguageUseCase() -> MockAnyUseCase<String, Bool> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
         } onRxError: { value in
             nil
         } onSuccess: { value in
-            ()
+            true
         }
     }
 }

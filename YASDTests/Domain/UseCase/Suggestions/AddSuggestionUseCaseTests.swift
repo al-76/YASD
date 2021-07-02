@@ -24,7 +24,7 @@ class AddSuggestionUseCaseTests: XCTestCase {
         let outputItems = scheduler.createObserver(SuggestionItemResult.self)
         let useCase = AddSuggestionUseCase(suggestions: MockFactory.createMockDictionaryRepository(),
                                            settings: MockFactory.createMockSettingsRepository(PublishSubject<Language>()),
-                                           history: MockFactory.createSuggestionStorageRepository(testValue))
+                                           history: MockFactory.createSuggestionStorageRepository(testValue, 0))
         let res = useCase.execute(with: "")
         disposeBag.insert(
             res.bind(to: outputItems)

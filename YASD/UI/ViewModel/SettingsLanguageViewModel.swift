@@ -11,7 +11,7 @@ import RxCocoa
 
 class SettingsLanguageViewModel: ViewModel {
     private let getLanguageList: AnyUseCase<String, SettingsLanguageItemResult>
-    private let updateLanguage: AnyUseCase<String, Void>
+    private let updateLanguage: AnyUseCase<String, Bool>
     
     struct Input {
         let search: Driver<String>
@@ -23,7 +23,7 @@ class SettingsLanguageViewModel: ViewModel {
     }
     
     init(getLanguageList: AnyUseCase<String, SettingsLanguageItemResult>,
-         updateLanguage: AnyUseCase<String, Void>) {
+         updateLanguage: AnyUseCase<String, Bool>) {
         self.getLanguageList = getLanguageList
         self.updateLanguage = updateLanguage
     }
@@ -35,10 +35,10 @@ class SettingsLanguageViewModel: ViewModel {
                 return self.getSettings(with: language)
         }
         let selected = input.select
-            .flatMapLatest { [weak self] language -> Driver<Void> in
-                guard let self = self else { return .just(()) }
+            .flatMapLatest { [weak self] language -> Driver<Bool> in
+                guard let self = self else { return .just(false) }
                 return self.updateLanguage.execute(with: language)
-                    .asDriver { _ in .just(()) }
+                    .asDriver { _ in .just(false) }
         }
         .withLatestFrom(input.search) { ($0, $1) }
         .flatMap { [weak self] _, language -> Driver<SettingsLanguageItemResult> in

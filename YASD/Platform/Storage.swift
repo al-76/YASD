@@ -25,7 +25,32 @@ class Storage {
         FileManager.default.createFile(atPath: url.path, contents: data, attributes: nil)
     }
     
+    func getSize(id: String) -> Int64 {
+        return getUrl(from: id)?.fileSize ?? 0
+    }
+    
+    func clear(id: String) throws {
+        if let url = getUrl(from: id) {
+            try FileManager.default.removeItem(at: url)
+        }
+    }
+    
     private func getUrl(from: String) -> URL? {
         return try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(from, isDirectory: false)
+    }
+}
+
+private extension URL {
+    var attributes: [FileAttributeKey : Any]? {
+        do {
+            return try FileManager.default.attributesOfItem(atPath: path)
+        } catch let error as NSError {
+            print("FileAttribute error: \(error)")
+        }
+        return nil
+    }
+
+    var fileSize: Int64 {
+        return attributes?[.size] as? Int64 ?? Int64(0)
     }
 }

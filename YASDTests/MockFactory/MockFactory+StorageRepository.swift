@@ -17,9 +17,11 @@ extension MockFactory {
         typealias T = Suggestion
         
         private let testValue: T
+        private let testSize: Int64
         
-        init(testValue: String) {
+        init(testValue: String, testSize: Int64) {
             self.testValue = Suggestion(testValue)
+            self.testSize = testSize
         }
         
         func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>> {
@@ -34,11 +36,17 @@ extension MockFactory {
         func remove(at index: Int) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
+        func removeAll() -> Observable<StorageServiceResult> {
+            return .just(.success(true))
+        }
         func contains(_ word: T) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
         func getChangedSubject() -> PublishSubject<Bool> {
             return PublishSubject<Bool>()
+        }
+        func getSize() -> Observable<Int64> {
+            return .just(testSize)
         }
     }
     
@@ -65,16 +73,22 @@ extension MockFactory {
         func remove(at index: Int) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
+        func removeAll() -> Observable<StorageServiceResult> {
+            return .just(.success(true))
+        }
         func contains(_ word: T) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
         func getChangedSubject() -> PublishSubject<Bool> {
             return publishSubject
         }
+        func getSize() -> Observable<Int64> {
+            return .just(0)
+        }
     }
     
-    static func createSuggestionStorageRepository(_ value: String) -> AnyStorageRepository<Suggestion> {
-        return AnyStorageRepository<Suggestion>(wrapped: SuggestionFakeStorageRepository(testValue: value))
+    static func createSuggestionStorageRepository(_ value: String, _ size: Int64) -> AnyStorageRepository<Suggestion> {
+        return AnyStorageRepository<Suggestion>(wrapped: SuggestionFakeStorageRepository(testValue: value, testSize: size))
     }
     
     static func createFormattedWordStorageRepository(_ value: String, _ publishSubject: PublishSubject<Bool>) -> AnyStorageRepository<FormattedWord> {

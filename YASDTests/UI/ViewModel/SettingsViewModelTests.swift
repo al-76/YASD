@@ -25,7 +25,18 @@ class SettingsViewModelTests: XCTestCase {
     func testGetLanguage() {
         // Arrange
         let testLanguage = "test"
-        let outputLanguage = createGetLanguageObserver(testLanguage)
+        let viewModel = SettingsViewModel(getLanguage: createMockGetStringUseCase(testLanguage),
+                                          getHistorySize: createMockGetStringUseCase(""),
+                                          getCacheSize: createMockGetStringUseCase(""),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: MockFactory.createUseCaseStub())
+        let outputLanguage = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: Driver.never())
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.selectedLanguage.drive(outputLanguage)
+        )
         
         // Act
         scheduler.start()
@@ -39,7 +50,18 @@ class SettingsViewModelTests: XCTestCase {
     
     func testGetLanguageError() {
         // Arrange
-        let outputLanguage = createGetLanguageObserver("error")
+        let viewModel = SettingsViewModel(getLanguage: createMockGetStringUseCase("error"),
+                                          getHistorySize: createMockGetStringUseCase(""),
+                                          getCacheSize: createMockGetStringUseCase(""),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: MockFactory.createUseCaseStub())
+        let outputLanguage = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: Driver.never())
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.selectedLanguage.drive(outputLanguage)
+        )
         
         // Act
         scheduler.start()
@@ -51,23 +73,185 @@ class SettingsViewModelTests: XCTestCase {
         ])
     }
     
-    private func createGetLanguageObserver(_ testLanguage: String) -> TestableObserver<String> {
-        let viewModel = SettingsViewModel(getLanguage: createMockGetLanguage(testLanguage))
-        let outputLanguage = scheduler.createObserver(String.self)
-        let output = viewModel.transform(from: SettingsViewModel.Input())
+    func testGetHistorySize() {
+        // Arrange
+        let testValue = "test"
+        let viewModel = SettingsViewModel(getLanguage: createMockGetStringUseCase(""),
+                                          getHistorySize: createMockGetStringUseCase(testValue),
+                                          getCacheSize: createMockGetStringUseCase(""),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: MockFactory.createUseCaseStub())
+        let outputHistorySize = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: Driver.never())
+        let output = viewModel.transform(from: input)
         disposeBag.insert(
-            output.selectedLanguage.drive(outputLanguage)
+            output.historySize.drive(outputHistorySize)
         )
-        return outputLanguage
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputHistorySize.events, [
+            .next(0, testValue)
+        ])
     }
     
-    private func createMockGetLanguage(_ language: String) -> MockAnyUseCase<Void, String> {
+    func testGetHistorySizeError() {
+        // Arrange
+        let viewModel = SettingsViewModel(getLanguage: createMockGetStringUseCase(""),
+                                          getHistorySize: createMockGetStringUseCase("error"),
+                                          getCacheSize: createMockGetStringUseCase(""),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: MockFactory.createUseCaseStub())
+        let outputHistorySize = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: Driver.never())
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.historySize.drive(outputHistorySize)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputHistorySize.events, [
+            .next(0, "")
+        ])
+    }
+    
+    func testGetCacheSize() {
+        // Arrange
+        let testValue = "test"
+        let viewModel = SettingsViewModel(getLanguage: createMockGetStringUseCase(""),
+                                          getHistorySize: createMockGetStringUseCase(""),
+                                          getCacheSize: createMockGetStringUseCase(testValue),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: MockFactory.createUseCaseStub())
+        let outputCacheSize = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: Driver.never())
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.cacheSize.drive(outputCacheSize)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputCacheSize.events, [
+            .next(0, testValue)
+        ])
+    }
+    
+    func testGetCacheSizeError() {
+        // Arrange
+        let viewModel = SettingsViewModel(getLanguage: createMockGetStringUseCase(""),
+                                          getHistorySize: createMockGetStringUseCase(""),
+                                          getCacheSize: createMockGetStringUseCase("error"),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: MockFactory.createUseCaseStub())
+        let outputCacheSize = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: Driver.never())
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.cacheSize.drive(outputCacheSize)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputCacheSize.events, [
+            .next(0, "")
+        ])
+    }
+    
+    func testClearHistory() {
+        let testValue = "test"
+        let inputClearHistory = scheduler.createHotObservable([.next(150, ())])
+            .asDriver(onErrorJustReturn: ())
+        let viewModel = SettingsViewModel(getLanguage: createMockGetStringUseCase(""),
+                                          getHistorySize: createMockGetStringUseCase(testValue),
+                                          getCacheSize: createMockGetStringUseCase(""),
+                                          clearHistory: createMockClearHistoryUseCase(),
+                                          clearCache: MockFactory.createUseCaseStub())
+        let outputHistorySize = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: inputClearHistory,
+                                            clearCache: Driver.never())
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.historySize.drive(outputHistorySize)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputHistorySize.events, [
+            .next(0, testValue),
+            .next(150, testValue)
+        ])
+    }
+    
+    func testClearCache() {
+        let testValue = "test"
+        let inputClearCache = scheduler.createHotObservable([.next(150, ())])
+            .asDriver(onErrorJustReturn: ())
+        let viewModel = SettingsViewModel(getLanguage: createMockGetStringUseCase(""),
+                                          getHistorySize: createMockGetStringUseCase(""),
+                                          getCacheSize: createMockGetStringUseCase(testValue),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: createMockClearCacheUseCase())
+        let outputCacheSize = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: inputClearCache)
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.cacheSize.drive(outputCacheSize)
+        )
+        
+        // Act
+        scheduler.start()
+        
+        // Assert
+        XCTAssertEqual(outputCacheSize.events, [
+            .next(0, testValue),
+            .next(150, testValue)
+        ])
+    }
+    
+    private func createMockGetStringUseCase(_ value: String) -> MockAnyUseCase<Void, String> {
         return MockFactory.createMockUseCase { _ in
-            language == "error" ? TestError.someError : nil
+            value == "error" ? TestError.someError : nil
         } onRxError: { _ in
             nil
         } onSuccess: { _ in
-            language
+            value
+        }
+    }
+    
+    private func createMockClearCacheUseCase() -> MockAnyUseCase<Void, Bool> {
+        return MockFactory.createMockUseCase { _ in
+            nil
+        } onRxError: { _ in
+            nil
+        } onSuccess: { _ in
+            true
+        }
+    }
+    
+    private func createMockClearHistoryUseCase() -> MockAnyUseCase<Void, StorageServiceResult> {
+        return MockFactory.createMockUseCase { _ in
+            nil
+        } onRxError: { _ in
+            nil
+        } onSuccess: { _ in
+            .success(true)
         }
     }
 }

@@ -9,10 +9,7 @@
 import Foundation
 import RxSwift
 
-typealias CacheServiceResult = Result<Data>
-typealias CachableAction = () -> Observable<CacheServiceResult>
-
-class CacheService {
+class DefaultCacheService: CacheService {
     let cache: DataCache
     
     init(cache: DataCache) {
@@ -34,6 +31,14 @@ class CacheService {
             }
             return Observable.just(.success(data!))
         }
+    }
+    
+    func clear() -> Observable<Bool> {
+        return cache.clear()
+    }
+    
+    func getSize() -> Observable<Int> {
+        return cache.getSize()
     }
     
     private func save(_ data: Data, forKey key: String) -> Observable<CacheServiceResult> {

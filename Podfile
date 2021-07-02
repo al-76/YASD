@@ -14,7 +14,7 @@ target 'YASD' do
   pod 'RMessage'
   pod 'SwiftSoup'
   pod 'MarkdownKit'
-  pod 'Cache', '5.2.0'
+  pod 'Cache', :git => 'https://github.com/hyperoslo/Cache.git'
   
   target 'YASDTests' do
     inherit! :search_paths

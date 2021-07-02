@@ -80,6 +80,19 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
         }
     }
     
+    func removeAll() -> Observable<StorageServiceResult> {
+        return Observable.create { [weak self] observer in
+            do {
+                try self?.clearData()
+                observer.onNext(.success(true))
+                observer.onCompleted()
+            } catch let error {
+                observer.onNext(.failure(error))
+            }
+            return Disposables.create {}
+        }
+    }
+    
     func contains(_ word: T) -> Observable<StorageServiceResult> {
         return Observable.create { [weak self] observer in
             observer.onNext(.success(self?.data.contains(word) ?? false))
@@ -92,8 +105,28 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
         return changed
     }
     
+    func getSize() -> Observable<Int64> {
+        let size = Observable<Int64>.create { [weak self] observer in
+            if let self = self {
+                observer.onNext(self.storage.getSize(id: self.id))
+            } else {
+                observer.onNext(0)
+            }
+            observer.onCompleted()
+            return Disposables.create {}
+        }
+        let changedSize = changed.flatMap { _ in size }
+        return Observable.merge(size, changedSize)
+    }
+    
     private func saveData() throws {
         try storage.save(id: id, object: data)
+        changed.onNext(true)
+    }
+    
+    private func clearData() throws {
+        data.removeAll()
+        try self.storage.clear(id: id)
         changed.onNext(true)
     }
 }

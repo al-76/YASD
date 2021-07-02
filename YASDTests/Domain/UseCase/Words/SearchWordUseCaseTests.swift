@@ -84,11 +84,17 @@ class SearchWordUseCaseTests: XCTestCase {
         func remove(at index: Int) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
+        func removeAll() -> Observable<StorageServiceResult> {
+            return .just(.success(true))
+        }
         func contains(_ word: T) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
         func getChangedSubject() -> PublishSubject<Bool> {
             return testPublishSubject
+        }
+        func getSize() -> Observable<Int64> {
+            return .just(0)
         }
     }
     

@@ -35,6 +35,7 @@ func configurePlatform(_ container: Container) {
     container.register(Player.self) { _ in Player() }
         .inObjectScope(.container)
     container.register(DataCache.self) { _, name in DataCache(name: name) }
+        .inObjectScope(.container)
     container.register(ExternalCacheService.self) { _ in Spotlight() }
         .inObjectScope(.container)
 }
@@ -90,7 +91,7 @@ func configureService(_ container: Container) {
     
     // Cache Service
     container.register(CacheService.self) { _ in
-        CacheService(cache: container.resolve(DataCache.self, argument: "CacheService")!)
+        DefaultCacheService(cache: container.resolve(DataCache.self, argument: "CacheService")!)
     }
     .inObjectScope(.container)
     
@@ -180,6 +181,22 @@ func configureUseCase(_ container: Container) {
         AnyUseCase<String, Bool>(wrapped: UpdateLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
     }
     .inObjectScope(.container)
+    container.register(AnyUseCase<Void, String>.self, name: "GetHistorySizeUseCase") { container in
+        AnyUseCase<Void, String>(wrapped: GetHistorySizeUseCase(history: container.resolve(AnyStorageRepository<Suggestion>.self)!))
+    }
+    .inObjectScope(.container)
+    container.register(AnyUseCase<Void, String>.self, name: "GetCacheSizeUseCase") { container in
+        AnyUseCase<Void, String>(wrapped: GetCacheSizeUseCase(cache: container.resolve(CacheService.self)!))
+    }
+    .inObjectScope(.container)
+    container.register(AnyUseCase<Void, StorageServiceResult>.self, name: "ClearHistoryUseCase") { container in
+        AnyUseCase<Void, StorageServiceResult>(wrapped: ClearHistoryUseCase(history: container.resolve(AnyStorageRepository<Suggestion>.self)!))
+    }
+    .inObjectScope(.container)
+    container.register(AnyUseCase<Void, Bool>.self, name: "ClearCacheUseCase") { container in
+        AnyUseCase<Void, Bool>(wrapped: ClearCacheUseCase(cache: container.resolve(CacheService.self)!))
+    }
+    .inObjectScope(.container)
 
     // Words
     container.register(AnyUseCase<SearchWordUseCase.Input, FoundWordResult>.self, name: "SearchWordUseCase") { container in
@@ -251,13 +268,17 @@ func configureViewModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(SettingsViewModel.self) { container in
-        SettingsViewModel(getLanguage: container.resolve(AnyUseCase<Void, String>.self, name: "GetLanguageSettingsUseCase")!)
+        SettingsViewModel(getLanguage: container.resolve(AnyUseCase<Void, String>.self, name: "GetLanguageSettingsUseCase")!,
+                          getHistorySize: container.resolve(AnyUseCase<Void, String>.self, name: "GetHistorySizeUseCase")!,
+                          getCacheSize: container.resolve(AnyUseCase<Void, String>.self, name: "GetCacheSizeUseCase")!,
+                          clearHistory: container.resolve(AnyUseCase<Void, StorageServiceResult>.self, name: "ClearHistoryUseCase")!,
+                          clearCache: container.resolve(AnyUseCase<Void, Bool>.self, name: "ClearCacheUseCase")!)
     }
     .inObjectScope(.container)
     
     container.register(SettingsLanguageViewModel.self) { container in
-        SettingsLanguageViewModel(getLanguageList: container.resolve(AnyUseCase<String, SettingsLanguageItemResult>.self, name: "GetLanguageSettingsUseCase")!,
-                                  updateLanguage: container.resolve(AnyUseCase<String, Void>.self, name: "UpdateLanguageSettingsUseCase")!)
+        SettingsLanguageViewModel(getLanguageList: container.resolve(AnyUseCase<String, SettingsLanguageItemResult>.self, name: "GetLanguageListSettingsUseCase")!,
+                                  updateLanguage: container.resolve(AnyUseCase<String, Bool>.self, name: "UpdateLanguageSettingsUseCase")!)
     }
     .inObjectScope(.container)
     

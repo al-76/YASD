@@ -22,7 +22,7 @@ class RemoveSuggestionUseCaseTests: XCTestCase {
         // Arrange
         let testValue = "test"
         let outputItems = scheduler.createObserver(StorageServiceResult.self)
-        let useCase = RemoveSuggestionUseCase(history: MockFactory.createSuggestionStorageRepository(testValue))
+        let useCase = RemoveSuggestionUseCase(history: MockFactory.createSuggestionStorageRepository(testValue, 0))
         let res = useCase.execute(with: "")
         disposeBag.insert(
             res.bind(to: outputItems)

@@ -19,9 +19,11 @@
 - [Cuckoo](https://github.com/Brightify/Cuckoo)
 - [MarkdownKit](https://github.com/ivanbruel/MarkdownKit)
 - [Cache](https://github.com/hyperoslo/Cache)
-- [Carthage](https://github.com/Carthage/Carthage)
+- [Cocoapods](https://github.com/CocoaPods/CocoaPods)
 
 ## License
 MIT
 
-You can contact me - Konopkin Vyacheslav robot.al76@gmail.com";
+Konopkin Vyacheslav <robot.al76@gmail.com>";
+"clearHistory" = "Clear history";
+"clearCache" = "Clear cache";

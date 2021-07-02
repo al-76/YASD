@@ -37,3 +37,9 @@
 
 /* Class = "UINavigationItem"; title = "Inställingar"; ObjectID = "wkg-LS-Deb"; */
 "wkg-LS-Deb.title" = "Inställingar";
+
+/* Class = "UILabel"; text = "Clear cache (%s)"; ObjectID = "iGQ-33-Hgo"; */
+"iGQ-33-Hgo.text" = "Rensa cache (%s)";
+
+/* Class = "UILabel"; text = "Clear history (%s)"; ObjectID = "8BW-La-9Bh"; */
+"8BW-La-9Bh.text" = "Rensa historik (%s)";
