@@ -1,14 +1,14 @@
 //
-//  Storage.swift
+//  DefaultStorage.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 26/08/2019.
-//  Copyright © 2019 yac. All rights reserved.
+//  Created by Vyacheslav Konopkin on 03.07.2021.
+//  Copyright © 2021 yac. All rights reserved.
 //
 
 import Foundation
 
-class Storage {
+class DefaultStorage: Storage {
     func get<T: Codable>(id: String, defaultObject: T) -> T {
         guard let url = getUrl(from: id),
             FileManager.default.fileExists(atPath: url.path),
@@ -54,3 +54,4 @@ private extension URL {
         return attributes?[.size] as? Int64 ?? Int64(0)
     }
 }
+

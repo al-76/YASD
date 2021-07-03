@@ -114,6 +114,7 @@
 		6FFF3B452684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B442684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift */; };
 		CD2A5DFC26909A3500B6E49A /* RMController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */; };
 		CD2A5DFF26909C0800B6E49A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5DFE26909C0800B6E49A /* Network.swift */; };
+		CD2A5E0526909F0E00B6E49A /* DefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5E0426909F0E00B6E49A /* DefaultStorage.swift */; };
 		CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
 		CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
 		CD50CDF926862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */; };
@@ -348,10 +349,10 @@
 		17A9BC7322B5271D002F769B /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				CD2A5E0426909F0E00B6E49A /* DefaultStorage.swift */,
 				2FCB2DE022A111540053B758 /* DefaultNetwork.swift */,
 				17A9BC7422B5273B002F769B /* HtmlParser.swift */,
 				17A9BC7622B5284F002F769B /* Markdown.swift */,
-				2F7321862313E4A000CC0822 /* Storage.swift */,
 				2F5F8BBE2322A7DA00EF6A85 /* Player.swift */,
 				2F393ACD233E255500F315FC /* DataCache.swift */,
 				17260B8124661338002F730A /* Spotlight.swift */,
@@ -752,6 +753,7 @@
 		CD2A5DFD26909BFE00B6E49A /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				2F7321862313E4A000CC0822 /* Storage.swift */,
 				CD2A5DFE26909C0800B6E49A /* Network.swift */,
 			);
 			path = Platform;
@@ -1112,6 +1114,7 @@
 				2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */,
 				CDE70521262AEFC20015CD07 /* RestoreBookmarkUseCase.swift in Sources */,
 				CD2A5DFC26909A3500B6E49A /* RMController+Extensions.swift in Sources */,
+				CD2A5E0526909F0E00B6E49A /* DefaultStorage.swift in Sources */,
 				CDE7051A262AEE640015CD07 /* SearchBookmarkUseCase.swift in Sources */,
 				6F9551DB2631C7D8007AD633 /* AnyStorageRepository+Suggestion+Extensions.swift in Sources */,
 				CDE7052A262AF5AE0015CD07 /* PlaySoundUseCase.swift in Sources */,

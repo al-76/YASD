@@ -30,7 +30,7 @@ func configurePlatform(_ container: Container) {
         .inObjectScope(.container)
     container.register(Markdown.self) { _ in Markdown() }
         .inObjectScope(.container)
-    container.register(Storage.self) { _ in Storage() }
+    container.register(Storage.self) { _ in DefaultStorage() }
         .inObjectScope(.container)
     container.register(Player.self) { _ in Player() }
         .inObjectScope(.container)
