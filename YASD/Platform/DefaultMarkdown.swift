@@ -1,17 +1,17 @@
 //
-//  MarkdownParser.swift
+//  DefaultMarkdown.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 15/06/2019.
-//  Copyright © 2019 yac. All rights reserved.
+//  Created by Vyacheslav Konopkin on 03.07.2021.
+//  Copyright © 2021 yac. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import MarkdownKit
 
-class Markdown {
+class DefaultMarkdown: Markdown {
     func parse(data: String) -> NSAttributedString {
-        return Markdown.getParser().parse(data)
+        return DefaultMarkdown.getParser().parse(data)
     }
     
     private class func getParser() -> MarkdownParser {

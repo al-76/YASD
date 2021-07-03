@@ -28,7 +28,7 @@ func configurePlatform(_ container: Container) {
         .inObjectScope(.container)
     container.register(HtmlParser.self) { _ in DefaultHtmlParser() }
         .inObjectScope(.container)
-    container.register(Markdown.self) { _ in Markdown() }
+    container.register(Markdown.self) { _ in DefaultMarkdown() }
         .inObjectScope(.container)
     container.register(Storage.self) { _ in DefaultStorage() }
         .inObjectScope(.container)
