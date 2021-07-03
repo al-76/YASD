@@ -72,7 +72,7 @@ class WordsTableViewController: UITableViewController {
                 .bind(to: searchResultsController.search),
             // found words
             output.foundWords.map { [weak self] result -> [FoundWord] in
-                return result.onFailure { self?.handleError($0) }.getOrDefault([])
+                result.onFailure { self?.handleError($0) }.getOrDefault([])
             }
             .drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { [weak self] (_, result, cell) in
                 if let wordsCell = cell as? WordsTableViewCell {

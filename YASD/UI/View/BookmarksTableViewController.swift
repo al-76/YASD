@@ -81,7 +81,7 @@ class BookmarksTableViewController: UITableViewController {
         disposeBag.insert(
             // bookmarks
             output.bookmarks.map { [weak self] result -> [FormattedWord] in
-                return result.onFailure { self?.handleError($0) }.getOrDefault([])
+                result.onFailure { self?.handleError($0) }.getOrDefault([])
             }
             .map { bookmarks in [BookmarkItemSection(header: "bookmarks", items: bookmarks)] }
             .drive(tableView.rx.items(dataSource: dataSource)),

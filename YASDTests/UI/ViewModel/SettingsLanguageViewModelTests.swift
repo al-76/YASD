@@ -25,7 +25,8 @@ class SettingsLanguageViewModelTests: XCTestCase {
     func testSearchAndSelectLanguage() {
         // Arrange
         let testValue = "test"
-        let expectedValue = [SettingsLanguageItem(selected: false, language: Language(name: testValue, code: testValue))]
+        let expectedValue = SettingsLanguageItemResult
+            .success([SettingsLanguageItem(selected: false, language: Language(name: testValue, code: testValue))])
         let inputSearch = scheduler.createHotObservable([
             .next(150, "error"),
             .next(160, "rx_error"),
@@ -37,7 +38,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
             .next(500, testValue),
             .completed(600)
         ]).asDriver(onErrorJustReturn: "")
-        let outputLanguageList = scheduler.createObserver([SettingsLanguageItem].self)
+        let outputLanguageList = scheduler.createObserver(SettingsLanguageItemResult.self)
         let viewModel = SettingsLanguageViewModel(getLanguageList: createMockGetLanguageListUseCase(), updateLanguage: createMockUpdateLanguageUseCase())
         let input = SettingsLanguageViewModel.Input(search: inputSearch,
                                                     select: inputSelect)
@@ -51,8 +52,8 @@ class SettingsLanguageViewModelTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(outputLanguageList.events, [
-            .next(150, []),
-            .next(160, []),
+            .next(150, .failure(TestError.someError)),
+            .next(160, .failure(TestError.someError)),
             .next(200, expectedValue),
             .next(450, expectedValue),
             .next(500, expectedValue),

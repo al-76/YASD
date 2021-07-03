@@ -19,7 +19,7 @@ class SettingsLanguageViewModel: ViewModel {
     }
     
     struct Output {
-        let languages: Driver<[SettingsLanguageItem]>
+        let languages: Driver<SettingsLanguageItemResult>
     }
     
     init(getLanguageList: AnyUseCase<String, SettingsLanguageItemResult>,
@@ -46,8 +46,7 @@ class SettingsLanguageViewModel: ViewModel {
             return self.getSettings(with: language)
         }
         
-        return Output(languages: Driver.merge(selected, searched)
-                        .map { $0.getOrDefault([]) })
+        return Output(languages: Driver.merge(selected, searched))
     }
     
     private func getSettings(with language: String) -> Driver<SettingsLanguageItemResult> {

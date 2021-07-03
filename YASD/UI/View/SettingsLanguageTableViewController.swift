@@ -9,16 +9,19 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RMessage
 
 class SettingsLanguageTableViewController: UITableViewController {
     var viewModel: SettingsLanguageViewModel!
     
     private let disposeBag = DisposeBag()
     private var searchController: UISearchController!
+    private let rmController = RMController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rmController.presentationViewController = self
         customizeView()
         bindToModel()
     }
@@ -57,12 +60,21 @@ class SettingsLanguageTableViewController: UITableViewController {
                 self?.tableView.cellForRow(at: $0)?.accessoryType = .none
             }),
             // languages
-            output.languages.drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { (_, result, cell) in
+            output.languages.map { [weak self] result -> [SettingsLanguageItem] in
+                result.onFailure { self?.handleError($0) }.getOrDefault([])
+            }
+            .drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { (_, result, cell) in
                 if let settingsCell = cell as? SettingsLanguageTableViewCell,
                     let cellLabel = settingsCell.textLabel {
                     cellLabel.text = result.language.name
                 }
                 cell.accessoryType = (result.selected ? .checkmark : .none)
         })
+    }
+    
+    private func handleError(_ error: Error) {
+        rmController.showMessage(withSpec: errorSpec,
+                                 title: "Error",
+                                 body: error.localizedDescription)
     }
 }
