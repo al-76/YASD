@@ -117,6 +117,7 @@
 		CD2A5E0126909DDA00B6E49A /* DefaultHtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5E0026909DDA00B6E49A /* DefaultHtmlParser.swift */; };
 		CD2A5E0326909E7A00B6E49A /* DefaultMarkdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5E0226909E7A00B6E49A /* DefaultMarkdown.swift */; };
 		CD2A5E0526909F0E00B6E49A /* DefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5E0426909F0E00B6E49A /* DefaultStorage.swift */; };
+		CD2A5E0726909F7700B6E49A /* DefaultPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5E0626909F7700B6E49A /* DefaultPlayer.swift */; };
 		CD2A5E092690A03100B6E49A /* DefaultDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5E082690A03000B6E49A /* DefaultDataCache.swift */; };
 		CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
 		CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
@@ -303,6 +304,7 @@
 		CD2A5E0026909DDA00B6E49A /* DefaultHtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHtmlParser.swift; sourceTree = "<group>"; };
 		CD2A5E0226909E7A00B6E49A /* DefaultMarkdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMarkdown.swift; sourceTree = "<group>"; };
 		CD2A5E0426909F0E00B6E49A /* DefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorage.swift; sourceTree = "<group>"; };
+		CD2A5E0626909F7700B6E49A /* DefaultPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPlayer.swift; sourceTree = "<group>"; };
 		CD2A5E082690A03000B6E49A /* DefaultDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataCache.swift; sourceTree = "<group>"; };
 		CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTextRepository.swift; sourceTree = "<group>"; };
 		CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAboutTextRepository.swift; sourceTree = "<group>"; };
@@ -357,11 +359,11 @@
 			isa = PBXGroup;
 			children = (
 				CD2A5E082690A03000B6E49A /* DefaultDataCache.swift */,
+				CD2A5E0626909F7700B6E49A /* DefaultPlayer.swift */,
 				CD2A5E0426909F0E00B6E49A /* DefaultStorage.swift */,
 				CD2A5E0026909DDA00B6E49A /* DefaultHtmlParser.swift */,
 				CD2A5E0226909E7A00B6E49A /* DefaultMarkdown.swift */,
 				2FCB2DE022A111540053B758 /* DefaultNetwork.swift */,
-				2F5F8BBE2322A7DA00EF6A85 /* Player.swift */,
 				17260B8124661338002F730A /* Spotlight.swift */,
 			);
 			path = Platform;
@@ -761,6 +763,7 @@
 			isa = PBXGroup;
 			children = (
 				2F393ACD233E255500F315FC /* DataCache.swift */,
+				2F5F8BBE2322A7DA00EF6A85 /* Player.swift */,
 				2F7321862313E4A000CC0822 /* Storage.swift */,
 				17A9BC7422B5273B002F769B /* HtmlParser.swift */,
 				17A9BC7622B5284F002F769B /* Markdown.swift */,
@@ -1127,6 +1130,7 @@
 				2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */,
 				CDE70521262AEFC20015CD07 /* RestoreBookmarkUseCase.swift in Sources */,
 				CD2A5DFC26909A3500B6E49A /* RMController+Extensions.swift in Sources */,
+				CD2A5E0726909F7700B6E49A /* DefaultPlayer.swift in Sources */,
 				CD2A5E0526909F0E00B6E49A /* DefaultStorage.swift in Sources */,
 				CDE7051A262AEE640015CD07 /* SearchBookmarkUseCase.swift in Sources */,
 				6F9551DB2631C7D8007AD633 /* AnyStorageRepository+Suggestion+Extensions.swift in Sources */,

@@ -32,7 +32,7 @@ func configurePlatform(_ container: Container) {
         .inObjectScope(.container)
     container.register(Storage.self) { _ in DefaultStorage() }
         .inObjectScope(.container)
-    container.register(Player.self) { _ in Player() }
+    container.register(Player.self) { _ in DefaultPlayer() }
         .inObjectScope(.container)
     container.register(DataCache.self) { _, name in DefaultDataCache(name: name) }
         .inObjectScope(.container)
