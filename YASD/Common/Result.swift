@@ -58,4 +58,11 @@ extension Result {
         handler(error)
         return self
     }
+    
+    @discardableResult
+    func onFailure(_ handler: ((Error) -> ())?) -> Self {
+        guard case let .failure(error) = self else { return self }
+        handler?(error)
+        return self
+    }
 }

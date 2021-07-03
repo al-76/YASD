@@ -38,7 +38,7 @@ class SettingsTableViewController: UITableViewController {
                                                           clearCache: clearCache.asDriver(onErrorJustReturn: ())))
         disposeBag.insert(
             output.selectedLanguage.map { [weak self] result -> String in
-                result.onFailure { self?.handleError($0) }
+                result.onFailure(self?.rmController.handleError)
                     .getOrDefault(Language.defaultLanguage).name
             }
             .drive(languageLabel.rx.text),
@@ -72,12 +72,6 @@ class SettingsTableViewController: UITableViewController {
         actionSheet.addAction(cancelAction)
 
         self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    private func handleError(_ error: Error) {
-        rmController.showMessage(withSpec: errorSpec,
-                                 title: "Error",
-                                 body: error.localizedDescription)
     }
 }
 

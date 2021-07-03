@@ -61,7 +61,8 @@ class SettingsLanguageTableViewController: UITableViewController {
             }),
             // languages
             output.languages.map { [weak self] result -> [SettingsLanguageItem] in
-                result.onFailure { self?.handleError($0) }.getOrDefault([])
+                result.onFailure(self?.rmController.handleError)
+                    .getOrDefault([])
             }
             .drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { (_, result, cell) in
                 if let settingsCell = cell as? SettingsLanguageTableViewCell,
@@ -70,11 +71,5 @@ class SettingsLanguageTableViewController: UITableViewController {
                 }
                 cell.accessoryType = (result.selected ? .checkmark : .none)
         })
-    }
-    
-    private func handleError(_ error: Error) {
-        rmController.showMessage(withSpec: errorSpec,
-                                 title: "Error",
-                                 body: error.localizedDescription)
     }
 }

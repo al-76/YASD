@@ -112,6 +112,7 @@
 		6FFF3B412684C6540023EF94 /* MockFactory+StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B402684C6540023EF94 /* MockFactory+StorageRepository.swift */; };
 		6FFF3B432684C9090023EF94 /* MockFactory+DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B422684C9090023EF94 /* MockFactory+DictionaryRepository.swift */; };
 		6FFF3B452684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B442684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift */; };
+		CD2A5DFC26909A3500B6E49A /* RMController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */; };
 		CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
 		CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
 		CD50CDF926862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */; };
@@ -292,6 +293,7 @@
 		885F7C7B825324469E8E4CF0 /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
 		A39F68F096DE88505B4EC216 /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
 		A5478ABEF2BF7C7432297DEA /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMController+Extensions.swift"; sourceTree = "<group>"; };
 		CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTextRepository.swift; sourceTree = "<group>"; };
 		CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAboutTextRepository.swift; sourceTree = "<group>"; };
 		CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreBookmarksUseCaseTests.swift; sourceTree = "<group>"; };
@@ -556,6 +558,7 @@
 				2FDD05A623B2588C0018F223 /* BookmarksTableViewController.swift */,
 				2F2980C623B2660F004F7FA9 /* BookmarksTableViewCell.swift */,
 				17260B7D24660138002F730A /* AboutViewController.swift */,
+				CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1096,6 +1099,7 @@
 				6FFDBE29268D101500D6BF69 /* GetCacheSizeUseCase.swift in Sources */,
 				2F2980C923B3866C004F7FA9 /* FoundWord.swift in Sources */,
 				CDE70521262AEFC20015CD07 /* RestoreBookmarkUseCase.swift in Sources */,
+				CD2A5DFC26909A3500B6E49A /* RMController+Extensions.swift in Sources */,
 				CDE7051A262AEE640015CD07 /* SearchBookmarkUseCase.swift in Sources */,
 				6F9551DB2631C7D8007AD633 /* AnyStorageRepository+Suggestion+Extensions.swift in Sources */,
 				CDE7052A262AF5AE0015CD07 /* PlaySoundUseCase.swift in Sources */,

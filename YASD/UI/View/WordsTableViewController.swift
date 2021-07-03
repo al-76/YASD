@@ -72,7 +72,8 @@ class WordsTableViewController: UITableViewController {
                 .bind(to: searchResultsController.search),
             // found words
             output.foundWords.map { [weak self] result -> [FoundWord] in
-                result.onFailure { self?.handleError($0) }.getOrDefault([])
+                result.onFailure(self?.rmController.handleError)
+                    .getOrDefault([])
             }
             .drive(tableView.rx.items(cellIdentifier: "WordsTableCell")) { [weak self] (_, result, cell) in
                 if let wordsCell = cell as? WordsTableViewCell {
@@ -84,7 +85,7 @@ class WordsTableViewController: UITableViewController {
             },
             // played, bookmarked
             Driver.merge(output.played, output.bookmarked).drive(onNext: { [weak self] result in
-                result.onFailure { self?.handleError($0) }
+                result.onFailure(self?.rmController.handleError)
             }),
             // loading
             output.loading.drive(activityIndicator.rx.isAnimating)
@@ -140,11 +141,5 @@ class WordsTableViewController: UITableViewController {
                 .map { _ in result.word }
                 .bind(to: removeBookmark)
         )
-    }
-    
-    private func handleError(_ error: Error) {
-        rmController.showMessage(withSpec: errorSpec,
-                                 title: "Error",
-                                 body: error.localizedDescription)
     }
 }

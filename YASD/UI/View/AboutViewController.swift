@@ -29,15 +29,9 @@ class AboutViewController: UIViewController {
         let output = viewModel.transform(from: AboutViewModel.Input())
         disposeBag.insert(
             output.text.map { [weak self] result -> NSAttributedString in
-                result.onFailure { self?.handleError($0) }
+                result.onFailure(self?.rmController.handleError)
                     .getOrDefault(NSAttributedString())
             }.drive(textView.rx.attributedText)
         )
-    }
-    
-    private func handleError(_ error: Error) {
-        rmController.showMessage(withSpec: errorSpec,
-                                 title: "Error",
-                                 body: error.localizedDescription)
     }
 }

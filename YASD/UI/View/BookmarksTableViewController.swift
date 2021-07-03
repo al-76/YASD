@@ -81,13 +81,14 @@ class BookmarksTableViewController: UITableViewController {
         disposeBag.insert(
             // bookmarks
             output.bookmarks.map { [weak self] result -> [FormattedWord] in
-                result.onFailure { self?.handleError($0) }.getOrDefault([])
+                result.onFailure(self?.rmController.handleError)
+                    .getOrDefault([])
             }
             .map { bookmarks in [BookmarkItemSection(header: "bookmarks", items: bookmarks)] }
             .drive(tableView.rx.items(dataSource: dataSource)),
             // played
             output.played.drive(onNext: { [weak self] result in
-                result.onFailure { self?.handleError($0) }
+                result.onFailure(self?.rmController.handleError)
             }),
             // search restored item
             output.restored.drive(searchController.searchBar.rx.text),
@@ -96,12 +97,6 @@ class BookmarksTableViewController: UITableViewController {
                 .map { $0.row }
                 .bind(to: removeBookmark)
         )
-    }
-    
-    private func handleError(_ error: Error) {
-        rmController.showMessage(withSpec: errorSpec,
-                                 title: "Error",
-                                 body: error.localizedDescription)
     }
 }
 

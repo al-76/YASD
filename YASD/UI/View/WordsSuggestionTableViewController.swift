@@ -53,7 +53,8 @@ class WordsSuggestionTableViewController: UITableViewController {
         disposeBag.insert(
             // suggestions
             output.suggestions.map { [weak self] result -> [SuggestionItem] in
-                result.onFailure { self?.handleError($0) }.getOrDefault([])
+                result.onFailure(self?.rmController.handleError)
+                    .getOrDefault([])
             }
             .map { suggestions in [SuggestionItemSection(header: "suggestions", items: suggestions)] }
             .drive(tableView.rx.items(dataSource: dataSource)),
@@ -68,12 +69,6 @@ class WordsSuggestionTableViewController: UITableViewController {
         guard let cell = tableView.cellForRow(at: index) as? WordsSuggestionTableViewCell,
             let text = cell.label.text else { return "" }
         return text
-    }
-    
-    private func handleError(_ error: Error) {
-        rmController.showMessage(withSpec: errorSpec,
-                                 title: "Error",
-                                 body: error.localizedDescription)
     }
 }
 
