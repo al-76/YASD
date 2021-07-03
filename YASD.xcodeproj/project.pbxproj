@@ -115,6 +115,7 @@
 		CD2A5DFC26909A3500B6E49A /* RMController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */; };
 		CD2A5DFF26909C0800B6E49A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5DFE26909C0800B6E49A /* Network.swift */; };
 		CD2A5E0526909F0E00B6E49A /* DefaultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5E0426909F0E00B6E49A /* DefaultStorage.swift */; };
+		CD2A5E092690A03100B6E49A /* DefaultDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5E082690A03000B6E49A /* DefaultDataCache.swift */; };
 		CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
 		CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
 		CD50CDF926862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */; };
@@ -297,6 +298,8 @@
 		A5478ABEF2BF7C7432297DEA /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMController+Extensions.swift"; sourceTree = "<group>"; };
 		CD2A5DFE26909C0800B6E49A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		CD2A5E0426909F0E00B6E49A /* DefaultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorage.swift; sourceTree = "<group>"; };
+		CD2A5E082690A03000B6E49A /* DefaultDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDataCache.swift; sourceTree = "<group>"; };
 		CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTextRepository.swift; sourceTree = "<group>"; };
 		CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAboutTextRepository.swift; sourceTree = "<group>"; };
 		CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreBookmarksUseCaseTests.swift; sourceTree = "<group>"; };
@@ -349,12 +352,12 @@
 		17A9BC7322B5271D002F769B /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				CD2A5E082690A03000B6E49A /* DefaultDataCache.swift */,
 				CD2A5E0426909F0E00B6E49A /* DefaultStorage.swift */,
 				2FCB2DE022A111540053B758 /* DefaultNetwork.swift */,
 				17A9BC7422B5273B002F769B /* HtmlParser.swift */,
 				17A9BC7622B5284F002F769B /* Markdown.swift */,
 				2F5F8BBE2322A7DA00EF6A85 /* Player.swift */,
-				2F393ACD233E255500F315FC /* DataCache.swift */,
 				17260B8124661338002F730A /* Spotlight.swift */,
 			);
 			path = Platform;
@@ -753,6 +756,7 @@
 		CD2A5DFD26909BFE00B6E49A /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				2F393ACD233E255500F315FC /* DataCache.swift */,
 				2F7321862313E4A000CC0822 /* Storage.swift */,
 				CD2A5DFE26909C0800B6E49A /* Network.swift */,
 			);
@@ -1052,6 +1056,7 @@
 				6FFB54EA2629D4360063483D /* SettingsRepository.swift in Sources */,
 				2F31739D22CCF84A008944EE /* SettingsLanguageViewModel.swift in Sources */,
 				2F0D2B26237EA57B00F23F3B /* LexinApi.swift in Sources */,
+				CD2A5E092690A03100B6E49A /* DefaultDataCache.swift in Sources */,
 				CDF9598325E150210059A1EB /* SuggestionDictionaryRepository.swift in Sources */,
 				CDE7053D2631FCE90015CD07 /* RemoveBookmarkUseCase.swift in Sources */,
 				2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */,

@@ -34,7 +34,7 @@ func configurePlatform(_ container: Container) {
         .inObjectScope(.container)
     container.register(Player.self) { _ in Player() }
         .inObjectScope(.container)
-    container.register(DataCache.self) { _, name in DataCache(name: name) }
+    container.register(DataCache.self) { _, name in DefaultDataCache(name: name) }
         .inObjectScope(.container)
     container.register(ExternalCacheService.self) { _ in Spotlight() }
         .inObjectScope(.container)

@@ -1,21 +1,17 @@
 //
-//  DataCache.swift
+//  DefaultDataCache.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 27/09/2019.
-//  Copyright © 2019 yac. All rights reserved.
+//  Created by Vyacheslav Konopkin on 03.07.2021.
+//  Copyright © 2021 yac. All rights reserved.
 //
 
 import RxSwift
 import Foundation
 import Cache
 
-typealias DataCacheResult = Result<Data>
-typealias DataCacheOptResult = Result<Data?>
-typealias DataCacheBoolResult = Result<Bool>
-
-class DataCache {
-    enum DataCacheError: Error {
+class DefaultDataCache: DataCache {
+    enum DefaultDataCacheError: Error {
         case noContext
     }
     
@@ -38,7 +34,7 @@ class DataCache {
                     observer.onNext(.failure(error))
                 }
             } else {
-                observer.onNext(.failure(DataCacheError.noContext))
+                observer.onNext(.failure(DefaultDataCacheError.noContext))
             }
             observer.onCompleted()
             return Disposables.create {}
@@ -51,7 +47,7 @@ class DataCache {
                 let data = try? self.getStorage().object(forKey: key)
                 observer.onNext(.success(data))
             } else {
-                observer.onNext(.failure(DataCacheError.noContext))
+                observer.onNext(.failure(DefaultDataCacheError.noContext))
             }
             observer.onCompleted()
             return Disposables.create {}
@@ -80,7 +76,7 @@ class DataCache {
                     observer.onNext(.failure(error))
                 }
             } else {
-                observer.onNext(.failure(DataCacheError.noContext))
+                observer.onNext(.failure(DefaultDataCacheError.noContext))
             }
             observer.onCompleted()
             return Disposables.create {}
@@ -105,3 +101,4 @@ class DataCache {
         return storage!
     }
 }
+
