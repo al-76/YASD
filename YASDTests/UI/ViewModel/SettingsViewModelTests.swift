@@ -235,13 +235,13 @@ class SettingsViewModelTests: XCTestCase {
         }
     }
     
-    private func createMockClearCacheUseCase() -> MockAnyUseCase<Void, Bool> {
+    private func createMockClearCacheUseCase() -> MockAnyUseCase<Void, CacheServiceBoolResult> {
         return MockFactory.createMockUseCase { _ in
             nil
         } onRxError: { _ in
             nil
         } onSuccess: { _ in
-            true
+            .success(true)
         }
     }
     

@@ -193,8 +193,8 @@ func configureUseCase(_ container: Container) {
         AnyUseCase<Void, StorageServiceResult>(wrapped: ClearHistoryUseCase(history: container.resolve(AnyStorageRepository<Suggestion>.self)!))
     }
     .inObjectScope(.container)
-    container.register(AnyUseCase<Void, Bool>.self, name: "ClearCacheUseCase") { container in
-        AnyUseCase<Void, Bool>(wrapped: ClearCacheUseCase(cache: container.resolve(CacheService.self)!))
+    container.register(AnyUseCase<Void, CacheServiceBoolResult>.self, name: "ClearCacheUseCase") { container in
+        AnyUseCase<Void, CacheServiceBoolResult>(wrapped: ClearCacheUseCase(cache: container.resolve(CacheService.self)!))
     }
     .inObjectScope(.container)
 
@@ -272,7 +272,7 @@ func configureViewModel(_ container: Container) {
                           getHistorySize: container.resolve(AnyUseCase<Void, String>.self, name: "GetHistorySizeUseCase")!,
                           getCacheSize: container.resolve(AnyUseCase<Void, String>.self, name: "GetCacheSizeUseCase")!,
                           clearHistory: container.resolve(AnyUseCase<Void, StorageServiceResult>.self, name: "ClearHistoryUseCase")!,
-                          clearCache: container.resolve(AnyUseCase<Void, Bool>.self, name: "ClearCacheUseCase")!)
+                          clearCache: container.resolve(AnyUseCase<Void, CacheServiceBoolResult>.self, name: "ClearCacheUseCase")!)
     }
     .inObjectScope(.container)
     

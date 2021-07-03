@@ -14,7 +14,7 @@ class SettingsViewModel: ViewModel {
     private let getHistorySize: AnyUseCase<Void, String>
     private let getCacheSize: AnyUseCase<Void, String>
     private let clearHistory: AnyUseCase<Void, StorageServiceResult>
-    private let clearCache: AnyUseCase<Void, Bool>
+    private let clearCache: AnyUseCase<Void, CacheServiceBoolResult>
     
     struct Input {
         let clearHistory: Driver<Void>
@@ -31,7 +31,7 @@ class SettingsViewModel: ViewModel {
          getHistorySize: AnyUseCase<Void, String>,
          getCacheSize: AnyUseCase<Void, String>,
          clearHistory: AnyUseCase<Void, StorageServiceResult>,
-         clearCache: AnyUseCase<Void, Bool>) {
+         clearCache: AnyUseCase<Void, CacheServiceBoolResult>) {
         self.getLanguage = getLanguage
         self.getHistorySize = getHistorySize
         self.getCacheSize = getCacheSize
@@ -45,9 +45,9 @@ class SettingsViewModel: ViewModel {
         let cacheSize = getCacheSize.execute(with: ())
             .asDriver(onErrorJustReturn: "")
         let updatedCacheSize = input.clearCache
-            .flatMapLatest { [weak self] _ -> Driver<Bool> in
-            guard let self = self else { return .just(false) }
-            return self.clearCache.execute(with: ()).asDriver(onErrorJustReturn: false)
+            .flatMapLatest { [weak self] _ -> Driver<CacheServiceBoolResult> in
+            guard let self = self else { return .just(.success(false)) }
+                return self.clearCache.execute(with: ()).asDriver { .just(.failure($0)) }
         }
         .flatMap { _ in cacheSize }
         let updatedHistorySize = input.clearHistory

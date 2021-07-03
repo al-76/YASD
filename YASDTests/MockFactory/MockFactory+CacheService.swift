@@ -16,7 +16,7 @@ extension MockFactory {
         let mock = MockCacheService()
         stub(mock) { stub in
             when(stub.getSize()).thenReturn(.just(testSize))
-            when(stub.clear()).thenReturn(.just(true))
+            when(stub.clear()).thenReturn(.just(.success(true)))
         }
         return mock
     }

@@ -20,18 +20,18 @@ class ClearCacheUseCaseTests: XCTestCase {
     
     func testExecute() {
         // Arrange
-        let outputSize = scheduler.createObserver(Bool.self)
+        let outputResult = scheduler.createObserver(CacheServiceBoolResult.self)
         let useCase = ClearCacheUseCase(cache: MockFactory.createMockCacheService(0))
         let res = useCase.execute(with: ())
-        res.bind(to: outputSize)
+        res.bind(to: outputResult)
             .disposed(by: disposeBag)
 
         // Act
         scheduler.start()
 
         // Assert
-        XCTAssertEqual(outputSize.events, [
-            .next(0, true),
+        XCTAssertEqual(outputResult.events, [
+            .next(0, .success(true)),
             .completed(0)
         ])
     }

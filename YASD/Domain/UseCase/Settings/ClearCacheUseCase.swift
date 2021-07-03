@@ -11,7 +11,7 @@ import RxSwift
 
 class ClearCacheUseCase: UseCase {
     typealias Input = Void
-    typealias Output = Bool
+    typealias Output = CacheServiceBoolResult
     
     private let cache: CacheService
     
@@ -19,7 +19,7 @@ class ClearCacheUseCase: UseCase {
         self.cache = cache
     }
         
-    func execute(with input: Void) -> Observable<Bool> {
+    func execute(with input: Void) -> Observable<CacheServiceBoolResult> {
         return cache.clear()
     }
 }

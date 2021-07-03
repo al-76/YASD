@@ -20,17 +20,17 @@ class ClearHistoryUseCaseTests: XCTestCase {
     
     func testExecute() {
         // Arrange
-        let outputSize = scheduler.createObserver(StorageServiceResult.self)
+        let outputResult = scheduler.createObserver(StorageServiceResult.self)
         let useCase = ClearHistoryUseCase(history: MockFactory.createSuggestionStorageRepository("", 0))
         let res = useCase.execute(with: ())
-        res.bind(to: outputSize)
+        res.bind(to: outputResult)
             .disposed(by: disposeBag)
 
         // Act
         scheduler.start()
 
         // Assert
-        XCTAssertEqual(outputSize.events, [
+        XCTAssertEqual(outputResult.events, [
             .next(0, .success(true)),
             .completed(0)
         ])

@@ -10,8 +10,15 @@ import RxSwift
 import Foundation
 import Cache
 
-// TODO: return errors
+typealias DataCacheResult = Result<Data>
+typealias DataCacheOptResult = Result<Data?>
+typealias DataCacheBoolResult = Result<Bool>
+
 class DataCache {
+    enum DataCacheError: Error {
+        case noContext
+    }
+    
     private let name: String
     private var storage: Cache.Storage<String, Data>? = nil
     private let changed = PublishSubject<Bool>()
@@ -20,26 +27,31 @@ class DataCache {
         self.name = name
     }
     
-    func save(_ data: Data, forKey key: String) -> Observable<Data> {
+    func save(_ data: Data, forKey key: String) -> Observable<DataCacheResult> {
         return Observable.create { [weak self] observer in
             if let self = self {
-                try? self.getStorage().setObject(data, forKey: key)
-                observer.onNext(data)
-                self.changed.onNext(true)
+                do {
+                    try self.getStorage().setObject(data, forKey: key)
+                    observer.onNext(.success(data))
+                    self.changed.onNext(true)
+                } catch let error {
+                    observer.onNext(.failure(error))
+                }
             } else {
-                observer.onNext(Data())
+                observer.onNext(.failure(DataCacheError.noContext))
             }
             observer.onCompleted()
             return Disposables.create {}
         }
     }
     
-    func load(_ key: String) -> Observable<Data?> {
+    func load(_ key: String) -> Observable<DataCacheOptResult> {
         return Observable.create { [weak self] observer in
             if let self = self {
-                observer.onNext(try? self.getStorage().object(forKey: key))
+                let data = try? self.getStorage().object(forKey: key)
+                observer.onNext(.success(data))
             } else {
-                observer.onNext(nil)
+                observer.onNext(.failure(DataCacheError.noContext))
             }
             observer.onCompleted()
             return Disposables.create {}
@@ -56,15 +68,19 @@ class DataCache {
         return Observable.merge(changedSize, size)
     }
     
-    func clear() -> Observable<Bool> {
+    func clear() -> Observable<DataCacheBoolResult> {
         return Observable.create { [weak self] observer in
             if let self = self {
-                let storage = try? self.getStorage()
-                try? storage?.removeAll()
-                observer.onNext(true)
-                self.changed.onNext(true)
+                do {
+                    let storage = try self.getStorage()
+                    try storage.removeAll()
+                    observer.onNext(.success(true))
+                    self.changed.onNext(true)
+                } catch let error {
+                    observer.onNext(.failure(error))
+                }
             } else {
-                observer.onNext(false)
+                observer.onNext(.failure(DataCacheError.noContext))
             }
             observer.onCompleted()
             return Disposables.create {}
