@@ -47,7 +47,6 @@
 		2F70647823B503570095DE9C /* FoundWord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70647723B503570095DE9C /* FoundWord+Extensions.swift */; };
 		2F7321872313E4A000CC0822 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7321862313E4A000CC0822 /* Storage.swift */; };
 		2F7DA16B2388395700E91C71 /* WordsSuggestionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7DA16A2388395700E91C71 /* WordsSuggestionViewModelTests.swift */; };
-		2F876F1D23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F876F1C23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift */; };
 		2F90DD3D2355FA2300CE8560 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
 		2F90DD402355FC1B00CE8560 /* LexinParserSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */; };
 		2FBCB84823A2949F0080238A /* SearchResultsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBCB84723A2949F0080238A /* SearchResultsTableView.swift */; };
@@ -210,7 +209,6 @@
 		2F70647723B503570095DE9C /* FoundWord+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoundWord+Extensions.swift"; sourceTree = "<group>"; };
 		2F7321862313E4A000CC0822 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		2F7DA16A2388395700E91C71 /* WordsSuggestionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSuggestionViewModelTests.swift; sourceTree = "<group>"; };
-		2F876F1C23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionItem+Extensions.swift"; sourceTree = "<group>"; };
 		2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserWords.swift; sourceTree = "<group>"; };
 		2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinParserSuggestion.swift; sourceTree = "<group>"; };
 		2F97576B2277474200B343B4 /* RxAtomic.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAtomic.framework; path = Carthage/Build/iOS/RxAtomic.framework; sourceTree = "<group>"; };
@@ -474,7 +472,6 @@
 				6F171E5526455E2000C37B28 /* GeneratedMocks.swift */,
 				17EB2816246DCECC00EE8B1D /* MockFactory */,
 				2FE7682122BCEEBA00375292 /* LexinWord+Extensions.swift */,
-				2F876F1C23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift */,
 				2F70647723B503570095DE9C /* FoundWord+Extensions.swift */,
 				17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */,
 				2F661B4E2272E16400C68A5F /* Info.plist */,
@@ -1143,7 +1140,6 @@
 				2FE7682222BCEEBA00375292 /* LexinWord+Extensions.swift in Sources */,
 				2F69AD0922F838C5001942E6 /* SettingsLanguageViewModelTests.swift in Sources */,
 				6F08F5C1268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift in Sources */,
-				2F876F1D23A3ED20003E5FA1 /* SuggestionItem+Extensions.swift in Sources */,
 				17EB2813246DCCB000EE8B1D /* BookmarksViewModelTests.swift in Sources */,
 				2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */,
 				6FAABDD42685F8BD009F6931 /* SearchBookmarksUseCaseTests.swift in Sources */,
