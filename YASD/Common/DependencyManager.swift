@@ -169,16 +169,16 @@ func configureUseCase(_ container: Container) {
     .inObjectScope(.container)
 
     // Settings
-    container.register(AnyUseCase<Void, String>.self, name: "GetLanguageSettingsUseCase") { container in
-        AnyUseCase<Void, String>(wrapped: GetLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
+    container.register(AnyUseCase<Void, SettingsRepositoryLanguageResult>.self, name: "GetLanguageSettingsUseCase") { container in
+        AnyUseCase<Void, SettingsRepositoryLanguageResult>(wrapped: GetLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
     }
     .inObjectScope(.container)
-    container.register(AnyUseCase<String, SettingsLanguageItemResult>.self, name: "GetLanguageListSettingsUseCase") { container in
-        AnyUseCase<String, SettingsLanguageItemResult>(wrapped: GetLanguageListSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
+    container.register(AnyUseCase<String, SettingsRepositoryItemResult>.self, name: "GetLanguageListSettingsUseCase") { container in
+        AnyUseCase<String, SettingsRepositoryItemResult>(wrapped: GetLanguageListSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
     }
     .inObjectScope(.container)
-    container.register(AnyUseCase<String, Bool>.self, name: "UpdateLanguageSettingsUseCase") { container in
-        AnyUseCase<String, Bool>(wrapped: UpdateLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
+    container.register(AnyUseCase<String, SettingsRepositoryResult>.self, name: "UpdateLanguageSettingsUseCase") { container in
+        AnyUseCase<String, SettingsRepositoryResult>(wrapped: UpdateLanguageSettingsUseCase(repository: container.resolve(SettingsRepository.self)!))
     }
     .inObjectScope(.container)
     container.register(AnyUseCase<Void, String>.self, name: "GetHistorySizeUseCase") { container in
@@ -268,7 +268,7 @@ func configureViewModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(SettingsViewModel.self) { container in
-        SettingsViewModel(getLanguage: container.resolve(AnyUseCase<Void, String>.self, name: "GetLanguageSettingsUseCase")!,
+        SettingsViewModel(getLanguage: container.resolve(AnyUseCase<Void, SettingsRepositoryLanguageResult>.self, name: "GetLanguageSettingsUseCase")!,
                           getHistorySize: container.resolve(AnyUseCase<Void, String>.self, name: "GetHistorySizeUseCase")!,
                           getCacheSize: container.resolve(AnyUseCase<Void, String>.self, name: "GetCacheSizeUseCase")!,
                           clearHistory: container.resolve(AnyUseCase<Void, StorageServiceResult>.self, name: "ClearHistoryUseCase")!,
@@ -277,8 +277,8 @@ func configureViewModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(SettingsLanguageViewModel.self) { container in
-        SettingsLanguageViewModel(getLanguageList: container.resolve(AnyUseCase<String, SettingsLanguageItemResult>.self, name: "GetLanguageListSettingsUseCase")!,
-                                  updateLanguage: container.resolve(AnyUseCase<String, Bool>.self, name: "UpdateLanguageSettingsUseCase")!)
+        SettingsLanguageViewModel(getLanguageList: container.resolve(AnyUseCase<String, SettingsRepositoryItemResult>.self, name: "GetLanguageListSettingsUseCase")!,
+                                  updateLanguage: container.resolve(AnyUseCase<String, SettingsRepositoryResult>.self, name: "UpdateLanguageSettingsUseCase")!)
     }
     .inObjectScope(.container)
     

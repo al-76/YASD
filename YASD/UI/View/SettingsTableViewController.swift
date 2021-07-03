@@ -9,10 +9,13 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RMessage
 
 class SettingsTableViewController: UITableViewController {
     var viewModel: SettingsViewModel!
+    
     let disposeBag = DisposeBag()
+    private let rmController = RMController()
     
     private let clearHistory = PublishRelay<Void>()
     private let clearCache = PublishRelay<Void>()
@@ -26,6 +29,7 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rmController.presentationViewController = self
         bindToModel()
     }
     
@@ -33,7 +37,11 @@ class SettingsTableViewController: UITableViewController {
         let output = viewModel.transform(from: SettingsViewModel.Input(clearHistory: clearHistory.asDriver(onErrorJustReturn: ()),
                                                           clearCache: clearCache.asDriver(onErrorJustReturn: ())))
         disposeBag.insert(
-            output.selectedLanguage.drive(languageLabel.rx.text),
+            output.selectedLanguage.map { [weak self] result -> String in
+                result.onFailure { self?.handleError($0) }
+                    .getOrDefault(Language.defaultLanguage).name
+            }
+            .drive(languageLabel.rx.text),
             output.historySize.drive(onNext: { [weak self] size in
                 self?.clearHistoryLabel.insertValue(size)
             }),
@@ -64,6 +72,12 @@ class SettingsTableViewController: UITableViewController {
         actionSheet.addAction(cancelAction)
 
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func handleError(_ error: Error) {
+        rmController.showMessage(withSpec: errorSpec,
+                                 title: "Error",
+                                 body: error.localizedDescription)
     }
 }
 

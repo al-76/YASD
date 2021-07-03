@@ -15,7 +15,7 @@ extension MockFactory {
     static func createMockSettingsRepository(_ publishSubject: PublishSubject<Language>) -> MockSettingsRepository {
         let mock = MockSettingsRepository()
         stub(mock) { stub in
-            when(stub.getLanguage()).then { _ in .just(Language(name: "test", code: "test")) }
+            when(stub.getLanguage()).then { _ in .just(.success(Language(name: "test", code: "test"))) }
             when(stub.getLanguageBehaviour()).then { _ in publishSubject }
         }
         return mock

@@ -9,9 +9,13 @@
 import Foundation
 import RxSwift
 
+typealias SettingsRepositoryResult = Result<Bool>
+typealias SettingsRepositoryLanguageResult = Result<Language>
+typealias SettingsRepositoryItemResult = Result<[SettingsLanguageItem]>
+
 protocol SettingsRepository {
-    func setLanguage(_ language: String) -> Observable<Void>
-    func getLanguage() -> Observable<Language>
-    func getLanguageList(with name: String) -> Observable<SettingsLanguageItemResult>
+    func setLanguage(_ language: String) -> Observable<SettingsRepositoryResult>
+    func getLanguage() -> Observable<SettingsRepositoryLanguageResult>
+    func getLanguageList(with name: String) -> Observable<SettingsRepositoryItemResult>
     func getLanguageBehaviour() -> PublishSubject<Language>
 }

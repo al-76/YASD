@@ -21,7 +21,7 @@ class UpdateLanguageSettingsUseCaseTests: XCTestCase {
     func testExecute() {
         // Arrange
         let testValue = "test"
-        let outputSetLanguage = scheduler.createObserver(Bool.self)
+        let outputSetLanguage = scheduler.createObserver(SettingsRepositoryResult.self)
         let useCase = UpdateLanguageSettingsUseCase(repository: createMockSettingsRepository())
         let res = useCase.execute(with: testValue)
         res.bind(to: outputSetLanguage)
@@ -32,7 +32,7 @@ class UpdateLanguageSettingsUseCaseTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(outputSetLanguage.events, [
-            .next(0, true),
+            .next(0, .success(true)),
             .completed(0)
         ])
     }
@@ -41,7 +41,7 @@ class UpdateLanguageSettingsUseCaseTests: XCTestCase {
         let mock = MockSettingsRepository()
         stub(mock) { stub in
             when(stub.setLanguage(any())).then { _ in
-                return .just(())
+                return .just(.success(true))
             }
         }
         return mock

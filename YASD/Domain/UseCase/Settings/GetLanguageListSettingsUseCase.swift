@@ -11,7 +11,7 @@ import RxSwift
 
 class GetLanguageListSettingsUseCase: UseCase {
     typealias Input = String
-    typealias Output = SettingsLanguageItemResult
+    typealias Output = SettingsRepositoryItemResult
     
     private let repository: SettingsRepository
 
@@ -19,7 +19,7 @@ class GetLanguageListSettingsUseCase: UseCase {
         self.repository = repository
     }
     
-    func execute(with input: String) -> Observable<SettingsLanguageItemResult> {
+    func execute(with input: String) -> Observable<SettingsRepositoryItemResult> {
         return repository.getLanguageList(with: input)
     }
 }

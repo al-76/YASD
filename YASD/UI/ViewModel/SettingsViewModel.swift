@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class SettingsViewModel: ViewModel {
-    private let getLanguage: AnyUseCase<Void, String>
+    private let getLanguage: AnyUseCase<Void, SettingsRepositoryLanguageResult>
     private let getHistorySize: AnyUseCase<Void, String>
     private let getCacheSize: AnyUseCase<Void, String>
     private let clearHistory: AnyUseCase<Void, StorageServiceResult>
@@ -22,12 +22,12 @@ class SettingsViewModel: ViewModel {
     }
     
     struct Output {
-        let selectedLanguage: Driver<String>
+        let selectedLanguage: Driver<SettingsRepositoryLanguageResult>
         let historySize: Driver<String>
         let cacheSize: Driver<String>
     }
 
-    init(getLanguage: AnyUseCase<Void, String>,
+    init(getLanguage: AnyUseCase<Void, SettingsRepositoryLanguageResult>,
          getHistorySize: AnyUseCase<Void, String>,
          getCacheSize: AnyUseCase<Void, String>,
          clearHistory: AnyUseCase<Void, StorageServiceResult>,
@@ -57,7 +57,7 @@ class SettingsViewModel: ViewModel {
         }
         .flatMap { _ in historySize }
         return Output(selectedLanguage: getLanguage.execute(with: ())
-                        .asDriver(onErrorJustReturn: Language.defaultLanguage.name),
+                        .asDriver { .just(.failure($0)) },
                       historySize: Driver.merge(historySize, updatedHistorySize),
                       cacheSize: Driver.merge(cacheSize, updatedCacheSize))
     }

@@ -27,9 +27,14 @@ class AddSuggestionUseCase: UseCase {
     
     func execute(with input: String) -> Observable<SuggestionItemResult> {
         let word = input.lowercased()
-        let foundSuggestions = settings.getLanguage().flatMap { [weak self] language -> Observable<SuggestionResult> in
+        let foundSuggestions = settings.getLanguage().flatMap { [weak self] result -> Observable<SuggestionResult> in
             guard let self = self else { return .just(.success([])) }
-            return self.suggestions.search(word, language)
+            switch(result) {
+            case let .success(language):
+                return self.suggestions.search(word, language)
+            case let .failure(error):
+                return .just(.failure(error))
+            }
         }
         return history.add(word)
             .flatMap { [weak self] _ -> Observable<SuggestionItemResult> in

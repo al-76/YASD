@@ -25,7 +25,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
     func testSearchAndSelectLanguage() {
         // Arrange
         let testValue = "test"
-        let expectedValue = SettingsLanguageItemResult
+        let expectedValue = SettingsRepositoryItemResult
             .success([SettingsLanguageItem(selected: false, language: Language(name: testValue, code: testValue))])
         let inputSearch = scheduler.createHotObservable([
             .next(150, "error"),
@@ -38,7 +38,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
             .next(500, testValue),
             .completed(600)
         ]).asDriver(onErrorJustReturn: "")
-        let outputLanguageList = scheduler.createObserver(SettingsLanguageItemResult.self)
+        let outputLanguageList = scheduler.createObserver(SettingsRepositoryItemResult.self)
         let viewModel = SettingsLanguageViewModel(getLanguageList: createMockGetLanguageListUseCase(), updateLanguage: createMockUpdateLanguageUseCase())
         let input = SettingsLanguageViewModel.Input(search: inputSearch,
                                                     select: inputSelect)
@@ -61,7 +61,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
         ])
     }
     
-    private func createMockGetLanguageListUseCase() -> MockAnyUseCase<String, SettingsLanguageItemResult> {
+    private func createMockGetLanguageListUseCase() -> MockAnyUseCase<String, SettingsRepositoryItemResult> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
         } onRxError: { value in
@@ -71,13 +71,13 @@ class SettingsLanguageViewModelTests: XCTestCase {
         }
     }
     
-    private func createMockUpdateLanguageUseCase() -> MockAnyUseCase<String, Bool> {
+    private func createMockUpdateLanguageUseCase() -> MockAnyUseCase<String, SettingsRepositoryResult> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
         } onRxError: { value in
             nil
         } onSuccess: { value in
-            true
+            .success(true)
         }
     }
 }

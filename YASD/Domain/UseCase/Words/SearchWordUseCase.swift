@@ -27,9 +27,14 @@ class SearchWordUseCase: UseCase {
     
     func execute(with input: Input) -> Observable<FoundWordResult> {
         let word = input.word.lowercased()
-        let foundWords = settings.getLanguage().flatMap { [weak self] language -> Observable<FoundWordResult> in
+        let foundWords = settings.getLanguage().flatMap { [weak self] result -> Observable<FoundWordResult> in
             guard let self = self else { return .just(.success([])) }
-            return self.words.search(word, language)
+            switch(result) {
+            case let .success(language):
+                return self.words.search(word, language)
+            case let .failure(error):
+                return .just(.failure(error))
+            }
         }.trackActivity(input.indicator)
         let changedBookmarks = bookmarks.getChangedSubject().filter { $0 }
         let changedLanguage = settings.getLanguageBehaviour().map { _ in true }

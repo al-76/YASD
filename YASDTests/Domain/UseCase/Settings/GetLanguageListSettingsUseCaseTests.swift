@@ -21,7 +21,7 @@ class GetLanguageListSettingsUseCaseTests: XCTestCase {
     func testExecute() {
         // Arrange
         let testValue = "test"
-        let outputLanguageItems = scheduler.createObserver(SettingsLanguageItemResult.self)
+        let outputLanguageItems = scheduler.createObserver(SettingsRepositoryItemResult.self)
         let useCase = GetLanguageListSettingsUseCase(repository: createMockSettingsRepository())
         let res = useCase.execute(with: testValue)
         res.bind(to: outputLanguageItems)
