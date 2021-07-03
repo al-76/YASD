@@ -157,8 +157,8 @@ func configureService(_ container: Container) {
 
 func configureUseCase(_ container: Container) {
     // About
-    container.register(AnyUseCase<Void, NSAttributedString>.self, name: "GetTextAboutUseCase") { container in
-        AnyUseCase<Void, NSAttributedString>(wrapped: GetTextAboutUseCase(repository: container.resolve(AboutTextRepository.self)!))
+    container.register(AnyUseCase<Void, AboutTextRepositoryResult>.self, name: "GetTextAboutUseCase") { container in
+        AnyUseCase<Void, AboutTextRepositoryResult>(wrapped: GetTextAboutUseCase(repository: container.resolve(AboutTextRepository.self)!))
     }
     .inObjectScope(.container)
 
@@ -292,7 +292,7 @@ func configureViewModel(_ container: Container) {
     .inObjectScope(.container)
     
     container.register(AboutViewModel.self) { container in
-        AboutViewModel(getText: container.resolve(AnyUseCase<Void, NSAttributedString>.self, name: "GetTextAboutUseCase")!)
+        AboutViewModel(getText: container.resolve(AnyUseCase<Void, AboutTextRepositoryResult>.self, name: "GetTextAboutUseCase")!)
     }
     .inObjectScope(.container)
 }

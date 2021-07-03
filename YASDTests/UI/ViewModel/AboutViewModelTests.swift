@@ -35,7 +35,7 @@ class AboutViewModelTests: XCTestCase {
                 
         // Assert
         XCTAssertEqual(outputText.events, [
-            .next(0, testString),
+            .next(0, .success(testString)),
             .completed(0)
         ])
     }
@@ -49,13 +49,13 @@ class AboutViewModelTests: XCTestCase {
                 
         // Assert
         XCTAssertEqual(outputText.events, [
-            .next(0, NSAttributedString()),
+            .next(0, .failure(TestError.someError)),
             .completed(0)
         ])
     }
     
-    private func createGetTextObserver(_ testString: NSAttributedString) -> TestableObserver<NSAttributedString> {
-        let outputText = scheduler.createObserver(NSAttributedString.self)
+    private func createGetTextObserver(_ testString: NSAttributedString) -> TestableObserver<AboutTextRepositoryResult> {
+        let outputText = scheduler.createObserver(AboutTextRepositoryResult.self)
         let viewModel = AboutViewModel(getText: createMockGetTextAboutUseCase(value: testString))
         let output = viewModel.transform(from: AboutViewModel.Input())
         output.text.drive(outputText)
@@ -63,13 +63,13 @@ class AboutViewModelTests: XCTestCase {
         return outputText
     }
     
-    private func createMockGetTextAboutUseCase(value: NSAttributedString) -> MockAnyUseCase<Void, NSAttributedString> {
+    private func createMockGetTextAboutUseCase(value: NSAttributedString) -> MockAnyUseCase<Void, AboutTextRepositoryResult> {
         return MockFactory.createMockUseCase { _ in
             value.string == "error" ? TestError.someError : nil
         } onRxError: { _ in
             nil
         } onSuccess: { _ in
-            value
+            .success(value)
         }
     }
 }

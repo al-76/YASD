@@ -11,7 +11,7 @@ import RxSwift
 
 class GetTextAboutUseCase: UseCase {
     typealias Input = Void
-    typealias Output = NSAttributedString
+    typealias Output = AboutTextRepositoryResult
     
     private let repository: AboutTextRepository
     
@@ -19,7 +19,7 @@ class GetTextAboutUseCase: UseCase {
         self.repository = repository
     }
     
-    func execute(with input: Void) -> Observable<NSAttributedString> {
+    func execute(with input: Void) -> Observable<AboutTextRepositoryResult> {
         return repository.getText()
     }
 }

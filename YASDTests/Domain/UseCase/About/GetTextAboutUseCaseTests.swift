@@ -21,7 +21,7 @@ class GetTextAboutUseCaseTests: XCTestCase {
     func testExecute() {
         // Arrange
         let testValue = "test"
-        let outputText = scheduler.createObserver(NSAttributedString.self)
+        let outputText = scheduler.createObserver(AboutTextRepositoryResult.self)
         let useCase = GetTextAboutUseCase(repository: createMockAboutTextRepository(testValue))
         let res = useCase.execute(with: ())
         res.bind(to: outputText)
@@ -32,7 +32,7 @@ class GetTextAboutUseCaseTests: XCTestCase {
         
         // Assert
         XCTAssertEqual(outputText.events, [
-            .next(0, NSAttributedString(string: testValue)),
+            .next(0, .success(NSAttributedString(string: testValue))),
             .completed(0)
         ])
     }
@@ -41,7 +41,7 @@ class GetTextAboutUseCaseTests: XCTestCase {
         let mock = MockAboutTextRepository()
         stub(mock) { stub in
             when(stub.getText()).then { _ in
-                return .just(NSAttributedString(string: value))
+                return .just(.success(NSAttributedString(string: value)))
             }
         }
         return mock

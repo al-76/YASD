@@ -14,17 +14,17 @@ class AboutViewModel: ViewModel {
     }
     
     struct Output {
-        let text: Driver<NSAttributedString>
+        let text: Driver<AboutTextRepositoryResult>
     }
     
-    private let getText: AnyUseCase<Void, NSAttributedString>
+    private let getText: AnyUseCase<Void, AboutTextRepositoryResult>
     
-    init(getText: AnyUseCase<Void, NSAttributedString>) {
+    init(getText: AnyUseCase<Void, AboutTextRepositoryResult>) {
         self.getText = getText
     }
     
     func transform(from input: Input) -> Output {
         return Output(text: getText.execute(with: ())
-                        .asDriver { _ in .just(NSAttributedString()) })
+                        .asDriver { .just(.failure($0)) })
     }
 }

@@ -8,6 +8,8 @@
 
 import RxSwift
 
+typealias AboutTextRepositoryResult = Result<NSAttributedString>
+
 protocol AboutTextRepository {
-    func getText() -> Observable<NSAttributedString>
+    func getText() -> Observable<AboutTextRepositoryResult>
 }
