@@ -1,5 +1,5 @@
 //
-//  Network.swift
+//  DefaultNetwork.swift
 //  YASD
 //
 //  Created by Vyacheslav Konopkin on 31/05/2019.
@@ -9,18 +9,13 @@
 import RxSwift
 import Foundation
 
-typealias NetworkResult = Result<Data>
-
-class Network {
-    enum NetworkError: Error {
+class DefaultNetwork: Network {
+    enum DefaultNetworkError: Error {
         case noContext
         case invalidUrl(url: String)
     }
     
-    typealias Parameters = (String?, [String: String]?)?
-    typealias PostParameters = (url: String, parameters: Parameters)
     private typealias URLRequestResult = Result<URLRequest>
-
     
     func postRequest(with parameters: PostParameters) -> Observable<NetworkResult> {
         return createRequest(parameters.url, type: "POST", parameters: parameters.parameters)
@@ -48,7 +43,7 @@ class Network {
                     observer.onNext(.failure(error))
                 }
             } else {
-                observer.onNext(.failure(NetworkError.noContext))
+                observer.onNext(.failure(DefaultNetworkError.noContext))
             }
             observer.onCompleted()
             return Disposables.create()
@@ -56,7 +51,7 @@ class Network {
     }
     
     private func createRequestAction(_ stringUrl: String, _ type: String, _ parameters: Parameters) throws -> URLRequest {
-        guard let url = URL(string: stringUrl) else { throw NetworkError.invalidUrl(url: stringUrl) }
+        guard let url = URL(string: stringUrl) else { throw DefaultNetworkError.invalidUrl(url: stringUrl) }
         var request = URLRequest(url: url)
         request.httpMethod = type
         if let body = parameters?.0 {
@@ -84,7 +79,7 @@ class Network {
     }
 }
 
-extension Network.NetworkError: LocalizedError {
+extension DefaultNetwork.DefaultNetworkError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .noContext:

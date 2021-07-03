@@ -50,7 +50,7 @@
 		2F90DD3D2355FA2300CE8560 /* LexinParserWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3C2355FA2300CE8560 /* LexinParserWords.swift */; };
 		2F90DD402355FC1B00CE8560 /* LexinParserSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F90DD3F2355FC1B00CE8560 /* LexinParserSuggestion.swift */; };
 		2FBCB84823A2949F0080238A /* SearchResultsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBCB84723A2949F0080238A /* SearchResultsTableView.swift */; };
-		2FCB2DE122A111540053B758 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB2DE022A111540053B758 /* Network.swift */; };
+		2FCB2DE122A111540053B758 /* DefaultNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCB2DE022A111540053B758 /* DefaultNetwork.swift */; };
 		2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6400238EA5C400948A52 /* FormattedWord.swift */; };
 		2FDB6404238EA7B700948A52 /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6403238EA7B700948A52 /* Suggestion.swift */; };
 		2FDB6407238EAC3D00948A52 /* SettingsLanguageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB6406238EAC3D00948A52 /* SettingsLanguageItem.swift */; };
@@ -113,6 +113,7 @@
 		6FFF3B432684C9090023EF94 /* MockFactory+DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B422684C9090023EF94 /* MockFactory+DictionaryRepository.swift */; };
 		6FFF3B452684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B442684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift */; };
 		CD2A5DFC26909A3500B6E49A /* RMController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */; };
+		CD2A5DFF26909C0800B6E49A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5DFE26909C0800B6E49A /* Network.swift */; };
 		CD2BDF6D25E0ED6C00E89EB1 /* AboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */; };
 		CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */; };
 		CD50CDF926862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */; };
@@ -219,7 +220,7 @@
 		2F9757702277474200B343B4 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		2FBCB84723A2949F0080238A /* SearchResultsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableView.swift; sourceTree = "<group>"; };
 		2FCB2DDE22A005180053B758 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
-		2FCB2DE022A111540053B758 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		2FCB2DE022A111540053B758 /* DefaultNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNetwork.swift; sourceTree = "<group>"; };
 		2FDB6400238EA5C400948A52 /* FormattedWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattedWord.swift; sourceTree = "<group>"; };
 		2FDB6403238EA7B700948A52 /* Suggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestion.swift; sourceTree = "<group>"; };
 		2FDB6406238EAC3D00948A52 /* SettingsLanguageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLanguageItem.swift; sourceTree = "<group>"; };
@@ -294,6 +295,7 @@
 		A39F68F096DE88505B4EC216 /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
 		A5478ABEF2BF7C7432297DEA /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMController+Extensions.swift"; sourceTree = "<group>"; };
+		CD2A5DFE26909C0800B6E49A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		CD2BDF6C25E0ED6C00E89EB1 /* AboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutTextRepository.swift; sourceTree = "<group>"; };
 		CD2BDF7225E0EF1600E89EB1 /* DefaultAboutTextRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAboutTextRepository.swift; sourceTree = "<group>"; };
 		CD50CDF826862E1E00AF43F6 /* RestoreBookmarksUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreBookmarksUseCaseTests.swift; sourceTree = "<group>"; };
@@ -346,7 +348,7 @@
 		17A9BC7322B5271D002F769B /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				2FCB2DE022A111540053B758 /* Network.swift */,
+				2FCB2DE022A111540053B758 /* DefaultNetwork.swift */,
 				17A9BC7422B5273B002F769B /* HtmlParser.swift */,
 				17A9BC7622B5284F002F769B /* Markdown.swift */,
 				2F7321862313E4A000CC0822 /* Storage.swift */,
@@ -484,6 +486,7 @@
 		2F7DA16423857DCD00E91C71 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				CD2A5DFD26909BFE00B6E49A /* Platform */,
 				17233CBF24A919C80049D914 /* Mapper */,
 				2FDB640F238EB42E00948A52 /* Lexin */,
 				CDF9598825E152110059A1EB /* DictionaryRepository */,
@@ -744,6 +747,14 @@
 				CDE70516262AEDAD0015CD07 /* UseCase.swift */,
 			);
 			path = UseCase;
+			sourceTree = "<group>";
+		};
+		CD2A5DFD26909BFE00B6E49A /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				CD2A5DFE26909C0800B6E49A /* Network.swift */,
+			);
+			path = Platform;
 			sourceTree = "<group>";
 		};
 		CDE70515262AED870015CD07 /* Bookmarks */ = {
@@ -1044,7 +1055,7 @@
 				2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */,
 				2FDD05A723B2588C0018F223 /* BookmarksTableViewController.swift in Sources */,
 				CDF9598625E1503E0059A1EB /* WordsDictionaryRepository.swift in Sources */,
-				2FCB2DE122A111540053B758 /* Network.swift in Sources */,
+				2FCB2DE122A111540053B758 /* DefaultNetwork.swift in Sources */,
 				17A9BC7522B5273B002F769B /* HtmlParser.swift in Sources */,
 				2F2980C723B2660F004F7FA9 /* BookmarksTableViewCell.swift in Sources */,
 				CDF9597F25E139280059A1EB /* DictionaryRepository.swift in Sources */,
@@ -1059,6 +1070,7 @@
 				2F393ACE233E255500F315FC /* DataCache.swift in Sources */,
 				2F5F8BBF2322A7DA00EF6A85 /* Player.swift in Sources */,
 				17A9BC7722B5284F002F769B /* Markdown.swift in Sources */,
+				CD2A5DFF26909C0800B6E49A /* Network.swift in Sources */,
 				2FDD05A123B0FBA90018F223 /* BookmarksViewModel.swift in Sources */,
 				6F9551D12631C2AE007AD633 /* AddSuggestionUseCase.swift in Sources */,
 				CD2BDF7325E0EF1600E89EB1 /* DefaultAboutTextRepository.swift in Sources */,
