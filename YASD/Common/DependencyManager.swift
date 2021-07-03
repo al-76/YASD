@@ -26,7 +26,7 @@ func createContainer() -> Container {
 func configurePlatform(_ container: Container) {
     container.register(Network.self) { _ in DefaultNetwork() }
         .inObjectScope(.container)
-    container.register(HtmlParser.self) { _ in HtmlParser() }
+    container.register(HtmlParser.self) { _ in DefaultHtmlParser() }
         .inObjectScope(.container)
     container.register(Markdown.self) { _ in Markdown() }
         .inObjectScope(.container)

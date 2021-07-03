@@ -1,24 +1,15 @@
-
 //
-//  File.swift
+//  DefaultHtmlParser.swift
 //  YASD
 //
-//  Created by Vyacheslav Konopkin on 15/06/2019.
-//  Copyright © 2019 yac. All rights reserved.
+//  Created by Vyacheslav Konopkin on 03.07.2021.
+//  Copyright © 2021 yac. All rights reserved.
 //
 
 import Foundation
 import SwiftSoup
 
-protocol HtmlParserElement {
-    func attribute(_ id: String) throws -> String
-    func text() throws -> String
-    func selectText(_ query: String) throws -> String
-    func selectTexts(_ query: String) throws -> [String]
-    func selectElements(_ query: String) throws -> [HtmlParserElement]
-}
-
-class HtmlParser {
+class DefaultHtmlParser: HtmlParser {
     private class SwiftSoupElement : HtmlParserElement {
         let element: SwiftSoup.Element
         
