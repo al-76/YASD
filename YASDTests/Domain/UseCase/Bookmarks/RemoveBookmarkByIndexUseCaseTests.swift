@@ -8,11 +8,11 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class RemoveBookmarkByIndexUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
@@ -21,15 +21,17 @@ class RemoveBookmarkByIndexUseCaseTests: XCTestCase {
     func testExecute() {
         // Arrange
         let outputItems = scheduler.createObserver(StorageServiceResult.self)
-        let useCase = RemoveBookmarkByIndexUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository("test", PublishSubject<Bool>()))
+        let useCase = RemoveBookmarkByIndexUseCase(bookmarks: MockFactory
+                                                    .createFormattedWordStorageRepository("test",
+                                                                                          PublishSubject<Bool>()))
         let res = useCase.execute(with: 0)
         disposeBag.insert(
             res.bind(to: outputItems)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputItems.events, [
             .next(0, .success(true)),

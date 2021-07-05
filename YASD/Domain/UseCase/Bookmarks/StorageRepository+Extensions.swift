@@ -13,7 +13,7 @@ extension StorageRepository where T == FormattedWord {
     func get(with word: String) -> Observable<Bookmarks> {
         return get(where: { $0.header.lowercased().starts(with: word.lowercased()) })
     }
-    
+
     func getAndIndex(cache: ExternalCacheService) -> Observable<Bookmarks> {
         get(with: "").flatMap { result -> Observable<Bookmarks> in
             switch result {

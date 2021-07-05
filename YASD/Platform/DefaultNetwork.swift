@@ -6,40 +6,41 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import RxSwift
 import Foundation
+import RxSwift
 
 class DefaultNetwork: Network {
     enum DefaultNetworkError: Error {
         case noContext
         case invalidUrl(url: String)
     }
-    
+
     private typealias URLRequestResult = Result<URLRequest>
-    
+
     func postRequest(with parameters: PostParameters) -> Observable<NetworkResult> {
         return createRequest(parameters.url, type: "POST", parameters: parameters.parameters)
             .flatMap { [weak self] request -> Observable<NetworkResult> in
                 guard let self = self else { return Observable.just(.success(Data())) }
                 return self.execute(request)
-        }
+            }
     }
-    
+
     func getRequest(with url: String) -> Observable<NetworkResult> {
         return createRequest(url, type: "GET", parameters: nil)
             .flatMap { [weak self] request -> Observable<NetworkResult>in
                 guard let self = self else { return Observable.just(.success(Data())) }
                 return self.execute(request)
-        }
+            }
     }
-    
-    private func createRequest(_ stringUrl: String, type: String, parameters: Parameters) -> Observable<URLRequestResult> {
+
+    private func createRequest(_ stringUrl: String,
+                               type: String, parameters: Parameters) -> Observable<URLRequestResult> {
         return Observable<URLRequestResult>.create { [weak self] observer in
             if let self = self {
                 do {
                     let request = try self.createRequestAction(stringUrl, type, parameters)
                     observer.onNext(.success(request))
-                } catch let error {
+                } catch {
                     observer.onNext(.failure(error))
                 }
             } else {
@@ -49,8 +50,10 @@ class DefaultNetwork: Network {
             return Disposables.create()
         }
     }
-    
-    private func createRequestAction(_ stringUrl: String, _ type: String, _ parameters: Parameters) throws -> URLRequest {
+
+    private func createRequestAction(_ stringUrl: String,
+                                     _ type: String,
+                                     _ parameters: Parameters) throws -> URLRequest {
         guard let url = URL(string: stringUrl) else { throw DefaultNetworkError.invalidUrl(url: stringUrl) }
         var request = URLRequest(url: url)
         request.httpMethod = type
@@ -64,7 +67,7 @@ class DefaultNetwork: Network {
         }
         return request
     }
-    
+
     private func execute(_ result: URLRequestResult) -> Observable<NetworkResult> {
         switch result {
         case let .success(request):

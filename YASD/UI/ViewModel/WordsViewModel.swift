@@ -6,29 +6,29 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 class WordsViewModel: ViewModel {
     private let searchWord: AnyUseCase<SearchWordUseCase.Input, FoundWordResult>
     private let addBookmark: AnyUseCase<FormattedWord, StorageServiceResult>
     private let playSound: AnyUseCase<String, PlayerManagerResult>
     private let removeBookmark: AnyUseCase<FormattedWord, StorageServiceResult>
-    
+
     struct Input {
         let search: Driver<String>
         let playUrl: Driver<String>
         let addBookmark: Driver<FormattedWord>
         let removeBookmark: Driver<FormattedWord>
     }
-    
+
     struct Output {
         let foundWords: Driver<FoundWordResult>
         let played: Driver<PlayerManagerResult>
         let bookmarked: Driver<StorageServiceResult>
         let loading: Driver<Bool>
     }
-    
+
     init(searchWord: AnyUseCase<SearchWordUseCase.Input, FoundWordResult>,
          addBookmark: AnyUseCase<FormattedWord, StorageServiceResult>,
          playSound: AnyUseCase<String, PlayerManagerResult>,
@@ -38,7 +38,7 @@ class WordsViewModel: ViewModel {
         self.playSound = playSound
         self.removeBookmark = removeBookmark
     }
-    
+
     func transform(from input: Input) -> Output {
         let activityIndicator = ActivityIndicator()
         let found = input.search.flatMapLatest { [weak self] word -> Driver<FoundWordResult> in
@@ -51,7 +51,7 @@ class WordsViewModel: ViewModel {
                 guard let self = self else { return .just(.success(false)) }
                 return self.playSound.execute(with: url)
                     .asDriver { .just(.failure($0)) }
-        }
+            }
         let addedBookmark = input.addBookmark.flatMap { [weak self] word -> Driver<StorageServiceResult> in
             guard let self = self else { return Driver.just(.success(false)) }
             return self.addBookmark.execute(with: word)

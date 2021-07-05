@@ -12,13 +12,13 @@ import RxSwift
 class RestoreBookmarkUseCase: UseCase {
     typealias Input = String
     typealias Output = String
-    
+
     private let cache: ExternalCacheService
 
     init(cache: ExternalCacheService) {
         self.cache = cache
     }
-    
+
     func execute(with input: String) -> Observable<String> {
         return .just(cache.getTitle(from: input))
     }

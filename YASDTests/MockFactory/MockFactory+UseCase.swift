@@ -17,6 +17,7 @@ extension MockFactory {
 }
 
 extension MockFactory {
+    // swiftlint:disable line_length
     static func createMockUseCase<Input, Output>(onError: @escaping (Input) -> Error?,
                                                  onRxError: @escaping (Input) -> Output?,
                                                  onSuccess: @escaping (Input) -> Output?) -> MockAnyUseCase<Input, Output> {

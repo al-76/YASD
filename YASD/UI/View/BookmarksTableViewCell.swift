@@ -6,20 +6,20 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class BookmarksTableViewCell: UITableViewCell {
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var buttonPlay: UIButton!
-    
+    @IBOutlet var textView: UITextView!
+    @IBOutlet var buttonPlay: UIButton!
+
     var disposeBag = DisposeBag()
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,8 +27,6 @@ class BookmarksTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-
 }

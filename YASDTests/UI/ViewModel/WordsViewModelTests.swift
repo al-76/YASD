@@ -7,20 +7,20 @@
 //
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class WordsViewModelTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
-    
+
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testSearchWord() {
         // Arrange
         let testValue = "test"
@@ -42,10 +42,10 @@ class WordsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.foundWords.drive(outputFoundWord)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputFoundWord.events, [
             .next(150, .failure(TestError.someError)),
@@ -53,7 +53,7 @@ class WordsViewModelTests: XCTestCase {
             .next(200, .success([FoundWord(testValue)]))
         ])
     }
-    
+
     func testAddBookmark() {
         // Arrange
         let inputBookmarks = scheduler.createHotObservable([
@@ -74,10 +74,10 @@ class WordsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.bookmarked.drive(outputBookmarks)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputBookmarks.events, [
             .next(150, .failure(TestError.someError)),
@@ -85,7 +85,7 @@ class WordsViewModelTests: XCTestCase {
             .next(200, .success(true))
         ])
     }
-    
+
     func testPlaySound() {
         // Arrange
         let inputUrl = scheduler.createHotObservable([
@@ -106,7 +106,7 @@ class WordsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.played.drive(outputPlayed)
         )
-        
+
         // Act
         scheduler.start()
 
@@ -117,7 +117,7 @@ class WordsViewModelTests: XCTestCase {
             .next(200, .success(true))
         ])
     }
-    
+
     func testRemoveBookmark() {
         // Arrange
         let inputBookmarks = scheduler.createHotObservable([
@@ -138,10 +138,10 @@ class WordsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.bookmarked.drive(outputBookmarks)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputBookmarks.events, [
             .next(150, .failure(TestError.someError)),
@@ -149,7 +149,7 @@ class WordsViewModelTests: XCTestCase {
             .next(200, .success(true))
         ])
     }
-    
+
     private func createMockSearchWordUseCase() -> MockAnyUseCase<SearchWordUseCase.Input, FoundWordResult> {
         return MockFactory.createMockUseCase { value in
             value.word == "error" ? TestError.someError : nil
@@ -159,23 +159,23 @@ class WordsViewModelTests: XCTestCase {
             .success([FoundWord(value.word)])
         }
     }
-    
+
     private func createMockBookmarkUseCase() -> MockAnyUseCase<FormattedWord, StorageServiceResult> {
         return MockFactory.createMockUseCase { value in
             value.header == "error" ? TestError.someError : nil
         } onRxError: { value in
             value.header == "rx_error" ? .failure(TestError.someError) : nil
-        } onSuccess: { value in
+        } onSuccess: { _ in
             .success(true)
         }
     }
-    
+
     private func createMockPlaySoundUseCase() -> MockAnyUseCase<String, PlayerManagerResult> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
         } onRxError: { value in
             value == "rx_error" ? .failure(TestError.someError) : nil
-        } onSuccess: { value in
+        } onSuccess: { _ in
             .success(true)
         }
     }

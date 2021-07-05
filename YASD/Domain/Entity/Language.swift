@@ -14,7 +14,7 @@ struct Language: Codable {
 }
 
 extension Language: Equatable {
-    static public func == (lhs: Language, rhs: Language) -> Bool {
+    public static func == (lhs: Language, rhs: Language) -> Bool {
         return (lhs.name == rhs.name && lhs.code == rhs.code)
     }
 }
@@ -27,7 +27,7 @@ extension Language {
 
 extension Language {
     public static let defaultLanguage = Language.supportedLanguages[17]
-    
+
     public static let supportedLanguages = [
         Language(name: "albanska", code: "alb"),
         Language(name: "amhariska", code: "amh"),

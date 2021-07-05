@@ -8,16 +8,16 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class UpdateLanguageSettingsUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testExecute() {
         // Arrange
         let testValue = "test"
@@ -36,12 +36,12 @@ class UpdateLanguageSettingsUseCaseTests: XCTestCase {
             .completed(0)
         ])
     }
-    
+
     private func createMockSettingsRepository() -> MockSettingsRepository {
         let mock = MockSettingsRepository()
         stub(mock) { stub in
             when(stub.setLanguage(any())).then { _ in
-                return .just(.success(true))
+                .just(.success(true))
             }
         }
         return mock

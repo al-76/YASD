@@ -6,38 +6,38 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import RMessage
+import RxCocoa
+import RxSwift
+import UIKit
 
 class SettingsLanguageTableViewController: UITableViewController {
     var viewModel: SettingsLanguageViewModel!
-    
+
     private let disposeBag = DisposeBag()
     private var searchController: UISearchController!
     private let rmController = RMController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         rmController.presentationViewController = self
         customizeView()
         bindToModel()
     }
-    
+
     private func customizeView() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = NSLocalizedString("searchLanguage", comment: "")
         searchController.obscuresBackgroundDuringPresentation = false
-        
+
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        
+
         tableView.dataSource = nil
         tableView.delegate = nil
     }
-    
+
     private func bindToModel() {
         let language = tableView.rx.itemSelected.map { [weak self] in
             guard let table = self?.tableView else {
@@ -64,12 +64,13 @@ class SettingsLanguageTableViewController: UITableViewController {
                 result.onFailure(self?.rmController.handleError)
                     .getOrDefault([])
             }
-            .drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { (_, result, cell) in
+            .drive(tableView.rx.items(cellIdentifier: "SettingsTableCell")) { _, result, cell in
                 if let settingsCell = cell as? SettingsLanguageTableViewCell,
-                    let cellLabel = settingsCell.textLabel {
+                   let cellLabel = settingsCell.textLabel {
                     cellLabel.text = result.language.name
                 }
                 cell.accessoryType = (result.selected ? .checkmark : .none)
-        })
+            }
+        )
     }
 }

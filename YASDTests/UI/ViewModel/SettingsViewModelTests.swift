@@ -8,17 +8,17 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class SettingsViewModelTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
-    
+
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
 
@@ -37,17 +37,17 @@ class SettingsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.selectedLanguage.drive(outputLanguage)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputLanguage.events, [
             .next(0, .success(Language(name: testLanguage, code: testLanguage))),
             .completed(0)
         ])
     }
-    
+
     func testGetLanguageError() {
         // Arrange
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase("error"),
@@ -62,17 +62,17 @@ class SettingsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.selectedLanguage.drive(outputLanguage)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputLanguage.events, [
             .next(0, .failure(TestError.someError)),
             .completed(0)
         ])
     }
-    
+
     func testGetHistorySize() {
         // Arrange
         let testValue = "test"
@@ -88,16 +88,16 @@ class SettingsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.historySize.drive(outputHistorySize)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputHistorySize.events, [
             .next(0, testValue)
         ])
     }
-    
+
     func testGetHistorySizeError() {
         // Arrange
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
@@ -112,16 +112,16 @@ class SettingsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.historySize.drive(outputHistorySize)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputHistorySize.events, [
             .next(0, "")
         ])
     }
-    
+
     func testGetCacheSize() {
         // Arrange
         let testValue = "test"
@@ -137,16 +137,16 @@ class SettingsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.cacheSize.drive(outputCacheSize)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputCacheSize.events, [
             .next(0, testValue)
         ])
     }
-    
+
     func testGetCacheSizeError() {
         // Arrange
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
@@ -161,16 +161,16 @@ class SettingsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.cacheSize.drive(outputCacheSize)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputCacheSize.events, [
             .next(0, "")
         ])
     }
-    
+
     func testClearHistory() {
         let testValue = "test"
         let inputClearHistory = scheduler.createHotObservable([.next(150, ())])
@@ -187,17 +187,17 @@ class SettingsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.historySize.drive(outputHistorySize)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputHistorySize.events, [
             .next(0, testValue),
             .next(150, testValue)
         ])
     }
-    
+
     func testClearCache() {
         let testValue = "test"
         let inputClearCache = scheduler.createHotObservable([.next(150, ())])
@@ -214,17 +214,18 @@ class SettingsViewModelTests: XCTestCase {
         disposeBag.insert(
             output.cacheSize.drive(outputCacheSize)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputCacheSize.events, [
             .next(0, testValue),
             .next(150, testValue)
         ])
     }
-    
+
+    // swiftlint:disable line_length
     private func createMockGeLanguageUseCase(_ value: String) -> MockAnyUseCase<Void, SettingsRepositoryLanguageResult> {
         return MockFactory.createMockUseCase { _ in
             value == "error" ? TestError.someError : nil
@@ -234,7 +235,7 @@ class SettingsViewModelTests: XCTestCase {
             .success(Language(name: value, code: value))
         }
     }
-    
+
     private func createMockGetStringUseCase(_ value: String) -> MockAnyUseCase<Void, String> {
         return MockFactory.createMockUseCase { _ in
             value == "error" ? TestError.someError : nil
@@ -244,7 +245,7 @@ class SettingsViewModelTests: XCTestCase {
             value
         }
     }
-    
+
     private func createMockClearCacheUseCase() -> MockAnyUseCase<Void, CacheServiceBoolResult> {
         return MockFactory.createMockUseCase { _ in
             nil
@@ -254,7 +255,7 @@ class SettingsViewModelTests: XCTestCase {
             .success(true)
         }
     }
-    
+
     private func createMockClearHistoryUseCase() -> MockAnyUseCase<Void, StorageServiceResult> {
         return MockFactory.createMockUseCase { _ in
             nil
@@ -265,4 +266,3 @@ class SettingsViewModelTests: XCTestCase {
         }
     }
 }
-

@@ -6,11 +6,11 @@
 //  Copyright © 2020 yac. All rights reserved.
 //
 
-@testable import YASD
 import Foundation
+@testable import YASD
 
 extension FormattedWord {
-    public init(_ header: String) {
+    init(_ header: String) {
         self.init(header: header, formatted: NSAttributedString(), soundUrl: nil, definition: "")
     }
 }

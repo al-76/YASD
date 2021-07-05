@@ -6,8 +6,8 @@
 //  Copyright © 2020 yac. All rights reserved.
 //
 
-import RxSwift
 import Foundation
+import RxSwift
 
 typealias PlayerManagerResult = Result<Bool>
 

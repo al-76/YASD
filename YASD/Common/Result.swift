@@ -33,7 +33,7 @@ extension Result {
             return defaultValue
         }
     }
-    
+
     func flatMap<U>(_ transform: (T) -> Result<U>) -> Result<U> {
         switch self {
         case let .success(value):
@@ -46,21 +46,21 @@ extension Result {
 
 extension Result {
     @discardableResult
-    func onSuccess(_ handler: (T) -> ()) -> Self {
+    func onSuccess(_ handler: (T) -> Void) -> Self {
         guard case let .success(value) = self else { return self }
         handler(value)
         return self
     }
-    
+
     @discardableResult
-    func onFailure(_ handler: (Error) -> ()) -> Self {
+    func onFailure(_ handler: (Error) -> Void) -> Self {
         guard case let .failure(error) = self else { return self }
         handler(error)
         return self
     }
-    
+
     @discardableResult
-    func onFailure(_ handler: ((Error) -> ())?) -> Self {
+    func onFailure(_ handler: ((Error) -> Void)?) -> Self {
         guard case let .failure(error) = self else { return self }
         handler?(error)
         return self

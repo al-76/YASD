@@ -9,7 +9,8 @@
 import UIKit
 
 class SearchResultsTableView: UITableView {
-    // Because of 'showsSearchResultsController' is only available for iOS13 and above we use a special view that is always isHidden == false.
+    // Because of 'showsSearchResultsController' is only available for iOS13 and above,
+    // we use a special view that is always isHidden == false.
     override var isHidden: Bool {
         get {
             if #available(iOS 13.0, *) {

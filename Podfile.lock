@@ -18,16 +18,9 @@ PODS:
   - RxRelay (6.2.0):
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
-  - RxSwiftExt (6.0.1):
-    - RxSwiftExt/Core (= 6.0.1)
-    - RxSwiftExt/RxCocoa (= 6.0.1)
-  - RxSwiftExt/Core (6.0.1):
-    - RxSwift (~> 6.0)
-  - RxSwiftExt/RxCocoa (6.0.1):
-    - RxCocoa (~> 6.0)
-    - RxSwiftExt/Core
   - RxTest (6.2.0):
     - RxSwift (= 6.2.0)
+  - SwiftLint (0.43.1)
   - SwiftSoup (2.3.2)
   - Swinject (2.6.0)
   - SwinjectStoryboard (2.2.0):
@@ -40,8 +33,8 @@ DEPENDENCIES:
   - RMessage
   - RxDataSources
   - RxSwift
-  - RxSwiftExt
   - RxTest
+  - SwiftLint
   - SwiftSoup
   - Swinject (= 2.6)
   - SwinjectStoryboard
@@ -57,8 +50,8 @@ SPEC REPOS:
     - RxDataSources
     - RxRelay
     - RxSwift
-    - RxSwiftExt
     - RxTest
+    - SwiftLint
     - SwiftSoup
     - Swinject
     - SwinjectStoryboard
@@ -83,12 +76,12 @@ SPEC CHECKSUMS:
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
-  RxSwiftExt: d61c4b9b06e0a448041b1c659e0f1b5c5a035afc
   RxTest: 0c692fa672b694373ba86d2b00033595297a2831
+  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   SwiftSoup: f97bc4e988c7729d6457f9642f974c617a6e2510
   Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
 
-PODFILE CHECKSUM: 1574530d29ea590723c776727c7366162550d1bc
+PODFILE CHECKSUM: e04ebfef25cc57eca7afade044757009892ede50
 
 COCOAPODS: 1.10.1

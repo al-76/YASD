@@ -6,24 +6,24 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 class WordsSuggestionViewModel: ViewModel {
     private let getSuggestion: AnyUseCase<String, SuggestionItemResult>
     private let addSuggestion: AnyUseCase<String, SuggestionItemResult>
     private let removeSuggestion: AnyUseCase<String, StorageServiceResult>
-    
+
     struct Input {
         let search: Driver<String>
         let addHistory: Driver<String>
         let removeHistory: Driver<String>
     }
-    
+
     struct Output {
         let suggestions: Driver<SuggestionItemResult>
     }
-    
+
     init(getSuggestion: AnyUseCase<String, SuggestionItemResult>,
          addSuggestion: AnyUseCase<String, SuggestionItemResult>,
          removeSuggestion: AnyUseCase<String, StorageServiceResult>) {
@@ -31,7 +31,7 @@ class WordsSuggestionViewModel: ViewModel {
         self.addSuggestion = addSuggestion
         self.removeSuggestion = removeSuggestion
     }
-    
+
     func transform(from input: Input) -> Output {
         let found = input.search
             .flatMapLatest { [weak self] word -> Driver<SuggestionItemResult> in
@@ -59,7 +59,6 @@ class WordsSuggestionViewModel: ViewModel {
                 return self.getSuggestion.execute(with: word)
                     .asDriver { .just(.failure($0)) }
             }
-
         return Output(suggestions: Driver.merge(found, added, removed))
     }
 }

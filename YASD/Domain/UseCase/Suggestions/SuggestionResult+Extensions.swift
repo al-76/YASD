@@ -10,16 +10,16 @@ import Foundation
 
 extension SuggestionResult {
     func toItem(removable: Bool) -> SuggestionItemResult {
-        switch(self) {
+        switch self {
         case let .success(items):
-            return SuggestionItemResult.success(items.map { SuggestionItem(suggestion: $0, removable: removable)})
+            return SuggestionItemResult.success(items.map { SuggestionItem(suggestion: $0, removable: removable) })
         case let .failure(error):
             return SuggestionItemResult.failure(error)
         }
     }
-    
+
     func reversed() -> SuggestionResult {
-        switch(self) {
+        switch self {
         case let .success(result):
             return .success(result.reversed())
         default:

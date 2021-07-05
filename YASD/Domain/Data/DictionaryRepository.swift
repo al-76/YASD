@@ -16,12 +16,12 @@ protocol DictionaryRepository {
 
 class AnyDictionaryRepository<T>: DictionaryRepository {
     private let searchObject: (String, Language) -> Observable<T>
-    
+
     init<TypeDictionaryRepository: DictionaryRepository>(wrapped: TypeDictionaryRepository)
-    where TypeDictionaryRepository.T == T {
+        where TypeDictionaryRepository.T == T {
         searchObject = wrapped.search
     }
-    
+
     func search(_ word: String, _ language: Language) -> Observable<T> {
         return searchObject(word, language)
     }

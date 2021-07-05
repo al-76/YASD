@@ -15,6 +15,7 @@ struct LexinWord {
         var id: String
         var value: String
     }
+
     struct Lang {
         var meaning: String?
         var phonetic: String?
@@ -28,7 +29,7 @@ struct LexinWord {
         var synonym: [String?]?
         var soundUrl: String?
     }
-    
+
     var word: String
     var type: String?
     var baseLang: Lang?

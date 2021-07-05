@@ -12,14 +12,14 @@ import RxSwift
 class GetLanguageSettingsUseCase: UseCase {
     typealias Input = Void
     typealias Output = SettingsRepositoryLanguageResult
-    
+
     private let repository: SettingsRepository
-    
+
     init(repository: SettingsRepository) {
         self.repository = repository
     }
-    
-    func execute(with input: Void) -> Observable<SettingsRepositoryLanguageResult> {
+
+    func execute(with _: Void) -> Observable<SettingsRepositoryLanguageResult> {
         return Observable.merge(repository.getLanguage(), repository.getLanguageBehaviour().map { .success($0) })
     }
 }

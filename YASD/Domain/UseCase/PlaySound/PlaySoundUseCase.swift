@@ -12,13 +12,13 @@ import RxSwift
 class PlaySoundUseCase: UseCase {
     typealias Input = String
     typealias Output = PlayerManagerResult
-    
+
     private let player: PlayerManager
-    
+
     init(player: PlayerManager) {
         self.player = player
     }
-    
+
     func execute(with input: String) -> Observable<PlayerManagerResult> {
         return player.playSound(with: input)
     }

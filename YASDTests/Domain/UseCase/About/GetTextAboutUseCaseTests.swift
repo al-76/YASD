@@ -8,16 +8,16 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class GetTextAboutUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testExecute() {
         // Arrange
         let testValue = "test"
@@ -26,22 +26,22 @@ class GetTextAboutUseCaseTests: XCTestCase {
         let res = useCase.execute(with: ())
         res.bind(to: outputText)
             .disposed(by: disposeBag)
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputText.events, [
             .next(0, .success(NSAttributedString(string: testValue))),
             .completed(0)
         ])
     }
-    
+
     private func createMockAboutTextRepository(_ value: String) -> MockAboutTextRepository {
         let mock = MockAboutTextRepository()
         stub(mock) { stub in
             when(stub.getText()).then { _ in
-                return .just(.success(NSAttributedString(string: value)))
+                .just(.success(NSAttributedString(string: value)))
             }
         }
         return mock

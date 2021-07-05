@@ -13,7 +13,7 @@ class DefaultMarkdown: Markdown {
     func parse(data: String) -> NSAttributedString {
         return DefaultMarkdown.getParser().parse(data)
     }
-    
+
     private class func getParser() -> MarkdownParser {
         if #available(iOS 13.0, *) {
             return MarkdownParser(font: UIFont.systemFont(ofSize: UIFont.systemFontSize),

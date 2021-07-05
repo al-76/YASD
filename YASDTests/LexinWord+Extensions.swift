@@ -9,17 +9,17 @@
 @testable import YASD
 
 extension LexinWord {
-    public init(word: String) {
+    init(word: String) {
         self.init(word: word, type: "test", baseLang: Lang(), targetLang: Lang(), lexemes: nil)
     }
-    
-    public init(word: String, type: String?) {
+
+    init(word: String, type: String?) {
         self.init(word: word, type: type, baseLang: Lang(), targetLang: Lang(), lexemes: nil)
     }
 }
 
 extension LexinWord: Equatable {
-    static public func == (lhs: LexinWord, rhs: LexinWord) -> Bool {
+    public static func == (lhs: LexinWord, rhs: LexinWord) -> Bool {
         return lhs.word == rhs.word
     }
 }

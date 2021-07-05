@@ -8,90 +8,112 @@
 
 @testable import YASD
 
-import RxSwift
 import Cuckoo
+import RxSwift
 
 extension MockFactory {
     // FIXME: Cuckoo doesn't support @escaping protocols methods
-    private class SuggestionFakeStorageRepository : StorageRepository {
+    private class SuggestionFakeStorageRepository: StorageRepository {
+        // swiftlint:disable nesting
         typealias T = Suggestion
-        
+
         private let testValue: T
         private let testSize: Int64
-        
+
         init(testValue: String, testSize: Int64) {
             self.testValue = Suggestion(testValue)
             self.testSize = testSize
         }
-        
-        func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>> {
+
+        func get(where _: @escaping (T) -> Bool) -> Observable<Result<[T]>> {
             return .just(.success([testValue]))
         }
-        func add(_ word: T) -> Observable<StorageServiceResult> {
+
+        func add(_: T) -> Observable<StorageServiceResult> {
             return .just(.success(true))
         }
-        func remove(_ word: T) -> Observable<StorageServiceResult> {
+
+        func remove(_: T) -> Observable<StorageServiceResult> {
             return .just(.success(true))
         }
-        func remove(at index: Int) -> Observable<StorageServiceResult> {
+
+        func remove(at _: Int) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
+
         func removeAll() -> Observable<StorageServiceResult> {
             return .just(.success(true))
         }
-        func contains(_ word: T) -> Observable<StorageServiceResult> {
+
+        func contains(_: T) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
+
         func getChangedSubject() -> PublishSubject<Bool> {
             return PublishSubject<Bool>()
         }
+
         func getSize() -> Observable<Int64> {
             return .just(testSize)
         }
     }
-    
-    private class FormattedWordStorageRepository : StorageRepository {
+
+    private class FormattedWordStorageRepository: StorageRepository {
+        // swiftlint:disable nesting
         typealias T = FormattedWord
-        
+
         private let testValue: T
         private let publishSubject: PublishSubject<Bool>
-        
+
         init(testValue: String, publishSubject: PublishSubject<Bool>) {
             self.testValue = FormattedWord(testValue)
             self.publishSubject = publishSubject
         }
-        
-        func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>> {
+
+        func get(where _: @escaping (T) -> Bool) -> Observable<Result<[T]>> {
             return .just(.success([testValue]))
         }
-        func add(_ word: T) -> Observable<StorageServiceResult> {
+
+        func add(_: T) -> Observable<StorageServiceResult> {
             return .just(.success(true))
         }
-        func remove(_ word: T) -> Observable<StorageServiceResult> {
+
+        func remove(_: T) -> Observable<StorageServiceResult> {
             return .just(.success(true))
         }
-        func remove(at index: Int) -> Observable<StorageServiceResult> {
+
+        func remove(at _: Int) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
+
         func removeAll() -> Observable<StorageServiceResult> {
             return .just(.success(true))
         }
-        func contains(_ word: T) -> Observable<StorageServiceResult> {
+
+        func contains(_: T) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
+
         func getChangedSubject() -> PublishSubject<Bool> {
             return publishSubject
         }
+
         func getSize() -> Observable<Int64> {
             return .just(0)
         }
     }
-    
+
     static func createSuggestionStorageRepository(_ value: String, _ size: Int64) -> AnyStorageRepository<Suggestion> {
-        return AnyStorageRepository<Suggestion>(wrapped: SuggestionFakeStorageRepository(testValue: value, testSize: size))
+        return AnyStorageRepository<Suggestion>(wrapped:
+                                                    SuggestionFakeStorageRepository(testValue: value,
+                                                                                    testSize: size))
     }
-    
-    static func createFormattedWordStorageRepository(_ value: String, _ publishSubject: PublishSubject<Bool>) -> AnyStorageRepository<FormattedWord> {
-        return AnyStorageRepository<FormattedWord>(wrapped: FormattedWordStorageRepository(testValue: value, publishSubject: publishSubject))
+
+    // swiftlint:disable line_length
+    static func createFormattedWordStorageRepository(_ value: String,
+                                                     _ publishSubject: PublishSubject<Bool>) -> AnyStorageRepository<FormattedWord> {
+        return AnyStorageRepository<FormattedWord>(wrapped:
+                                                    FormattedWordStorageRepository(testValue: value,
+                                                                                   publishSubject: publishSubject))
     }
 }

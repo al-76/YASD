@@ -8,19 +8,19 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class BookmarksViewModelTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
-    
+
     static let errorIndex = 3000
-    
+
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
 
@@ -95,7 +95,7 @@ class BookmarksViewModelTests: XCTestCase {
             .next(200, .success([FormattedWord(testString)]))
         ])
     }
-    
+
     func testChange() {
         // Arrange
         let testData = [FormattedWord("test")]
@@ -113,16 +113,16 @@ class BookmarksViewModelTests: XCTestCase {
         disposeBag.insert(
             output.bookmarks.drive(outputBookmarks)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputBookmarks.events, [
             .next(0, .success(testData))
         ])
     }
-    
+
     func testRemove() {
         // Arrange
         let testData = [FormattedWord("test")]
@@ -146,10 +146,10 @@ class BookmarksViewModelTests: XCTestCase {
         disposeBag.insert(
             output.bookmarks.drive(outputBookmarks)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputBookmarks.events, [
             .next(0, .success(testData)),
@@ -157,7 +157,7 @@ class BookmarksViewModelTests: XCTestCase {
             .next(200, .success(testData))
         ])
     }
-    
+
     func testPlay() {
         // Arrange
         let inputPlay = scheduler.createHotObservable([
@@ -179,10 +179,10 @@ class BookmarksViewModelTests: XCTestCase {
         disposeBag.insert(
             output.played.drive(outputPlayed)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputPlayed.events, [
             .next(150, .failure(TestError.someError)),
@@ -190,7 +190,7 @@ class BookmarksViewModelTests: XCTestCase {
             .completed(400)
         ])
     }
-        
+
     private func createMockSearchBookmark() -> MockAnyUseCase<String, Bookmarks> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
@@ -200,17 +200,17 @@ class BookmarksViewModelTests: XCTestCase {
             .success([FormattedWord(value)])
         }
     }
-    
+
     private func createMockChangedBookmarkNever() -> MockAnyUseCase<Void, Bookmarks> {
         let mock = MockAnyUseCase(wrapped: MockUseCase<Void, Bookmarks>())
         stub(mock) { stub in
             when(stub.execute(with: any())).then { _ in
-                return Observable.never()
+                Observable.never()
             }
         }
         return mock
     }
-    
+
     private func createMockChangedBookmark(_ bookmarks: [FormattedWord]) -> MockAnyUseCase<Void, Bookmarks> {
         return MockFactory.createMockUseCase { _ in
             nil
@@ -220,11 +220,11 @@ class BookmarksViewModelTests: XCTestCase {
             .success(bookmarks)
         }
     }
-    
+
     private func createMockRestoreBookmark() -> MockAnyUseCase<String, String> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
-        } onRxError: { value in
+        } onRxError: { _ in
             nil
         } onSuccess: { value in
             value
@@ -234,19 +234,19 @@ class BookmarksViewModelTests: XCTestCase {
     private func createRemoveBookmarkUseCaseMock() -> MockAnyUseCase<Int, StorageServiceResult> {
         return MockFactory.createMockUseCase { value in
             value == BookmarksViewModelTests.errorIndex ? TestError.someError : nil
-        } onRxError: { value in
+        } onRxError: { _ in
             nil
-        } onSuccess: { value in
+        } onSuccess: { _ in
             .success(true)
         }
     }
-    
+
     private func createPlaySoundUseCaseMock() -> MockAnyUseCase<String, PlayerManagerResult> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
-        } onRxError: { value in
+        } onRxError: { _ in
             nil
-        } onSuccess: { value in
+        } onSuccess: { _ in
             .success(true)
         }
     }

@@ -12,13 +12,13 @@ import RxSwift
 class AddBookmarkUseCase: UseCase {
     typealias Input = FormattedWord
     typealias Output = StorageServiceResult
-    
+
     private let bookmarks: AnyStorageRepository<FormattedWord>
-    
+
     init(bookmarks: AnyStorageRepository<FormattedWord>) {
         self.bookmarks = bookmarks
     }
-    
+
     func execute(with input: FormattedWord) -> Observable<StorageServiceResult> {
         return bookmarks.add(input)
     }

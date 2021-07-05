@@ -12,16 +12,16 @@ import RxSwift
 class GetCacheSizeUseCase: UseCase {
     typealias Input = Void
     typealias Output = String
-    
+
     private let cache: CacheService
-    
+
     init(cache: CacheService) {
         self.cache = cache
     }
-        
-    func execute(with input: Void) -> Observable<String> {
+
+    func execute(with _: Void) -> Observable<String> {
         return cache.getSize().map { value in
-            return ByteCountFormatter.string(fromByteCount: Int64(value),
+            ByteCountFormatter.string(fromByteCount: Int64(value),
                                       countStyle: .file)
         }
     }

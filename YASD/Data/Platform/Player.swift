@@ -11,4 +11,3 @@ import Foundation
 protocol Player {
     func play(with data: Data) throws
 }
-

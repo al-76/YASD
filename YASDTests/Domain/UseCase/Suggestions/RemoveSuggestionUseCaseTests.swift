@@ -8,11 +8,11 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class RemoveSuggestionUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
@@ -27,10 +27,10 @@ class RemoveSuggestionUseCaseTests: XCTestCase {
         disposeBag.insert(
             res.bind(to: outputItems)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputItems.events, [
             .next(0, .success(true)),
@@ -38,5 +38,3 @@ class RemoveSuggestionUseCaseTests: XCTestCase {
         ])
     }
 }
-
-

@@ -8,16 +8,16 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class ChangedBookmarkUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testExecute() {
         // Arrange
         let testValue = "test"
@@ -26,14 +26,15 @@ class ChangedBookmarkUseCaseTests: XCTestCase {
             .next(160, true)
         ])
         let changedBookmarks = PublishSubject<Bool>()
-        let useCase = ChangedBookmarkUseCase(bookmarks: MockFactory.createFormattedWordStorageRepository(testValue, changedBookmarks),
+        let useCase = ChangedBookmarkUseCase(bookmarks: MockFactory
+                                                .createFormattedWordStorageRepository(testValue, changedBookmarks),
                                              cache: MockFactory.createMockExternalCacheService("test"))
         let res = useCase.execute(with: ())
         disposeBag.insert(
             inputChangedBookmarks.bind(to: changedBookmarks),
             res.bind(to: outputItems)
         )
-        
+
         // Act
         scheduler.start()
 

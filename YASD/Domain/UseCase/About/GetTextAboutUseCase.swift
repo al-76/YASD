@@ -12,14 +12,14 @@ import RxSwift
 class GetTextAboutUseCase: UseCase {
     typealias Input = Void
     typealias Output = AboutTextRepositoryResult
-    
+
     private let repository: AboutTextRepository
-    
+
     init(repository: AboutTextRepository) {
         self.repository = repository
     }
-    
-    func execute(with input: Void) -> Observable<AboutTextRepositoryResult> {
+
+    func execute(with _: Void) -> Observable<AboutTextRepositoryResult> {
         return repository.getText()
     }
 }

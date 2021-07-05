@@ -8,8 +8,8 @@
 
 @testable import YASD
 
-import RxSwift
 import Cuckoo
+import RxSwift
 
 extension MockFactory {
     static func createMockSettingsRepository(_ publishSubject: PublishSubject<Language>) -> MockSettingsRepository {

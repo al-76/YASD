@@ -6,8 +6,8 @@
 //  Copyright © 2021 yac. All rights reserved.
 //
 
-import Foundation
 import AVFoundation
+import Foundation
 
 class DefaultPlayer: Player {
     var player: AVAudioPlayer?

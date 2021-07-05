@@ -6,14 +6,15 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 import UIKit
 
-extension Reactive where Base: UISearchBar {
-    public var editedText: ControlEvent<String> {
-        let source = text.map {
-            [weak searchBar = self.base as UISearchBar] _ in searchBar?.text ?? "" }
+public extension Reactive where Base: UISearchBar {
+    var editedText: ControlEvent<String> {
+        let source = text.map { [weak searchBar = self.base as UISearchBar] _ in
+            searchBar?.text ?? ""
+        }
         return ControlEvent(events: source)
     }
 }

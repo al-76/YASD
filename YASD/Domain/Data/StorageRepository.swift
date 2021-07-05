@@ -13,8 +13,8 @@ typealias StorageServiceResult = Result<Bool>
 
 protocol StorageRepository {
     associatedtype T
-    
-    func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>>
+
+    func get(where filterFunc: @escaping (T) -> Bool) -> Observable<Result<[T]>>
     func add(_ word: T) -> Observable<StorageServiceResult>
     func remove(_ word: T) -> Observable<StorageServiceResult>
     func remove(at index: Int) -> Observable<StorageServiceResult>
@@ -33,9 +33,9 @@ class AnyStorageRepository<T: Codable & Equatable>: StorageRepository {
     private let containsObject: (_ word: T) -> Observable<StorageServiceResult>
     private let getChangedSubjectObject: () -> PublishSubject<Bool>
     private let getSizeObject: () -> Observable<Int64>
-    
+
     init<TypeStorageRepository: StorageRepository>(wrapped: TypeStorageRepository)
-    where TypeStorageRepository.T == T {
+        where TypeStorageRepository.T == T {
         getObject = wrapped.get
         addObject = wrapped.add
         removeObject = wrapped.remove
@@ -45,35 +45,35 @@ class AnyStorageRepository<T: Codable & Equatable>: StorageRepository {
         getChangedSubjectObject = wrapped.getChangedSubject
         getSizeObject = wrapped.getSize
     }
-    
-    func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>> {
+
+    func get(where filterFunc: @escaping (T) -> Bool) -> Observable<Result<[T]>> {
         return getObject(filterFunc)
     }
-    
+
     func add(_ word: T) -> Observable<StorageServiceResult> {
         return addObject(word)
     }
-    
+
     func remove(_ word: T) -> Observable<StorageServiceResult> {
         return removeObject(word)
     }
-    
+
     func remove(at index: Int) -> Observable<StorageServiceResult> {
         return removeAtObject(index)
     }
-    
+
     func removeAll() -> Observable<StorageServiceResult> {
         return removeAllObject()
     }
-    
+
     func contains(_ word: T) -> Observable<StorageServiceResult> {
         return containsObject(word)
     }
-    
+
     func getChangedSubject() -> PublishSubject<Bool> {
         return getChangedSubjectObject()
     }
-    
+
     func getSize() -> Observable<Int64> {
         return getSizeObject()
     }

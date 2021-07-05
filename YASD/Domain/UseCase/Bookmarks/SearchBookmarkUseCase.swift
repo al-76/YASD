@@ -12,13 +12,13 @@ import RxSwift
 class SearchBookmarkUseCase: UseCase {
     typealias Input = String
     typealias Output = Bookmarks
-    
+
     private let bookmarks: AnyStorageRepository<FormattedWord>
-    
+
     init(bookmarks: AnyStorageRepository<FormattedWord>) {
         self.bookmarks = bookmarks
     }
-    
+
     func execute(with input: String) -> Observable<Bookmarks> {
         return bookmarks.get(with: input)
     }

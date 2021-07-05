@@ -13,13 +13,13 @@ class DefaultAboutTextRepository: AboutTextRepository {
     enum DefaultAboutTextRepositoryError: Error {
         case noContext
     }
-    
+
     let markdown: Markdown
-    
+
     init(markdown: Markdown) {
         self.markdown = markdown
     }
-    
+
     func getText() -> Observable<AboutTextRepositoryResult> {
         return Observable.create { [weak self] observer in
             if let self = self {

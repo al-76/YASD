@@ -8,17 +8,17 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class SettingsLanguageViewModelTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
-    
+
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
 
@@ -39,17 +39,18 @@ class SettingsLanguageViewModelTests: XCTestCase {
             .completed(600)
         ]).asDriver(onErrorJustReturn: "")
         let outputLanguageList = scheduler.createObserver(SettingsRepositoryItemResult.self)
-        let viewModel = SettingsLanguageViewModel(getLanguageList: createMockGetLanguageListUseCase(), updateLanguage: createMockUpdateLanguageUseCase())
+        let viewModel = SettingsLanguageViewModel(getLanguageList: createMockGetLanguageListUseCase(),
+                                                  updateLanguage: createMockUpdateLanguageUseCase())
         let input = SettingsLanguageViewModel.Input(search: inputSearch,
                                                     select: inputSelect)
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.languages.drive(outputLanguageList)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputLanguageList.events, [
             .next(150, .failure(TestError.someError)),
@@ -60,7 +61,7 @@ class SettingsLanguageViewModelTests: XCTestCase {
             .completed(600)
         ])
     }
-    
+
     private func createMockGetLanguageListUseCase() -> MockAnyUseCase<String, SettingsRepositoryItemResult> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
@@ -70,13 +71,13 @@ class SettingsLanguageViewModelTests: XCTestCase {
             .success([SettingsLanguageItem(selected: false, language: Language(name: value, code: value))])
         }
     }
-    
+
     private func createMockUpdateLanguageUseCase() -> MockAnyUseCase<String, SettingsRepositoryResult> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
-        } onRxError: { value in
+        } onRxError: { _ in
             nil
-        } onSuccess: { value in
+        } onSuccess: { _ in
             .success(true)
         }
     }

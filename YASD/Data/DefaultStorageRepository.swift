@@ -13,16 +13,16 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
     private let changed = PublishSubject<Bool>()
     private let id: String
     private let storage: Storage
-    
+
     private lazy var data: [T] = {
-        return self.storage.get(id: id, defaultObject: [T]())
+        self.storage.get(id: id, defaultObject: [T]())
     }()
-    
+
     init(id: String, storage: Storage) {
         self.id = id
         self.storage = storage
     }
-    
+
     func get(where filterFunc: @escaping (T) -> Bool) -> Observable<Result<[T]>> {
         return Observable.create { [weak self] observer in
             if let data = self?.data {
@@ -35,7 +35,7 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
             return Disposables.create {}
         }
     }
-    
+
     func add(_ word: T) -> Observable<StorageServiceResult> {
         return Observable.create { [weak self] observer in
             do {
@@ -45,13 +45,13 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
                 }
                 observer.onNext(.success(true))
                 observer.onCompleted()
-            } catch let error {
+            } catch {
                 observer.onNext(.failure(error))
             }
             return Disposables.create {}
         }
     }
-    
+
     func remove(_ word: T) -> Observable<StorageServiceResult> {
         return Observable.create { [weak self] observer in
             do {
@@ -59,13 +59,13 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
                 try self?.saveData()
                 observer.onNext(.success(true))
                 observer.onCompleted()
-            } catch let error {
+            } catch {
                 observer.onNext(.failure(error))
             }
             return Disposables.create {}
         }
     }
-    
+
     func remove(at index: Int) -> Observable<StorageServiceResult> {
         return Observable.create { [weak self] observer in
             do {
@@ -73,26 +73,26 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
                 try self?.saveData()
                 observer.onNext(.success(true))
                 observer.onCompleted()
-            } catch let error {
+            } catch {
                 observer.onNext(.failure(error))
             }
             return Disposables.create {}
         }
     }
-    
+
     func removeAll() -> Observable<StorageServiceResult> {
         return Observable.create { [weak self] observer in
             do {
                 try self?.clearData()
                 observer.onNext(.success(true))
                 observer.onCompleted()
-            } catch let error {
+            } catch {
                 observer.onNext(.failure(error))
             }
             return Disposables.create {}
         }
     }
-    
+
     func contains(_ word: T) -> Observable<StorageServiceResult> {
         return Observable.create { [weak self] observer in
             observer.onNext(.success(self?.data.contains(word) ?? false))
@@ -100,11 +100,11 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
             return Disposables.create {}
         }
     }
-    
+
     func getChangedSubject() -> PublishSubject<Bool> {
         return changed
     }
-    
+
     func getSize() -> Observable<Int64> {
         let size = Observable<Int64>.create { [weak self] observer in
             if let self = self {
@@ -118,15 +118,15 @@ class DefaultStorageRepository<T: Codable & Equatable>: StorageRepository {
         let changedSize = changed.flatMap { _ in size }
         return Observable.merge(size, changedSize)
     }
-    
+
     private func saveData() throws {
         try storage.save(id: id, object: data)
         changed.onNext(true)
     }
-    
+
     private func clearData() throws {
         data.removeAll()
-        try self.storage.clear(id: id)
+        try storage.clear(id: id)
         changed.onNext(true)
     }
 }

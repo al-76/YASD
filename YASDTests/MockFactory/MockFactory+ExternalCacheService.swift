@@ -8,15 +8,15 @@
 
 @testable import YASD
 
-import RxSwift
 import Cuckoo
+import RxSwift
 
 extension MockFactory {
     static func createMockExternalCacheService(_ testValue: String) -> MockExternalCacheService {
         let mock = MockExternalCacheService()
         stub(mock) { stub in
             when(stub.getTitle(from: any())).then { _ in
-                return testValue
+                testValue
             }
             when(stub.index(data: any())).thenReturn(.just(.success(())))
         }

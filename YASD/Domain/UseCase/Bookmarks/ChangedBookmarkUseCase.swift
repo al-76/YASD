@@ -12,16 +12,16 @@ import RxSwift
 class ChangedBookmarkUseCase: UseCase {
     typealias Input = Void
     typealias Output = Bookmarks
-    
+
     private let bookmarks: AnyStorageRepository<FormattedWord>
     private let cache: ExternalCacheService
-    
+
     init(bookmarks: AnyStorageRepository<FormattedWord>, cache: ExternalCacheService) {
         self.bookmarks = bookmarks
         self.cache = cache
     }
-    
-    func execute(with input: Void) -> Observable<Bookmarks> {
+
+    func execute(with _: Void) -> Observable<Bookmarks> {
         return bookmarks.getChangedSubject()
             .filter { $0 }
             .flatMap { [weak self] _ -> Observable<Bookmarks> in

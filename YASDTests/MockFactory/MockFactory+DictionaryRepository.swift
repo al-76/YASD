@@ -8,8 +8,8 @@
 
 @testable import YASD
 
-import RxSwift
 import Cuckoo
+import RxSwift
 
 extension MockFactory {
     static func createMockDictionaryRepository() -> MockAnyDictionaryRepository<SuggestionResult> {

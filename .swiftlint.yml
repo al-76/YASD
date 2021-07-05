@@ -1,0 +1,11 @@
+excluded:  
+  - Pods
+  - YASD/Contrib
+  - YASDTests/GeneratedMocks.swift
+generic_type_name:
+  min_length: 1
+  max_length: 30
+type_name:
+  min_length: 1
+identifier_name:
+  min_length: 1

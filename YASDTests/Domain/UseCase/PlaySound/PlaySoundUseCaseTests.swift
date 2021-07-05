@@ -8,16 +8,16 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class PlaySoundUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testExecute() {
         // Arrange
         let outputPlayer = scheduler.createObserver(PlayerManagerResult.self)
@@ -35,12 +35,12 @@ class PlaySoundUseCaseTests: XCTestCase {
             .completed(0)
         ])
     }
-    
+
     private func createMockPlayManager() -> MockPlayerManager {
         let mock = MockPlayerManager()
         stub(mock) { stub in
             when(stub.playSound(with: any())).then { _ in
-                return .just(.success(true))
+                .just(.success(true))
             }
         }
         return mock

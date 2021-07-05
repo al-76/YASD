@@ -6,25 +6,25 @@
 //  Copyright © 2020 yac. All rights reserved.
 //
 
-import UIKit
-import RxSwift
 import RMessage
+import RxSwift
+import UIKit
 
 class AboutViewController: UIViewController {
     var viewModel: AboutViewModel!
-    
-    @IBOutlet weak var textView: UITextView!
-    
+
+    @IBOutlet var textView: UITextView!
+
     private let disposeBag = DisposeBag()
     private let rmController = RMController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         rmController.presentationViewController = self
         bindToModel()
     }
-    
+
     private func bindToModel() {
         let output = viewModel.transform(from: AboutViewModel.Input())
         disposeBag.insert(

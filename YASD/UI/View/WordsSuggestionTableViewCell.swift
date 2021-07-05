@@ -9,10 +9,10 @@
 import UIKit
 
 class WordsSuggestionTableViewCell: UITableViewCell {
-    @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var iconHistory: UIImageView!
-    @IBOutlet weak var buttonRemove: UIButton!
-    
+    @IBOutlet var label: UILabel!
+    @IBOutlet var iconHistory: UIImageView!
+    @IBOutlet var buttonRemove: UIButton!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,10 +20,9 @@ class WordsSuggestionTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-    
+
     func setRemovable(_ value: Bool) {
         iconHistory.isHidden = !value
         buttonRemove.isHidden = !value

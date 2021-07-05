@@ -7,20 +7,20 @@
 //
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class WordsSuggestionViewModelTests: XCTestCase {
     enum TestError: Error {
         case someError
     }
-    
+
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testGetSuggestion() {
         // Arrange
         let testValue = "test"
@@ -30,7 +30,11 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(200, testValue)
         ]).asDriver(onErrorJustReturn: "")
         let outputSuggestions = scheduler.createObserver(SuggestionItemResult.self)
-        let viewModel = WordsSuggestionViewModel(getSuggestion: createMockGetAddSuggestionUseCase(), addSuggestion: MockFactory.createUseCaseStub(), removeSuggestion: MockFactory.createUseCaseStub())
+        let viewModel = WordsSuggestionViewModel(getSuggestion: createMockGetAddSuggestionUseCase(),
+                                                 addSuggestion: MockFactory
+                                                    .createUseCaseStub(),
+                                                 removeSuggestion: MockFactory
+                                                    .createUseCaseStub())
         let input = WordsSuggestionViewModel.Input(search: inputSearch,
                                                    addHistory: Driver.never(),
                                                    removeHistory: Driver.never())
@@ -38,10 +42,10 @@ class WordsSuggestionViewModelTests: XCTestCase {
         disposeBag.insert(
             output.suggestions.drive(outputSuggestions)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputSuggestions.events, [
             .next(150, .failure(TestError.someError)),
@@ -49,7 +53,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(200, .success([SuggestionItem(suggestion: testValue, removable: false)]))
         ])
     }
-    
+
     func testAddSuggestion() {
         // Arrange
         let testValue = "test"
@@ -59,7 +63,11 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(200, testValue)
         ]).asDriver(onErrorJustReturn: "")
         let outputSuggestions = scheduler.createObserver(SuggestionItemResult.self)
-        let viewModel = WordsSuggestionViewModel(getSuggestion: MockFactory.createUseCaseStub(), addSuggestion: createMockGetAddSuggestionUseCase(), removeSuggestion: MockFactory.createUseCaseStub())
+        let viewModel = WordsSuggestionViewModel(getSuggestion: MockFactory
+                                                    .createUseCaseStub(),
+                                                 addSuggestion: createMockGetAddSuggestionUseCase(),
+                                                 removeSuggestion: MockFactory
+                                                    .createUseCaseStub())
         let input = WordsSuggestionViewModel.Input(search: Driver.never(),
                                                    addHistory: inputAddHistory,
                                                    removeHistory: Driver.never())
@@ -67,10 +75,10 @@ class WordsSuggestionViewModelTests: XCTestCase {
         disposeBag.insert(
             output.suggestions.drive(outputSuggestions)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputSuggestions.events, [
             .next(150, .failure(TestError.someError)),
@@ -78,7 +86,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(200, .success([SuggestionItem(suggestion: testValue, removable: false)]))
         ])
     }
-    
+
     func testRemoveSuggestion() {
         // Arrange
         let testValue = "test"
@@ -93,7 +101,9 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(195, testValue)
         ]).asDriver(onErrorJustReturn: "")
         let outputSuggestions = scheduler.createObserver(SuggestionItemResult.self)
-        let viewModel = WordsSuggestionViewModel(getSuggestion: createMockGetAddSuggestionUseCase(), addSuggestion: createMockGetAddSuggestionUseCase(), removeSuggestion: createMockRemoveSuggestionUseCase())
+        let viewModel = WordsSuggestionViewModel(getSuggestion: createMockGetAddSuggestionUseCase(),
+                                                 addSuggestion: createMockGetAddSuggestionUseCase(),
+                                                 removeSuggestion: createMockRemoveSuggestionUseCase())
         let input = WordsSuggestionViewModel.Input(search: inputSearch,
                                                    addHistory: Driver.never(),
                                                    removeHistory: inputRemoveHistory)
@@ -101,10 +111,10 @@ class WordsSuggestionViewModelTests: XCTestCase {
         disposeBag.insert(
             output.suggestions.drive(outputSuggestions)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         let expected = SuggestionItemResult.success([SuggestionItem(suggestion: testValue, removable: false)])
         XCTAssertEqual(outputSuggestions.events, [
@@ -116,7 +126,7 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .next(200, expected)
         ])
     }
-    
+
     func createMockGetAddSuggestionUseCase() -> MockAnyUseCase<String, SuggestionItemResult> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
@@ -126,13 +136,13 @@ class WordsSuggestionViewModelTests: XCTestCase {
             .success([SuggestionItem(suggestion: value, removable: false)])
         }
     }
-    
+
     func createMockRemoveSuggestionUseCase() -> MockAnyUseCase<String, StorageServiceResult> {
         return MockFactory.createMockUseCase { value in
             value == "error" ? TestError.someError : nil
         } onRxError: { value in
             value == "rx_error" ? .failure(TestError.someError) : nil
-        } onSuccess: { value in
+        } onSuccess: { _ in
             .success(true)
         }
     }

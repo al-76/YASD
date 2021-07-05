@@ -9,21 +9,21 @@
 import RxSwift
 import UIKit
 
-class WordsTableViewCell: UITableViewCell {    
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var buttonPlay: UIButton!
-    @IBOutlet weak var buttonBookmark: UIButton!
-    
+class WordsTableViewCell: UITableViewCell {
+    @IBOutlet var textView: UITextView!
+    @IBOutlet var buttonPlay: UIButton!
+    @IBOutlet var buttonBookmark: UIButton!
+
     var disposeBag = DisposeBag()
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         if #available(iOS 13, *) {
             // nothing
         } else {
@@ -31,10 +31,9 @@ class WordsTableViewCell: UITableViewCell {
             buttonBookmark.setImage(UIImage(named: "fill_bookmark"), for: UIControl.State.selected)
         }
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 }

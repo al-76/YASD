@@ -12,7 +12,7 @@ import RMessage
 extension RMController {
     func handleError(_ error: Error) {
         showMessage(withSpec: errorSpec,
-                                 title: "Error",
-                                 body: error.localizedDescription)
+                    title: "Error",
+                    body: error.localizedDescription)
     }
 }

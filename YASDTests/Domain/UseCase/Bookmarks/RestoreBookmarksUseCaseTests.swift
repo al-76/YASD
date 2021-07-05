@@ -8,16 +8,16 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class RestoreBookmarksUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testExecute() {
         // Arrange
         let testValue = "test"
@@ -26,10 +26,10 @@ class RestoreBookmarksUseCaseTests: XCTestCase {
         let res = useCase.execute(with: "")
         res.bind(to: outputResult)
             .disposed(by: disposeBag)
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputResult.events, [
             .next(0, testValue),

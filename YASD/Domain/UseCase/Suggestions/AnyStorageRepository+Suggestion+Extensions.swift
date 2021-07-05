@@ -18,6 +18,6 @@ extension AnyStorageRepository where T == Suggestion {
                                             let filtered = suggestion.filter(history).toItem(removable: false)
                                             let merged = filtered.merge(history.reversed().toItem(removable: true))
                                             return merged
-        })
+                                        })
     }
 }

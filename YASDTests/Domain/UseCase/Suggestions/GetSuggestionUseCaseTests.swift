@@ -8,11 +8,11 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class GetSuggestionUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
@@ -23,16 +23,18 @@ class GetSuggestionUseCaseTests: XCTestCase {
         let testValue = "test"
         let outputItems = scheduler.createObserver(SuggestionItemResult.self)
         let useCase = GetSuggestionUseCase(suggestions: MockFactory.createMockDictionaryRepository(),
-                                           settings: MockFactory.createMockSettingsRepository(PublishSubject<Language>()),
-                                           history: MockFactory.createSuggestionStorageRepository(testValue, 0))
+                                           settings: MockFactory
+                                            .createMockSettingsRepository(PublishSubject<Language>()),
+                                           history: MockFactory
+                                            .createSuggestionStorageRepository(testValue, 0))
         let res = useCase.execute(with: "")
         disposeBag.insert(
             res.bind(to: outputItems)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         XCTAssertEqual(outputItems.events, [
             .next(0, .success([SuggestionItem(suggestion: testValue, removable: true)])),

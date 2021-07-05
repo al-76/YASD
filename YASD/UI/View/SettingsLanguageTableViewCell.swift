@@ -6,8 +6,8 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class SettingsLanguageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
@@ -20,5 +20,4 @@ class SettingsLanguageTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

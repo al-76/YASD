@@ -12,14 +12,14 @@ import RxSwift
 class ClearHistoryUseCase: UseCase {
     typealias Input = Void
     typealias Output = StorageServiceResult
-    
+
     private let history: AnyStorageRepository<Suggestion>
-    
+
     init(history: AnyStorageRepository<Suggestion>) {
         self.history = history
     }
-        
-    func execute(with input: Void) -> Observable<StorageServiceResult> {
+
+    func execute(with _: Void) -> Observable<StorageServiceResult> {
         return history.removeAll()
     }
 }

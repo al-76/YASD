@@ -49,7 +49,7 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0El-zz-oW6">
                                                             <rect key="frame" x="0.0" y="0.0" width="70.5" height="32.5"/>
                                                             <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="20" maxY="4"/>
-                                                            <state key="normal" image="speaker.3.fill" catalog="system">
+                                                            <state key="normal" image="speaker.wave.3.fill" catalog="system">
                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
                                                             </state>
                                                         </button>
@@ -565,7 +565,7 @@
         <image name="gear" width="29" height="33"/>
         <image name="goforward" catalog="system" width="121" height="128"/>
         <image name="speaker.3.fill" width="34" height="27"/>
-        <image name="speaker.3.fill" catalog="system" width="128" height="86"/>
+        <image name="speaker.wave.3.fill" catalog="system" width="128" height="86"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

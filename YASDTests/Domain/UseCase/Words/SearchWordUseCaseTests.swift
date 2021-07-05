@@ -8,16 +8,16 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class SearchWordUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testExecute() {
         // Arrange
         let testValue = "test"
@@ -39,10 +39,10 @@ class SearchWordUseCaseTests: XCTestCase {
             inputChangedBookmarks.bind(to: changedBookmarks),
             res.bind(to: outputItems)
         )
-        
+
         // Act
         scheduler.start()
-        
+
         // Assert
         let expectedValue = [FoundWord(testValue)]
         XCTAssertEqual(outputItems.events, [
@@ -51,7 +51,7 @@ class SearchWordUseCaseTests: XCTestCase {
             .next(160, .success(expectedValue))
         ])
     }
-    
+
     private func createMockDictionaryRepository() -> MockAnyDictionaryRepository<FoundWordResult> {
         let mock = MockAnyDictionaryRepository<FoundWordResult>(wrapped: MockDictionaryRepository())
         stub(mock) { stub in
@@ -59,48 +59,56 @@ class SearchWordUseCaseTests: XCTestCase {
         }
         return mock
     }
-    
+
     // FIXME: Cuckoo doesn't support @escaping protocols methods
-    class FakeStorageRepository : StorageRepository {
+    class FakeStorageRepository: StorageRepository {
+        // swiftlint:disable nesting
         typealias T = FormattedWord
-        
+
         private let testValue: T
         private let testPublishSubject: PublishSubject<Bool>
-        
+
         init(testValue: String, testPublishSubject: PublishSubject<Bool>) {
             self.testValue = FormattedWord(testValue)
             self.testPublishSubject = testPublishSubject
         }
-        
-        func get(where filterFunc: (@escaping (T) -> Bool)) -> Observable<Result<[T]>> {
+
+        func get(where _: @escaping (T) -> Bool) -> Observable<Result<[T]>> {
             return .just(.success([testValue]))
         }
-        func add(_ word: T) -> Observable<StorageServiceResult> {
+
+        func add(_: T) -> Observable<StorageServiceResult> {
             return .just(.success(true))
         }
-        func remove(_ word: T) -> Observable<StorageServiceResult> {
+
+        func remove(_: T) -> Observable<StorageServiceResult> {
             return .just(.success(true))
         }
-        func remove(at index: Int) -> Observable<StorageServiceResult> {
+
+        func remove(at _: Int) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
+
         func removeAll() -> Observable<StorageServiceResult> {
             return .just(.success(true))
         }
-        func contains(_ word: T) -> Observable<StorageServiceResult> {
+
+        func contains(_: T) -> Observable<StorageServiceResult> {
             .just(.success(true))
         }
+
         func getChangedSubject() -> PublishSubject<Bool> {
             return testPublishSubject
         }
+
         func getSize() -> Observable<Int64> {
             return .just(0)
         }
     }
-    
-    func createStorageRepository(_ value: String, _ publishSubject: PublishSubject<Bool>) -> AnyStorageRepository<FormattedWord> {
+
+    func createStorageRepository(_ value: String,
+                                 _ publishSubject: PublishSubject<Bool>) -> AnyStorageRepository<FormattedWord> {
         return AnyStorageRepository<FormattedWord>(wrapped: FakeStorageRepository(testValue: value,
-                                                                                 testPublishSubject: publishSubject))
+                                                                                  testPublishSubject: publishSubject))
     }
 }
-

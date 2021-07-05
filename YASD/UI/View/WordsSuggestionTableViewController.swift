@@ -6,11 +6,11 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import UIKit
-import RxSwift
+import RMessage
 import RxCocoa
 import RxDataSources
-import RMessage
+import RxSwift
+import UIKit
 
 class WordsSuggestionTableViewController: UITableViewController {
     var viewModel: WordsSuggestionViewModel!
@@ -20,18 +20,18 @@ class WordsSuggestionTableViewController: UITableViewController {
     let selectSuggestion = PublishRelay<String>()
     private let dataSource = createDataSource()
     private let rmController = RMController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         rmController.presentationViewController = self
         customizeView()
         bindToModel()
     }
-    
+
     private func customizeView() {
         clearsSelectionOnViewWillAppear = false
-        
+
         tableView.dataSource = nil
         tableView.delegate = nil
         tableView.rowHeight = UITableView.automaticDimension
@@ -39,7 +39,7 @@ class WordsSuggestionTableViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         tableView.reloadData()
     }
-    
+
     private func bindToModel() {
         let suggestion: ((IndexPath) -> String) = { [weak self] index in
             guard let self = self else { return "" }
@@ -64,10 +64,10 @@ class WordsSuggestionTableViewController: UITableViewController {
                 .bind(to: selectSuggestion)
         )
     }
-    
+
     private func suggestion(_ index: IndexPath) -> String {
         guard let cell = tableView.cellForRow(at: index) as? WordsSuggestionTableViewCell,
-            let text = cell.label.text else { return "" }
+              let text = cell.label.text else { return "" }
         return text
     }
 }
@@ -79,48 +79,53 @@ struct SuggestionItemSection {
 
 extension SuggestionItem: IdentifiableType {
     var identity: String {
-        return self.suggestion ?? ""
+        return suggestion ?? ""
     }
 }
 
 extension SuggestionItem: Equatable {
-    static public func == (lhs: SuggestionItem, rhs: SuggestionItem) -> Bool {
+    public static func == (lhs: SuggestionItem, rhs: SuggestionItem) -> Bool {
         return lhs.suggestion == rhs.suggestion && lhs.removable == rhs.removable
     }
 }
 
 extension SuggestionItemSection: AnimatableSectionModelType {
     typealias Item = SuggestionItem
-    
-    var identity: String { return self.header }
-    
+
+    var identity: String { return header }
+
     init(original: SuggestionItemSection, items: [SuggestionItem]) {
         self = original
         self.items = items
     }
 }
 
-fileprivate func createDataSource() -> RxTableViewSectionedAnimatedDataSource<SuggestionItemSection> {
-    return RxTableViewSectionedAnimatedDataSource(animationConfiguration: AnimationConfiguration(insertAnimation: .automatic, reloadAnimation: .automatic, deleteAnimation: .automatic),
-                                                  configureCell: { (dataSource, tableView, indexPath, suggestion) -> UITableViewCell in
-                                                    let id = "WordsSuggestionTableCell"
-                                                    let cell = tableView.dequeueReusableCell(withIdentifier: id) ?? UITableViewCell(style: .default, reuseIdentifier: id)
-                                                    if let suggestionCell = cell as? WordsSuggestionTableViewCell {
-                                                        configureCell(suggestionCell, with: suggestion)
-                                                    }
-                                                    return cell
-    },
-                                                  canEditRowAtIndexPath: { dataSource, index in
-                                                    return getSuggestionItem(from: dataSource, with: index).removable
-    })
+private func createDataSource() -> RxTableViewSectionedAnimatedDataSource<SuggestionItemSection> {
+    return RxTableViewSectionedAnimatedDataSource(animationConfiguration:
+        AnimationConfiguration(insertAnimation: .automatic,
+                               reloadAnimation: .automatic,
+                               deleteAnimation: .automatic),
+        configureCell: { _, tableView, _, suggestion -> UITableViewCell in
+            let id = "WordsSuggestionTableCell"
+            let cell = tableView.dequeueReusableCell(withIdentifier: id) ??
+                UITableViewCell(style: .default, reuseIdentifier: id)
+            if let suggestionCell = cell as? WordsSuggestionTableViewCell {
+                configureCell(suggestionCell, with: suggestion)
+            }
+            return cell
+        },
+        canEditRowAtIndexPath: { dataSource, index in
+            getSuggestionItem(from: dataSource, with: index).removable
+        })
 }
 
-fileprivate func getSuggestionItem(from dataSource: TableViewSectionedDataSource<SuggestionItemSection>, with index: IndexPath) -> SuggestionItem {
+private func getSuggestionItem(from dataSource: TableViewSectionedDataSource<SuggestionItemSection>,
+                               with index: IndexPath) -> SuggestionItem {
     let section = dataSource.sectionModels[index.section]
     return section.items[index.row]
 }
 
-fileprivate func configureCell(_ cell: WordsSuggestionTableViewCell, with result: SuggestionItem) {
+private func configureCell(_ cell: WordsSuggestionTableViewCell, with result: SuggestionItem) {
     cell.label.text = result.suggestion
     cell.setRemovable(result.removable)
 }

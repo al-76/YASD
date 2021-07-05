@@ -12,11 +12,11 @@ import RxSwift
 class SearchWordUseCase: UseCase {
     typealias Input = (word: String, indicator: ActivityIndicator)
     typealias Output = FoundWordResult
-    
+
     private let words: AnyDictionaryRepository<FoundWordResult>
     private let settings: SettingsRepository
     private let bookmarks: AnyStorageRepository<FormattedWord>
-    
+
     init(words: AnyDictionaryRepository<FoundWordResult>,
          settings: SettingsRepository,
          bookmarks: AnyStorageRepository<FormattedWord>) {
@@ -24,12 +24,12 @@ class SearchWordUseCase: UseCase {
         self.settings = settings
         self.bookmarks = bookmarks
     }
-    
+
     func execute(with input: Input) -> Observable<FoundWordResult> {
         let word = input.word.lowercased()
         let foundWords = settings.getLanguage().flatMap { [weak self] result -> Observable<FoundWordResult> in
             guard let self = self else { return .just(.success([])) }
-            switch(result) {
+            switch result {
             case let .success(language):
                 return self.words.search(word, language)
             case let .failure(error):

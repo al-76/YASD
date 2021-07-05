@@ -8,16 +8,16 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class GetCacheSizeUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testExecute() {
         // Arrange
         let testSize = 1024
@@ -32,7 +32,8 @@ class GetCacheSizeUseCaseTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(outputSize.events, [
-            .next(0, ByteCountFormatter.string(fromByteCount: Int64(testSize), countStyle: .file)), // FIXME: Hidden dependency
+            .next(0, ByteCountFormatter.string(fromByteCount: Int64(testSize),
+                                               countStyle: .file)), // FIXME: Hidden dependency
             .completed(0)
         ])
     }

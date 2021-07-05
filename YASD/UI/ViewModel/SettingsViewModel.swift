@@ -6,8 +6,8 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 class SettingsViewModel: ViewModel {
     private let getLanguage: AnyUseCase<Void, SettingsRepositoryLanguageResult>
@@ -15,12 +15,12 @@ class SettingsViewModel: ViewModel {
     private let getCacheSize: AnyUseCase<Void, String>
     private let clearHistory: AnyUseCase<Void, StorageServiceResult>
     private let clearCache: AnyUseCase<Void, CacheServiceBoolResult>
-    
+
     struct Input {
         let clearHistory: Driver<Void>
         let clearCache: Driver<Void>
     }
-    
+
     struct Output {
         let selectedLanguage: Driver<SettingsRepositoryLanguageResult>
         let historySize: Driver<String>
@@ -38,7 +38,7 @@ class SettingsViewModel: ViewModel {
         self.clearHistory = clearHistory
         self.clearCache = clearCache
     }
-    
+
     func transform(from input: Input) -> Output {
         let historySize = getHistorySize.execute(with: ())
             .asDriver(onErrorJustReturn: "")
@@ -46,19 +46,19 @@ class SettingsViewModel: ViewModel {
             .asDriver(onErrorJustReturn: "")
         let updatedCacheSize = input.clearCache
             .flatMapLatest { [weak self] _ -> Driver<CacheServiceBoolResult> in
-            guard let self = self else { return .just(.success(false)) }
+                guard let self = self else { return .just(.success(false)) }
                 return self.clearCache.execute(with: ()).asDriver { .just(.failure($0)) }
-        }
-        .flatMap { _ in cacheSize }
+            }
+            .flatMap { _ in cacheSize }
         let updatedHistorySize = input.clearHistory
             .flatMapLatest { [weak self] _ -> Driver<StorageServiceResult> in
                 guard let self = self else { return .just(.success(false)) }
                 return self.clearHistory.execute(with: ()).asDriver { .just(.failure($0)) }
-        }
-        .flatMap { _ in historySize }
+            }
+            .flatMap { _ in historySize }
         return Output(selectedLanguage: getLanguage.execute(with: ())
-                        .asDriver { .just(.failure($0)) },
-                      historySize: Driver.merge(historySize, updatedHistorySize),
-                      cacheSize: Driver.merge(cacheSize, updatedCacheSize))
+            .asDriver { .just(.failure($0)) },
+            historySize: Driver.merge(historySize, updatedHistorySize),
+            cacheSize: Driver.merge(cacheSize, updatedCacheSize))
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 extension SuggestionItemResult {
     func merge(_ result: SuggestionItemResult) -> SuggestionItemResult {
-        switch((self, result)) {
+        switch (self, result) {
         case let (.success(result1), .success(result2)):
             return .success(result1 + result2)
         default:

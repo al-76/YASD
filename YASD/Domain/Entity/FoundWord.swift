@@ -12,4 +12,5 @@ struct FoundWord {
     let word: FormattedWord
     let bookmarked: Bool
 }
+
 typealias FoundWordResult = Result<[FoundWord]>

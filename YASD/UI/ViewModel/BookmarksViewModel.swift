@@ -6,9 +6,8 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import RxSwift
-import RxSwiftExt
 import RxCocoa
+import RxSwift
 
 class BookmarksViewModel: ViewModel {
     private let searchBookmark: AnyUseCase<String, Bookmarks>
@@ -16,20 +15,20 @@ class BookmarksViewModel: ViewModel {
     private let removeBookmark: AnyUseCase<Int, StorageServiceResult>
     private let changedBookmark: AnyUseCase<Void, Bookmarks>
     private let playSound: AnyUseCase<String, PlayerManagerResult>
-    
+
     struct Input {
         let search: Driver<String>
         let playUrl: Driver<String>
         let removeBookmark: Driver<Int>
         let restore: Driver<String>
     }
-    
+
     struct Output {
         let played: Driver<PlayerManagerResult>
         let bookmarks: Driver<Bookmarks>
         let restored: Driver<String>
     }
-    
+
     init(searchBookmark: AnyUseCase<String, Bookmarks>,
          restoreBookmark: AnyUseCase<String, String>,
          removeBookmark: AnyUseCase<Int, StorageServiceResult>,
@@ -41,7 +40,7 @@ class BookmarksViewModel: ViewModel {
         self.changedBookmark = changedBookmark
         self.playSound = playSound
     }
-    
+
     func transform(from input: Input) -> Output {
         let restored = input.restore.flatMap { [weak self] id -> Driver<String> in
             guard let self = self else { return .just("") }
@@ -55,12 +54,13 @@ class BookmarksViewModel: ViewModel {
         }
         let changed = changedBookmark.execute(with: ())
             .asDriver { .just(.failure($0)) }
-        let removed = input.removeBookmark.filter { $0 >= 0 }.flatMap { [weak self] index -> Driver<StorageServiceResult> in
+        let removed = input.removeBookmark.filter { $0 >= 0 }
+            .flatMap { [weak self] index -> Driver<StorageServiceResult> in
             guard let self = self else { return .just(.success(false)) }
             return self.removeBookmark.execute(with: index)
                 .asDriver { .just(.failure($0)) }
         }.flatMap { _ -> Driver<Bookmarks> in
-            return changed
+            changed
         }
         let played = input.playUrl.flatMap { [weak self] url -> Driver<PlayerManagerResult> in
             guard let self = self else { return .just(.success(false)) }

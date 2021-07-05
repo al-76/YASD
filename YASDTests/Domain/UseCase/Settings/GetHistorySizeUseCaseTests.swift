@@ -8,16 +8,16 @@
 
 @testable import YASD
 
-import XCTest
-import RxSwift
-import RxCocoa
-import RxTest
 import Cuckoo
+import RxCocoa
+import RxSwift
+import RxTest
+import XCTest
 
 class GetHistorySizeUseCaseTests: XCTestCase {
     let disposeBag = DisposeBag()
     let scheduler = TestScheduler(initialClock: 0)
-    
+
     func testExecute() {
         // Arrange
         let testSize: Int64 = 1024
@@ -32,7 +32,8 @@ class GetHistorySizeUseCaseTests: XCTestCase {
 
         // Assert
         XCTAssertEqual(outputSize.events, [
-            .next(0, ByteCountFormatter.string(fromByteCount: testSize, countStyle: .file)), // FIXME: Hidden dependency
+            .next(0, ByteCountFormatter.string(fromByteCount: testSize,
+                                               countStyle: .file)), // FIXME: Hidden dependency
             .completed(0)
         ])
     }

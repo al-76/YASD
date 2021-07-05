@@ -6,8 +6,8 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
-import RxSwift
 import Foundation
+import RxSwift
 
 typealias DataCacheResult = Result<Data>
 typealias DataCacheOptResult = Result<Data?>

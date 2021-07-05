@@ -11,7 +11,7 @@
 import Foundation
 
 extension FoundWord {
-    public init(_ word: String) {
+    init(_ word: String) {
         let word = FormattedWord(header: word,
                                  formatted: NSAttributedString(string: word),
                                  soundUrl: nil,
@@ -21,7 +21,7 @@ extension FoundWord {
 }
 
 extension FoundWord: Equatable {
-    static public func == (lhs: FoundWord, rhs: FoundWord) -> Bool {
+    public static func == (lhs: FoundWord, rhs: FoundWord) -> Bool {
         return lhs.word == rhs.word && lhs.bookmarked == rhs.bookmarked
     }
 }

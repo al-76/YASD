@@ -12,13 +12,13 @@ import RxSwift
 class GetLanguageListSettingsUseCase: UseCase {
     typealias Input = String
     typealias Output = SettingsRepositoryItemResult
-    
+
     private let repository: SettingsRepository
 
     init(repository: SettingsRepository) {
         self.repository = repository
     }
-    
+
     func execute(with input: String) -> Observable<SettingsRepositoryItemResult> {
         return repository.getLanguageList(with: input)
     }
