@@ -6,6 +6,7 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
+import Firebase
 import Swinject
 import SwinjectStoryboard
 import UIKit
@@ -19,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         window = createMainWindow(container)
-
         return true
     }
 

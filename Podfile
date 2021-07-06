@@ -15,7 +15,9 @@ target 'YASD' do
   pod 'MarkdownKit'
   pod 'Cache', :git => 'https://github.com/hyperoslo/Cache.git'
   pod 'SwiftLint'
-  
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
+ 
   target 'YASDTests' do
     inherit! :search_paths
     pod 'RxTest'
