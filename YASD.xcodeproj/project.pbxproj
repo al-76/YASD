@@ -75,6 +75,7 @@
 		6F08F5C9268B3A4D005D18D7 /* AddBookmarkUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08F5C8268B3A4D005D18D7 /* AddBookmarkUseCaseTests.swift */; };
 		6F171E322643FB9D00C37B28 /* AboutViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F171E312643FB9D00C37B28 /* AboutViewModelTests.swift */; };
 		6F171E5626455E2000C37B28 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F171E5526455E2000C37B28 /* GeneratedMocks.swift */; };
+		6F64C4C32695EF720052E683 /* BookmarksTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F64C4C22695EF720052E683 /* BookmarksTabBarItem.swift */; };
 		6F7494F42694A3DC00C3AB98 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F7494F32694A3C000C3AB98 /* GoogleService-Info.plist */; };
 		6F86CCB82632CCD0003552BB /* GetLanguageSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCB72632CCD0003552BB /* GetLanguageSettingsUseCase.swift */; };
 		6F86CCBC2632D0C0003552BB /* GetLanguageListSettingsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F86CCBB2632D0C0003552BB /* GetLanguageListSettingsUseCase.swift */; };
@@ -261,6 +262,7 @@
 		6F171E312643FB9D00C37B28 /* AboutViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModelTests.swift; sourceTree = "<group>"; };
 		6F171E332643FF4000C37B28 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6F171E5526455E2000C37B28 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
+		6F64C4C22695EF720052E683 /* BookmarksTabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksTabBarItem.swift; sourceTree = "<group>"; };
 		6F7494F32694A3C000C3AB98 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6F86CCB72632CCD0003552BB /* GetLanguageSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLanguageSettingsUseCase.swift; sourceTree = "<group>"; };
 		6F86CCBB2632D0C0003552BB /* GetLanguageListSettingsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLanguageListSettingsUseCase.swift; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 				2F2980C623B2660F004F7FA9 /* BookmarksTableViewCell.swift */,
 				17260B7D24660138002F730A /* AboutViewController.swift */,
 				CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */,
+				6F64C4C22695EF720052E683 /* BookmarksTabBarItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1111,6 +1114,7 @@
 				CDF9598325E150210059A1EB /* SuggestionDictionaryRepository.swift in Sources */,
 				CDE7053D2631FCE90015CD07 /* RemoveBookmarkUseCase.swift in Sources */,
 				2FDB6401238EA5C400948A52 /* FormattedWord.swift in Sources */,
+				6F64C4C32695EF720052E683 /* BookmarksTabBarItem.swift in Sources */,
 				2FDD05A723B2588C0018F223 /* BookmarksTableViewController.swift in Sources */,
 				CDF9598625E1503E0059A1EB /* WordsDictionaryRepository.swift in Sources */,
 				2FCB2DE122A111540053B758 /* DefaultNetwork.swift in Sources */,

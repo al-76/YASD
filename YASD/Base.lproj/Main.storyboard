@@ -352,7 +352,7 @@
         <scene sceneID="uT2-B1-RVs">
             <objects>
                 <navigationController id="ZOw-uO-scV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Bookmarks" image="bookmark.fill" catalog="system" id="cjq-xQ-h0C"/>
+                    <tabBarItem key="tabBarItem" title="Bookmarks" image="bookmark.fill" catalog="system" id="cjq-xQ-h0C" customClass="BookmarksTabBarItem" customModule="YASD" customModuleProvider="target"/>
                     <navigationItem key="navigationItem" id="IPt-mm-LOX"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zbQ-yU-CAV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
