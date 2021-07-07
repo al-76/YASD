@@ -28,11 +28,14 @@ class SettingsViewModelTests: XCTestCase {
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(testLanguage),
                                           getHistorySize: createMockGetStringUseCase(""),
                                           getCacheSize: createMockGetStringUseCase(""),
+                                          getBookmarksSize: createMockGetStringUseCase(""),
                                           clearHistory: MockFactory.createUseCaseStub(),
-                                          clearCache: MockFactory.createUseCaseStub())
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
         let outputLanguage = scheduler.createObserver(SettingsRepositoryLanguageResult.self)
         let input = SettingsViewModel.Input(clearHistory: Driver.never(),
-                                            clearCache: Driver.never())
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: Driver.never())
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.selectedLanguage.drive(outputLanguage)
@@ -53,11 +56,14 @@ class SettingsViewModelTests: XCTestCase {
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase("error"),
                                           getHistorySize: createMockGetStringUseCase(""),
                                           getCacheSize: createMockGetStringUseCase(""),
+                                          getBookmarksSize: createMockGetStringUseCase(""),
                                           clearHistory: MockFactory.createUseCaseStub(),
-                                          clearCache: MockFactory.createUseCaseStub())
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
         let outputLanguage = scheduler.createObserver(SettingsRepositoryLanguageResult.self)
         let input = SettingsViewModel.Input(clearHistory: Driver.never(),
-                                            clearCache: Driver.never())
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: Driver.never())
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.selectedLanguage.drive(outputLanguage)
@@ -79,11 +85,14 @@ class SettingsViewModelTests: XCTestCase {
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
                                           getHistorySize: createMockGetStringUseCase(testValue),
                                           getCacheSize: createMockGetStringUseCase(""),
+                                          getBookmarksSize: createMockGetStringUseCase(""),
                                           clearHistory: MockFactory.createUseCaseStub(),
-                                          clearCache: MockFactory.createUseCaseStub())
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
         let outputHistorySize = scheduler.createObserver(String.self)
         let input = SettingsViewModel.Input(clearHistory: Driver.never(),
-                                            clearCache: Driver.never())
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: Driver.never())
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.historySize.drive(outputHistorySize)
@@ -103,11 +112,14 @@ class SettingsViewModelTests: XCTestCase {
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
                                           getHistorySize: createMockGetStringUseCase("error"),
                                           getCacheSize: createMockGetStringUseCase(""),
+                                          getBookmarksSize: createMockGetStringUseCase(""),
                                           clearHistory: MockFactory.createUseCaseStub(),
-                                          clearCache: MockFactory.createUseCaseStub())
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
         let outputHistorySize = scheduler.createObserver(String.self)
         let input = SettingsViewModel.Input(clearHistory: Driver.never(),
-                                            clearCache: Driver.never())
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: Driver.never())
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.historySize.drive(outputHistorySize)
@@ -122,17 +134,75 @@ class SettingsViewModelTests: XCTestCase {
         ])
     }
 
+    func testGetBookmarksSize() {
+        // Arrange
+        let testValue = "test"
+        let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
+                                          getHistorySize: createMockGetStringUseCase(""),
+                                          getCacheSize: createMockGetStringUseCase(""),
+                                          getBookmarksSize: createMockGetStringUseCase(testValue),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
+        let outputBookmarksSize = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: Driver.never())
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.bookmarksSize.drive(outputBookmarksSize)
+        )
+
+        // Act
+        scheduler.start()
+
+        // Assert
+        XCTAssertEqual(outputBookmarksSize.events, [
+            .next(0, testValue)
+        ])
+    }
+
+    func testGetBookmarksSizeError() {
+        // Arrange
+        let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
+                                          getHistorySize: createMockGetStringUseCase(""),
+                                          getCacheSize: createMockGetStringUseCase(""),
+                                          getBookmarksSize: createMockGetStringUseCase("error"),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
+        let outputBookmarksSize = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: Driver.never())
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.bookmarksSize.drive(outputBookmarksSize)
+        )
+
+        // Act
+        scheduler.start()
+
+        // Assert
+        XCTAssertEqual(outputBookmarksSize.events, [
+            .next(0, "")
+        ])
+    }
+
     func testGetCacheSize() {
         // Arrange
         let testValue = "test"
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
                                           getHistorySize: createMockGetStringUseCase(""),
                                           getCacheSize: createMockGetStringUseCase(testValue),
+                                          getBookmarksSize: createMockGetStringUseCase(""),
                                           clearHistory: MockFactory.createUseCaseStub(),
-                                          clearCache: MockFactory.createUseCaseStub())
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
         let outputCacheSize = scheduler.createObserver(String.self)
         let input = SettingsViewModel.Input(clearHistory: Driver.never(),
-                                            clearCache: Driver.never())
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: Driver.never())
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.cacheSize.drive(outputCacheSize)
@@ -152,11 +222,14 @@ class SettingsViewModelTests: XCTestCase {
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
                                           getHistorySize: createMockGetStringUseCase(""),
                                           getCacheSize: createMockGetStringUseCase("error"),
+                                          getBookmarksSize: createMockGetStringUseCase(""),
                                           clearHistory: MockFactory.createUseCaseStub(),
-                                          clearCache: MockFactory.createUseCaseStub())
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
         let outputCacheSize = scheduler.createObserver(String.self)
         let input = SettingsViewModel.Input(clearHistory: Driver.never(),
-                                            clearCache: Driver.never())
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: Driver.never())
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.cacheSize.drive(outputCacheSize)
@@ -178,11 +251,14 @@ class SettingsViewModelTests: XCTestCase {
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
                                           getHistorySize: createMockGetStringUseCase(testValue),
                                           getCacheSize: createMockGetStringUseCase(""),
-                                          clearHistory: createMockClearHistoryUseCase(),
-                                          clearCache: MockFactory.createUseCaseStub())
+                                          getBookmarksSize: createMockGetStringUseCase(""),
+                                          clearHistory: createMockClearStorageUseCase(),
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
         let outputHistorySize = scheduler.createObserver(String.self)
         let input = SettingsViewModel.Input(clearHistory: inputClearHistory,
-                                            clearCache: Driver.never())
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: Driver.never())
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.historySize.drive(outputHistorySize)
@@ -198,6 +274,36 @@ class SettingsViewModelTests: XCTestCase {
         ])
     }
 
+    func testClearBookmarks() {
+        let testValue = "test"
+        let inputClearBookmarks = scheduler.createHotObservable([.next(150, ())])
+            .asDriver(onErrorJustReturn: ())
+        let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
+                                          getHistorySize: createMockGetStringUseCase(""),
+                                          getCacheSize: createMockGetStringUseCase(""),
+                                          getBookmarksSize: createMockGetStringUseCase(testValue),
+                                          clearHistory: MockFactory.createUseCaseStub(),
+                                          clearCache: MockFactory.createUseCaseStub(),
+                                          clearBookmarks: createMockClearStorageUseCase())
+        let outputBookmarksSize = scheduler.createObserver(String.self)
+        let input = SettingsViewModel.Input(clearHistory: Driver.never(),
+                                            clearCache: Driver.never(),
+                                            clearBookmarks: inputClearBookmarks)
+        let output = viewModel.transform(from: input)
+        disposeBag.insert(
+            output.bookmarksSize.drive(outputBookmarksSize)
+        )
+
+        // Act
+        scheduler.start()
+
+        // Assert
+        XCTAssertEqual(outputBookmarksSize.events, [
+            .next(0, testValue),
+            .next(150, testValue)
+        ])
+    }
+
     func testClearCache() {
         let testValue = "test"
         let inputClearCache = scheduler.createHotObservable([.next(150, ())])
@@ -205,11 +311,14 @@ class SettingsViewModelTests: XCTestCase {
         let viewModel = SettingsViewModel(getLanguage: createMockGeLanguageUseCase(""),
                                           getHistorySize: createMockGetStringUseCase(""),
                                           getCacheSize: createMockGetStringUseCase(testValue),
+                                          getBookmarksSize: createMockGetStringUseCase(""),
                                           clearHistory: MockFactory.createUseCaseStub(),
-                                          clearCache: createMockClearCacheUseCase())
+                                          clearCache: createMockClearCacheUseCase(),
+                                          clearBookmarks: MockFactory.createUseCaseStub())
         let outputCacheSize = scheduler.createObserver(String.self)
         let input = SettingsViewModel.Input(clearHistory: Driver.never(),
-                                            clearCache: inputClearCache)
+                                            clearCache: inputClearCache,
+                                            clearBookmarks: Driver.never())
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.cacheSize.drive(outputCacheSize)
@@ -256,7 +365,7 @@ class SettingsViewModelTests: XCTestCase {
         }
     }
 
-    private func createMockClearHistoryUseCase() -> MockAnyUseCase<Void, StorageServiceResult> {
+    private func createMockClearStorageUseCase() -> MockAnyUseCase<Void, StorageServiceResult> {
         return MockFactory.createMockUseCase { _ in
             nil
         } onRxError: { _ in

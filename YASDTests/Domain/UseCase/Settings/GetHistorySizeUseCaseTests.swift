@@ -22,7 +22,7 @@ class GetHistorySizeUseCaseTests: XCTestCase {
         // Arrange
         let testSize: Int64 = 1024
         let outputSize = scheduler.createObserver(String.self)
-        let useCase = GetHistorySizeUseCase(history: MockFactory.createSuggestionStorageRepository("", testSize))
+        let useCase = GetStorageSizeUseCase(history: MockFactory.createSuggestionStorageRepository("", testSize))
         let res = useCase.execute(with: ())
         res.bind(to: outputSize)
             .disposed(by: disposeBag)

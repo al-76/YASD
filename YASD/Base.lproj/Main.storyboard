@@ -475,12 +475,38 @@
                                             <outletCollection property="gestureRecognizers" destination="J0S-yr-FUh" appends="YES" id="tgo-Yq-i5Y"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="cK6-AO-zE1">
+                                        <rect key="frame" x="0.0" y="266.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cK6-AO-zE1" id="El4-5g-vWn">
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Clear bookmarks (%s)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgi-nF-K9v">
+                                                    <rect key="frame" x="18" y="9.5" width="353.5" height="24.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="xgi-nF-K9v" firstAttribute="top" secondItem="El4-5g-vWn" secondAttribute="top" constant="9.5" id="1vF-kd-K8S"/>
+                                                <constraint firstAttribute="trailing" secondItem="xgi-nF-K9v" secondAttribute="trailing" constant="13" id="5PS-ge-ymx"/>
+                                                <constraint firstAttribute="bottom" secondItem="xgi-nF-K9v" secondAttribute="bottom" constant="10" id="bvD-1p-6sv"/>
+                                                <constraint firstItem="xgi-nF-K9v" firstAttribute="leading" secondItem="El4-5g-vWn" secondAttribute="leading" constant="18" id="wSu-it-n2F"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="o48-PZ-0ll" appends="YES" id="8hh-JM-eKD"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Something else" id="tSR-gP-nE5">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="cBW-sI-TLH">
-                                        <rect key="frame" x="0.0" y="316.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="360.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cBW-sI-TLH" id="OUL-tD-mtm">
                                             <rect key="frame" x="0.0" y="0.0" width="384.5" height="44"/>
@@ -515,6 +541,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="wkg-LS-Deb"/>
                     <connections>
+                        <outlet property="clearBookmarksGesture" destination="o48-PZ-0ll" id="aya-o8-IpZ"/>
+                        <outlet property="clearBookmarksLabel" destination="xgi-nF-K9v" id="egt-LG-rL4"/>
                         <outlet property="clearCacheGesture" destination="J0S-yr-FUh" id="nFC-c1-nKp"/>
                         <outlet property="clearCacheLabel" destination="iGQ-33-Hgo" id="VeZ-C6-dna"/>
                         <outlet property="clearHistoryGesture" destination="jd9-ME-K7b" id="YP1-cu-Wrt"/>
@@ -525,6 +553,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I8p-GL-iig" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="jd9-ME-K7b" userLabel="Clear History"/>
                 <tapGestureRecognizer id="J0S-yr-FUh" userLabel="Clear Cache"/>
+                <tapGestureRecognizer id="o48-PZ-0ll" userLabel="Clear Bookmarks"/>
                 <tapGestureRecognizer id="MJP-5E-NtR" userLabel="Language">
                     <connections>
                         <segue destination="8fB-EJ-puf" kind="show" id="Vxf-zL-Gc8"/>

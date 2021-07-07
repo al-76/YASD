@@ -21,7 +21,7 @@ class ClearHistoryUseCaseTests: XCTestCase {
     func testExecute() {
         // Arrange
         let outputResult = scheduler.createObserver(StorageServiceResult.self)
-        let useCase = ClearHistoryUseCase(history: MockFactory.createSuggestionStorageRepository("", 0))
+        let useCase = ClearStorageUseCase(history: MockFactory.createSuggestionStorageRepository("", 0))
         let res = useCase.execute(with: ())
         res.bind(to: outputResult)
             .disposed(by: disposeBag)

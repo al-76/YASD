@@ -19,12 +19,15 @@ class SettingsTableViewController: UITableViewController {
 
     private let clearHistory = PublishRelay<Void>()
     private let clearCache = PublishRelay<Void>()
+    private let clearBookmarks = PublishRelay<Void>()
 
     @IBOutlet var languageLabel: UILabel!
     @IBOutlet var clearHistoryLabel: UILabel!
     @IBOutlet var clearCacheLabel: UILabel!
+    @IBOutlet weak var clearBookmarksLabel: UILabel!
     @IBOutlet var clearHistoryGesture: UITapGestureRecognizer!
     @IBOutlet var clearCacheGesture: UITapGestureRecognizer!
+    @IBOutlet var clearBookmarksGesture: UITapGestureRecognizer!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +38,8 @@ class SettingsTableViewController: UITableViewController {
 
     private func bindToModel() {
         let input = SettingsViewModel.Input(clearHistory: clearHistory.asDriver(onErrorJustReturn: ()),
-                                            clearCache: clearCache.asDriver(onErrorJustReturn: ()))
+                                            clearCache: clearCache.asDriver(onErrorJustReturn: ()),
+                                            clearBookmarks: clearBookmarks.asDriver(onErrorJustReturn: ()))
         let output = viewModel.transform(from: input)
         disposeBag.insert(
             output.selectedLanguage.map { [weak self] result -> String in
@@ -49,6 +53,9 @@ class SettingsTableViewController: UITableViewController {
             output.cacheSize.drive(onNext: { [weak self] size in
                 self?.clearCacheLabel.insertValue(size)
             }),
+            output.bookmarksSize.drive(onNext: { [weak self] size in
+                self?.clearBookmarksLabel.insertValue(size)
+            }),
             clearHistoryGesture.rx.event.asDriver().drive(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.showAlert(text: NSLocalizedString("clearHistory", comment: ""),
@@ -58,6 +65,11 @@ class SettingsTableViewController: UITableViewController {
                 guard let self = self else { return }
                 self.showAlert(text: NSLocalizedString("clearCache", comment: ""),
                                relay: self.clearCache)
+            }),
+            clearBookmarksGesture.rx.event.asDriver().drive(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.showAlert(text: NSLocalizedString("clearBookmarks", comment: ""),
+                               relay: self.clearBookmarks)
             })
         )
     }

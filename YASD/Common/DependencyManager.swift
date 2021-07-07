@@ -149,12 +149,6 @@ func configureService(_ container: Container) {
                                                     storage: container.resolve(Storage.self)!))
     }
     .inObjectScope(.container)
-    container.register(AnyStorageRepository<Suggestion>.self) { _ in
-        AnyStorageRepository(wrapped:
-            DefaultStorageRepository<Suggestion>(id: "history",
-                                                 storage: container.resolve(Storage.self)!))
-    }
-    .inObjectScope(.container)
 
     // Lexin Word Mapper
     container.register(LexinWordMapper.self) { _ in
@@ -202,7 +196,7 @@ func configureUseCase(_ container: Container) {
     .inObjectScope(.container)
     container.register(AnyUseCase<Void, String>.self,
                        name: "GetHistorySizeUseCase") { container in
-        AnyUseCase(wrapped: GetHistorySizeUseCase(history: container.resolve(AnyStorageRepository.self)!))
+        AnyUseCase(wrapped: GetStorageSizeUseCase(history: container.resolve(AnyStorageRepository<Suggestion>.self)!))
     }
     .inObjectScope(.container)
     container.register(AnyUseCase<Void, String>.self,
@@ -210,9 +204,19 @@ func configureUseCase(_ container: Container) {
         AnyUseCase(wrapped: GetCacheSizeUseCase(cache: container.resolve(CacheService.self)!))
     }
     .inObjectScope(.container)
+    container.register(AnyUseCase<Void, String>.self,
+                       name: "GetBookmarksSizeUseCase") { container in
+        AnyUseCase(wrapped: GetStorageSizeUseCase(history: container.resolve(AnyStorageRepository<FormattedWord>.self)!))
+    }
+    .inObjectScope(.container)
     container.register(AnyUseCase<Void, StorageServiceResult>.self,
                        name: "ClearHistoryUseCase") { container in
-        AnyUseCase(wrapped: ClearHistoryUseCase(history: container.resolve(AnyStorageRepository.self)!))
+        AnyUseCase(wrapped: ClearStorageUseCase(history: container.resolve(AnyStorageRepository<Suggestion>.self)!))
+    }
+    .inObjectScope(.container)
+    container.register(AnyUseCase<Void, StorageServiceResult>.self,
+                       name: "ClearBookmarksUseCase") { container in
+        AnyUseCase(wrapped: ClearStorageUseCase(history: container.resolve(AnyStorageRepository<FormattedWord>.self)!))
     }
     .inObjectScope(.container)
     container.register(AnyUseCase<Void, CacheServiceBoolResult>.self,
@@ -313,8 +317,10 @@ func configureViewModel(_ container: Container) {
         SettingsViewModel(getLanguage: container.resolve(AnyUseCase.self, name: "GetLanguageSettingsUseCase")!,
                           getHistorySize: container.resolve(AnyUseCase.self, name: "GetHistorySizeUseCase")!,
                           getCacheSize: container.resolve(AnyUseCase.self, name: "GetCacheSizeUseCase")!,
+                          getBookmarksSize: container.resolve(AnyUseCase.self, name: "GetBookmarksSizeUseCase")!,
                           clearHistory: container.resolve(AnyUseCase.self, name: "ClearHistoryUseCase")!,
-                          clearCache: container.resolve(AnyUseCase.self, name: "ClearCacheUseCase")!)
+                          clearCache: container.resolve(AnyUseCase.self, name: "ClearCacheUseCase")!,
+                          clearBookmarks: container.resolve(AnyUseCase.self, name: "ClearBookmarksUseCase")!)
     }
     .inObjectScope(.container)
 

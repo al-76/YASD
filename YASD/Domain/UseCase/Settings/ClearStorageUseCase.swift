@@ -1,5 +1,5 @@
 //
-//  ClearHistoryUseCase.swift
+//  ClearStorageUseCase.swift
 //  YASD
 //
 //  Created by Vyacheslav Konopkin on 30.06.2021.
@@ -9,13 +9,13 @@
 import Foundation
 import RxSwift
 
-class ClearHistoryUseCase: UseCase {
+class ClearStorageUseCase<T: Codable & Equatable>: UseCase {
     typealias Input = Void
     typealias Output = StorageServiceResult
 
-    private let history: AnyStorageRepository<Suggestion>
+    private let history: AnyStorageRepository<T>
 
-    init(history: AnyStorageRepository<Suggestion>) {
+    init(history: AnyStorageRepository<T>) {
         self.history = history
     }
 
