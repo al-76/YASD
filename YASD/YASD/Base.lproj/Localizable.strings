@@ -9,7 +9,7 @@
 "searchLanguage" = "Type a language!";
 "textAbout" = "# YASD - Yet Another Swedish Dictionary
 
-[YASD](https://github.com/al-76/YASD) 1.0.0 uses [Lexin](https://lexin.nada.kth.se/) and libraries:
+[YASD](https://github.com/al-76/YASD) %s uses [Lexin](https://lexin.nada.kth.se/) and libraries:
 - [Swinject](https://github.com/Swinject/Swinject)
 - [SwinjectStoryboard](https://github.com/Swinject/SwinjectStoryboard)
 - [RxSwift](https://github.com/ReactiveX/RxSwift)
