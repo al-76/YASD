@@ -1,4 +1,5 @@
 PODS:
+  - BuyMeACoffee (1.0.5)
   - Cache (7.0.0)
   - Cuckoo (1.5.1):
     - Cuckoo/Swift (= 1.5.1)
@@ -117,6 +118,7 @@ PODS:
     - Swinject (~> 2.6)
 
 DEPENDENCIES:
+  - BuyMeACoffee (~> 1.0)
   - Cache (from `https://github.com/hyperoslo/Cache.git`)
   - Cuckoo
   - Firebase/Analytics
@@ -133,6 +135,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - BuyMeACoffee
     - Cuckoo
     - Differentiator
     - Firebase
@@ -169,6 +172,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/hyperoslo/Cache.git
 
 SPEC CHECKSUMS:
+  BuyMeACoffee: 604c6e19659c507786a673c99cd90130c60bdf57
   Cache: 2332ebd6ee2155c9acd27a87de0153552f81875c
   Cuckoo: 9124fe138270854903483c270370e6e7658fbc9b
   Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
@@ -196,6 +200,6 @@ SPEC CHECKSUMS:
   Swinject: 48a96cda93633cf2860697b4ce76ab5db9ebaca2
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
 
-PODFILE CHECKSUM: 5e572b2418a5e96451d459389bebc9e8915c401a
+PODFILE CHECKSUM: 10e23f540751291ce5ff02c7c8fca41ac5419c03
 
 COCOAPODS: 1.10.1

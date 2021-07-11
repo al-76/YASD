@@ -206,7 +206,8 @@ func configureUseCase(_ container: Container) {
     .inObjectScope(.container)
     container.register(AnyUseCase<Void, String>.self,
                        name: "GetBookmarksSizeUseCase") { container in
-        AnyUseCase(wrapped: GetStorageSizeUseCase(history: container.resolve(AnyStorageRepository<FormattedWord>.self)!))
+        AnyUseCase(wrapped: GetStorageSizeUseCase(history: container
+                                                    .resolve(AnyStorageRepository<FormattedWord>.self)!))
     }
     .inObjectScope(.container)
     container.register(AnyUseCase<Void, StorageServiceResult>.self,

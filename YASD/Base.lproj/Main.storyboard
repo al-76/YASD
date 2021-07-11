@@ -533,6 +533,34 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Donate" id="1Gq-MV-3Fc">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="top" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="9wd-EH-dRK">
+                                        <rect key="frame" x="0.0" y="454.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9wd-EH-dRK" id="t54-KR-WL0">
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMW-w4-vTg" customClass="BMCButton" customModule="BuyMeACoffee">
+                                                    <rect key="frame" x="7" y="7" width="370.5" height="30"/>
+                                                    <state key="normal" title="Button"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iMW-w4-vTg" firstAttribute="leading" secondItem="t54-KR-WL0" secondAttribute="leading" constant="7" id="Mna-9r-D1s"/>
+                                                <constraint firstItem="iMW-w4-vTg" firstAttribute="top" secondItem="t54-KR-WL0" secondAttribute="top" constant="7" id="Y5u-V4-MA7"/>
+                                                <constraint firstAttribute="trailing" secondItem="iMW-w4-vTg" secondAttribute="trailing" constant="7" id="mir-gt-8rQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="iMW-w4-vTg" secondAttribute="bottom" constant="7" id="tsP-SF-mAA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                        <gestureRecognizers/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="m84-Ru-Spg" id="NuZ-Gx-DTd"/>
@@ -587,6 +615,11 @@
             <point key="canvasLocation" x="747.82608695652175" y="-344.19642857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="iMW-w4-vTg">
+            <size key="intrinsicContentSize" width="171" height="50"/>
+        </designable>
+    </designables>
     <resources>
         <image name="book.fill" catalog="system" width="128" height="102"/>
         <image name="bookmark" catalog="system" width="112" height="128"/>

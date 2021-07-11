@@ -24,6 +24,7 @@
 		17EB281A246DD76200EE8B1D /* FormattedWord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */; };
 		17F940052350F0AD00FBFD54 /* Swinject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */; };
 		17FC6BA0237FEF7E00279589 /* LexinApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */; };
+		1BC00B17E25C09A95A4DDB30 /* Pods_YASDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 747967F8EC6E47757E88C778 /* Pods_YASDTests.framework */; };
 		2F0D2B26237EA57B00F23F3B /* LexinApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0D2B25237EA57B00F23F3B /* LexinApi.swift */; };
 		2F18E2E323437097003F91FD /* DefaultCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F18E2E223437097003F91FD /* DefaultCacheService.swift */; };
 		2F1E1E7E23463434007C128B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F1E1E7D23463434007C128B /* NetworkService.swift */; };
@@ -68,6 +69,7 @@
 		2FF62C81228AA89400B4946C /* WordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C80228AA89400B4946C /* WordsViewModel.swift */; };
 		2FF62C8A228D61AF00B4946C /* WordsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62C89228D61AF00B4946C /* WordsViewModelTests.swift */; };
 		2FF62CBD229444BE00B4946C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF62CBC229444BE00B4946C /* ViewModel.swift */; };
+		4569B808DC02DA68124470FA /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6492C2065532BA30AF405291 /* Pods_YASD.framework */; };
 		6F08F5C1268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08F5C0268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift */; };
 		6F08F5C3268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08F5C2268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift */; };
 		6F08F5C5268B2817005D18D7 /* ChangedBookmarkUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08F5C4268B2817005D18D7 /* ChangedBookmarkUseCaseTests.swift */; };
@@ -114,8 +116,6 @@
 		6FFF3B412684C6540023EF94 /* MockFactory+StorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B402684C6540023EF94 /* MockFactory+StorageRepository.swift */; };
 		6FFF3B432684C9090023EF94 /* MockFactory+DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B422684C9090023EF94 /* MockFactory+DictionaryRepository.swift */; };
 		6FFF3B452684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF3B442684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift */; };
-		75193397BB7F7A9E38B6D3D8 /* Pods_YASDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C90A6B0D85D335FF0C3692D /* Pods_YASDTests.framework */; };
-		851EDD11013FE123AB6CCAB6 /* Pods_YASD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C2652C0C56BB7CFE934AFA /* Pods_YASD.framework */; };
 		CD2A5DFC26909A3500B6E49A /* RMController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */; };
 		CD2A5DFF26909C0800B6E49A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5DFE26909C0800B6E49A /* Network.swift */; };
 		CD2A5E0126909DDA00B6E49A /* DefaultHtmlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2A5E0026909DDA00B6E49A /* DefaultHtmlParser.swift */; };
@@ -136,6 +136,7 @@
 		CDE705312631F5920015CD07 /* SearchWordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE705302631F5920015CD07 /* SearchWordUseCase.swift */; };
 		CDE705392631F73F0015CD07 /* AddBookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE705382631F73F0015CD07 /* AddBookmarkUseCase.swift */; };
 		CDE7053D2631FCE90015CD07 /* RemoveBookmarkUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE7053C2631FCE90015CD07 /* RemoveBookmarkUseCase.swift */; };
+		CDEC0C45269B020100642F45 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEC0C44269B020100642F45 /* StoreKit.framework */; };
 		CDF9597725E130A00059A1EB /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9597625E130A00059A1EB /* Language.swift */; };
 		CDF9597F25E139280059A1EB /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9597E25E139280059A1EB /* DictionaryRepository.swift */; };
 		CDF9598325E150210059A1EB /* SuggestionDictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */; };
@@ -186,6 +187,8 @@
 		17EB2819246DD76200EE8B1D /* FormattedWord+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormattedWord+Extensions.swift"; sourceTree = "<group>"; };
 		17F940042350F0AD00FBFD54 /* Swinject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swinject+Extensions.swift"; sourceTree = "<group>"; };
 		17FC6B9F237FEF7E00279589 /* LexinApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApiProvider.swift; sourceTree = "<group>"; };
+		1C1899A9B842C7BDC70FDBEC /* Pods-YASDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.release.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.release.xcconfig"; sourceTree = "<group>"; };
+		21D869D0FC6AADFF2964E7C8 /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
 		2F0D2B25237EA57B00F23F3B /* LexinApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexinApi.swift; sourceTree = "<group>"; };
 		2F18E2E223437097003F91FD /* DefaultCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCacheService.swift; sourceTree = "<group>"; };
 		2F1E1E7D23463434007C128B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -249,11 +252,7 @@
 		2FF62C91228DAAB400B4946C /* RxRelay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxRelay.framework; path = Carthage/Build/iOS/RxRelay.framework; sourceTree = "<group>"; };
 		2FF62CBC229444BE00B4946C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2FFF024622B2870800C1DC61 /* MarkdownKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MarkdownKit.framework; path = Carthage/Build/iOS/MarkdownKit.framework; sourceTree = "<group>"; };
-		37BF696CC23A17C1B5604801 /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
-		3F9F8DAB51177D4BDCB07A06 /* Pods-YASDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.release.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.release.xcconfig"; sourceTree = "<group>"; };
-		52F6CA764450891ABFE07C7F /* Pods-YASDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.debug.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.debug.xcconfig"; sourceTree = "<group>"; };
-		67C2652C0C56BB7CFE934AFA /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C90A6B0D85D335FF0C3692D /* Pods_YASDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6492C2065532BA30AF405291 /* Pods_YASD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F08F5C0268B1F15005D18D7 /* RemoveBookmarkByIndexUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBookmarkByIndexUseCaseTests.swift; sourceTree = "<group>"; };
 		6F08F5C2268B2708005D18D7 /* RemoveBookmarkUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBookmarkUseCaseTests.swift; sourceTree = "<group>"; };
 		6F08F5C4268B2817005D18D7 /* ChangedBookmarkUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangedBookmarkUseCaseTests.swift; sourceTree = "<group>"; };
@@ -302,7 +301,8 @@
 		6FFF3B402684C6540023EF94 /* MockFactory+StorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+StorageRepository.swift"; sourceTree = "<group>"; };
 		6FFF3B422684C9090023EF94 /* MockFactory+DictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MockFactory+DictionaryRepository.swift"; sourceTree = "<group>"; };
 		6FFF3B442684CD0B0023EF94 /* RemoveSuggestionUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveSuggestionUseCaseTests.swift; sourceTree = "<group>"; };
-		8AE9D27353A1F2DD315C3D05 /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
+		747967F8EC6E47757E88C778 /* Pods_YASDTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YASDTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0790AF2DB9E83211753186F /* Pods-YASDTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASDTests.debug.xcconfig"; path = "Target Support Files/Pods-YASDTests/Pods-YASDTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CD2A5DFB26909A3500B6E49A /* RMController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RMController+Extensions.swift"; sourceTree = "<group>"; };
 		CD2A5DFE26909C0800B6E49A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		CD2A5E0026909DDA00B6E49A /* DefaultHtmlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHtmlParser.swift; sourceTree = "<group>"; };
@@ -323,12 +323,14 @@
 		CDE705302631F5920015CD07 /* SearchWordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWordUseCase.swift; sourceTree = "<group>"; };
 		CDE705382631F73F0015CD07 /* AddBookmarkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookmarkUseCase.swift; sourceTree = "<group>"; };
 		CDE7053C2631FCE90015CD07 /* RemoveBookmarkUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBookmarkUseCase.swift; sourceTree = "<group>"; };
+		CDEC0C44269B020100642F45 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CDF9597625E130A00059A1EB /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		CDF9597E25E139280059A1EB /* DictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRepository.swift; sourceTree = "<group>"; };
 		CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionDictionaryRepository.swift; sourceTree = "<group>"; };
 		CDF9598525E1503E0059A1EB /* WordsDictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsDictionaryRepository.swift; sourceTree = "<group>"; };
 		F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalCacheService.swift; sourceTree = "<group>"; };
 		F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorageRepository.swift; sourceTree = "<group>"; };
+		FD414620BAF678CE48F7901D /* Pods-YASD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.release.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,7 +338,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				851EDD11013FE123AB6CCAB6 /* Pods_YASD.framework in Frameworks */,
+				4569B808DC02DA68124470FA /* Pods_YASD.framework in Frameworks */,
+				CDEC0C45269B020100642F45 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,7 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75193397BB7F7A9E38B6D3D8 /* Pods_YASDTests.framework in Frameworks */,
+				1BC00B17E25C09A95A4DDB30 /* Pods_YASDTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +523,7 @@
 		2F97575A22772FED00B343B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDEC0C44269B020100642F45 /* StoreKit.framework */,
 				6F171E332643FF4000C37B28 /* XCTest.framework */,
 				2FDD059E23AD15710018F223 /* Differentiator.framework */,
 				2FDD059C23ACF7FA0018F223 /* RxDataSources.framework */,
@@ -536,8 +540,8 @@
 				2F97576F2277474200B343B4 /* RxCocoa.framework */,
 				2F9757702277474200B343B4 /* RxSwift.framework */,
 				2F97576E2277474200B343B4 /* RxTest.framework */,
-				67C2652C0C56BB7CFE934AFA /* Pods_YASD.framework */,
-				6C90A6B0D85D335FF0C3692D /* Pods_YASDTests.framework */,
+				6492C2065532BA30AF405291 /* Pods_YASD.framework */,
+				747967F8EC6E47757E88C778 /* Pods_YASDTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -823,10 +827,10 @@
 		F2119DFC71016D5B0441E10C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				37BF696CC23A17C1B5604801 /* Pods-YASD.debug.xcconfig */,
-				8AE9D27353A1F2DD315C3D05 /* Pods-YASD.release.xcconfig */,
-				52F6CA764450891ABFE07C7F /* Pods-YASDTests.debug.xcconfig */,
-				3F9F8DAB51177D4BDCB07A06 /* Pods-YASDTests.release.xcconfig */,
+				21D869D0FC6AADFF2964E7C8 /* Pods-YASD.debug.xcconfig */,
+				FD414620BAF678CE48F7901D /* Pods-YASD.release.xcconfig */,
+				C0790AF2DB9E83211753186F /* Pods-YASDTests.debug.xcconfig */,
+				1C1899A9B842C7BDC70FDBEC /* Pods-YASDTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -859,13 +863,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F661B5C2272E16400C68A5F /* Build configuration list for PBXNativeTarget "YASD" */;
 			buildPhases = (
-				DB8BCCB6056D39DE8509B1F0 /* [CP] Check Pods Manifest.lock */,
+				FC46FCDF6C5B253FC804EB5E /* [CP] Check Pods Manifest.lock */,
 				2F661B2E2272E16300C68A5F /* Sources */,
 				2F661B2F2272E16300C68A5F /* Frameworks */,
 				2F661B302272E16300C68A5F /* Resources */,
 				6F8D98742693168B005E66C5 /* Swiftlint */,
-				3F700C40577FE54E196CBA03 /* [CP] Embed Pods Frameworks */,
 				6F7494F52694A77B00C3AB98 /* Firebase Crashlytics */,
+				8420EFDF5D73B619EC21C401 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -880,13 +884,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F661B5F2272E16400C68A5F /* Build configuration list for PBXNativeTarget "YASDTests" */;
 			buildPhases = (
-				D361BA37E80ECBEA46A2548C /* [CP] Check Pods Manifest.lock */,
+				878D56157D05919E157BCB56 /* [CP] Check Pods Manifest.lock */,
 				6F171E5426455CBB00C37B28 /* Cuckoo */,
 				2F661B442272E16400C68A5F /* Sources */,
 				2F661B452272E16400C68A5F /* Frameworks */,
 				2F661B462272E16400C68A5F /* Resources */,
 				2FF62C9E228EF13D00B4946C /* CopyFiles */,
-				9078C6DAC2F9BB4BEE98269D /* [CP] Embed Pods Frameworks */,
+				CB16D8DC7F94A0AEDAF8FF04 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -960,23 +964,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3F700C40577FE54E196CBA03 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6F171E5426455CBB00C37B28 /* Cuckoo */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1031,24 +1018,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		9078C6DAC2F9BB4BEE98269D /* [CP] Embed Pods Frameworks */ = {
+		8420EFDF5D73B619EC21C401 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YASDTests/Pods-YASDTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-YASDTests/Pods-YASDTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASDTests/Pods-YASDTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASD/Pods-YASD-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D361BA37E80ECBEA46A2548C /* [CP] Check Pods Manifest.lock */ = {
+		878D56157D05919E157BCB56 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1070,7 +1057,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DB8BCCB6056D39DE8509B1F0 /* [CP] Check Pods Manifest.lock */ = {
+		CB16D8DC7F94A0AEDAF8FF04 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YASDTests/Pods-YASDTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YASDTests/Pods-YASDTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YASDTests/Pods-YASDTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC46FCDF6C5B253FC804EB5E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1313,7 +1317,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "Apple Development: robotal76@gmail.com (W5CSJA2R45)";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1398,21 +1402,21 @@
 		};
 		2F661B5D2272E16400C68A5F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37BF696CC23A17C1B5604801 /* Pods-YASD.debug.xcconfig */;
+			baseConfigurationReference = 21D869D0FC6AADFF2964E7C8 /* Pods-YASD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6894A8BA33;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = YASD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ors.YASD;
 				PRODUCT_NAME = YASD;
-				PROVISIONING_PROFILE_SPECIFIER = "YASD Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1420,21 +1424,21 @@
 		};
 		2F661B5E2272E16400C68A5F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8AE9D27353A1F2DD315C3D05 /* Pods-YASD.release.xcconfig */;
+			baseConfigurationReference = FD414620BAF678CE48F7901D /* Pods-YASD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6894A8BA33;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = YASD/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited)";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ors.YASD;
 				PRODUCT_NAME = YASD;
-				PROVISIONING_PROFILE_SPECIFIER = "YASD Development";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1442,7 +1446,7 @@
 		};
 		2F661B602272E16400C68A5F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 52F6CA764450891ABFE07C7F /* Pods-YASDTests.debug.xcconfig */;
+			baseConfigurationReference = C0790AF2DB9E83211753186F /* Pods-YASDTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1461,7 +1465,7 @@
 		};
 		2F661B612272E16400C68A5F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F9F8DAB51177D4BDCB07A06 /* Pods-YASDTests.release.xcconfig */;
+			baseConfigurationReference = 1C1899A9B842C7BDC70FDBEC /* Pods-YASDTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";

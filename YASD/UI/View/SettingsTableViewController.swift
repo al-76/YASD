@@ -6,6 +6,7 @@
 //  Copyright © 2019 yac. All rights reserved.
 //
 
+import BuyMeACoffee
 import RMessage
 import RxCocoa
 import RxSwift
@@ -34,6 +35,7 @@ class SettingsTableViewController: UITableViewController {
 
         rmController.presentationViewController = self
         bindToModel()
+        configureBMC()
     }
 
     private func bindToModel() {
@@ -72,6 +74,11 @@ class SettingsTableViewController: UITableViewController {
                                relay: self.clearBookmarks)
             })
         )
+    }
+
+    private func configureBMC() {
+        BMCManager.shared.presentingViewController = self
+        BMCManager.shared.thankYouMessage = "Thank you for supporting 🎉!"
     }
 
     private func showAlert(text: String, relay: PublishRelay<Void>) {

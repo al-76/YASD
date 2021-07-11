@@ -1,9 +1,9 @@
 
-/* Class = "UITableViewSection"; headerTitle = "Något annat"; ObjectID = "7LO-NU-QJ8"; */
-"7LO-NU-QJ8.headerTitle" = "Något annat";
+/* Class = "UITableViewSection"; headerTitle = "Något annat"; ObjectID = "tSR-gP-nE5"; */
+"tSR-gP-nE5.headerTitle" = "Något annat";
 
-/* Class = "UILabel"; text = "Om"; ObjectID = "8BW-La-9Bh"; */
-"8BW-La-9Bh.text" = "Om";
+/* Class = "UILabel"; text = "Om"; ObjectID = "JfW-vw-WYx"; */
+"JfW-vw-WYx.text" = "Om";
 
 /* Class = "UITableViewSection"; headerTitle = "Välj språk"; ObjectID = "BMX-1O-lhr"; */
 "BMX-1O-lhr.headerTitle" = "Välj språk";
@@ -45,4 +45,11 @@
 "8BW-La-9Bh.text" = "Rensa historik (%s)";
 
 /* Class = "UILabel"; text = "Clear bookmarks (%s)"; ObjectID = "xgi-nF-K9v"; */
-"8BW-La-9Bh.text" = "Rensa bokmärken (%s)";
+"xgi-nF-K9v.text" = "Rensa bokmärken (%s)";
+
+/* Class = "UITableViewSection"; headerTitle = "Donera"; ObjectID = "1Gq-MV-3Fc"; */
+"1Gq-MV-3Fc.headerTitle" = "Donera";
+
+/* Class = "UITableViewSection"; headerTitle = "Lagring"; ObjectID = "7LO-NU-QJ8"; */
+"7LO-NU-QJ8.headerTitle" = "Lagring";
+
