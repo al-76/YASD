@@ -27,7 +27,7 @@ else
     for i in 16 20 29 32 40 50 57 58 60 64 72 76 80 87 100 114 120 128 144 152 167 180 256 512 1024
         do
             echo "Creating $i px icon"
-            convert -density 400 $1 -resize $i'x'$i\! ./$2/Assets.xcassets/AppIcon.appiconset/appicon_$i.png
+            convert -background grey -alpha remove -alpha off -density 400 $1 -resize $i'x'$i\! ./$2/Assets.xcassets/AppIcon.appiconset/appicon_$i.png
     done
 
     echo "Created app icon files, writing Contents.json file..."
