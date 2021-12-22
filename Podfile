@@ -17,7 +17,7 @@ target 'YASD' do
   pod 'SwiftLint'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
-  pod 'BuyMeACoffee', '~> 1.0'
+  pod 'BuyMeACoffee'
  
   target 'YASDTests' do
     inherit! :search_paths
