@@ -12,8 +12,8 @@ import Cuckoo
 import RxSwift
 
 extension MockFactory {
-    static func createMockExternalCacheService(_ testValue: String) -> MockExternalCacheService {
-        let mock = MockExternalCacheService()
+    static func createMockExternalIndexer(_ testValue: String) -> MockExternalIndexer {
+        let mock = MockExternalIndexer()
         stub(mock) { stub in
             when(stub.getTitle(from: any())).then { _ in
                 testValue

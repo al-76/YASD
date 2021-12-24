@@ -1,5 +1,5 @@
 //
-//  ExternalCacheService.swift
+//  ExternalIndexer.swift
 //  YASD
 //
 //  Created by Vyacheslav Konopkin on 26.10.2020.
@@ -9,9 +9,9 @@
 import Foundation
 import RxSwift
 
-typealias ExternalCacheServiceResult = Result<Void>
+typealias ExternalIndexerResult = Result<Void>
 
-protocol ExternalCacheService {
-    func index(data: [FormattedWord]) -> Observable<ExternalCacheServiceResult>
+protocol ExternalIndexer {
+    func index(data: [FormattedWord]) -> Observable<ExternalIndexerResult>
     func getTitle(from id: String) -> String
 }

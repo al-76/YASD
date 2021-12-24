@@ -14,11 +14,11 @@ extension StorageRepository where T == FormattedWord {
         return get(where: { $0.header.lowercased().starts(with: word.lowercased()) })
     }
 
-    func getAndIndex(cache: ExternalCacheService) -> Observable<Bookmarks> {
+    func getAndIndex(indexer: ExternalIndexer) -> Observable<Bookmarks> {
         get(with: "").flatMap { result -> Observable<Bookmarks> in
             switch result {
             case let .success(words):
-                return cache.index(data: words)
+                return indexer.index(data: words)
                     .map { _ in result }
             case let .failure(error):
                 return .just(.failure(error))

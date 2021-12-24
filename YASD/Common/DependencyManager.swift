@@ -36,7 +36,7 @@ func configurePlatform(_ container: Container) {
         .inObjectScope(.container)
     container.register(DataCache.self) { _, name in DefaultDataCache(name: name) }
         .inObjectScope(.container)
-    container.register(ExternalCacheService.self) { _ in Spotlight() }
+    container.register(ExternalIndexer.self) { _ in Spotlight() }
         .inObjectScope(.container)
 }
 
@@ -268,8 +268,8 @@ func configureUseCase(_ container: Container) {
     .inObjectScope(.container)
     container.register(AnyUseCase<String, String>.self,
                        name: "RestoreBookmarkUseCase") { container in
-        AnyUseCase(wrapped: RestoreBookmarkUseCase(cache:
-            container.resolve(ExternalCacheService.self)!))
+        AnyUseCase(wrapped: RestoreBookmarkUseCase(indexer:
+            container.resolve(ExternalIndexer.self)!))
     }
     .inObjectScope(.container)
     container.register(AnyUseCase<Int, StorageServiceResult>.self,
@@ -289,7 +289,7 @@ func configureUseCase(_ container: Container) {
     container.register(AnyUseCase<Void, Bookmarks>.self, name: "ChangedBookmarkUseCase") { container in
         AnyUseCase(wrapped: ChangedBookmarkUseCase(bookmarks:
             container.resolve(AnyStorageRepository.self)!,
-            cache: container.resolve(ExternalCacheService.self)!))
+            indexer: container.resolve(ExternalIndexer.self)!))
     }
     .inObjectScope(.container)
     container.register(AnyUseCase<FormattedWord, StorageServiceResult>.self, name: "AddBookmarkUseCase") { container in

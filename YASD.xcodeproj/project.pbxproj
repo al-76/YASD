@@ -141,7 +141,7 @@
 		CDF9598325E150210059A1EB /* SuggestionDictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */; };
 		CDF9598625E1503E0059A1EB /* WordsDictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9598525E1503E0059A1EB /* WordsDictionaryRepository.swift */; };
 		E76A62A83A303136B53C38C0 /* Pods_YASDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCCE40C699AE64DB6517E930 /* Pods_YASDTests.framework */; };
-		F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */; };
+		F6B8B547254701A100DBA9D3 /* ExternalIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6B8B546254701A100DBA9D3 /* ExternalIndexer.swift */; };
 		F6ED48B5255025A200E60E1B /* DefaultStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */; };
 /* End PBXBuildFile section */
 
@@ -329,7 +329,7 @@
 		CDF9598225E150210059A1EB /* SuggestionDictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionDictionaryRepository.swift; sourceTree = "<group>"; };
 		CDF9598525E1503E0059A1EB /* WordsDictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsDictionaryRepository.swift; sourceTree = "<group>"; };
 		E3B74D49DA9D981DE1E223D6 /* Pods-YASD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YASD.debug.xcconfig"; path = "Target Support Files/Pods-YASD/Pods-YASD.debug.xcconfig"; sourceTree = "<group>"; };
-		F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalCacheService.swift; sourceTree = "<group>"; };
+		F6B8B546254701A100DBA9D3 /* ExternalIndexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalIndexer.swift; sourceTree = "<group>"; };
 		F6ED48B4255025A200E60E1B /* DefaultStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStorageRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -851,7 +851,7 @@
 		F6B8B54B2547048B00DBA9D3 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				F6B8B546254701A100DBA9D3 /* ExternalCacheService.swift */,
+				F6B8B546254701A100DBA9D3 /* ExternalIndexer.swift */,
 			);
 			path = Platform;
 			sourceTree = "<group>";
@@ -1002,7 +1002,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Domain/UseCase/UseCase.swift\" \\\n\"${INPUT_DIR}/Domain/Data/AboutTextRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/DictionaryRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/PlayerManager.swift\" \\\n\"${INPUT_DIR}/Domain/Data/SettingsRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/CacheService.swift\" \\\n\"${INPUT_DIR}/Domain/Platform/ExternalCacheService.swift\"\n\n\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Domain/UseCase/UseCase.swift\" \\\n\"${INPUT_DIR}/Domain/Data/AboutTextRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/DictionaryRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/PlayerManager.swift\" \\\n\"${INPUT_DIR}/Domain/Data/SettingsRepository.swift\" \\\n\"${INPUT_DIR}/Domain/Data/CacheService.swift\" \\\n\"${INPUT_DIR}/Domain/Platform/ExternalIndexer.swift\"\n\n\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
 		};
 		6F7494F52694A77B00C3AB98 /* Firebase Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1171,7 +1171,7 @@
 				2FDCDBCF234F27DB00E6F15F /* WordsSuggestionTableViewController.swift in Sources */,
 				6FFDBE2B268D102900D6BF69 /* ClearStorageUseCase.swift in Sources */,
 				6FFDBE27268D100200D6BF69 /* GetStorageSizeUseCase.swift in Sources */,
-				F6B8B547254701A100DBA9D3 /* ExternalCacheService.swift in Sources */,
+				F6B8B547254701A100DBA9D3 /* ExternalIndexer.swift in Sources */,
 				17233CC124A919D40049D914 /* Mapper.swift in Sources */,
 				CDF9597725E130A00059A1EB /* Language.swift in Sources */,
 				2F661B362272E16300C68A5F /* AppDelegate.swift in Sources */,

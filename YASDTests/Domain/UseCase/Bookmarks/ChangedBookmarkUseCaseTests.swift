@@ -28,7 +28,7 @@ class ChangedBookmarkUseCaseTests: XCTestCase {
         let changedBookmarks = PublishSubject<Bool>()
         let useCase = ChangedBookmarkUseCase(bookmarks: MockFactory
                                                 .createFormattedWordStorageRepository(testValue, changedBookmarks),
-                                             cache: MockFactory.createMockExternalCacheService("test"))
+                                             indexer: MockFactory.createMockExternalIndexer("test"))
         let res = useCase.execute(with: ())
         disposeBag.insert(
             inputChangedBookmarks.bind(to: changedBookmarks),

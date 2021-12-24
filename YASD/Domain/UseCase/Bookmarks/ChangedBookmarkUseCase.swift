@@ -14,11 +14,11 @@ class ChangedBookmarkUseCase: UseCase {
     typealias Output = Bookmarks
 
     private let bookmarks: AnyStorageRepository<FormattedWord>
-    private let cache: ExternalCacheService
+    private let indexer: ExternalIndexer
 
-    init(bookmarks: AnyStorageRepository<FormattedWord>, cache: ExternalCacheService) {
+    init(bookmarks: AnyStorageRepository<FormattedWord>, indexer: ExternalIndexer) {
         self.bookmarks = bookmarks
-        self.cache = cache
+        self.indexer = indexer
     }
 
     func execute(with _: Void) -> Observable<Bookmarks> {
@@ -26,7 +26,7 @@ class ChangedBookmarkUseCase: UseCase {
             .filter { $0 }
             .flatMap { [weak self] _ -> Observable<Bookmarks> in
                 guard let self = self else { return .just(.success([])) }
-                return self.bookmarks.getAndIndex(cache: self.cache)
+                return self.bookmarks.getAndIndex(indexer: self.indexer)
             }
     }
 }

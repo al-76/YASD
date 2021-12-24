@@ -13,13 +13,13 @@ class RestoreBookmarkUseCase: UseCase {
     typealias Input = String
     typealias Output = String
 
-    private let cache: ExternalCacheService
+    private let indexer: ExternalIndexer
 
-    init(cache: ExternalCacheService) {
-        self.cache = cache
+    init(indexer: ExternalIndexer) {
+        self.indexer = indexer
     }
 
     func execute(with input: String) -> Observable<String> {
-        return .just(cache.getTitle(from: input))
+        return .just(indexer.getTitle(from: input))
     }
 }

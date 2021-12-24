@@ -22,7 +22,7 @@ class RestoreBookmarksUseCaseTests: XCTestCase {
         // Arrange
         let testValue = "test"
         let outputResult = scheduler.createObserver(String.self)
-        let useCase = RestoreBookmarkUseCase(cache: MockFactory.createMockExternalCacheService(testValue))
+        let useCase = RestoreBookmarkUseCase(indexer: MockFactory.createMockExternalIndexer(testValue))
         let res = useCase.execute(with: "")
         res.bind(to: outputResult)
             .disposed(by: disposeBag)
